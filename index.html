@@ -171,7 +171,7 @@ function card(p){
     <div class="card-top">
       <div class="ava" style="background:${bg};color:${fg}">${initials(p.en)}</div>
       <div class="info">
-        <div class="nick">${p.nick}</div>
+        <div class="nick">${p.th}</div>
         <div class="eid">${p.id}</div>
         <div class="role">${p.role}</div>
         ${badge(p.loc)}
@@ -181,7 +181,7 @@ function card(p){
       <div class="drow">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
         <div>
-          <div class="dname">${p.th}</div>
+          <div class="dname">ชื่อเล่น: ${p.nick}</div>
           <div class="dsub">${p.en}</div>
         </div>
       </div>
