@@ -167,11 +167,13 @@ function badge(loc){
 
 function card(p){
   const [bg,fg]=pal(p.id);
+  const displayName = p.id === '680012' ? p.en : p.th;
+  const displaySub = p.id === '680012' ? p.th : p.en;
   return `<div class="card" onclick="toggle(this)">
     <div class="card-top">
       <div class="ava" style="background:${bg};color:${fg}">${initials(p.en)}</div>
       <div class="info">
-        <div class="nick">${p.th}</div>
+        <div class="nick">${displayName}</div>
         <div class="eid">${p.id}</div>
         <div class="role">${p.role}</div>
         ${badge(p.loc)}
@@ -182,7 +184,7 @@ function card(p){
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
         <div>
           <div class="dname">ชื่อเล่น: ${p.nick}</div>
-          <div class="dsub">${p.en}</div>
+          <div class="dsub">${displaySub}</div>
         </div>
       </div>
       <div class="drow">
