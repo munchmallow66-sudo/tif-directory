@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TIF — Employee Directory</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  :root{
+    --bg:#f8f7f4;--surface:#ffffff;--surface2:#f1f0ec;
+    --text:#1a1a18;--text2:#5f5e5a;--text3:#9a9893;
+    --border:#e3e1db;--border2:#ccc;
+    --accent:#185FA5;--accent-bg:#E6F1FB;--accent-text:#185FA5;
+    --success:#0F6E56;--success-bg:#E1F5EE;
+    --warn:#854F0B;--warn-bg:#FAEEDA;
+    --radius:8px;
+  }
+  @media(prefers-color-scheme:dark){
+    :root{
+      --bg:#1a1a18;--surface:#252523;--surface2:#2e2e2b;
+      --text:#f0ede8;--text2:#b4b2a9;--text3:#6b6965;
+      --border:#3a3936;--border2:#4a4945;
+      --accent-bg:#0c3355;--accent-text:#7db8e8;
+      --success-bg:#053a2d;--warn-bg:#3d2505;
+    }
+  }
+  body{background:var(--bg);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans Thai',sans-serif;color:var(--text);min-height:100vh}
+  header{background:var(--surface);border-bottom:1px solid var(--border);padding:16px 24px;position:sticky;top:0;z-index:100}
+  .header-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+  .logo{display:flex;align-items:center;gap:10px}
+  .logo-mark{width:36px;height:36px;background:#185FA5;border-radius:8px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:14px;flex-shrink:0}
+  .logo-text{font-size:15px;font-weight:600;color:var(--text)}
+  .logo-sub{font-size:12px;color:var(--text3);margin-top:1px}
+  .search-wrap{position:relative;flex:1;min-width:200px;max-width:360px}
+  .search-wrap svg{position:absolute;left:10px;top:50%;transform:translateY(-50%);color:var(--text3);pointer-events:none;width:16px;height:16px}
+  #search{width:100%;padding:0 12px 0 34px;height:38px;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);font-size:14px;color:var(--text);outline:none}
+  #search:focus{border-color:var(--accent)}
+  .filters{display:flex;gap:6px;flex-wrap:wrap}
+  .fbtn{height:30px;padding:0 14px;border:1px solid var(--border);border-radius:15px;background:transparent;font-size:12px;color:var(--text2);cursor:pointer;transition:.15s}
+  .fbtn:hover{border-color:var(--border2);color:var(--text)}
+  .fbtn.on{background:var(--accent-bg);border-color:var(--accent);color:var(--accent-text);font-weight:500}
+  main{max-width:1100px;margin:0 auto;padding:20px 24px}
+  .meta{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+  .meta-count{font-size:13px;color:var(--text3)}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:10px}
+  .card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:14px 16px;cursor:pointer;transition:border-color .15s,transform .1s}
+  .card:hover{border-color:var(--border2);transform:translateY(-1px)}
+  .card.open{border-color:var(--accent)}
+  .card-top{display:flex;gap:12px;align-items:flex-start}
+  .ava{width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:600;flex-shrink:0}
+  .info{flex:1;min-width:0}
+  .nick{font-size:15px;font-weight:600;color:var(--text)}
+  .eid{font-size:11px;color:var(--text3);margin-top:1px}
+  .role{font-size:12px;color:var(--text2);margin-top:5px;line-height:1.45;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+  .badge{display:inline-flex;align-items:center;gap:3px;font-size:11px;margin-top:8px;padding:2px 9px;border-radius:10px;font-weight:500}
+  .bkk{background:var(--accent-bg);color:var(--accent-text)}
+  .phs{background:var(--success-bg);color:var(--success)}
+  .pt{background:var(--warn-bg);color:var(--warn)}
+  .detail{margin-top:12px;padding-top:12px;border-top:1px solid var(--border);display:none}
+  .card.open .detail{display:block}
+  .drow{display:flex;gap:8px;align-items:flex-start;margin-bottom:10px;font-size:12px}
+  .drow svg{width:14px;height:14px;color:var(--text3);flex-shrink:0;margin-top:1px}
+  .dval{color:var(--text2);word-break:break-all;line-height:1.5}
+  .dname{font-size:12px;font-weight:600;color:var(--text);line-height:1.4}
+  .dsub{font-size:11px;color:var(--text3);margin-top:1px}
+  .dlink{font-size:12px;color:var(--accent-text)}
+  .mono{font-family:ui-monospace,monospace;font-size:11px;letter-spacing:.02em}
+  .copy{display:inline-flex;align-items:center;gap:4px;font-size:11px;padding:3px 8px;border-radius:5px;border:none;cursor:pointer;margin-top:4px;background:var(--accent-bg);color:var(--accent-text);font-family:inherit}
+  .copy:hover{opacity:.8}
+  .copy.ok{background:var(--success-bg);color:var(--success)}
+  .empty{text-align:center;padding:60px 0;color:var(--text3);font-size:14px;grid-column:1/-1}
+  .empty-icon{font-size:40px;margin-bottom:12px}
+</style>
+</head>
+<body>
+<header>
+  <div class="header-inner">
+    <div class="logo">
+      <div class="logo-mark">TIF</div>
+      <div>
+        <div class="logo-text">Employee Directory</div>
+        <div class="logo-sub">Thai International Flying &amp; Training</div>
+      </div>
+    </div>
+    <div class="search-wrap">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      <input id="search" type="search" placeholder="ค้นหาชื่อ ตำแหน่ง nickname…">
+    </div>
+    <div class="filters" id="filters">
+      <button class="fbtn on" data-loc="ALL">ทั้งหมด</button>
+      <button class="fbtn" data-loc="BKK">BKK</button>
+      <button class="fbtn" data-loc="PHS">PHS</button>
+      <button class="fbtn" data-loc="Part Time">Part Time</button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="meta"><span class="meta-count" id="count"></span></div>
+  <div class="grid" id="grid"></div>
+</main>
+
+<script>
+const staff=[
+  {id:"600001",th:"ร.อ.สุนทร วัชพืช",en:"Capt.Soontorn Wutchapuech",nick:"ครูสุน",role:"Flight Instructor",loc:"PHS",email:"soontorn.wut@tif.ac.th",pass:"G#896407835532om"},
+  {id:"600002",th:"พ.จ.อ.วินัย เกษม",en:"Po 1 Winai Kasem",nick:"วินัย",role:"Director of Maintenance",loc:"PHS",email:"winai.kas@tif.ac.th",pass:"Y#140737376116oh"},
+  {id:"610002",th:"นายนิรุทธ์ เพ็ชรมั่ง",en:"Mr.Nirut Pehtmung",nick:"รุทธ์",role:"Driver",loc:"PHS",email:"nirut.peh@tif.ac.th",pass:"S^720215979696om"},
+  {id:"620001",th:"นายเอกวรรธน์ ขาวสอาด",en:"Mr.Ekkawat Khaosa-ard",nick:"โอจีฟ",role:"Purchasing Manager",loc:"Part Time",email:"ekkawat.kha@tif.ac.th",pass:"J.529464670946uv"},
+  {id:"620002",th:"นายพัฒน์ โพธิ์ปฐมพร",en:"Mr.Phat Phopatompon",nick:"พัฒน์",role:"Chief Flight Instructor",loc:"PHS",email:"phat.pho@tif.ac.th",pass:"T@548536106195oj"},
+  {id:"650006",th:"น.ส.กชกร มณีนาค",en:"Ms.Kodchakorn Maneenart",nick:"เป้",role:"Store Keeper & Aircraft Mechanic",loc:"PHS",email:"kodchakorn.man@tif.ac.th",pass:"M@307041617156af"},
+  {id:"660002",th:"นายหนึ่งณัฐ ยิ้มศรี",en:"Mr.Nuengnat Yimsri",nick:"ณัฐ",role:"Aircraft Mechanic",loc:"PHS",email:"nuengnat.yim@tif.ac.th",pass:"Q%447138540692oq"},
+  {id:"670001",th:"นายชวัลวิทย์ วงศ์ชัย",en:"Mr.Chawanwit Wongchai",nick:"กัปตัน",role:"เจ้าหน้าที่สนามบินคลอง 11",loc:"PHS",email:"chawanwit.won@tif.ac.th",pass:"H#119282314687or"},
+  {id:"670002",th:"นายชยพล หารบุรุษ",en:"Mr.Chayapon Hanburuts",nick:"เก่ง",role:"Aircraft Mechanic",loc:"PHS",email:"chayapon.han@tif.ac.th",pass:"J$781171144247us"},
+  {id:"670005",th:"นายสิรวิชช์ อรชร",en:"Mr.Sirawit Aorachon",nick:"ปอ",role:"Aircraft Mechanic",loc:"PHS",email:"sirawit.aor@tif.ac.th",pass:"F^497600667910ot"},
+  {id:"670008",th:"นายไพศาล อุบลวรรณ์",en:"Mr.Paisan Ubonwan",nick:"อ๊อฟ",role:"Aircraft Mechanic",loc:"PHS",email:"paisan.ubo@tif.ac.th",pass:"J!902129222241og"},
+  {id:"670010",th:"นายจักรี สุบงกฏ",en:"Mr.Chakri Subongkot",nick:"ตุ้ม",role:"Acting Accountable Executive",loc:"BKK",email:"chakri.sub@tif.ac.th",pass:"V*510608834741uv"},
+  {id:"680001",th:"น.ส.สิภาพันธุ์ พันธุ์เพ็ง",en:"Miss Sipapun Punpeng",nick:"เปียโน",role:"Training Officer",loc:"Part Time",email:"sipapun.pun@tif.ac.th",pass:"V#056525430292uk"},
+  {id:"680002",th:"น.ส.ศุภนุช ปัญโญกิจ",en:"Ms.Supanoot PunyoKit",nick:"หงษ์",role:"Aircraft Mechanic",loc:"PHS",email:"supanoot.pun@tif.ac.th",pass:"D/644495442020oq"},
+  {id:"680007",th:"นายภาณุ นิ่มสกุล",en:"Mr.Panu Nimsakul",nick:"หนึ่ง",role:"CEO / ประธานเจ้าหน้าที่บริหาร",loc:"BKK",email:"panu.nim@tif.ac.th",pass:"D$493672531537us"},
+  {id:"680008",th:"นายจักรินทร์ กัญญาลักษณ์",en:"Mr.Jarkarin Kunyalak",nick:"หน่อย",role:"COO / ประธานเจ้าหน้าที่ฝ่ายปฏิบัติการ",loc:"BKK",email:"jarkarin.kun@tif.ac.th",pass:"F&577001290995ur"},
+  {id:"680009",th:"น.ส.พรปรียา ป้อมสุเมรุ",en:"Ms.Pornpreya Pomsumen",nick:"แอน",role:"CFO / ประธานเจ้าหน้าที่ฝ่ายการเงิน",loc:"BKK",email:"pornpreya.pom@tif.ac.th",pass:"M!740161403118as"},
+  {id:"680011",th:"นายณัฐพล สืบสุข",en:"Mr.Nattapon Suebsuk",nick:"เต๊าะ",role:"Director of Operations",loc:"PHS",email:"nattapon.sue@tif.ac.th",pass:"S)166284045349aj"},
+  {id:"680012",th:"นายคีทัน วดิเวลราจัน",en:"Mr.Keerthan Vadivelrajan",nick:"คีทัน",role:"Chief Training Officer",loc:"PHS",email:"keerthan.vad@tif.ac.th",pass:"P(419563033409of"},
+  {id:"680013",th:"นายธนวัฒน์ รอดสิน",en:"Mr.Thanawat Rodsin",nick:"คิว",role:"Aircraft Mechanic",loc:"PHS",email:"thanawat.rod@tif.ac.th",pass:"M^386326178478or"},
+  {id:"680014",th:"นายมะกอยี สะอะ",en:"Mr.Magoryee Sa-a",nick:"ยี",role:"Aircraft Mechanic",loc:"PHS",email:"magoryee.saa@tif.ac.th",pass:"P#188590824396ud"},
+  {id:"680015",th:"นายณัฐดนัย มังสาทอง",en:"Mr.Natdanai Mangsathong",nick:"เควิ่น",role:"Director of Standards",loc:"BKK",email:"natdanai.man@tif.ac.th",pass:"T*042434973799ay"},
+  {id:"680017",th:"น.ส.ภควรรณ ชูรัตน์",en:"Ms.Phakkawan Churat",nick:"ตูน",role:"Senior Finance & Accounting Officer",loc:"BKK",email:"phakkawan.chu@tif.ac.th",pass:"F#136395642749un"},
+  {id:"680019",th:"นายรพี อุชชิน",en:"Mr.Rapee Ujjin",nick:"ปุ๋ย",role:"Compliance Monitoring Manager (AMO)",loc:"BKK",email:"rapee.ujj@tif.ac.th",pass:"V&096885384722up"},
+  {id:"680020",th:"น.ส.จิณัฐตา สุทธาชีพ",en:"Miss Jinutta Suttacheep",nick:"หงษ์",role:"HR Manager",loc:"BKK",email:"jinutta.sut@tif.ac.th",pass:"M#238551254301uc"},
+  {id:"680022",th:"น.ส.อนาฐิตา เชาวนภรณ์",en:"Miss Anathita Chaowanaphon",nick:"นัตตี้",role:"Training Coordinator",loc:"PHS",email:"anathita.cha@tif.ac.th",pass:"H(045959412216up"},
+  {id:"680023",th:"นายพสธร สืบสังข์",en:"Mr.Potsatorn Seubsang",nick:"ไฟท์",role:"Flight Instructor",loc:"PHS",email:"potsatorn.seu@tif.ac.th",pass:"C@730279678370uz"},
+  {id:"680024",th:"น.ส.ประภัสสร ทรัพย์ศาสตร์",en:"Miss Prapatsorn Sabsat",nick:"เบียร์",role:"Training Planner Manager",loc:"BKK",email:"prapatsorn.sab@tif.ac.th",pass:"L!359643614976uf"},
+  {id:"680025",th:"น.ส.จริยาภรณ์ เจริญพงศ์",en:"Miss Jariyaporn Charoenphong",nick:"อุ๋น",role:"TKI",loc:"PHS",email:"jariyaporn.cha@tif.ac.th",pass:"V&252909057133ap"},
+  {id:"680026",th:"น.ส.สุชีรา ถนอมเมฆ",en:"Miss Suchera Thanommake",nick:"ฝ้าย",role:"Operation Officer",loc:"PHS",email:"suchera.tha@tif.ac.th",pass:"H/930236734843og"},
+  {id:"690004",th:"นายสุวิชา บุญเลิศ",en:"Mr.Suvicha Boonlert",nick:"แจ็ค",role:"Compliance Monitoring Manager (FTO)",loc:"BKK",email:"suvicha.boo@tif.ac.th",pass:"L$372715683539op"},
+  {id:"690005",th:"นายธัชพงศ์ คงวุฒิ",en:"Mr.Tadchapong Khongwut",nick:"ก๊อง",role:"เจ้าหน้าที่วางแผนซ่อมบำรุง",loc:"PHS",email:"tadchapong.kho@tif.ac.th",pass:"R%601212144344uy"},
+  {id:"690006",th:"น.ส.กิตติวรรณ เมณฑ์กูล",en:"Miss Kittiwan Menkoon",nick:"อ๊ะอาย",role:"Sales Officer",loc:"BKK",email:"kittiwan.men@tif.ac.th",pass:"Y#845098702731oc"},
+  {id:"690007",th:"น.ส.ภัททิยา สามนฑา",en:"Miss Phattiya Samonta",nick:"ดัช",role:"Safety Management Officer",loc:"PHS",email:"phattiya.sam@tif.ac.th",pass:"K/044361159417oy"},
+  {id:"690008",th:"น.ส.ศุภางค์ กำเนิดศิริ",en:"Miss Supang Kumnerdsiri",nick:"ปลาทู",role:"Compliance and Monitoring Officer",loc:"BKK",email:"supang.kum@tif.ac.th",pass:"J.181367381758ur"},
+  {id:"690009",th:"น.ส.นิชานันท์ แซ่นึ่ง",en:"Miss Nichanan Saenung",nick:"ฟิ้นท์",role:"Registration and Licensing Officer",loc:"BKK",email:"nichanan.sae@tif.ac.th",pass:"T/557615524327us"},
+  {id:"690010",th:"น.ส.อัญชิษฐา ขุนล่ำ",en:"Miss Anchittha Khunlam",nick:"รุ้ง",role:"เลขานุการ",loc:"BKK",email:"anchittha.khu@tif.ac.th",pass:"N$102057651850ux"},
+  {id:"690011",th:"นายปรารถนา พัฒนศิริ",en:"Mr.Pratana Patanasiri",nick:"ม่ำ",role:"Director, Safety and Compliance Monitoring",loc:"BKK",email:"pratana.pat@tif.ac.th",pass:"D/601931563214um"},
+  {id:"690012",th:"น.ส.วาสน์นิดา ชื่นสกุล",en:"Miss Wasnida Chuensakul",nick:"โจ๋",role:"Sales Manager",loc:"BKK",email:"wasnida.chu@tif.ac.th",pass:"C@975468836927uc"},
+  {id:"690013",th:"นายวัชระ ผลชัย",en:"Mr.Watchara Phonchai",nick:"เซฟ",role:"IT Support Officer",loc:"BKK",email:"watchara.pho@tif.ac.th",pass:"N!815681190871oz"},
+  {id:"690014",th:"น.ส.นภัทรธิราห์ วิทศิริ",en:"Miss Naphatthira Witsiri",nick:"หมิว",role:"Accounting and Finance Manager",loc:"BKK",email:"naphatthira.wit@tif.ac.th",pass:"T@334640530592us"},
+  {id:"690015",th:"น.ส.สิริภัทร ปาลี",en:"Miss Siriphat Palee",nick:"มีน",role:"Sales Officer",loc:"BKK",email:"siriphat.pal@tif.ac.th",pass:"D(449142846604oh"},
+];
+
+const palette=[
+  ["#dbeafe","#1e40af"],["#dcfce7","#166534"],["#fef3c7","#92400e"],
+  ["#fce7f3","#9d174d"],["#ede9fe","#5b21b6"],["#fee2e2","#991b1b"],
+  ["#d1fae5","#065f46"],["#e0f2fe","#0c4a6e"],
+];
+
+function initials(en){
+  const s=en.replace(/^(Miss|Mr\.|Ms\.|Capt\.|Po\s*1)\s*/i,'').trim().split(/\s+/);
+  return ((s[0]||'')[0]+(s[1]||'')[0]||'').toUpperCase();
+}
+function pal(id){return palette[parseInt(id.slice(-2))%palette.length]}
+
+function badge(loc){
+  if(loc==='BKK') return `<span class="badge bkk">✈ BKK</span>`;
+  if(loc==='PHS') return `<span class="badge phs">🛫 PHS</span>`;
+  return `<span class="badge pt">⏱ Part Time</span>`;
+}
+
+function card(p){
+  const [bg,fg]=pal(p.id);
+  return `<div class="card" onclick="toggle(this)">
+    <div class="card-top">
+      <div class="ava" style="background:${bg};color:${fg}">${initials(p.en)}</div>
+      <div class="info">
+        <div class="nick">${p.nick}</div>
+        <div class="eid">${p.id}</div>
+        <div class="role">${p.role}</div>
+        ${badge(p.loc)}
+      </div>
+    </div>
+    <div class="detail">
+      <div class="drow">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        <div>
+          <div class="dname">${p.th}</div>
+          <div class="dsub">${p.en}</div>
+        </div>
+      </div>
+      <div class="drow">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+        <div>
+          <div class="dlink">${p.email}</div>
+          <button class="copy" onclick="cp(event,'${p.email}',this)">📋 คัดลอก</button>
+        </div>
+      </div>
+      <div class="drow">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        <div>
+          <div class="mono dval">${p.pass}</div>
+          <button class="copy" onclick="cp(event,'${p.pass}',this)">📋 คัดลอก</button>
+        </div>
+      </div>
+    </div>
+  </div>`;
+}
+
+let loc='ALL';
+function render(){
+  const q=document.getElementById('search').value.toLowerCase();
+  const list=staff.filter(p=>{
+    const ml=loc==='ALL'||p.loc===loc;
+    const mq=!q||[p.th,p.en,p.nick,p.role,p.id,p.email].some(v=>v.toLowerCase().includes(q));
+    return ml&&mq;
+  });
+  document.getElementById('grid').innerHTML=list.length
+    ?list.map(card).join('')
+    :`<div class="empty"><div class="empty-icon">🔍</div>ไม่พบข้อมูลที่ค้นหา</div>`;
+  document.getElementById('count').textContent=`แสดง ${list.length} จาก ${staff.length} คน`;
+}
+
+function toggle(el){
+  const was=el.classList.contains('open');
+  document.querySelectorAll('.card.open').forEach(c=>c.classList.remove('open'));
+  if(!was) el.classList.add('open');
+}
+
+function cp(e,txt,btn){
+  e.stopPropagation();
+  navigator.clipboard.writeText(txt).then(()=>{
+    btn.textContent='✅ คัดลอกแล้ว';btn.classList.add('ok');
+    setTimeout(()=>{btn.textContent='📋 คัดลอก';btn.classList.remove('ok');},1800);
+  });
+}
+
+document.getElementById('search').addEventListener('input',render);
+document.querySelectorAll('.fbtn').forEach(b=>b.addEventListener('click',()=>{
+  loc=b.dataset.loc;
+  document.querySelectorAll('.fbtn').forEach(x=>x.classList.remove('on'));
+  b.classList.add('on');render();
+}));
+
+render();
+</script>
+</body>
+</html>
