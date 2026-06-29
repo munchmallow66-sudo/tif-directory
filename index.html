@@ -591,6 +591,45 @@
   .reset-btn:hover {
     opacity: 0.9;
   }
+  
+  /* Single View mode for displaying one person at a time */
+  .grid.single-view {
+    grid-template-columns: 1fr;
+    max-width: 480px;
+    margin: 0 auto;
+  }
+  .grid.single-view .card:not(.open) {
+    display: none;
+  }
+  
+  /* Copy All button styles */
+  .copy-all {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 8px 16px;
+    border-radius: 8px;
+    border: 1px solid var(--accent);
+    cursor: pointer;
+    background: var(--accent-bg);
+    color: var(--accent-text);
+    font-family: inherit;
+    width: 100%;
+    margin-top: 16px;
+    transition: all 0.2s ease;
+  }
+  .copy-all:hover {
+    background: var(--accent);
+    color: #fff;
+  }
+  .copy-all.ok {
+    background: var(--success-bg);
+    color: var(--success);
+    border-color: var(--success-bg);
+  }
 </style>
 </head>
 <body>
@@ -633,7 +672,10 @@
 </div>
 
 <main>
-  <div class="meta"><span class="meta-count" id="count"></span></div>
+  <div class="meta">
+    <span class="meta-count" id="count"></span>
+    <button id="back-btn" class="fbtn" style="display:none;" onclick="closeAllCards()">← แสดงทุกคน</button>
+  </div>
   <div class="grid" id="grid"></div>
 </main>
 
@@ -658,7 +700,7 @@ const staff=[
   {id:"680008",th:"นายจักรินทร์ กัญญาลักษณ์",en:"Mr.Jarkarin Kunyalak",nick:"หน่อย",role:"COO / ประธานเจ้าหน้าที่ฝ่ายปฏิบัติการ",loc:"BKK",email:"jarkarin.kun@tif.ac.th",pass:"F&577001290995ur"},
   {id:"680009",th:"น.ส.พรปรียา ป้อมสุเมรุ",en:"Ms.Pornpreya Pomsumen",nick:"แอน",role:"CFO / ประธานเจ้าหน้าที่ฝ่ายการเงิน",loc:"BKK",email:"pornpreya.pom@tif.ac.th",pass:"M!740161403118as"},
   {id:"680011",th:"นายณัฐพล สืบสุข",en:"Mr.Nattapon Suebsuk",nick:"เต๊าะ",role:"Director of Operations",loc:"PHS",email:"nattapon.sue@tif.ac.th",pass:"S)166284045349aj"},
-  {id:"680012",th:"นายคีทัน วดิเวลราจัน",en:"Mr.Keerthan Vadivelrajan",nick:"คีทัน",role:"Chief Training Officer",loc:"PHS",email:"keerthan.vad@tif.ac.th",pass:"P(419563033409of"},
+  {id:"680012",th:"นายคีทัน วดิเวลราจัน",en:"Mr.Keerthan Vadivelrajan",nick:"Keerthan",role:"Chief Training Officer",loc:"PHS",email:"keerthan.vad@tif.ac.th",pass:"P(419563033409of"},
   {id:"680013",th:"นายธนวัฒน์ รอดสิน",en:"Mr.Thanawat Rodsin",nick:"คิว",role:"Aircraft Mechanic",loc:"PHS",email:"thanawat.rod@tif.ac.th",pass:"M^386326178478or"},
   {id:"680014",th:"นายมะกอยี สะอะ",en:"Mr.Magoryee Sa-a",nick:"ยี",role:"Aircraft Mechanic",loc:"PHS",email:"magoryee.saa@tif.ac.th",pass:"P#188590824396ud"},
   {id:"680015",th:"นายณัฐดนัย มังสาทอง",en:"Mr.Natdanai Mangsathong",nick:"เควิ่น",role:"Director of Standards",loc:"BKK",email:"natdanai.man@tif.ac.th",pass:"T*042434973799ay"},
@@ -678,7 +720,7 @@ const staff=[
   {id:"690009",th:"น.ส.นิชานันท์ แซ่นึ่ง",en:"Miss Nichanan Saenung",nick:"ฟิ้นท์",role:"Registration and Licensing Officer",loc:"BKK",email:"nichanan.sae@tif.ac.th",pass:"T/557615524327us"},
   {id:"690010",th:"น.ส.อัญชิษฐา ขุนล่ำ",en:"Miss Anchittha Khunlam",nick:"รุ้ง",role:"Business Assurance Manager / Secretary",loc:"BKK",email:"anchittha.khu@tif.ac.th",pass:"N$102057651850ux"},
   {id:"690011",th:"นายปรารถนา พัฒนศิริ",en:"Mr.Pratana Patanasiri",nick:"ม่ำ",role:"Director, Safety and Compliance Monitoring",loc:"BKK",email:"pratana.pat@tif.ac.th",pass:"D/601931563214um"},
-  {id:"690012",th:"น.ส.วาสน์นิดา ชื่นสกุล",en:"Miss Wasnida Chuensakul",nick:"โจ๋",role:"Sales Manager",loc:"BKK",email:"wasnida.chu@tif.ac.th",pass:"C@975468836927uc"},
+  {id:"690012",th:"น.ส.วาสน์นิดา ชื่นสกุล",en:"Miss Wasnida Chuensakul",nick:"โจ๋",role:"Sale Supervisor",loc:"BKK",email:"wasnida.chu@tif.ac.th",pass:"C@975468836927uc"},
   {id:"690013",th:"นายวัชระ ผลชัย",en:"Mr.Watchara Phonchai",nick:"เซฟ",role:"IT Support Officer",loc:"BKK",email:"watchara.pho@tif.ac.th",pass:"N!815681190871oz"},
   {id:"690014",th:"น.ส.นภัทรธิราห์ วิทศิริ",en:"Miss Naphatthira Witsiri",nick:"หมิว",role:"Accounting and Finance Manager",loc:"BKK",email:"naphatthira.wit@tif.ac.th",pass:"T@334640530592us"},
   {id:"690015",th:"น.ส.สิริภัทร ปาลี",en:"Miss Siriphat Palee",nick:"มีน",role:"Sales Officer",loc:"BKK",email:"siriphat.pal@tif.ac.th",pass:"D(449142846604oh"},
@@ -725,6 +767,7 @@ function card(p, q){
   const [bg,fg]=pal(p.id);
   const displayName = p.id === '680012' ? p.en : p.th;
   const displaySub = p.id === '680012' ? p.th : p.en;
+  const nickPrefix = p.id === '680012' ? 'Mr. ' : 'คุณ';
   
   const highlightedName = highlightText(displayName, q);
   const highlightedRole = highlightText(p.role, q);
@@ -738,6 +781,7 @@ function card(p, q){
       <div class="ava" style="background:${bg};color:${fg}">${initials(p.en)}</div>
       <div class="info">
         <div class="nick">${highlightedName}</div>
+        <div style="font-size:11.5px; color:var(--text3); font-weight:500; margin-top:2px;">ชื่อเล่น: ${nickPrefix}${highlightedNick}</div>
         <div class="eid">${highlightedId}</div>
         <div class="role">${highlightedRole}</div>
         ${badge(p.loc)}
@@ -748,8 +792,23 @@ function card(p, q){
         <div class="drow">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
           <div class="dval-wrap">
-            <div class="dname">ชื่อเล่น: ${highlightedNick}</div>
+            <div class="dname">ชื่อเล่น: ${nickPrefix}${highlightedNick}</div>
             <div class="dsub">${highlightedSub}</div>
+            <div style="display:flex;gap:6px;margin-top:4px;flex-wrap:wrap;">
+              <button class="copy" onclick="cp(event,'${displayName}',this)">📋 คัดลอกชื่อจริง</button>
+              <button class="copy" onclick="cp(event,'${p.nick}',this)">📋 คัดลอกชื่อเล่น</button>
+            </div>
+          </div>
+        </div>
+        <div class="drow">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+          <div class="dval-wrap">
+            <div class="dname">ตำแหน่ง: ${highlightedRole}</div>
+            <div class="dsub">รหัสพนักงาน: ${highlightedId} (${p.loc})</div>
+            <div style="display:flex;gap:6px;margin-top:4px;flex-wrap:wrap;">
+              <button class="copy" onclick="cp(event,'${p.role}',this)">📋 คัดลอกตำแหน่ง</button>
+              <button class="copy" onclick="cp(event,'${p.id}',this)">📋 คัดลอกรหัส</button>
+            </div>
           </div>
         </div>
         <div class="drow">
@@ -772,6 +831,9 @@ function card(p, q){
             </div>
           </div>
         </div>
+        <div style="margin-top: 14px; border-top: 1px dashed var(--border); padding-top: 14px; width: 100%;">
+          <button class="copy-all" onclick="copyAll(event,'${p.id}',this)">📋 คัดลอกข้อมูลทั้งหมด</button>
+        </div>
       </div>
     </div>
   </div>`;
@@ -790,12 +852,32 @@ function render(){
     ?list.map(p => card(p, q)).join('')
     :`<div class="empty"><div class="empty-icon">🔍</div>ไม่พบข้อมูลที่ค้นหา<button class="reset-btn" onclick="resetFilters()">ล้างการค้นหา</button></div>`;
   document.getElementById('count').textContent=`แสดง ${list.length} จาก ${staff.length} คน`;
+
+  // Reset single-view mode on render
+  document.getElementById('grid').classList.remove('single-view');
+  document.getElementById('back-btn').style.display = 'none';
 }
 
 function toggle(el){
   const was=el.classList.contains('open');
   document.querySelectorAll('.card.open').forEach(c=>c.classList.remove('open'));
-  if(!was) el.classList.add('open');
+  
+  if(!was) {
+    el.classList.add('open');
+    document.getElementById('grid').classList.add('single-view');
+    document.getElementById('back-btn').style.display = 'inline-flex';
+    // Scroll to the top of the card smoothly
+    setTimeout(() => {
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 100);
+  } else {
+    document.getElementById('grid').classList.remove('single-view');
+    document.getElementById('back-btn').style.display = 'none';
+  }
+}
+
+function closeAllCards() {
+  resetFilters();
 }
 
 function cp(e,txt,btn){
@@ -804,6 +886,32 @@ function cp(e,txt,btn){
     const oldText = btn.textContent;
     btn.textContent='✅ คัดลอกแล้ว';btn.classList.add('ok');
     setTimeout(()=>{btn.textContent=oldText;btn.classList.remove('ok');},1800);
+  });
+}
+
+function copyAll(e, id, btn){
+  e.stopPropagation();
+  const p=staff.find(x=>x.id===id);
+  if(!p) return;
+  const displayName = p.id === '680012' ? p.en : p.th;
+  const displaySub = p.id === '680012' ? p.th : p.en;
+  const nickPrefix = p.id === '680012' ? 'Mr. ' : 'คุณ';
+  const text = `ชื่อ-นามสกุล: ${displayName} (${nickPrefix}${p.nick})
+ชื่อภาษาอังกฤษ/ไทย: ${displaySub}
+รหัสพนักงาน: ${p.id}
+ตำแหน่ง: ${p.role}
+สังกัด/พื้นที่: ${p.loc}
+อีเมล: ${p.email}
+รหัสผ่าน: ${p.pass}`;
+
+  navigator.clipboard.writeText(text).then(()=>{
+    const oldText = btn.textContent;
+    btn.textContent = '✅ คัดลอกข้อมูลทั้งหมดแล้ว';
+    btn.classList.add('ok');
+    setTimeout(()=>{
+      btn.textContent = oldText;
+      btn.classList.remove('ok');
+    },1800);
   });
 }
 
@@ -843,7 +951,7 @@ function resetFilters() {
   document.getElementById('search').value = '';
   document.getElementById('search-clear').style.display = 'none';
   loc = 'ALL';
-  document.querySelectorAll('.fbtn').forEach(x => {
+  document.querySelectorAll('#filters .fbtn').forEach(x => {
     if (x.dataset.loc === 'ALL') x.classList.add('on');
     else x.classList.remove('on');
   });
@@ -865,9 +973,9 @@ searchClearBtn.addEventListener('click', () => {
   render();
 });
 
-document.querySelectorAll('.fbtn').forEach(b=>b.addEventListener('click',()=>{
+document.querySelectorAll('#filters .fbtn').forEach(b=>b.addEventListener('click',()=>{
   loc=b.dataset.loc;
-  document.querySelectorAll('.fbtn').forEach(x=>x.classList.remove('on'));
+  document.querySelectorAll('#filters .fbtn').forEach(x=>x.classList.remove('on'));
   b.classList.add('on');render();
 }));
 
