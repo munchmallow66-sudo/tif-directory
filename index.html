@@ -630,6 +630,408 @@
     color: var(--success);
     border-color: var(--success-bg);
   }
+  
+  /* Tabs Navigation */
+  .nav-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 12px 24px;
+    position: sticky;
+    top: 67px;
+    z-index: 99;
+    transition: all 0.2s;
+  }
+  
+  .nav-tab {
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text2);
+    background: none;
+    border: 1px solid transparent;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.2s;
+  }
+  
+  .nav-tab:hover {
+    color: var(--text);
+    background: var(--surface2);
+  }
+  
+  .nav-tab.active {
+    background: var(--accent-bg);
+    border-color: var(--accent);
+    color: var(--accent-text);
+  }
+  
+  /* Toolbar Styles */
+  .toolbar-wrap {
+    max-width: 1100px;
+    margin: 16px auto 0;
+    padding: 0 24px;
+  }
+  
+  .toolbar-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 10px 16px;
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    transition: all 0.2s;
+  }
+  
+  .toolbar-left, .toolbar-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  
+  .sort-select-wrap {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  #sort-select {
+    height: 32px;
+    padding: 0 10px;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    background: var(--surface2);
+    color: var(--text);
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 500;
+    outline: none;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  
+  #sort-select:focus {
+    border-color: var(--accent);
+  }
+  
+  /* Action Buttons in Card Details */
+  .btn-action {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 6px 12px;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    cursor: pointer;
+    background: var(--surface);
+    color: var(--text2);
+    font-family: inherit;
+    transition: all 0.2s;
+    flex: 1;
+    margin-top: 4px;
+  }
+  
+  .btn-action-edit:hover {
+    background: var(--accent-bg);
+    color: var(--accent-text);
+    border-color: var(--accent);
+  }
+  
+  .btn-action-delete:hover {
+    background: var(--warn-bg);
+    color: var(--warn);
+    border-color: var(--warn);
+  }
+
+  /* Dashboard Styles */
+  .dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+  
+  .dash-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: var(--shadow);
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    transition: all 0.2s;
+  }
+  
+  .dash-card-icon {
+    font-size: 24px;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--surface2);
+  }
+  
+  .total-card .dash-card-icon { background: rgba(91, 33, 182, 0.1); color: #5b21b6; }
+  .bkk-card .dash-card-icon { background: var(--accent-bg); color: var(--accent-text); }
+  .phs-card .dash-card-icon { background: var(--success-bg); color: var(--success); }
+  .pt-card .dash-card-icon { background: var(--warn-bg); color: var(--warn); }
+  
+  .dash-card-info {
+    flex: 1;
+  }
+  
+  .dash-card-label {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text3);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  
+  .dash-card-val {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--text);
+    margin: 2px 0;
+  }
+  
+  .dash-card-sub {
+    font-size: 11px;
+    color: var(--text3);
+  }
+  
+  .dashboard-section-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  
+  @media(max-width: 768px){
+    .dashboard-section-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+  
+  .section-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: var(--shadow);
+    transition: all 0.2s;
+  }
+  
+  .section-card-title {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 16px;
+    color: var(--text);
+    border-left: 3px solid var(--accent);
+    padding-left: 8px;
+  }
+  
+  .stat-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  
+  .stat-item {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  
+  .stat-header {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    font-weight: 500;
+  }
+  
+  .stat-name {
+    color: var(--text2);
+    font-weight: 600;
+  }
+  
+  .stat-count {
+    color: var(--text3);
+  }
+  
+  .stat-bar-bg {
+    height: 8px;
+    background: var(--surface2);
+    border-radius: 999px;
+    overflow: hidden;
+  }
+  
+  .stat-bar-fill {
+    height: 100%;
+    border-radius: 999px;
+    background: var(--accent);
+    transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  /* Modal Styles */
+  .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: 16px;
+    animation: fadeIn 0.2s ease-out;
+  }
+  
+  .modal-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    width: 100%;
+    max-width: 600px;
+    box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    animation: slideUp 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .modal-header {
+    padding: 16px 24px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .modal-header h3 {
+    font-size: 16px;
+    font-weight: 600;
+  }
+  
+  .modal-close {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--text3);
+    padding: 6px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+  }
+  
+  .modal-close:hover {
+    background: var(--surface2);
+    color: var(--text2);
+  }
+  
+  .modal-close svg {
+    width: 18px;
+    height: 18px;
+  }
+  
+  .form-grid {
+    padding: 24px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    max-height: 70vh;
+    overflow-y: auto;
+  }
+  
+  @media(max-width: 500px){
+    .form-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+  
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  
+  .form-group label {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text2);
+  }
+  
+  .form-group input, .form-group select {
+    height: 38px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 0 12px;
+    font-size: 14px;
+    background: var(--surface2);
+    color: var(--text);
+    outline: none;
+    transition: all 0.2s;
+  }
+  
+  .form-group input:focus, .form-group select:focus {
+    border-color: var(--accent);
+    background: var(--surface);
+    box-shadow: 0 0 0 3px var(--accent-focus);
+  }
+  
+  .form-help {
+    font-size: 10px;
+    color: var(--text3);
+    margin-top: 2px;
+  }
+  
+  .pwd-input-wrap {
+    display: flex;
+    align-items: center;
+  }
+  
+  .pwd-input-wrap input {
+    flex: 1;
+    min-width: 0;
+  }
+  
+  .modal-footer {
+    padding: 16px 24px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    background: var(--surface2);
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  
+  @keyframes slideUp {
+    from { transform: translateY(15px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+  }
 </style>
 </head>
 <body>
@@ -662,25 +1064,212 @@
   </div>
 </header>
 
-<div class="filters-wrap">
-  <div class="filters" id="filters">
-    <button class="fbtn on" data-loc="ALL">ทั้งหมด <span class="fcount" id="count-all">0</span></button>
-    <button class="fbtn" data-loc="BKK">BKK <span class="fcount" id="count-bkk">0</span></button>
-    <button class="fbtn" data-loc="PHS">PHS <span class="fcount" id="count-phs">0</span></button>
-    <button class="fbtn" data-loc="Part Time">Part Time <span class="fcount" id="count-pt">0</span></button>
+<nav class="nav-tabs">
+  <button class="nav-tab active" onclick="switchTab('directory')">
+    ✈ รายชื่อพนักงาน
+  </button>
+  <button class="nav-tab" onclick="switchTab('dashboard')">
+    📊 สถิติองค์กร
+  </button>
+  <button class="nav-tab" onclick="switchTab('settings')">
+    ⚙ จัดการระบบ
+  </button>
+</nav>
+
+<!-- Tab 1: Directory -->
+<div id="tab-directory" class="tab-content">
+  <div class="toolbar-wrap">
+    <div class="toolbar-inner">
+      <div class="toolbar-left">
+        <div class="sort-select-wrap">
+          <span style="font-size:12px; font-weight:600; color:var(--text3); white-space:nowrap;">เรียงลำดับ:</span>
+          <select id="sort-select" onchange="render()">
+            <option value="id-asc">รหัสพนักงาน (เก่า - ใหม่)</option>
+            <option value="id-desc">รหัสพนักงาน (ใหม่ - เก่า)</option>
+            <option value="name-th">ชื่อภาษาไทย (ก - ฮ)</option>
+            <option value="name-en">ชื่อภาษาอังกฤษ (A - Z)</option>
+          </select>
+        </div>
+      </div>
+      <div class="toolbar-right">
+        <button class="fbtn on" onclick="openAddModal()" style="height:34px; background:var(--accent); color:#fff; border-color:var(--accent); font-weight:600; gap:4px; display:inline-flex; align-items:center;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:14px; height:14px;"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          เพิ่มพนักงานใหม่
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="filters-wrap">
+    <div class="filters" id="filters">
+      <button class="fbtn on" data-loc="ALL">ทั้งหมด <span class="fcount" id="count-all">0</span></button>
+      <button class="fbtn" data-loc="BKK">BKK <span class="fcount" id="count-bkk">0</span></button>
+      <button class="fbtn" data-loc="PHS">PHS <span class="fcount" id="count-phs">0</span></button>
+      <button class="fbtn" data-loc="Part Time">Part Time <span class="fcount" id="count-pt">0</span></button>
+    </div>
+  </div>
+
+  <main>
+    <div class="meta">
+      <span class="meta-count" id="count"></span>
+      <button id="back-btn" class="fbtn" style="display:none;" onclick="closeAllCards()">← แสดงทุกคน</button>
+    </div>
+    <div class="grid" id="grid"></div>
+  </main>
+</div>
+
+<!-- Tab 2: Dashboard -->
+<div id="tab-dashboard" class="tab-content" style="display:none;">
+  <main>
+    <h2 style="font-size: 18px; font-weight: 600; margin-bottom: 20px; color: var(--text);">ข้อมูลสถิติของพนักงาน TIF</h2>
+    
+    <div class="dashboard-grid">
+      <div class="dash-card total-card">
+        <div class="dash-card-icon">👥</div>
+        <div class="dash-card-info">
+          <div class="dash-card-label">พนักงานทั้งหมด</div>
+          <div class="dash-card-val" id="db-total-count">0</div>
+          <div class="dash-card-sub">คนในระบบปัจจุบัน</div>
+        </div>
+      </div>
+      
+      <div class="dash-card bkk-card">
+        <div class="dash-card-icon">✈</div>
+        <div class="dash-card-info">
+          <div class="dash-card-label">สังกัด BKK</div>
+          <div class="dash-card-val" id="db-bkk-count">0</div>
+          <div class="dash-card-sub" id="db-bkk-percent">0% ของทั้งหมด</div>
+        </div>
+      </div>
+      
+      <div class="dash-card phs-card">
+        <div class="dash-card-icon">🛫</div>
+        <div class="dash-card-info">
+          <div class="dash-card-label">สังกัด PHS</div>
+          <div class="dash-card-val" id="db-phs-count">0</div>
+          <div class="dash-card-sub" id="db-phs-percent">0% ของทั้งหมด</div>
+        </div>
+      </div>
+      
+      <div class="dash-card pt-card">
+        <div class="dash-card-icon">⏱</div>
+        <div class="dash-card-info">
+          <div class="dash-card-label">Part Time</div>
+          <div class="dash-card-val" id="db-pt-count">0</div>
+          <div class="dash-card-sub" id="db-pt-percent">0% ของทั้งหมด</div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="dashboard-section-grid">
+      <div class="section-card">
+        <h3 class="section-card-title">สัดส่วนพนักงานแยกตามสังกัด/พื้นที่</h3>
+        <div class="stat-list" id="db-loc-bars"></div>
+      </div>
+      
+      <div class="section-card">
+        <h3 class="section-card-title">สัดส่วนตามกลุ่มสายงาน</h3>
+        <div class="stat-list" id="db-dept-bars"></div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<!-- Tab 3: Settings -->
+<div id="tab-settings" class="tab-content" style="display:none;">
+  <main style="max-width: 600px; margin: 0 auto;">
+    <div class="section-card">
+      <h2 style="font-size: 18px; font-weight: 600; margin-bottom: 8px; color: var(--text);">จัดการฐานข้อมูลระบบ (System Settings)</h2>
+      <p style="font-size: 13px; color: var(--text3); line-height: 1.6; margin-bottom: 24px;">
+        คุณสามารถส่งออกข้อมูลพนักงานทั้งหมดเพื่อสำรองเก็บไว้เป็นไฟล์ JSON หรือทำการกู้คืนข้อมูลโดยเลือกไฟล์ที่เคยส่งออกไว้ รวมถึงการล้างข้อมูลกลับไปเป็นค่าเริ่มต้นจากทางระบบ
+      </p>
+      
+      <div style="display:flex; flex-direction:column; gap:16px;">
+        <div style="padding:16px; border:1px solid var(--border); border-radius:10px; background:var(--surface2);">
+          <h3 style="font-size:14px; font-weight:600; margin-bottom:6px; color:var(--text);">📥 ส่งออกข้อมูล (Backup Data)</h3>
+          <p style="font-size:12px; color:var(--text3); margin-bottom:12px;">บันทึกข้อมูลพนักงานทั้งหมดที่มีการอัปเดตปัจจุบันลงเครื่องคอมพิวเตอร์ของคุณเป็นไฟล์ JSON</p>
+          <button class="fbtn on" onclick="exportStaffJSON()" style="background:var(--accent); color:#fff; border-color:var(--accent); font-weight:600; padding:0 18px; height:36px; display:inline-flex; align-items:center;">ดาวน์โหลดข้อมูลสำรอง</button>
+        </div>
+        
+        <div style="padding:16px; border:1px solid var(--border); border-radius:10px; background:var(--surface2);">
+          <h3 style="font-size:14px; font-weight:600; margin-bottom:6px; color:var(--text);">📤 นำเข้าข้อมูล (Restore Data)</h3>
+          <p style="font-size:12px; color:var(--text3); margin-bottom:12px;">เลือกไฟล์สำรองข้อมูลพนักงาน (.json) เพื่ออัปโหลดและกู้คืนเข้าสู่ระบบนี้</p>
+          <input type="file" id="import-file-input" accept=".json" style="display:none;" onchange="importStaffJSON(event)">
+          <button class="fbtn" onclick="document.getElementById('import-file-input').click()" style="font-weight:600; padding:0 18px; height:36px; display:inline-flex; align-items:center;">เลือกไฟล์สำหรับกู้คืนข้อมูล</button>
+        </div>
+        
+        <div style="padding:16px; border:1px dashed var(--warn); border-radius:10px; background:rgba(180, 83, 9, 0.03);">
+          <h3 style="font-size:14px; font-weight:600; color:var(--warn); margin-bottom:6px;">⚠️ รีเซ็ตข้อมูลระบบ (System Reset)</h3>
+          <p style="font-size:12px; color:var(--text3); margin-bottom:12px;">ล้างข้อมูลที่มีการบันทึกไว้ในคอมพิวเตอร์เครื่องนี้ทั้งหมด แล้วคืนค่ากลับเป็นพนักงานเริ่มต้น 47 คน</p>
+          <button class="fbtn" onclick="resetSystemToDefault()" style="border-color:var(--warn); color:var(--warn); font-weight:600; padding:0 18px; height:36px; display:inline-flex; align-items:center;">รีเซ็ตเป็นค่าเริ่มต้น</button>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<!-- Add/Edit Staff Modal -->
+<div id="staff-modal" class="modal-overlay" style="display:none;">
+  <div class="modal-card">
+    <div class="modal-header">
+      <h3 id="modal-title" style="color:var(--text);">เพิ่มพนักงานใหม่</h3>
+      <button class="modal-close" onclick="closeModal()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <form id="staff-form" onsubmit="saveStaff(event)">
+      <div class="form-grid">
+        <div class="form-group">
+          <label for="form-id">รหัสพนักงาน (6 หลัก)</label>
+          <input type="text" id="form-id" required pattern="\d{6}" placeholder="เช่น 680027" maxlength="6">
+          <div class="form-help">รหัสตัวเลข 6 หลัก เช่น 680027</div>
+        </div>
+        <div class="form-group">
+          <label for="form-nick">ชื่อเล่น</label>
+          <input type="text" id="form-nick" required placeholder="เช่น แม็ค">
+        </div>
+        <div class="form-group">
+          <label for="form-th">ชื่อ-นามสกุล (ภาษาไทย)</label>
+          <input type="text" id="form-th" required placeholder="เช่น นายพันธ์พิสุทธิ์ นุราช">
+        </div>
+        <div class="form-group">
+          <label for="form-en">ชื่อ-นามสกุล (ภาษาอังกฤษ)</label>
+          <input type="text" id="form-en" required placeholder="เช่น Mr.Punpisut Nurach">
+        </div>
+        <div class="form-group">
+          <label for="form-role">ตำแหน่งงาน</label>
+          <input type="text" id="form-role" required placeholder="เช่น Flight Instructor">
+        </div>
+        <div class="form-group">
+          <label for="form-loc">สถานที่ปฏิบัติงาน</label>
+          <select id="form-loc" required>
+            <option value="BKK">✈ BKK</option>
+            <option value="PHS">🛫 PHS</option>
+            <option value="Part Time">⏱ Part Time</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="form-email">อีเมล</label>
+          <input type="email" id="form-email" required placeholder="เช่น email@tif.ac.th">
+        </div>
+        <div class="form-group">
+          <label for="form-pass">รหัสผ่านสำหรับเข้าใช้งาน</label>
+          <div class="pwd-input-wrap">
+            <input type="text" id="form-pass" required placeholder="รหัสผ่าน">
+            <button type="button" class="fbtn" onclick="generateRandomPass()" style="height:38px; border-radius:8px; margin-left:6px; flex-shrink:0; display:inline-flex; align-items:center;">🎲 สุ่มรหัส</button>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="fbtn" onclick="closeModal()" style="border-radius:8px; display:inline-flex; align-items:center;">ยกเลิก</button>
+        <button type="submit" class="fbtn on" style="border-radius:8px; background:var(--accent); color:#fff; border:none; padding:0 24px; height:32px; display:inline-flex; align-items:center; font-weight:600;">บันทึกข้อมูล</button>
+      </div>
+    </form>
   </div>
 </div>
 
-<main>
-  <div class="meta">
-    <span class="meta-count" id="count"></span>
-    <button id="back-btn" class="fbtn" style="display:none;" onclick="closeAllCards()">← แสดงทุกคน</button>
-  </div>
-  <div class="grid" id="grid"></div>
-</main>
-
 <script>
-const staff=[
+const defaultStaff=[
   {id:"000000",th:"นายพันธ์พิสุทธิ์ นุราช",en:"Mr.Punpisut Nurach",nick:"แม็ค",role:"—",loc:"BKK",email:"punpisut.nur@tif.ac.th",pass:"B!182705302131us"},
   {id:"600001",th:"ร.อ.สุนทร วัชพืช",en:"Capt.Soontorn Wutchapuech",nick:"ครูสุน",role:"Flight Instructor",loc:"PHS",email:"soontorn.wut@tif.ac.th",pass:"G#896407835532om"},
   {id:"600002",th:"พ.จ.อ.วินัย เกษม",en:"Po 1 Winai Kasem",nick:"วินัย",role:"Director of Maintenance",loc:"PHS",email:"winai.kas@tif.ac.th",pass:"Y#140737376116oh"},
@@ -725,6 +1314,7 @@ const staff=[
   {id:"690014",th:"น.ส.นภัทรธิราห์ วิทศิริ",en:"Miss Naphatthira Witsiri",nick:"หมิว",role:"Accounting and Finance Manager",loc:"BKK",email:"naphatthira.wit@tif.ac.th",pass:"T@334640530592us"},
   {id:"690015",th:"น.ส.สิริภัทร ปาลี",en:"Miss Siriphat Palee",nick:"มีน",role:"Sales Officer",loc:"BKK",email:"siriphat.pal@tif.ac.th",pass:"D(449142846604oh"},
 ];
+let staff = [];
 
 const palette=[
   ["#dbeafe","#1e40af"],["#dcfce7","#166534"],["#fef3c7","#92400e"],
@@ -815,7 +1405,10 @@ function card(p, q){
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
           <div class="dval-wrap">
             <div class="dlink">${highlightedEmail}</div>
-            <button class="copy" onclick="cp(event,'${p.email}',this)">📋 คัดลอกเมล</button>
+            <div style="display:flex;gap:6px;margin-top:4px;flex-wrap:wrap;">
+              <button class="copy" onclick="cp(event,'${p.email}',this)">📋 คัดลอกเมล</button>
+              <a href="mailto:${p.email}" onclick="event.stopPropagation();" class="copy" style="text-decoration:none; display:inline-flex; align-items:center; gap:4px; margin-top:4px;">✉️ ส่งอีเมล</a>
+            </div>
           </div>
         </div>
         <div class="drow">
@@ -834,20 +1427,53 @@ function card(p, q){
         <div style="margin-top: 14px; border-top: 1px dashed var(--border); padding-top: 14px; width: 100%;">
           <button class="copy-all" onclick="copyAll(event,'${p.id}',this)">📋 คัดลอกข้อมูลทั้งหมด</button>
         </div>
+        <div style="margin-top: 12px; display:flex; gap:8px; width: 100%;">
+          <button class="btn-action btn-action-edit" onclick="openEditModal(event, '${p.id}')">✏️ แก้ไขข้อมูล</button>
+          <button class="btn-action btn-action-delete" onclick="deleteStaff(event, '${p.id}')">🗑️ ลบพนักงาน</button>
+        </div>
       </div>
     </div>
   </div>`;
 }
 
 let loc='ALL';
+let currentEditId = null;
+
+function initData() {
+  const stored = localStorage.getItem('tif_staff_data');
+  if (stored) {
+    try {
+      staff = JSON.parse(stored);
+    } catch (e) {
+      console.error("Error parsing staff data", e);
+      staff = [...defaultStaff];
+    }
+  } else {
+    staff = [...defaultStaff];
+    localStorage.setItem('tif_staff_data', JSON.stringify(staff));
+  }
+}
 
 function render(){
   const q=document.getElementById('search').value.toLowerCase().trim();
-  const list=staff.filter(p=>{
+  const sortBy = document.getElementById('sort-select').value;
+  
+  let list=staff.filter(p=>{
     const ml=loc==='ALL'||p.loc===loc;
     const mq=!q||[p.th,p.en,p.nick,p.role,p.id,p.email].some(v=>v.toLowerCase().includes(q));
     return ml&&mq;
   });
+  
+  if (sortBy === 'id-asc') {
+    list.sort((a, b) => a.id.localeCompare(b.id));
+  } else if (sortBy === 'id-desc') {
+    list.sort((a, b) => b.id.localeCompare(a.id));
+  } else if (sortBy === 'name-th') {
+    list.sort((a, b) => a.th.localeCompare(b.th, 'th'));
+  } else if (sortBy === 'name-en') {
+    list.sort((a, b) => a.en.localeCompare(b.en));
+  }
+  
   document.getElementById('grid').innerHTML=list.length
     ?list.map(p => card(p, q)).join('')
     :`<div class="empty"><div class="empty-icon">🔍</div>ไม่พบข้อมูลที่ค้นหา<button class="reset-btn" onclick="resetFilters()">ล้างการค้นหา</button></div>`;
@@ -958,6 +1584,369 @@ function resetFilters() {
   render();
 }
 
+// Modal actions
+function openAddModal() {
+  currentEditId = null;
+  document.getElementById('modal-title').textContent = 'เพิ่มพนักงานใหม่';
+  document.getElementById('form-id').disabled = false;
+  document.getElementById('staff-form').reset();
+  
+  document.getElementById('form-id').value = '';
+  document.getElementById('form-nick').value = '';
+  document.getElementById('form-th').value = '';
+  document.getElementById('form-en').value = '';
+  document.getElementById('form-role').value = '';
+  document.getElementById('form-loc').value = 'BKK';
+  document.getElementById('form-email').value = '';
+  document.getElementById('form-pass').value = '';
+  
+  generateRandomPass();
+  document.getElementById('staff-modal').style.display = 'flex';
+}
+
+function openEditModal(e, id) {
+  if (e) e.stopPropagation();
+  currentEditId = id;
+  const p = staff.find(x => x.id === id);
+  if (!p) return;
+  
+  document.getElementById('modal-title').textContent = 'แก้ไขข้อมูลพนักงาน';
+  document.getElementById('form-id').value = p.id;
+  document.getElementById('form-id').disabled = true;
+  document.getElementById('form-nick').value = p.nick;
+  document.getElementById('form-th').value = p.th;
+  document.getElementById('form-en').value = p.en;
+  document.getElementById('form-role').value = p.role;
+  document.getElementById('form-loc').value = p.loc;
+  document.getElementById('form-email').value = p.email;
+  document.getElementById('form-pass').value = p.pass;
+  
+  document.getElementById('staff-modal').style.display = 'flex';
+}
+
+function closeModal() {
+  document.getElementById('staff-modal').style.display = 'none';
+}
+
+function generateRandomPass() {
+  const chars = 'abcdefghijklmnopqrstuvwxyz';
+  const symbols = '!@#$%^&*()_+';
+  const upper = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  
+  const randUpper = upper[Math.floor(Math.random() * upper.length)];
+  const randSymbol = symbols[Math.floor(Math.random() * symbols.length)];
+  let randDigits = '';
+  for(let i=0; i<12; i++){
+    randDigits += Math.floor(Math.random() * 10).toString();
+  }
+  let randChars = '';
+  for(let i=0; i<2; i++){
+    randChars += chars[Math.floor(Math.random() * chars.length)];
+  }
+  
+  const password = `${randUpper}${randSymbol}${randDigits}${randChars}`;
+  document.getElementById('form-pass').value = password;
+}
+
+function saveStaff(e) {
+  e.preventDefault();
+  const id = document.getElementById('form-id').value.trim();
+  const nick = document.getElementById('form-nick').value.trim();
+  const th = document.getElementById('form-th').value.trim();
+  const en = document.getElementById('form-en').value.trim();
+  const role = document.getElementById('form-role').value.trim();
+  const locVal = document.getElementById('form-loc').value;
+  const email = document.getElementById('form-email').value.trim();
+  const pass = document.getElementById('form-pass').value.trim();
+  
+  if (!id || !nick || !th || !en || !role || !email || !pass) {
+    alert('กรุณากรอกข้อมูลให้ครบถ้วน');
+    return;
+  }
+  
+  if (currentEditId === null) {
+    if (staff.some(x => x.id === id)) {
+      alert(`รหัสพนักงาน ${id} มีอยู่ในระบบแล้ว กรุณาใช้รหัสอื่น`);
+      return;
+    }
+    staff.push({ id, th, en, nick, role, loc: locVal, email, pass });
+  } else {
+    const idx = staff.findIndex(x => x.id === currentEditId);
+    if (idx !== -1) {
+      staff[idx] = { id: currentEditId, th, en, nick, role, loc: locVal, email, pass };
+    }
+  }
+  
+  localStorage.setItem('tif_staff_data', JSON.stringify(staff));
+  closeModal();
+  updateFilterCounts();
+  render();
+  
+  if (currentEditId) {
+    setTimeout(() => {
+      const cards = document.querySelectorAll('.card');
+      cards.forEach(c => {
+        const eidEl = c.querySelector('.eid');
+        if (eidEl && eidEl.textContent.trim() === currentEditId) {
+          toggle(c);
+        }
+      });
+    }, 150);
+  }
+}
+
+function deleteStaff(e, id) {
+  if (e) e.stopPropagation();
+  const p = staff.find(x => x.id === id);
+  if (!p) return;
+  
+  const displayName = p.id === '680012' ? p.en : p.th;
+  if (confirm(`คุณต้องการลบข้อมูลของ ${displayName} (รหัส: ${id}) ใช่หรือไม่?`)) {
+    staff = staff.filter(x => x.id !== id);
+    localStorage.setItem('tif_staff_data', JSON.stringify(staff));
+    
+    document.getElementById('grid').classList.remove('single-view');
+    document.getElementById('back-btn').style.display = 'none';
+    
+    updateFilterCounts();
+    render();
+  }
+}
+
+// Tab switcher
+function switchTab(tabId) {
+  document.querySelectorAll('.nav-tab').forEach(btn => btn.classList.remove('active'));
+  document.querySelectorAll('.tab-content').forEach(content => content.style.display = 'none');
+  
+  const activeBtn = document.querySelector(`.nav-tab[onclick="switchTab('${tabId}')"]`);
+  if (activeBtn) activeBtn.classList.add('active');
+  
+  const activeContent = document.getElementById(`tab-${tabId}`);
+  if (activeContent) activeContent.style.display = 'block';
+  
+  const searchWrap = document.querySelector('.search-wrap');
+  if (tabId === 'directory') {
+    searchWrap.style.opacity = '1';
+    searchWrap.style.pointerEvents = 'auto';
+  } else {
+    searchWrap.style.opacity = '0';
+    searchWrap.style.pointerEvents = 'none';
+  }
+  
+  if (tabId === 'dashboard') {
+    renderDashboard();
+  }
+}
+
+// Dashboard statistics
+function renderDashboard() {
+  const total = staff.length;
+  const bkk = staff.filter(p => p.loc === 'BKK').length;
+  const phs = staff.filter(p => p.loc === 'PHS').length;
+  const pt = staff.filter(p => p.loc === 'Part Time').length;
+  
+  document.getElementById('db-total-count').textContent = total;
+  document.getElementById('db-bkk-count').textContent = bkk;
+  document.getElementById('db-phs-count').textContent = phs;
+  document.getElementById('db-pt-count').textContent = pt;
+  
+  const bkkPct = total > 0 ? Math.round((bkk / total) * 100) : 0;
+  const phsPct = total > 0 ? Math.round((phs / total) * 100) : 0;
+  const ptPct = total > 0 ? Math.round((pt / total) * 100) : 0;
+  
+  document.getElementById('db-bkk-percent').textContent = `${bkkPct}% ของทั้งหมด`;
+  document.getElementById('db-phs-percent').textContent = `${phsPct}% ของทั้งหมด`;
+  document.getElementById('db-pt-percent').textContent = `${ptPct}% ของทั้งหมด`;
+  
+  const locHtml = `
+    <div class="stat-item">
+      <div class="stat-header">
+        <span class="stat-name">✈ สังกัด BKK</span>
+        <span class="stat-count">${bkk} คน (${bkkPct}%)</span>
+      </div>
+      <div class="stat-bar-bg">
+        <div class="stat-bar-fill" style="width: ${bkkPct}%; background: var(--accent);"></div>
+      </div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-header">
+        <span class="stat-name">🛫 สังกัด PHS</span>
+        <span class="stat-count">${phs} คน (${phsPct}%)</span>
+      </div>
+      <div class="stat-bar-bg">
+        <div class="stat-bar-fill" style="width: ${phsPct}%; background: var(--success);"></div>
+      </div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-header">
+        <span class="stat-name">⏱ Part Time</span>
+        <span class="stat-count">${pt} คน (${ptPct}%)</span>
+      </div>
+      <div class="stat-bar-bg">
+        <div class="stat-bar-fill" style="width: ${ptPct}%; background: var(--warn);"></div>
+      </div>
+    </div>
+  `;
+  document.getElementById('db-loc-bars').innerHTML = locHtml;
+  
+  let flightOps = 0;
+  let maintenance = 0;
+  let adminSalesSupport = 0;
+  let others = 0;
+  
+  staff.forEach(p => {
+    const role = p.role.toLowerCase();
+    if (role.includes('instructor') || role.includes('training') || role.includes('tki') || role.includes('operations')) {
+      flightOps++;
+    } else if (role.includes('maintenance') || role.includes('mechanic') || role.includes('store keeper') || role.includes('ซ่อมบำรุง')) {
+      maintenance++;
+    } else if (role.includes('ceo') || role.includes('coo') || role.includes('cfo') || role.includes('hr') || 
+               role.includes('finance') || role.includes('accounting') || role.includes('sales') || 
+               role.includes('purchasing') || role.includes('secretary') || role.includes('it') || 
+               role.includes('driver') || role.includes('สนามบิน') || role.includes('compliance') || 
+               role.includes('assurance') || role.includes('safety') || role.includes('executive') || 
+               role.includes('registration') || role.includes('licensing') || role.includes('officer') || 
+               role.includes('manager') || role.includes('supervisor')) {
+      adminSalesSupport++;
+    } else {
+      others++;
+    }
+  });
+  
+  const flightPct = total > 0 ? Math.round((flightOps / total) * 100) : 0;
+  const maintPct = total > 0 ? Math.round((maintenance / total) * 100) : 0;
+  const adminPct = total > 0 ? Math.round((adminSalesSupport / total) * 100) : 0;
+  const otherPct = total > 0 ? Math.round((others / total) * 100) : 0;
+  
+  let deptHtml = `
+    <div class="stat-item">
+      <div class="stat-header">
+        <span class="stat-name">✈ ฝ่ายปฏิบัติการบินและฝึกอบรม (Flight Ops & Training)</span>
+        <span class="stat-count">${flightOps} คน (${flightPct}%)</span>
+      </div>
+      <div class="stat-bar-bg">
+        <div class="stat-bar-fill" style="width: ${flightPct}%; background: #a855f7;"></div>
+      </div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-header">
+        <span class="stat-name">🛠 ฝ่ายซ่อมบำรุงอากาศยาน (Maintenance)</span>
+        <span class="stat-count">${maintenance} คน (${maintPct}%)</span>
+      </div>
+      <div class="stat-bar-bg">
+        <div class="stat-bar-fill" style="width: ${maintPct}%; background: #06b6d4;"></div>
+      </div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-header">
+        <span class="stat-name">💼 ฝ่ายบริหารและสนับสนุนการบิน (Management, Admin & Sales)</span>
+        <span class="stat-count">${adminSalesSupport} คน (${adminPct}%)</span>
+      </div>
+      <div class="stat-bar-bg">
+        <div class="stat-bar-fill" style="width: ${adminPct}%; background: #f43f5e;"></div>
+      </div>
+    </div>
+  `;
+  if (others > 0) {
+    deptHtml += `
+      <div class="stat-item">
+        <div class="stat-header">
+          <span class="stat-name">❓ อื่นๆ / ยังไม่ระบุกลุ่ม</span>
+          <span class="stat-count">${others} คน (${otherPct}%)</span>
+        </div>
+        <div class="stat-bar-bg">
+          <div class="stat-bar-fill" style="width: ${otherPct}%; background: #64748b;"></div>
+        </div>
+      </div>
+    `;
+  }
+  document.getElementById('db-dept-bars').innerHTML = deptHtml;
+}
+
+// Backup & Restore
+function exportStaffJSON() {
+  const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(staff, null, 2));
+  const downloadAnchor = document.createElement('a');
+  downloadAnchor.setAttribute("href",     dataStr);
+  downloadAnchor.setAttribute("download", `tif_staff_backup_${new Date().toISOString().slice(0,10)}.json`);
+  document.body.appendChild(downloadAnchor);
+  downloadAnchor.click();
+  downloadAnchor.remove();
+}
+
+function importStaffJSON(event) {
+  const input = event.target;
+  if (!input.files || input.files.length === 0) return;
+  const file = input.files[0];
+  const reader = new FileReader();
+  reader.onload = function() {
+    try {
+      const parsed = JSON.parse(reader.result);
+      if (Array.isArray(parsed) && parsed.length > 0 && parsed[0].id && parsed[0].th && parsed[0].en && parsed[0].nick) {
+        if (confirm(`พบข้อมูลพนักงานทั้งหมด ${parsed.length} คนในไฟล์นี้ ต้องการนำเข้าเพื่อเขียนทับข้อมูลในระบบปัจจุบันใช่หรือไม่?`)) {
+          staff = parsed;
+          localStorage.setItem('tif_staff_data', JSON.stringify(staff));
+          updateFilterCounts();
+          render();
+          alert('นำเข้าข้อมูลพนักงานและกู้คืนระบบเสร็จเรียบร้อยแล้ว!');
+          switchTab('directory');
+        }
+      } else {
+        alert('รูปแบบไฟล์ JSON ไม่ถูกต้อง กรุณาใช้ไฟล์ที่เคยส่งออกจากระบบนี้เท่านั้น');
+      }
+    } catch (e) {
+      alert('ไม่สามารถอ่านไฟล์ JSON ได้ กรุณาตรวจสอบว่าไฟล์สมบูรณ์หรือไม่');
+    }
+    input.value = '';
+  };
+  reader.readAsText(file);
+}
+
+function resetSystemToDefault() {
+  if (confirm('คุณแน่ใจหรือไม่ว่าต้องการล้างข้อมูลระบบทั้งหมด? ข้อมูลพนักงานที่ถูกเพิ่มหรือแก้ไขหลังจากนี้จะสูญหาย และระบบจะกลับไปเป็นพนักงานเริ่มต้น 47 คน')) {
+    staff = [...defaultStaff];
+    localStorage.setItem('tif_staff_data', JSON.stringify(staff));
+    updateFilterCounts();
+    render();
+    alert('รีเซ็ตข้อมูลระบบกลับเป็นค่าเริ่มต้นเรียบร้อยแล้ว!');
+    switchTab('directory');
+  }
+}
+
+// Deep linking URL query check
+function handleUrlQuery() {
+  const urlParams = new URLSearchParams(window.location.search);
+  const id = urlParams.get('id');
+  if (id) {
+    const p = staff.find(x => x.id === id);
+    if (p) {
+      switchTab('directory');
+      document.getElementById('search').value = '';
+      document.getElementById('search-clear').style.display = 'none';
+      loc = 'ALL';
+      document.querySelectorAll('#filters .fbtn').forEach(x => {
+        if (x.dataset.loc === 'ALL') x.classList.add('on');
+        else x.classList.remove('on');
+      });
+      render();
+      
+      setTimeout(() => {
+        const cards = document.querySelectorAll('.card');
+        let targetCard = null;
+        cards.forEach(c => {
+          const eidEl = c.querySelector('.eid');
+          if (eidEl && eidEl.textContent.trim() === id) {
+            targetCard = c;
+          }
+        });
+        if (targetCard) {
+          toggle(targetCard);
+        }
+      }, 200);
+    }
+  }
+}
+
 const searchInput = document.getElementById('search');
 const searchClearBtn = document.getElementById('search-clear');
 
@@ -979,8 +1968,11 @@ document.querySelectorAll('#filters .fbtn').forEach(b=>b.addEventListener('click
   b.classList.add('on');render();
 }));
 
+// Startup initialization
+initData();
 updateFilterCounts();
 render();
+handleUrlQuery();
 </script>
 </body>
 </html>
