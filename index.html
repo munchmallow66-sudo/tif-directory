@@ -1,1380 +1,1968 @@
 <!DOCTYPE html>
 <html lang="th">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TIF — Employee Directory</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+Thai:wght@400;500;600;700&display=swap" rel="stylesheet">
-<style>
-  *{box-sizing:border-box;margin:0;padding:0}
-  :root{
-    --bg:#f8fafc;
-    --surface:#ffffff;
-    --surface2:#f1f5f9;
-    --text:#0f172a;
-    --text2:#475569;
-    --text3:#64748b;
-    --border:#e2e8f0;
-    --border2:#cbd5e1;
-    --border-hover:#94a3b8;
-    --accent:#185FA5;
-    --accent-bg:#e0f2fe;
-    --accent-text:#0369a1;
-    --accent-focus:rgba(24, 95, 165, 0.15);
-    --success:#0f766e;
-    --success-bg:#ccfbf1;
-    --warn:#b45309;
-    --warn-bg:#fef3c7;
-    --radius:10px;
-    --header-bg:rgba(255, 255, 255, 0.85);
-    --shadow:0 1px 3px 0 rgba(0,0,0,0.05),0 1px 2px -1px rgba(0,0,0,0.05);
-    --shadow-hover:0 4px 6px -1px rgba(0,0,0,0.05),0 2px 4px -2px rgba(0,0,0,0.05);
-  }
-  
-  html.dark{
-    --bg:#0b0f19;
-    --surface:#151d30;
-    --surface2:#1e2942;
-    --text:#f8fafc;
-    --text2:#94a3b8;
-    --text3:#64748b;
-    --border:#243049;
-    --border2:#38bdf8;
-    --border-hover:#475569;
-    --accent:#38bdf8;
-    --accent-bg:#0c3355;
-    --accent-text:#78c2f3;
-    --accent-focus:rgba(56, 189, 248, 0.2);
-    --success-bg:#042e27;
-    --warn-bg:#451a03;
-    --header-bg:rgba(21, 29, 48, 0.85);
-    --shadow:0 1px 3px 0 rgba(0,0,0,0.2),0 1px 2px -1px rgba(0,0,0,0.2);
-    --shadow-hover:0 10px 15px -3px rgba(0,0,0,0.3),0 4px 6px -4px rgba(0,0,0,0.3);
-  }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TIF — Employee Directory</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+Thai:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0
+    }
 
-  body{
-    background:var(--bg);
-    font-family:'Inter','Noto Sans Thai',-apple-system,BlinkMacSystemFont,sans-serif;
-    color:var(--text);
-    min-height:100vh;
-    transition:background-color 0.3s ease,color 0.3s ease;
-  }
-  
-  header{
-    background:var(--header-bg);
-    backdrop-filter:blur(12px);
-    -webkit-backdrop-filter:blur(12px);
-    border-bottom:1px solid var(--border);
-    padding:14px 24px;
-    position:sticky;
-    top:0;
-    z-index:100;
-    transition:background 0.2s,border-color 0.2s;
-  }
-  
-  .header-inner{
-    max-width:1100px;
-    margin:0 auto;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:16px;
-    flex-wrap:wrap;
-  }
-  
-  .logo-wrap{
-    display:flex;
-    align-items:center;
-    gap:16px;
-  }
-  
-  .logo{
-    display:flex;
-    align-items:center;
-    gap:10px;
-  }
-  
-  .logo-mark{
-    width:36px;
-    height:36px;
-    background:#185FA5;
-    border-radius:8px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    color:#fff;
-    font-weight:700;
-    font-size:14px;
-    flex-shrink:0;
-  }
-  
-  .logo-text{
-    font-size:15px;
-    font-weight:600;
-    color:var(--text);
-  }
-  
-  .logo-sub{
-    font-size:12px;
-    color:var(--text3);
-    margin-top:1px;
-  }
-  
-  .controls{
-    display:flex;
-    align-items:center;
-    gap:12px;
-    flex:1;
-    justify-content:flex-end;
-    min-width:280px;
-  }
-  
-  .search-wrap{
-    position:relative;
-    flex:1;
-    max-width:320px;
-  }
-  
-  .search-icon{
-    position:absolute;
-    left:12px;
-    top:50%;
-    transform:translateY(-50%);
-    color:var(--text3);
-    pointer-events:none;
-    width:16px;
-    height:16px;
-  }
-  
-  #search{
-    width:100%;
-    padding:0 34px 0 34px;
-    height:38px;
-    background:var(--surface2);
-    border:1px solid var(--border);
-    border-radius:var(--radius);
-    font-size:14px;
-    font-family:inherit;
-    color:var(--text);
-    outline:none;
-    transition:all 0.2s ease;
-  }
-  
-  #search:focus{
-    border-color:var(--accent);
-    background:var(--surface);
-    box-shadow:0 0 0 3px var(--accent-focus);
-  }
+    :root {
+      --bg: #f8fafc;
+      --surface: #ffffff;
+      --surface2: #f1f5f9;
+      --text: #0f172a;
+      --text2: #475569;
+      --text3: #64748b;
+      --border: #e2e8f0;
+      --border2: #cbd5e1;
+      --border-hover: #94a3b8;
+      --accent: #185FA5;
+      --accent-bg: #e0f2fe;
+      --accent-text: #0369a1;
+      --accent-focus: rgba(24, 95, 165, 0.15);
+      --success: #0f766e;
+      --success-bg: #ccfbf1;
+      --warn: #b45309;
+      --warn-bg: #fef3c7;
+      --radius: 10px;
+      --header-bg: rgba(255, 255, 255, 0.85);
+      --shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px -1px rgba(0, 0, 0, 0.05);
+      --shadow-hover: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+    }
 
-  #search-clear {
-    position:absolute;
-    right:10px;
-    top:50%;
-    transform:translateY(-50%);
-    background:none;
-    border:none;
-    cursor:pointer;
-    color:var(--text3);
-    display:flex;
-    align-items:center;
-    padding:4px;
-    border-radius:50%;
-    transition:all 0.2s;
-  }
-  #search-clear:hover {
-    background:var(--surface2);
-    color:var(--text2);
-  }
-  #search-clear svg {
-    width: 14px;
-    height: 14px;
-  }
-  
-  .theme-toggle-btn {
-    background:var(--surface2);
-    border:1px solid var(--border);
-    color:var(--text2);
-    cursor:pointer;
-    width:38px;
-    height:38px;
-    border-radius:var(--radius);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    transition:all 0.2s;
-  }
-  
-  .theme-toggle-btn:hover {
-    background:var(--border);
-    color:var(--text);
-  }
-  
-  .theme-toggle-btn svg {
-    width:18px;
-    height:18px;
-  }
-  
-  html:not(.dark) .sun-icon { display: none; }
-  html:not(.dark) .moon-icon { display: block; }
-  html.dark .sun-icon { display: block; }
-  html.dark .moon-icon { display: none; }
+    html.dark {
+      --bg: #0b0f19;
+      --surface: #151d30;
+      --surface2: #1e2942;
+      --text: #f8fafc;
+      --text2: #94a3b8;
+      --text3: #64748b;
+      --border: #243049;
+      --border2: #38bdf8;
+      --border-hover: #475569;
+      --accent: #38bdf8;
+      --accent-bg: #0c3355;
+      --accent-text: #78c2f3;
+      --accent-focus: rgba(56, 189, 248, 0.2);
+      --success-bg: #042e27;
+      --warn-bg: #451a03;
+      --header-bg: rgba(21, 29, 48, 0.85);
+      --shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 1px 2px -1px rgba(0, 0, 0, 0.2);
+      --shadow-hover: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -4px rgba(0, 0, 0, 0.3);
+    }
 
-  .filters-wrap {
-    max-width: 1100px;
-    margin: 16px auto 0;
-    padding: 0 24px;
-  }
-  
-  .filters{
-    display:flex;
-    gap:8px;
-    flex-wrap:wrap;
-  }
-  
-  .fbtn{
-    height:32px;
-    padding:0 14px;
-    border:1px solid var(--border);
-    border-radius:9999px;
-    background:var(--surface);
-    font-size:12px;
-    font-weight:500;
-    font-family:inherit;
-    color:var(--text2);
-    cursor:pointer;
-    transition:all 0.2s ease;
-    display:inline-flex;
-    align-items:center;
-  }
-  
-  .fbtn:hover{
-    border-color:var(--border2);
-    color:var(--text);
-    background:var(--surface2);
-  }
-  
-  .fbtn.on{
-    background:var(--accent-bg);
-    border-color:var(--accent);
-    color:var(--accent-text);
-  }
+    body {
+      background: var(--bg);
+      font-family: 'Inter', 'Noto Sans Thai', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: var(--text);
+      min-height: 100vh;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
 
-  .fcount {
-    display:inline-flex;
-    align-items:center;
-    justify-content:center;
-    background:var(--surface2);
-    color:var(--text3);
-    font-size:10px;
-    font-weight:600;
-    padding:1px 6px;
-    border-radius:10px;
-    margin-left:6px;
-    transition:all 0.2s;
-  }
+    header {
+      background: var(--header-bg);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 14px 24px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      transition: background 0.2s, border-color 0.2s;
+    }
 
-  .fbtn.on .fcount {
-    background:var(--accent);
-    color:#fff;
-  }
-  
-  main{
-    max-width:1100px;
-    margin:0 auto;
-    padding:20px 24px;
-  }
-  
-  .meta{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    margin-bottom:16px;
-  }
-  
-  .meta-count{
-    font-size:13px;
-    font-weight:500;
-    color:var(--text3);
-  }
-  
-  .grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fill,minmax(240px,1fr));
-    gap:16px;
-  }
-  
-  .card{
-    background:var(--surface);
-    border:1px solid var(--border);
-    border-radius:12px;
-    padding:16px;
-    cursor:pointer;
-    transition:all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow:var(--shadow);
-    display:flex;
-    flex-direction:column;
-  }
-  
-  .card:hover{
-    transform:translateY(-2px);
-    border-color:var(--border-hover);
-    box-shadow:var(--shadow-hover);
-  }
-  
-  .card.open{
-    border-color:var(--accent);
-    box-shadow:var(--shadow-hover);
-  }
-  
-  .card-top{
-    display:flex;
-    gap:14px;
-    align-items:flex-start;
-  }
-  
-  .ava{
-    width:46px;
-    height:46px;
-    border-radius:50%;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:14px;
-    font-weight:600;
-    flex-shrink:0;
-    box-shadow:inset 0 0 0 1px rgba(0,0,0,0.05);
-  }
-  
-  .info{
-    flex:1;
-    min-width:0;
-  }
-  
-  .nick{
-    font-size:14px;
-    font-weight:600;
-    color:var(--text);
-    line-height:1.4;
-    word-break:break-word;
-  }
-  
-  .eid{
-    font-size:11px;
-    font-family:ui-monospace,monospace;
-    color:var(--text3);
-    margin-top:2px;
-  }
-  
-  .role{
-    font-size:12px;
-    color:var(--text2);
-    margin-top:6px;
-    line-height:1.4;
-    display:-webkit-box;
-    -webkit-line-clamp:2;
-    -webkit-box-orient:vertical;
-    overflow:hidden;
-  }
-  
-  .badge{
-    display:inline-flex;
-    align-items:center;
-    gap:3px;
-    font-size:10px;
-    margin-top:10px;
-    padding:2px 8px;
-    border-radius:9999px;
-    font-weight:600;
-  }
-  
-  .bkk{background:var(--accent-bg);color:var(--accent-text)}
-  .phs{background:var(--success-bg);color:var(--success)}
-  .pt{background:var(--warn-bg);color:var(--warn)}
-  
-  /* Smooth Expand details transition */
-  .detail-wrapper{
-    display:grid;
-    grid-template-rows:0fr;
-    transition:grid-template-rows 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-    overflow:hidden;
-  }
-  .card.open .detail-wrapper{
-    grid-template-rows:1fr;
-  }
-  .detail-content{
-    min-height:0;
-    opacity:0;
-    transition:opacity 0.2s ease-out, padding 0.25s ease;
-    padding-top:0;
-  }
-  .card.open .detail-content{
-    opacity:1;
-    padding-top:14px;
-    border-top:1px solid var(--border);
-    margin-top:14px;
-  }
-  
-  .drow{
-    display:flex;
-    gap:10px;
-    align-items:flex-start;
-    margin-bottom:12px;
-    font-size:12px;
-  }
-  .drow:last-child {
-    margin-bottom:0;
-  }
-  
-  .drow svg{
-    width:14px;
-    height:14px;
-    color:var(--text3);
-    flex-shrink:0;
-    margin-top:2px;
-  }
-  
-  .dval-wrap {
-    flex:1;
-    min-width:0;
-    display:flex;
-    flex-direction:column;
-    gap:4px;
-  }
-  
-  .dval{
-    color:var(--text2);
-    word-break:break-all;
-    line-height:1.5;
-  }
-  
-  .dname{
-    font-size:12px;
-    font-weight:600;
-    color:var(--text);
-    line-height:1.4;
-  }
-  
-  .dsub{
-    font-size:11px;
-    color:var(--text3);
-    margin-top:1px;
-  }
-  
-  .dlink{
-    font-size:12px;
-    color:var(--accent-text);
-    font-weight:500;
-  }
-  
-  .pwd-container {
-    display:flex;
-    align-items:center;
-    gap:8px;
-    margin-top:2px;
-  }
+    .header-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
 
-  .pwd-text {
-    font-family:ui-monospace,monospace;
-    font-size:11px;
-    background:var(--surface2);
-    padding:2px 8px;
-    border-radius:4px;
-    color:var(--text2);
-    border:1px solid var(--border);
-    min-width:110px;
-    display:inline-block;
-    text-align:center;
-    letter-spacing: 0.05em;
-  }
-  
-  .pwd-toggle {
-    background:none;
-    border:none;
-    cursor:pointer;
-    color:var(--text3);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    padding:4px;
-    border-radius:4px;
-    transition:all 0.2s;
-  }
-  
-  .pwd-toggle:hover {
-    background:var(--surface2);
-    color:var(--text2);
-  }
-  
-  .pwd-toggle svg {
-    width:14px;
-    height:14px;
-  }
-  
-  .mono{
-    font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;
-    font-size:11px;
-    letter-spacing:.02em;
-  }
-  
-  .copy{
-    display:inline-flex;
-    align-items:center;
-    gap:4px;
-    font-size:10px;
-    font-weight:500;
-    padding:3px 8px;
-    border-radius:6px;
-    border:1px solid var(--border);
-    cursor:pointer;
-    margin-top:4px;
-    background:var(--surface);
-    color:var(--text2);
-    font-family:inherit;
-    align-self:flex-start;
-    transition:all 0.2s;
-  }
-  
-  .copy:hover{
-    background:var(--accent-bg);
-    color:var(--accent-text);
-    border-color:var(--accent);
-  }
-  
-  .copy.ok{
-    background:var(--success-bg);
-    color:var(--success);
-    border-color:var(--success-bg);
-  }
-  
-  /* Highlight matching text */
-  .hl {
-    background: rgba(245, 158, 11, 0.22);
-    border-radius: 2px;
-    color: inherit;
-  }
-  
-  .empty{
-    text-align:center;
-    padding:60px 24px;
-    color:var(--text3);
-    font-size:14px;
-    grid-column:1/-1;
-    background:var(--surface);
-    border-radius:12px;
-    border:1px dashed var(--border);
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
-  }
-  
-  .empty-icon{
-    font-size:48px;
-    margin-bottom:16px;
-  }
+    .logo-wrap {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
 
-  .reset-btn {
-    margin-top: 16px;
-    height: 36px;
-    padding: 0 16px;
-    border-radius: 18px;
-    background: var(--accent);
-    color: #fff;
-    border: none;
-    cursor: pointer;
-    font-weight: 500;
-    font-size: 13px;
-    transition: opacity 0.2s;
-  }
-  .reset-btn:hover {
-    opacity: 0.9;
-  }
-  
-  /* Single View mode for displaying one person at a time */
-  .grid.single-view {
-    grid-template-columns: 1fr;
-    max-width: 480px;
-    margin: 0 auto;
-  }
-  .grid.single-view .card:not(.open) {
-    display: none;
-  }
-  
-  /* Copy All button styles */
-  .copy-all {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 6px;
-    font-size: 12px;
-    font-weight: 600;
-    padding: 8px 16px;
-    border-radius: 8px;
-    border: 1px solid var(--accent);
-    cursor: pointer;
-    background: var(--accent-bg);
-    color: var(--accent-text);
-    font-family: inherit;
-    width: 100%;
-    margin-top: 16px;
-    transition: all 0.2s ease;
-  }
-  .copy-all:hover {
-    background: var(--accent);
-    color: #fff;
-  }
-  .copy-all.ok {
-    background: var(--success-bg);
-    color: var(--success);
-    border-color: var(--success-bg);
-  }
-  
-  /* Tabs Navigation */
-  .nav-tabs {
-    display: flex;
-    justify-content: center;
-    gap: 8px;
-    background: var(--surface);
-    border-bottom: 1px solid var(--border);
-    padding: 12px 24px;
-    position: sticky;
-    top: 67px;
-    z-index: 99;
-    transition: all 0.2s;
-  }
-  
-  .nav-tab {
-    padding: 8px 16px;
-    border-radius: 8px;
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--text2);
-    background: none;
-    border: 1px solid transparent;
-    cursor: pointer;
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    transition: all 0.2s;
-  }
-  
-  .nav-tab:hover {
-    color: var(--text);
-    background: var(--surface2);
-  }
-  
-  .nav-tab.active {
-    background: var(--accent-bg);
-    border-color: var(--accent);
-    color: var(--accent-text);
-  }
-  
-  /* Toolbar Styles */
-  .toolbar-wrap {
-    max-width: 1100px;
-    margin: 16px auto 0;
-    padding: 0 24px;
-  }
-  
-  .toolbar-inner {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 12px;
-    flex-wrap: wrap;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    padding: 10px 16px;
-    border-radius: 12px;
-    box-shadow: var(--shadow);
-    transition: all 0.2s;
-  }
-  
-  .toolbar-left, .toolbar-right {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
-  
-  .sort-select-wrap {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-  
-  #sort-select {
-    height: 32px;
-    padding: 0 10px;
-    border-radius: 6px;
-    border: 1px solid var(--border);
-    background: var(--surface2);
-    color: var(--text);
-    font-family: inherit;
-    font-size: 12px;
-    font-weight: 500;
-    outline: none;
-    cursor: pointer;
-    transition: all 0.2s;
-  }
-  
-  #sort-select:focus {
-    border-color: var(--accent);
-  }
-  
-  /* Action Buttons in Card Details */
-  .btn-action {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 4px;
-    font-size: 11px;
-    font-weight: 600;
-    padding: 6px 12px;
-    border-radius: 6px;
-    border: 1px solid var(--border);
-    cursor: pointer;
-    background: var(--surface);
-    color: var(--text2);
-    font-family: inherit;
-    transition: all 0.2s;
-    flex: 1;
-    margin-top: 4px;
-  }
-  
-  .btn-action-edit:hover {
-    background: var(--accent-bg);
-    color: var(--accent-text);
-    border-color: var(--accent);
-  }
-  
-  .btn-action-delete:hover {
-    background: var(--warn-bg);
-    color: var(--warn);
-    border-color: var(--warn);
-  }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
 
-  /* Dashboard Styles */
-  .dashboard-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 16px;
-    margin-bottom: 24px;
-  }
-  
-  .dash-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 20px;
-    box-shadow: var(--shadow);
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    transition: all 0.2s;
-  }
-  
-  .dash-card-icon {
-    font-size: 24px;
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: var(--surface2);
-  }
-  
-  .total-card .dash-card-icon { background: rgba(91, 33, 182, 0.1); color: #5b21b6; }
-  .bkk-card .dash-card-icon { background: var(--accent-bg); color: var(--accent-text); }
-  .phs-card .dash-card-icon { background: var(--success-bg); color: var(--success); }
-  .pt-card .dash-card-icon { background: var(--warn-bg); color: var(--warn); }
-  
-  .dash-card-info {
-    flex: 1;
-  }
-  
-  .dash-card-label {
-    font-size: 11px;
-    font-weight: 600;
-    color: var(--text3);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-  }
-  
-  .dash-card-val {
-    font-size: 24px;
-    font-weight: 700;
-    color: var(--text);
-    margin: 2px 0;
-  }
-  
-  .dash-card-sub {
-    font-size: 11px;
-    color: var(--text3);
-  }
-  
-  .dashboard-section-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
-  }
-  
-  @media(max-width: 768px){
+    .logo-mark {
+      width: 36px;
+      height: 36px;
+      background: #185FA5;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-weight: 700;
+      font-size: 14px;
+      flex-shrink: 0;
+    }
+
+    .logo-text {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .logo-sub {
+      font-size: 12px;
+      color: var(--text3);
+      margin-top: 1px;
+    }
+
+    .controls {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex: 1;
+      justify-content: flex-end;
+      min-width: 280px;
+    }
+
+    .search-wrap {
+      position: relative;
+      flex: 1;
+      max-width: 320px;
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text3);
+      pointer-events: none;
+      width: 16px;
+      height: 16px;
+    }
+
+    #search {
+      width: 100%;
+      padding: 0 34px 0 34px;
+      height: 38px;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      font-size: 14px;
+      font-family: inherit;
+      color: var(--text);
+      outline: none;
+      transition: all 0.2s ease;
+    }
+
+    #search:focus {
+      border-color: var(--accent);
+      background: var(--surface);
+      box-shadow: 0 0 0 3px var(--accent-focus);
+    }
+
+    #search-clear {
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--text3);
+      display: flex;
+      align-items: center;
+      padding: 4px;
+      border-radius: 50%;
+      transition: all 0.2s;
+    }
+
+    #search-clear:hover {
+      background: var(--surface2);
+      color: var(--text2);
+    }
+
+    #search-clear svg {
+      width: 14px;
+      height: 14px;
+    }
+
+    .theme-toggle-btn {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      color: var(--text2);
+      cursor: pointer;
+      width: 38px;
+      height: 38px;
+      border-radius: var(--radius);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+    }
+
+    .theme-toggle-btn:hover {
+      background: var(--border);
+      color: var(--text);
+    }
+
+    .theme-toggle-btn svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    html:not(.dark) .sun-icon {
+      display: none;
+    }
+
+    html:not(.dark) .moon-icon {
+      display: block;
+    }
+
+    html.dark .sun-icon {
+      display: block;
+    }
+
+    html.dark .moon-icon {
+      display: none;
+    }
+
+    .lang-switch {
+      display: flex;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2px;
+      gap: 2px;
+    }
+
+    .lang-btn {
+      background: none;
+      border: none;
+      color: var(--text3);
+      padding: 6px 12px;
+      border-radius: calc(var(--radius) - 2px);
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-family: inherit;
+    }
+
+    .lang-btn:hover {
+      color: var(--text2);
+    }
+
+    .lang-btn.active {
+      background: var(--surface);
+      color: var(--accent);
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    }
+
+    html.dark .lang-btn.active {
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+    }
+
+    .filters-wrap {
+      max-width: 1100px;
+      margin: 16px auto 0;
+      padding: 0 24px;
+    }
+
+    .filters {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .fbtn {
+      height: 32px;
+      padding: 0 14px;
+      border: 1px solid var(--border);
+      border-radius: 9999px;
+      background: var(--surface);
+      font-size: 12px;
+      font-weight: 500;
+      font-family: inherit;
+      color: var(--text2);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+    }
+
+    .fbtn:hover {
+      border-color: var(--border2);
+      color: var(--text);
+      background: var(--surface2);
+    }
+
+    .fbtn.on {
+      background: var(--accent-bg);
+      border-color: var(--accent);
+      color: var(--accent-text);
+    }
+
+    .fcount {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--surface2);
+      color: var(--text3);
+      font-size: 10px;
+      font-weight: 600;
+      padding: 1px 6px;
+      border-radius: 10px;
+      margin-left: 6px;
+      transition: all 0.2s;
+    }
+
+    .fbtn.on .fcount {
+      background: var(--accent);
+      color: #fff;
+    }
+
+    main {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 20px 24px;
+    }
+
+    .meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+    }
+
+    .meta-count {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text3);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 16px;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px;
+      cursor: pointer;
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card:hover {
+      transform: translateY(-2px);
+      border-color: var(--border-hover);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .card.open {
+      border-color: var(--accent);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .card-top {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+    }
+
+    .ava {
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-weight: 600;
+      flex-shrink: 0;
+      box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.05);
+    }
+
+    .info {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .nick {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text);
+      line-height: 1.4;
+      word-break: break-word;
+    }
+
+    .eid {
+      font-size: 11px;
+      font-family: ui-monospace, monospace;
+      color: var(--text3);
+      margin-top: 2px;
+    }
+
+    .role {
+      font-size: 12px;
+      color: var(--text2);
+      margin-top: 6px;
+      line-height: 1.4;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+      font-size: 10px;
+      margin-top: 10px;
+      padding: 2px 8px;
+      border-radius: 9999px;
+      font-weight: 600;
+    }
+
+    .bkk {
+      background: var(--accent-bg);
+      color: var(--accent-text)
+    }
+
+    .phs {
+      background: var(--success-bg);
+      color: var(--success)
+    }
+
+    .pt {
+      background: var(--warn-bg);
+      color: var(--warn)
+    }
+
+    /* Smooth Expand details transition */
+    .detail-wrapper {
+      display: grid;
+      grid-template-rows: 0fr;
+      transition: grid-template-rows 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      overflow: hidden;
+    }
+
+    .card.open .detail-wrapper {
+      grid-template-rows: 1fr;
+    }
+
+    .detail-content {
+      min-height: 0;
+      opacity: 0;
+      transition: opacity 0.2s ease-out, padding 0.25s ease;
+      padding-top: 0;
+    }
+
+    .card.open .detail-content {
+      opacity: 1;
+      padding-top: 14px;
+      border-top: 1px solid var(--border);
+      margin-top: 14px;
+    }
+
+    .drow {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      margin-bottom: 12px;
+      font-size: 12px;
+    }
+
+    .drow:last-child {
+      margin-bottom: 0;
+    }
+
+    .drow svg {
+      width: 14px;
+      height: 14px;
+      color: var(--text3);
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .dval-wrap {
+      flex: 1;
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .dval {
+      color: var(--text2);
+      word-break: break-all;
+      line-height: 1.5;
+    }
+
+    .dname {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text);
+      line-height: 1.4;
+    }
+
+    .dsub {
+      font-size: 11px;
+      color: var(--text3);
+      margin-top: 1px;
+    }
+
+    .dlink {
+      font-size: 12px;
+      color: var(--accent-text);
+      font-weight: 500;
+    }
+
+    .pwd-container {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 2px;
+    }
+
+    .pwd-text {
+      font-family: ui-monospace, monospace;
+      font-size: 11px;
+      background: var(--surface2);
+      padding: 2px 8px;
+      border-radius: 4px;
+      color: var(--text2);
+      border: 1px solid var(--border);
+      min-width: 110px;
+      display: inline-block;
+      text-align: center;
+      letter-spacing: 0.05em;
+    }
+
+    .pwd-toggle {
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--text3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 4px;
+      border-radius: 4px;
+      transition: all 0.2s;
+    }
+
+    .pwd-toggle:hover {
+      background: var(--surface2);
+      color: var(--text2);
+    }
+
+    .pwd-toggle svg {
+      width: 14px;
+      height: 14px;
+    }
+
+    .mono {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 11px;
+      letter-spacing: .02em;
+    }
+
+    .copy {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 10px;
+      font-weight: 500;
+      padding: 3px 8px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      cursor: pointer;
+      margin-top: 4px;
+      background: var(--surface);
+      color: var(--text2);
+      font-family: inherit;
+      align-self: flex-start;
+      transition: all 0.2s;
+    }
+
+    .copy:hover {
+      background: var(--accent-bg);
+      color: var(--accent-text);
+      border-color: var(--accent);
+    }
+
+    .copy.ok {
+      background: var(--success-bg);
+      color: var(--success);
+      border-color: var(--success-bg);
+    }
+
+    /* Highlight matching text */
+    .hl {
+      background: rgba(245, 158, 11, 0.22);
+      border-radius: 2px;
+      color: inherit;
+    }
+
+    .empty {
+      text-align: center;
+      padding: 60px 24px;
+      color: var(--text3);
+      font-size: 14px;
+      grid-column: 1/-1;
+      background: var(--surface);
+      border-radius: 12px;
+      border: 1px dashed var(--border);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .empty-icon {
+      font-size: 48px;
+      margin-bottom: 16px;
+    }
+
+    .reset-btn {
+      margin-top: 16px;
+      height: 36px;
+      padding: 0 16px;
+      border-radius: 18px;
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      font-weight: 500;
+      font-size: 13px;
+      transition: opacity 0.2s;
+    }
+
+    .reset-btn:hover {
+      opacity: 0.9;
+    }
+
+    /* Single View mode for displaying one person at a time */
+    .grid.single-view {
+      grid-template-columns: 1fr;
+      max-width: 480px;
+      margin: 0 auto;
+    }
+
+    .grid.single-view .card:not(.open) {
+      display: none;
+    }
+
+    .dept-header {
+      grid-column: 1 / -1;
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text);
+      margin-top: 24px;
+      margin-bottom: 8px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      user-select: none;
+    }
+
+    .dept-header:first-of-type {
+      margin-top: 8px;
+    }
+
+    .grid.single-view .dept-header {
+      display: none;
+    }
+
+    /* Copy All button styles */
+    .copy-all {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 8px 16px;
+      border-radius: 8px;
+      border: 1px solid var(--accent);
+      cursor: pointer;
+      background: var(--accent-bg);
+      color: var(--accent-text);
+      font-family: inherit;
+      width: 100%;
+      margin-top: 16px;
+      transition: all 0.2s ease;
+    }
+
+    .copy-all:hover {
+      background: var(--accent);
+      color: #fff;
+    }
+
+    .copy-all.ok {
+      background: var(--success-bg);
+      color: var(--success);
+      border-color: var(--success-bg);
+    }
+
+    /* Tabs Navigation */
+    .nav-tabs {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 12px 24px;
+      position: sticky;
+      top: 67px;
+      z-index: 99;
+      transition: all 0.2s;
+    }
+
+    .nav-tab {
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text2);
+      background: none;
+      border: 1px solid transparent;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s;
+    }
+
+    .nav-tab:hover {
+      color: var(--text);
+      background: var(--surface2);
+    }
+
+    .nav-tab.active {
+      background: var(--accent-bg);
+      border-color: var(--accent);
+      color: var(--accent-text);
+    }
+
+    /* Toolbar Styles */
+    .toolbar-wrap {
+      max-width: 1100px;
+      margin: 16px auto 0;
+      padding: 0 24px;
+    }
+
+    .toolbar-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 10px 16px;
+      border-radius: 12px;
+      box-shadow: var(--shadow);
+      transition: all 0.2s;
+    }
+
+    .toolbar-left,
+    .toolbar-right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .sort-select-wrap {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    #sort-select {
+      height: 32px;
+      padding: 0 10px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      background: var(--surface2);
+      color: var(--text);
+      font-family: inherit;
+      font-size: 12px;
+      font-weight: 500;
+      outline: none;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    #sort-select:focus {
+      border-color: var(--accent);
+    }
+
+    /* Action Buttons in Card Details */
+    .btn-action {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 6px 12px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      cursor: pointer;
+      background: var(--surface);
+      color: var(--text2);
+      font-family: inherit;
+      transition: all 0.2s;
+      flex: 1;
+      margin-top: 4px;
+    }
+
+    .btn-action-edit:hover {
+      background: var(--accent-bg);
+      color: var(--accent-text);
+      border-color: var(--accent);
+    }
+
+    .btn-action-delete:hover {
+      background: var(--warn-bg);
+      color: var(--warn);
+      border-color: var(--warn);
+    }
+
+    /* Dashboard Styles */
+    .dashboard-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .dash-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: var(--shadow);
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      transition: all 0.2s;
+    }
+
+    .dash-card-icon {
+      font-size: 24px;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--surface2);
+    }
+
+    .total-card .dash-card-icon {
+      background: rgba(91, 33, 182, 0.1);
+      color: #5b21b6;
+    }
+
+    .bkk-card .dash-card-icon {
+      background: var(--accent-bg);
+      color: var(--accent-text);
+    }
+
+    .phs-card .dash-card-icon {
+      background: var(--success-bg);
+      color: var(--success);
+    }
+
+    .pt-card .dash-card-icon {
+      background: var(--warn-bg);
+      color: var(--warn);
+    }
+
+    .mail-card .dash-card-icon {
+      background: rgba(16, 185, 129, 0.1);
+      color: #10b981;
+    }
+
+    .dash-card-info {
+      flex: 1;
+    }
+
+    .dash-card-label {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text3);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .dash-card-val {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--text);
+      margin: 2px 0;
+    }
+
+    .dash-card-sub {
+      font-size: 11px;
+      color: var(--text3);
+    }
+
     .dashboard-section-grid {
-      grid-template-columns: 1fr;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
     }
-  }
-  
-  .section-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 20px;
-    box-shadow: var(--shadow);
-    transition: all 0.2s;
-  }
-  
-  .section-card-title {
-    font-size: 14px;
-    font-weight: 600;
-    margin-bottom: 16px;
-    color: var(--text);
-    border-left: 3px solid var(--accent);
-    padding-left: 8px;
-  }
-  
-  .stat-list {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-  }
-  
-  .stat-item {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-  }
-  
-  .stat-header {
-    display: flex;
-    justify-content: space-between;
-    font-size: 12px;
-    font-weight: 500;
-  }
-  
-  .stat-name {
-    color: var(--text2);
-    font-weight: 600;
-  }
-  
-  .stat-count {
-    color: var(--text3);
-  }
-  
-  .stat-bar-bg {
-    height: 8px;
-    background: var(--surface2);
-    border-radius: 999px;
-    overflow: hidden;
-  }
-  
-  .stat-bar-fill {
-    height: 100%;
-    border-radius: 999px;
-    background: var(--accent);
-    transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-  
-  /* Modal Styles */
-  .modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(4px);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 1000;
-    padding: 16px;
-    animation: fadeIn 0.2s ease-out;
-  }
-  
-  .modal-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    width: 100%;
-    max-width: 600px;
-    box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04);
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-    animation: slideUp 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-  
-  .modal-header {
-    padding: 16px 24px;
-    border-bottom: 1px solid var(--border);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-  
-  .modal-header h3 {
-    font-size: 16px;
-    font-weight: 600;
-  }
-  
-  .modal-close {
-    background: none;
-    border: none;
-    cursor: pointer;
-    color: var(--text3);
-    padding: 6px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.2s;
-  }
-  
-  .modal-close:hover {
-    background: var(--surface2);
-    color: var(--text2);
-  }
-  
-  .modal-close svg {
-    width: 18px;
-    height: 18px;
-  }
-  
-  .form-grid {
-    padding: 24px;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 16px;
-    max-height: 70vh;
-    overflow-y: auto;
-  }
-  
-  @media(max-width: 500px){
+
+    @media(max-width: 768px) {
+      .dashboard-section-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .section-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: var(--shadow);
+      transition: all 0.2s;
+    }
+
+    .section-card-title {
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 16px;
+      color: var(--text);
+      border-left: 3px solid var(--accent);
+      padding-left: 8px;
+    }
+
+    .stat-list {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .stat-item {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .stat-header {
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+      font-weight: 500;
+    }
+
+    .stat-name {
+      color: var(--text2);
+      font-weight: 600;
+    }
+
+    .stat-count {
+      color: var(--text3);
+    }
+
+    .stat-bar-bg {
+      height: 8px;
+      background: var(--surface2);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .stat-bar-fill {
+      height: 100%;
+      border-radius: 999px;
+      background: var(--accent);
+      transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* Modal Styles */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(4px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      padding: 16px;
+      animation: fadeIn 0.2s ease-out;
+    }
+
+    .modal-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      width: 100%;
+      max-width: 600px;
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      animation: slideUp 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .modal-header {
+      padding: 16px 24px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .modal-header h3 {
+      font-size: 16px;
+      font-weight: 600;
+    }
+
+    .modal-close {
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--text3);
+      padding: 6px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+    }
+
+    .modal-close:hover {
+      background: var(--surface2);
+      color: var(--text2);
+    }
+
+    .modal-close svg {
+      width: 18px;
+      height: 18px;
+    }
+
     .form-grid {
-      grid-template-columns: 1fr;
+      padding: 24px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      max-height: 70vh;
+      overflow-y: auto;
     }
-  }
-  
-  .form-group {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-  }
-  
-  .form-group label {
-    font-size: 12px;
-    font-weight: 600;
-    color: var(--text2);
-  }
-  
-  .form-group input, .form-group select {
-    height: 38px;
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 0 12px;
-    font-size: 14px;
-    background: var(--surface2);
-    color: var(--text);
-    outline: none;
-    transition: all 0.2s;
-  }
-  
-  .form-group input:focus, .form-group select:focus {
-    border-color: var(--accent);
-    background: var(--surface);
-    box-shadow: 0 0 0 3px var(--accent-focus);
-  }
-  
-  .form-help {
-    font-size: 10px;
-    color: var(--text3);
-    margin-top: 2px;
-  }
-  
-  .pwd-input-wrap {
-    display: flex;
-    align-items: center;
-  }
-  
-  .pwd-input-wrap input {
-    flex: 1;
-    min-width: 0;
-  }
-  
-  .modal-footer {
-    padding: 16px 24px;
-    border-top: 1px solid var(--border);
-    display: flex;
-    justify-content: flex-end;
-    gap: 12px;
-    background: var(--surface2);
-  }
-  
-  @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-  }
-  
-  @keyframes slideUp {
-    from { transform: translateY(15px); opacity: 0; }
-    to { transform: translateY(0); opacity: 1; }
-  }
-</style>
+
+    @media(max-width: 500px) {
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .form-group label {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text2);
+    }
+
+    .form-group input,
+    .form-group select {
+      height: 38px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 0 12px;
+      font-size: 14px;
+      background: var(--surface2);
+      color: var(--text);
+      outline: none;
+      transition: all 0.2s;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus {
+      border-color: var(--accent);
+      background: var(--surface);
+      box-shadow: 0 0 0 3px var(--accent-focus);
+    }
+
+    .form-help {
+      font-size: 10px;
+      color: var(--text3);
+      margin-top: 2px;
+    }
+
+    .pwd-input-wrap {
+      display: flex;
+      align-items: center;
+    }
+
+    .pwd-input-wrap input {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .modal-footer {
+      padding: 16px 24px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: flex-end;
+      gap: 12px;
+      background: var(--surface2);
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes slideUp {
+      from {
+        transform: translateY(15px);
+        opacity: 0;
+      }
+
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+  </style>
 </head>
+
 <body>
-<header>
-  <div class="header-inner">
-    <div class="logo-wrap">
-      <div class="logo">
-        <div class="logo-mark">TIF</div>
-        <div>
-          <div class="logo-text">Employee Directory</div>
-          <div class="logo-sub">Thai International Flying &amp; Training</div>
-        </div>
-      </div>
-    </div>
-    
-    <div class="controls">
-      <div class="search-wrap">
-        <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-        <input id="search" type="search" placeholder="ค้นหาชื่อ ตำแหน่ง nickname…" autocomplete="off">
-        <button id="search-clear" type="button" aria-label="Clear search" style="display:none;">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-        </button>
-      </div>
-      
-      <button id="theme-toggle" class="theme-toggle-btn" aria-label="Toggle dark mode">
-        <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
-        <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
-      </button>
-    </div>
-  </div>
-</header>
-
-<nav class="nav-tabs">
-  <button class="nav-tab active" onclick="switchTab('directory')">
-    ✈ รายชื่อพนักงาน
-  </button>
-  <button class="nav-tab" onclick="switchTab('dashboard')">
-    📊 สถิติองค์กร
-  </button>
-  <button class="nav-tab" onclick="switchTab('settings')">
-    ⚙ จัดการระบบ
-  </button>
-</nav>
-
-<!-- Tab 1: Directory -->
-<div id="tab-directory" class="tab-content">
-  <div class="toolbar-wrap">
-    <div class="toolbar-inner">
-      <div class="toolbar-left">
-        <div class="sort-select-wrap">
-          <span style="font-size:12px; font-weight:600; color:var(--text3); white-space:nowrap;">เรียงลำดับ:</span>
-          <select id="sort-select" onchange="render()">
-            <option value="id-asc">รหัสพนักงาน (เก่า - ใหม่)</option>
-            <option value="id-desc">รหัสพนักงาน (ใหม่ - เก่า)</option>
-            <option value="name-th">ชื่อภาษาไทย (ก - ฮ)</option>
-            <option value="name-en">ชื่อภาษาอังกฤษ (A - Z)</option>
-          </select>
-        </div>
-      </div>
-      <div class="toolbar-right">
-        <button class="fbtn on" onclick="openAddModal()" style="height:34px; background:var(--accent); color:#fff; border-color:var(--accent); font-weight:600; gap:4px; display:inline-flex; align-items:center;">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:14px; height:14px;"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-          เพิ่มพนักงานใหม่
-        </button>
-      </div>
-    </div>
-  </div>
-
-  <div class="filters-wrap">
-    <div class="filters" id="filters">
-      <button class="fbtn on" data-loc="ALL">ทั้งหมด <span class="fcount" id="count-all">0</span></button>
-      <button class="fbtn" data-loc="BKK">BKK <span class="fcount" id="count-bkk">0</span></button>
-      <button class="fbtn" data-loc="PHS">PHS <span class="fcount" id="count-phs">0</span></button>
-      <button class="fbtn" data-loc="Part Time">Part Time <span class="fcount" id="count-pt">0</span></button>
-    </div>
-  </div>
-
-  <main>
-    <div class="meta">
-      <span class="meta-count" id="count"></span>
-      <button id="back-btn" class="fbtn" style="display:none;" onclick="closeAllCards()">← แสดงทุกคน</button>
-    </div>
-    <div class="grid" id="grid"></div>
-  </main>
-</div>
-
-<!-- Tab 2: Dashboard -->
-<div id="tab-dashboard" class="tab-content" style="display:none;">
-  <main>
-    <h2 style="font-size: 18px; font-weight: 600; margin-bottom: 20px; color: var(--text);">ข้อมูลสถิติของพนักงาน TIF</h2>
-    
-    <div class="dashboard-grid">
-      <div class="dash-card total-card">
-        <div class="dash-card-icon">👥</div>
-        <div class="dash-card-info">
-          <div class="dash-card-label">พนักงานทั้งหมด</div>
-          <div class="dash-card-val" id="db-total-count">0</div>
-          <div class="dash-card-sub">คนในระบบปัจจุบัน</div>
-        </div>
-      </div>
-      
-      <div class="dash-card bkk-card">
-        <div class="dash-card-icon">✈</div>
-        <div class="dash-card-info">
-          <div class="dash-card-label">สังกัด BKK</div>
-          <div class="dash-card-val" id="db-bkk-count">0</div>
-          <div class="dash-card-sub" id="db-bkk-percent">0% ของทั้งหมด</div>
-        </div>
-      </div>
-      
-      <div class="dash-card phs-card">
-        <div class="dash-card-icon">🛫</div>
-        <div class="dash-card-info">
-          <div class="dash-card-label">สังกัด PHS</div>
-          <div class="dash-card-val" id="db-phs-count">0</div>
-          <div class="dash-card-sub" id="db-phs-percent">0% ของทั้งหมด</div>
-        </div>
-      </div>
-      
-      <div class="dash-card pt-card">
-        <div class="dash-card-icon">⏱</div>
-        <div class="dash-card-info">
-          <div class="dash-card-label">Part Time</div>
-          <div class="dash-card-val" id="db-pt-count">0</div>
-          <div class="dash-card-sub" id="db-pt-percent">0% ของทั้งหมด</div>
-        </div>
-      </div>
-    </div>
-    
-    <div class="dashboard-section-grid">
-      <div class="section-card">
-        <h3 class="section-card-title">สัดส่วนพนักงานแยกตามสังกัด/พื้นที่</h3>
-        <div class="stat-list" id="db-loc-bars"></div>
-      </div>
-      
-      <div class="section-card">
-        <h3 class="section-card-title">สัดส่วนตามกลุ่มสายงาน</h3>
-        <div class="stat-list" id="db-dept-bars"></div>
-      </div>
-    </div>
-  </main>
-</div>
-
-<!-- Tab 3: Settings -->
-<div id="tab-settings" class="tab-content" style="display:none;">
-  <main style="max-width: 600px; margin: 0 auto;">
-    <div class="section-card">
-      <h2 style="font-size: 18px; font-weight: 600; margin-bottom: 8px; color: var(--text);">จัดการฐานข้อมูลระบบ (System Settings)</h2>
-      <p style="font-size: 13px; color: var(--text3); line-height: 1.6; margin-bottom: 24px;">
-        คุณสามารถส่งออกข้อมูลพนักงานทั้งหมดเพื่อสำรองเก็บไว้เป็นไฟล์ JSON หรือทำการกู้คืนข้อมูลโดยเลือกไฟล์ที่เคยส่งออกไว้ รวมถึงการล้างข้อมูลกลับไปเป็นค่าเริ่มต้นจากทางระบบ
-      </p>
-      
-      <div style="display:flex; flex-direction:column; gap:16px;">
-        <div style="padding:16px; border:1px solid var(--border); border-radius:10px; background:var(--surface2);">
-          <h3 style="font-size:14px; font-weight:600; margin-bottom:6px; color:var(--text);">📥 ส่งออกข้อมูล (Backup Data)</h3>
-          <p style="font-size:12px; color:var(--text3); margin-bottom:12px;">บันทึกข้อมูลพนักงานทั้งหมดที่มีการอัปเดตปัจจุบันลงเครื่องคอมพิวเตอร์ของคุณเป็นไฟล์ JSON</p>
-          <button class="fbtn on" onclick="exportStaffJSON()" style="background:var(--accent); color:#fff; border-color:var(--accent); font-weight:600; padding:0 18px; height:36px; display:inline-flex; align-items:center;">ดาวน์โหลดข้อมูลสำรอง</button>
-        </div>
-        
-        <div style="padding:16px; border:1px solid var(--border); border-radius:10px; background:var(--surface2);">
-          <h3 style="font-size:14px; font-weight:600; margin-bottom:6px; color:var(--text);">📤 นำเข้าข้อมูล (Restore Data)</h3>
-          <p style="font-size:12px; color:var(--text3); margin-bottom:12px;">เลือกไฟล์สำรองข้อมูลพนักงาน (.json) เพื่ออัปโหลดและกู้คืนเข้าสู่ระบบนี้</p>
-          <input type="file" id="import-file-input" accept=".json" style="display:none;" onchange="importStaffJSON(event)">
-          <button class="fbtn" onclick="document.getElementById('import-file-input').click()" style="font-weight:600; padding:0 18px; height:36px; display:inline-flex; align-items:center;">เลือกไฟล์สำหรับกู้คืนข้อมูล</button>
-        </div>
-        
-        <div style="padding:16px; border:1px dashed var(--warn); border-radius:10px; background:rgba(180, 83, 9, 0.03);">
-          <h3 style="font-size:14px; font-weight:600; color:var(--warn); margin-bottom:6px;">⚠️ รีเซ็ตข้อมูลระบบ (System Reset)</h3>
-          <p style="font-size:12px; color:var(--text3); margin-bottom:12px;">ล้างข้อมูลที่มีการบันทึกไว้ในคอมพิวเตอร์เครื่องนี้ทั้งหมด แล้วคืนค่ากลับเป็นพนักงานเริ่มต้น 47 คน</p>
-          <button class="fbtn" onclick="resetSystemToDefault()" style="border-color:var(--warn); color:var(--warn); font-weight:600; padding:0 18px; height:36px; display:inline-flex; align-items:center;">รีเซ็ตเป็นค่าเริ่มต้น</button>
-        </div>
-      </div>
-    </div>
-  </main>
-</div>
-
-<!-- Add/Edit Staff Modal -->
-<div id="staff-modal" class="modal-overlay" style="display:none;">
-  <div class="modal-card">
-    <div class="modal-header">
-      <h3 id="modal-title" style="color:var(--text);">เพิ่มพนักงานใหม่</h3>
-      <button class="modal-close" onclick="closeModal()">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-      </button>
-    </div>
-    <form id="staff-form" onsubmit="saveStaff(event)">
-      <div class="form-grid">
-        <div class="form-group">
-          <label for="form-id">รหัสพนักงาน (6 หลัก)</label>
-          <input type="text" id="form-id" required pattern="\d{6}" placeholder="เช่น 680027" maxlength="6">
-          <div class="form-help">รหัสตัวเลข 6 หลัก เช่น 680027</div>
-        </div>
-        <div class="form-group">
-          <label for="form-nick">ชื่อเล่น</label>
-          <input type="text" id="form-nick" required placeholder="เช่น แม็ค">
-        </div>
-        <div class="form-group">
-          <label for="form-th">ชื่อ-นามสกุล (ภาษาไทย)</label>
-          <input type="text" id="form-th" required placeholder="เช่น นายพันธ์พิสุทธิ์ นุราช">
-        </div>
-        <div class="form-group">
-          <label for="form-en">ชื่อ-นามสกุล (ภาษาอังกฤษ)</label>
-          <input type="text" id="form-en" required placeholder="เช่น Mr.Punpisut Nurach">
-        </div>
-        <div class="form-group">
-          <label for="form-role">ตำแหน่งงาน</label>
-          <input type="text" id="form-role" required placeholder="เช่น Flight Instructor">
-        </div>
-        <div class="form-group">
-          <label for="form-loc">สถานที่ปฏิบัติงาน</label>
-          <select id="form-loc" required>
-            <option value="BKK">✈ BKK</option>
-            <option value="PHS">🛫 PHS</option>
-            <option value="Part Time">⏱ Part Time</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label for="form-email">อีเมล</label>
-          <input type="email" id="form-email" required placeholder="เช่น email@tif.ac.th">
-        </div>
-        <div class="form-group">
-          <label for="form-pass">รหัสผ่านสำหรับเข้าใช้งาน</label>
-          <div class="pwd-input-wrap">
-            <input type="text" id="form-pass" required placeholder="รหัสผ่าน">
-            <button type="button" class="fbtn" onclick="generateRandomPass()" style="height:38px; border-radius:8px; margin-left:6px; flex-shrink:0; display:inline-flex; align-items:center;">🎲 สุ่มรหัส</button>
+  <header>
+    <div class="header-inner">
+      <div class="logo-wrap">
+        <div class="logo">
+          <div class="logo-mark">TIF</div>
+          <div>
+            <div class="logo-text">Employee Directory</div>
+            <div class="logo-sub">Thai Inter Flying</div>
           </div>
         </div>
       </div>
-      <div class="modal-footer">
-        <button type="button" class="fbtn" onclick="closeModal()" style="border-radius:8px; display:inline-flex; align-items:center;">ยกเลิก</button>
-        <button type="submit" class="fbtn on" style="border-radius:8px; background:var(--accent); color:#fff; border:none; padding:0 24px; height:32px; display:inline-flex; align-items:center; font-weight:600;">บันทึกข้อมูล</button>
+
+      <div class="controls">
+        <div class="search-wrap">
+          <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="8" />
+            <path d="m21 21-4.35-4.35" />
+          </svg>
+          <input id="search" type="search" placeholder="ค้นหาชื่อ ตำแหน่ง nickname…" autocomplete="off">
+          <button id="search-clear" type="button" aria-label="Clear search" style="display:none;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="18" y1="6" x2="6" y2="18" />
+              <line x1="6" y1="6" x2="18" y2="18" />
+            </svg>
+          </button>
+        </div>
+
+        <div class="lang-switch">
+          <button class="lang-btn active" id="lang-th" onclick="switchLang('th')">TH</button>
+          <button class="lang-btn" id="lang-en" onclick="switchLang('en')">EN</button>
+        </div>
+
+        <button id="theme-toggle" class="theme-toggle-btn" aria-label="Toggle dark mode">
+          <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="4" />
+            <path
+              d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41" />
+          </svg>
+          <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
+          </svg>
+        </button>
       </div>
-    </form>
+    </div>
+  </header>
+
+  <nav class="nav-tabs">
+    <button class="nav-tab active" id="nav-tab-directory" onclick="switchTab('directory')">
+      ✈ รายชื่อพนักงาน
+    </button>
+    <button class="nav-tab" id="nav-tab-dashboard" onclick="switchTab('dashboard')">
+      📊 สถิติองค์กร
+    </button>
+    <button class="nav-tab" id="nav-tab-settings" onclick="switchTab('settings')">
+      ⚙ จัดการระบบ
+    </button>
+  </nav>
+
+  <!-- Tab 1: Directory -->
+  <div id="tab-directory" class="tab-content">
+    <div class="toolbar-wrap">
+      <div class="toolbar-inner">
+        <div class="toolbar-left">
+          <div class="sort-select-wrap">
+            <span id="sort-label" style="font-size:12px; font-weight:600; color:var(--text3); white-space:nowrap;">เรียงลำดับ:</span>
+            <select id="sort-select" onchange="render()">
+              <option value="id-asc">รหัสพนักงาน (เก่า - ใหม่)</option>
+              <option value="id-desc">รหัสพนักงาน (ใหม่ - เก่า)</option>
+              <option value="name-th">ชื่อภาษาไทย (ก - ฮ)</option>
+              <option value="name-en">ชื่อภาษาอังกฤษ (A - Z)</option>
+            </select>
+          </div>
+        </div>
+        <div class="toolbar-right">
+          <button class="fbtn on" onclick="openAddModal()"
+            style="height:34px; background:var(--accent); color:#fff; border-color:var(--accent); font-weight:600; gap:4px; display:inline-flex; align-items:center;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+              style="width:14px; height:14px;">
+              <line x1="12" y1="5" x2="12" y2="19" />
+              <line x1="5" y1="12" x2="19" y2="12" />
+            </svg>
+            <span id="btn-add-text">เพิ่มพนักงานใหม่</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="filters-wrap">
+      <div class="filters" id="filters">
+        <button class="fbtn on" data-loc="ALL">ทั้งหมด <span class="fcount" id="count-all">0</span></button>
+        <button class="fbtn" data-loc="BKK">BKK <span class="fcount" id="count-bkk">0</span></button>
+        <button class="fbtn" data-loc="PHS">PHS <span class="fcount" id="count-phs">0</span></button>
+        <button class="fbtn" data-loc="Part Time">Part Time <span class="fcount" id="count-pt">0</span></button>
+      </div>
+      <div class="filters" id="dept-filters" style="margin-top: 10px;">
+        <button class="fbtn on" data-dept="ALL">ทั้งหมด <span class="fcount" id="count-dept-all">0</span></button>
+        <button class="fbtn" data-dept="flight">ปฏิบัติการบิน <span class="fcount" id="count-dept-flight">0</span></button>
+        <button class="fbtn" data-dept="maint">ซ่อมบำรุง <span class="fcount" id="count-dept-maint">0</span></button>
+        <button class="fbtn" data-dept="admin">บริหาร/สนับสนุน <span class="fcount" id="count-dept-admin">0</span></button>
+        <button class="fbtn" data-dept="other">อื่นๆ <span class="fcount" id="count-dept-other">0</span></button>
+      </div>
+      <div class="filters" id="mail-filters" style="margin-top: 10px;">
+        <button class="fbtn on" data-mail="ALL">เมล: ทั้งหมด <span class="fcount" id="count-mail-all">0</span></button>
+        <button class="fbtn" data-mail="used">เมล: ใช้งานแล้ว <span class="fcount" id="count-mail-used">0</span></button>
+        <button class="fbtn" data-mail="pending">เมล: ยังไม่ใช้งาน <span class="fcount" id="count-mail-pending">0</span></button>
+      </div>
+    </div>
+
+    <main>
+      <div class="meta">
+        <span class="meta-count" id="count"></span>
+        <button id="back-btn" class="fbtn" style="display:none;" onclick="closeAllCards()">← แสดงทุกคน</button>
+      </div>
+      <div class="grid" id="grid"></div>
+    </main>
   </div>
-</div>
 
-<script>
-const defaultStaff=[
-  {id:"000000",th:"นายพันธ์พิสุทธิ์ นุราช",en:"Mr.Punpisut Nurach",nick:"แม็ค",role:"—",loc:"BKK",email:"punpisut.nur@tif.ac.th",pass:"B!182705302131us"},
-  {id:"600001",th:"ร.อ.สุนทร วัชพืช",en:"Capt.Soontorn Wutchapuech",nick:"ครูสุน",role:"Flight Instructor",loc:"PHS",email:"soontorn.wut@tif.ac.th",pass:"G#896407835532om"},
-  {id:"600002",th:"พ.จ.อ.วินัย เกษม",en:"Po 1 Winai Kasem",nick:"วินัย",role:"Director of Maintenance",loc:"PHS",email:"winai.kas@tif.ac.th",pass:"Y#140737376116oh"},
-  {id:"610002",th:"นายนิรุทธ์ เพ็ชรมั่ง",en:"Mr.Nirut Pehtmung",nick:"รุทธ์",role:"Driver",loc:"PHS",email:"nirut.peh@tif.ac.th",pass:"S^720215979696om"},
-  {id:"620001",th:"นายเอกวรรธน์ ขาวสอาด",en:"Mr.Ekkawat Khaosa-ard",nick:"โอจีฟ",role:"Purchasing Manager",loc:"Part Time",email:"ekkawat.kha@tif.ac.th",pass:"J.529464670946uv"},
-  {id:"620002",th:"นายพัฒน์ โพธิ์ปฐมพร",en:"Mr.Phat Phopatompon",nick:"พัฒน์",role:"Chief Flight Instructor",loc:"PHS",email:"phat.pho@tif.ac.th",pass:"T@548536106195oj"},
-  {id:"650006",th:"น.ส.กชกร มณีนาค",en:"Ms.Kodchakorn Maneenart",nick:"เป้",role:"Store Keeper & Aircraft Mechanic",loc:"PHS",email:"kodchakorn.man@tif.ac.th",pass:"M@307041617156af"},
-  {id:"660002",th:"นายหนึ่งณัฐ ยิ้มศรี",en:"Mr.Nuengnat Yimsri",nick:"ณัฐ",role:"Aircraft Mechanic",loc:"PHS",email:"nuengnat.yim@tif.ac.th",pass:"Q%447138540692oq"},
-  {id:"670001",th:"นายชวัลวิทย์ วงศ์ชัย",en:"Mr.Chawanwit Wongchai",nick:"กัปตัน",role:"เจ้าหน้าที่สนามบินคลอง 11",loc:"PHS",email:"chawanwit.won@tif.ac.th",pass:"H#119282314687or"},
-  {id:"670002",th:"นายชยพล หารบุรุษ",en:"Mr.Chayapon Hanburuts",nick:"เก่ง",role:"Aircraft Mechanic",loc:"PHS",email:"chayapon.han@tif.ac.th",pass:"J$781171144247us"},
-  {id:"670005",th:"นายสิรวิชช์ อรชร",en:"Mr.Sirawit Aorachon",nick:"ปอ",role:"Aircraft Mechanic",loc:"PHS",email:"sirawit.aor@tif.ac.th",pass:"F^497600667910ot"},
-  {id:"670008",th:"นายไพศาล อุบลวรรณ์",en:"Mr.Paisan Ubonwan",nick:"อ๊อฟ",role:"Aircraft Mechanic",loc:"PHS",email:"paisan.ubo@tif.ac.th",pass:"J!902129222241og"},
-  {id:"670010",th:"นายจักรี สุบงกฏ",en:"Mr.Chakri Subongkot",nick:"ตุ้ม",role:"Acting Accountable Executive",loc:"BKK",email:"chakri.sub@tif.ac.th",pass:"V*510608834741uv"},
-  {id:"680001",th:"น.ส.สิภาพันธุ์ พันธุ์เพ็ง",en:"Miss Sipapun Punpeng",nick:"เปียโน",role:"Training Officer",loc:"Part Time",email:"sipapun.pun@tif.ac.th",pass:"V#056525430292uk"},
-  {id:"680002",th:"น.ส.ศุภนุช ปัญโญกิจ",en:"Ms.Supanoot PunyoKit",nick:"หงษ์",role:"Aircraft Mechanic",loc:"PHS",email:"supanoot.pun@tif.ac.th",pass:"D/644495442020oq"},
-  {id:"680007",th:"นายภาณุ นิ่มสกุล",en:"Mr.Panu Nimsakul",nick:"หนึ่ง",role:"CEO / ประธานเจ้าหน้าที่บริหาร",loc:"BKK",email:"panu.nim@tif.ac.th",pass:"D$493672531537us"},
-  {id:"680008",th:"นายจักรินทร์ กัญญาลักษณ์",en:"Mr.Jarkarin Kunyalak",nick:"หน่อย",role:"COO / ประธานเจ้าหน้าที่ฝ่ายปฏิบัติการ",loc:"BKK",email:"jarkarin.kun@tif.ac.th",pass:"F&577001290995ur"},
-  {id:"680009",th:"น.ส.พรปรียา ป้อมสุเมรุ",en:"Ms.Pornpreya Pomsumen",nick:"แอน",role:"CFO / ประธานเจ้าหน้าที่ฝ่ายการเงิน",loc:"BKK",email:"pornpreya.pom@tif.ac.th",pass:"M!740161403118as"},
-  {id:"680011",th:"นายณัฐพล สืบสุข",en:"Mr.Nattapon Suebsuk",nick:"เต๊าะ",role:"Director of Operations",loc:"PHS",email:"nattapon.sue@tif.ac.th",pass:"S)166284045349aj"},
-  {id:"680012",th:"นายคีทัน วีเค",en:"Mr.Keerthan VK",nick:"Keerthan",role:"Chief Training Officer",loc:"PHS",email:"keerthan.kar@tif.ac.th",pass:"P(419563033409of"},
-  {id:"680013",th:"นายธนวัฒน์ รอดสิน",en:"Mr.Thanawat Rodsin",nick:"คิว",role:"Aircraft Mechanic",loc:"PHS",email:"thanawat.rod@tif.ac.th",pass:"M^386326178478or"},
-  {id:"680014",th:"นายมะกอยี สะอะ",en:"Mr.Magoryee Sa-a",nick:"ยี",role:"Aircraft Mechanic",loc:"PHS",email:"magoryee.saa@tif.ac.th",pass:"P#188590824396ud"},
-  {id:"680015",th:"นายณัฐดนัย มังสาทอง",en:"Mr.Natdanai Mangsathong",nick:"เควิ่น",role:"Director of Standards",loc:"BKK",email:"natdanai.man@tif.ac.th",pass:"T*042434973799ay"},
-  {id:"680017",th:"น.ส.ภควรรณ ชูรัตน์",en:"Ms.Phakkawan Churat",nick:"ตูน",role:"Senior Finance & Accounting Officer",loc:"BKK",email:"phakkawan.chu@tif.ac.th",pass:"F#136395642749un"},
-  {id:"680019",th:"นายรพี อุชชิน",en:"Mr.Rapee Ujjin",nick:"ปุ๋ย",role:"Compliance Monitoring Manager (AMO)",loc:"BKK",email:"rapee.ujj@tif.ac.th",pass:"V&096885384722up"},
-  {id:"680020",th:"น.ส.จิณัฐตา สุทธาชีพ",en:"Miss Jinutta Suttacheep",nick:"หงษ์",role:"HR Manager",loc:"BKK",email:"jinutta.sut@tif.ac.th",pass:"M#238551254301uc"},
-  {id:"680022",th:"น.ส.อนาฐิตา เชาวนภรณ์",en:"Miss Anathita Chaowanaphon",nick:"นัตตี้",role:"Training Coordinator",loc:"PHS",email:"anathita.cha@tif.ac.th",pass:"H(045959412216up"},
-  {id:"680023",th:"นายพสธร สืบสังข์",en:"Mr.Potsatorn Seubsang",nick:"ไฟท์",role:"Flight Instructor",loc:"PHS",email:"potsatorn.seu@tif.ac.th",pass:"C@730279678370uz"},
-  {id:"680024",th:"น.ส.ประภัสสร ทรัพย์ศาสตร์",en:"Miss Prapatsorn Sabsat",nick:"เบียร์",role:"Training Planner Manager",loc:"BKK",email:"prapatsorn.sab@tif.ac.th",pass:"L!359643614976uf"},
-  {id:"680025",th:"น.ส.จริยาภรณ์ เจริญพงศ์",en:"Miss Jariyaporn Charoenphong",nick:"อุ๋น",role:"TKI",loc:"PHS",email:"jariyaporn.cha@tif.ac.th",pass:"V&252909057133ap"},
-  {id:"680026",th:"น.ส.สุชีรา ถนอมเมฆ",en:"Miss Suchera Thanommake",nick:"ฝ้าย",role:"Operation Officer",loc:"PHS",email:"suchera.tha@tif.ac.th",pass:"H/930236734843og"},
-  {id:"690004",th:"นายสุวิชา บุญเลิศ",en:"Mr.Suvicha Boonlert",nick:"แจ็ค",role:"Compliance Monitoring Manager (FTO)",loc:"BKK",email:"suvicha.boo@tif.ac.th",pass:"L$372715683539op"},
-  {id:"690005",th:"นายธัชพงศ์ คงวุฒิ",en:"Mr.Tadchapong Khongwut",nick:"ก๊อง",role:"เจ้าหน้าที่วางแผนซ่อมบำรุง",loc:"PHS",email:"tadchapong.kho@tif.ac.th",pass:"R%601212144344uy"},
-  {id:"690006",th:"น.ส.กิตติวรรณ เมณฑ์กูล",en:"Miss Kittiwan Menkoon",nick:"อ๊ะอาย",role:"Sales Officer",loc:"BKK",email:"kittiwan.men@tif.ac.th",pass:"Y#845098702731oc"},
-  {id:"690007",th:"น.ส.ภัททิยา สามนฑา",en:"Miss Phattiya Samonta",nick:"ดัช",role:"Safety Management Officer",loc:"PHS",email:"phattiya.sam@tif.ac.th",pass:"K/044361159417oy"},
-  {id:"690008",th:"น.ส.ศุภางค์ กำเนิดศิริ",en:"Miss Supang Kumnerdsiri",nick:"ปลาทู",role:"Compliance and Monitoring Officer",loc:"BKK",email:"supang.kum@tif.ac.th",pass:"J.181367381758ur"},
-  {id:"690009",th:"น.ส.นิชานันท์ แซ่นึ่ง",en:"Miss Nichanan Saenung",nick:"ฟิ้นท์",role:"Registration and Licensing Officer",loc:"BKK",email:"nichanan.sae@tif.ac.th",pass:"T/557615524327us"},
-  {id:"690010",th:"น.ส.อัญชิษฐา ขุนล่ำ",en:"Miss Anchittha Khunlam",nick:"รุ้ง",role:"Business Assurance Manager / Secretary",loc:"BKK",email:"anchittha.khu@tif.ac.th",pass:"N$102057651850ux"},
-  {id:"690011",th:"นายปรารถนา พัฒนศิริ",en:"Mr.Pratana Patanasiri",nick:"ม่ำ",role:"Director, Safety and Compliance Monitoring",loc:"BKK",email:"pratana.pat@tif.ac.th",pass:"D/601931563214um"},
-  {id:"690012",th:"น.ส.วาสน์นิดา ชื่นสกุล",en:"Miss Wasnida Chuensakul",nick:"โจ๋",role:"Sale Supervisor",loc:"BKK",email:"wasnida.chu@tif.ac.th",pass:"C@975468836927uc"},
-  {id:"690013",th:"นายวัชระ ผลชัย",en:"Mr.Watchara Phonchai",nick:"เซฟ",role:"IT Support Officer",loc:"BKK",email:"watchara.pho@tif.ac.th",pass:"N!815681190871oz"},
-  {id:"690014",th:"น.ส.นภัทรธิราห์ วิทศิริ",en:"Miss Naphatthira Witsiri",nick:"หมิว",role:"Accounting and Finance Manager",loc:"BKK",email:"naphatthira.wit@tif.ac.th",pass:"T@334640530592us"},
-  {id:"690015",th:"น.ส.สิริภัทร ปาลี",en:"Miss Siriphat Palee",nick:"มีน",role:"Sales Officer",loc:"BKK",email:"siriphat.pal@tif.ac.th",pass:"D(449142846604oh"},
-];
-let staff = [];
+  <!-- Tab 2: Dashboard -->
+  <div id="tab-dashboard" class="tab-content" style="display:none;">
+    <main>
+      <h2 id="db-title" style="font-size: 18px; font-weight: 600; margin-bottom: 20px; color: var(--text);">ข้อมูลสถิติของพนักงาน TIF</h2>
 
-const palette=[
-  ["#dbeafe","#1e40af"],["#dcfce7","#166534"],["#fef3c7","#92400e"],
-  ["#fce7f3","#9d174d"],["#ede9fe","#5b21b6"],["#fee2e2","#991b1b"],
-  ["#d1fae5","#065f46"],["#e0f2fe","#0c4a6e"],
-];
+      <div class="dashboard-grid">
+        <div class="dash-card total-card">
+          <div class="dash-card-icon">👥</div>
+          <div class="dash-card-info">
+            <div class="dash-card-label" id="db-total-label">พนักงานทั้งหมด</div>
+            <div class="dash-card-val" id="db-total-count">0</div>
+            <div class="dash-card-sub" id="db-total-sub">คนในระบบปัจจุบัน</div>
+          </div>
+        </div>
 
-// Initialize theme
-const currentTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-if (currentTheme === 'dark') {
-  document.documentElement.classList.add('dark');
-} else {
-  document.documentElement.classList.remove('dark');
-}
+        <div class="dash-card bkk-card">
+          <div class="dash-card-icon">✈</div>
+          <div class="dash-card-info">
+            <div class="dash-card-label" id="db-bkk-label">สังกัด BKK</div>
+            <div class="dash-card-val" id="db-bkk-count">0</div>
+            <div class="dash-card-sub" id="db-bkk-percent">0% ของทั้งหมด</div>
+          </div>
+        </div>
 
-document.getElementById('theme-toggle').addEventListener('click', () => {
-  const isDark = document.documentElement.classList.toggle('dark');
-  localStorage.setItem('theme', isDark ? 'dark' : 'light');
-});
+        <div class="dash-card phs-card">
+          <div class="dash-card-icon">🛫</div>
+          <div class="dash-card-info">
+            <div class="dash-card-label" id="db-phs-label">สังกัด PHS</div>
+            <div class="dash-card-val" id="db-phs-count">0</div>
+            <div class="dash-card-sub" id="db-phs-percent">0% ของทั้งหมด</div>
+          </div>
+        </div>
 
-function initials(en){
-  const s=en.replace(/^(Miss|Mr\.|Ms\.|Capt\.|Po\s*1)\s*/i,'').trim().split(/\s+/);
-  return ((s[0]||'')[0]+(s[1]||'')[0]||'').toUpperCase();
-}
-function pal(id){return palette[parseInt(id.slice(-2))%palette.length]}
+        <div class="dash-card pt-card">
+          <div class="dash-card-icon">⏱</div>
+          <div class="dash-card-info">
+            <div class="dash-card-label" id="db-pt-label">Part Time</div>
+            <div class="dash-card-val" id="db-pt-count">0</div>
+            <div class="dash-card-sub" id="db-pt-percent">0% ของทั้งหมด</div>
+          </div>
+        </div>
 
-function badge(loc){
-  if(loc==='BKK') return `<span class="badge bkk">✈ BKK</span>`;
-  if(loc==='PHS') return `<span class="badge phs">🛫 PHS</span>`;
-  return `<span class="badge pt">⏱ Part Time</span>`;
-}
+        <div class="dash-card mail-card">
+          <div class="dash-card-icon">✉</div>
+          <div class="dash-card-info">
+            <div class="dash-card-label" id="db-mail-label">เปิดใช้งานอีเมล</div>
+            <div class="dash-card-val" id="db-mail-count">0</div>
+            <div class="dash-card-sub" id="db-mail-percent">0% ของทั้งหมด</div>
+          </div>
+        </div>
+      </div>
 
-function highlightText(text, q) {
-  if (!q) return text;
-  const regex = new RegExp(`(${q.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&')})`, 'gi');
-  return text.replace(regex, '<mark class="hl">$1</mark>');
-}
+      <div class="dashboard-section-grid">
+        <div class="section-card">
+          <h3 class="section-card-title" id="db-loc-ratio-title">สัดส่วนพนักงานแยกตามสังกัด/พื้นที่</h3>
+          <div class="stat-list" id="db-loc-bars"></div>
+        </div>
 
-function card(p, q){
-  const [bg,fg]=pal(p.id);
-  const displayName = p.id === '680012' ? p.en : p.th;
-  const displaySub = p.id === '680012' ? p.th : p.en;
-  const nickPrefix = p.id === '680012' ? 'Mr. ' : 'คุณ';
-  
-  const highlightedName = highlightText(displayName, q);
-  const highlightedRole = highlightText(p.role, q);
-  const highlightedId = highlightText(p.id, q);
-  const highlightedEmail = highlightText(p.email, q);
-  const highlightedSub = highlightText(displaySub, q);
-  const highlightedNick = highlightText(p.nick, q);
+        <div class="section-card">
+          <h3 class="section-card-title" id="db-dept-ratio-title">สัดส่วนตามกลุ่มสายงาน</h3>
+          <div class="stat-list" id="db-dept-bars"></div>
+        </div>
+      </div>
+    </main>
+  </div>
 
-  return `<div class="card" onclick="toggle(this)">
+  <!-- Tab 3: Settings -->
+  <div id="tab-settings" class="tab-content" style="display:none;">
+    <main style="max-width: 600px; margin: 0 auto;">
+      <div class="section-card">
+        <h2 id="settings-title" style="font-size: 18px; font-weight: 600; margin-bottom: 8px; color: var(--text);">จัดการฐานข้อมูลระบบ (System Settings)</h2>
+        <p id="settings-desc" style="font-size: 13px; color: var(--text3); line-height: 1.6; margin-bottom: 24px;">
+          คุณสามารถส่งออกข้อมูลพนักงานทั้งหมดเพื่อสำรองเก็บไว้เป็นไฟล์ JSON
+          หรือทำการกู้คืนข้อมูลโดยเลือกไฟล์ที่เคยส่งออกไว้ รวมถึงการล้างข้อมูลกลับไปเป็นค่าเริ่มต้นจากทางระบบ
+        </p>
+
+        <div style="display:flex; flex-direction:column; gap:16px;">
+          <div style="padding:16px; border:1px solid var(--border); border-radius:10px; background:var(--surface2);">
+            <h3 id="backup-title" style="font-size:14px; font-weight:600; margin-bottom:6px; color:var(--text);">📥 ส่งออกข้อมูล (Backup Data)</h3>
+            <p id="backup-desc" style="font-size:12px; color:var(--text3); margin-bottom:12px;">
+              บันทึกข้อมูลพนักงานทั้งหมดที่มีการอัปเดตปัจจุบันลงเครื่องคอมพิวเตอร์ของคุณเป็นไฟล์ JSON</p>
+            <button id="backup-btn" class="fbtn on" onclick="exportStaffJSON()"
+              style="background:var(--accent); color:#fff; border-color:var(--accent); font-weight:600; padding:0 18px; height:36px; display:inline-flex; align-items:center;">ดาวน์โหลดข้อมูลสำรอง</button>
+          </div>
+
+          <div style="padding:16px; border:1px solid var(--border); border-radius:10px; background:var(--surface2);">
+            <h3 id="restore-title" style="font-size:14px; font-weight:600; margin-bottom:6px; color:var(--text);">📤 นำเข้าข้อมูล (Restore Data)</h3>
+            <p id="restore-desc" style="font-size:12px; color:var(--text3); margin-bottom:12px;">เลือกไฟล์สำรองข้อมูลพนักงาน (.json)
+              เพื่ออัปโหลดและกู้คืนเข้าสู่ระบบนี้</p>
+            <input type="file" id="import-file-input" accept=".json" style="display:none;"
+              onchange="importStaffJSON(event)">
+            <button id="restore-btn" class="fbtn" onclick="document.getElementById('import-file-input').click()"
+              style="font-weight:600; padding:0 18px; height:36px; display:inline-flex; align-items:center;">เลือกไฟล์สำหรับกู้คืนข้อมูล</button>
+          </div>
+
+          <div
+            style="padding:16px; border:1px dashed var(--warn); border-radius:10px; background:rgba(180, 83, 9, 0.03);">
+            <h3 id="reset-title" style="font-size:14px; font-weight:600; color:var(--warn); margin-bottom:6px;">⚠️ รีเซ็ตข้อมูลระบบ (System Reset)</h3>
+            <p id="reset-desc" style="font-size:12px; color:var(--text3); margin-bottom:12px;">
+              ล้างข้อมูลที่มีการบันทึกไว้ในคอมพิวเตอร์เครื่องนี้ทั้งหมด แล้วคืนค่ากลับเป็นพนักงานเริ่มต้น 47 คน</p>
+            <button id="reset-btn" class="fbtn" onclick="resetSystemToDefault()"
+              style="border-color:var(--warn); color:var(--warn); font-weight:600; padding:0 18px; height:36px; display:inline-flex; align-items:center;">รีเซ็ตเป็นค่าเริ่มต้น</button>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Add/Edit Staff Modal -->
+  <div id="staff-modal" class="modal-overlay" style="display:none;">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 id="modal-title" style="color:var(--text);">เพิ่มพนักงานใหม่</h3>
+        <button class="modal-close" onclick="closeModal()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="6" x2="6" y2="18" />
+            <line x1="6" y1="6" x2="18" y2="18" />
+          </svg>
+        </button>
+      </div>
+      <form id="staff-form" onsubmit="saveStaff(event)">
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="form-id" id="lbl-form-id">รหัสพนักงาน (6 หลัก)</label>
+            <input type="text" id="form-id" required pattern="\d{6}" placeholder="เช่น 680027" maxlength="6">
+            <div class="form-help" id="help-form-id">รหัสตัวเลข 6 หลัก เช่น 680027</div>
+          </div>
+          <div class="form-group">
+            <label for="form-nick" id="lbl-form-nick">ชื่อเล่น</label>
+            <input type="text" id="form-nick" required placeholder="เช่น แม็ค">
+          </div>
+          <div class="form-group">
+            <label for="form-nick-en" id="lbl-form-nick-en">ชื่อเล่น (ภาษาอังกฤษ)</label>
+            <input type="text" id="form-nick-en" required placeholder="เช่น Mac">
+          </div>
+          <div class="form-group">
+            <label for="form-th" id="lbl-form-th">ชื่อ-นามสกุล (ภาษาไทย)</label>
+            <input type="text" id="form-th" required placeholder="เช่น นายพันธ์พิสุทธิ์ นุราช">
+          </div>
+          <div class="form-group">
+            <label for="form-en" id="lbl-form-en">ชื่อ-นามสกุล (ภาษาอังกฤษ)</label>
+            <input type="text" id="form-en" required placeholder="เช่น Mr.Punpisut Nurach">
+          </div>
+          <div class="form-group">
+            <label for="form-role" id="lbl-form-role">ตำแหน่งงาน</label>
+            <input type="text" id="form-role" required placeholder="เช่น Flight Instructor">
+          </div>
+          <div class="form-group">
+            <label for="form-loc" id="lbl-form-loc">สถานที่ปฏิบัติงาน</label>
+            <select id="form-loc" required>
+              <option value="BKK">✈ BKK</option>
+              <option value="PHS">🛫 PHS</option>
+              <option value="Part Time">⏱ Part Time</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="form-email" id="lbl-form-email">อีเมล</label>
+            <input type="email" id="form-email" required placeholder="เช่น email@tif.ac.th">
+          </div>
+          <div class="form-group">
+            <label for="form-mail-used" id="lbl-form-mail-used">สถานะการใช้งานเมล</label>
+            <select id="form-mail-used" required>
+              <option value="false" id="opt-mail-pending">ยังไม่ได้ใช้งาน (Pending)</option>
+              <option value="true" id="opt-mail-used">ใช้งานแล้ว (Active)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="form-pass" id="lbl-form-pass">รหัสผ่านสำหรับเข้าใช้งาน</label>
+            <div class="pwd-input-wrap">
+              <input type="text" id="form-pass" required placeholder="รหัสผ่าน">
+              <button type="button" class="fbtn" id="btn-form-randpass" onclick="generateRandomPass()"
+                style="height:38px; border-radius:8px; margin-left:6px; flex-shrink:0; display:inline-flex; align-items:center;">🎲
+                สุ่มรหัส</button>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="fbtn" id="btn-form-cancel" onclick="closeModal()"
+            style="border-radius:8px; display:inline-flex; align-items:center;">ยกเลิก</button>
+          <button type="submit" class="fbtn on" id="btn-form-save"
+            style="border-radius:8px; background:var(--accent); color:#fff; border:none; padding:0 24px; height:32px; display:inline-flex; align-items:center; font-weight:600;">บันทึกข้อมูล</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    const defaultStaff = [
+      { id: "000000", th: "นายพันธ์พิสุทธิ์ นุราช", en: "Mr.Punpisut Nurach", nick: "แม็ค", nickEn: "Mac", role: "—", loc: "BKK", email: "punpisut.nur@tif.ac.th", pass: "B!182705302131us" },
+      { id: "600001", th: "ร.อ.สุนทร วัชพืช", en: "Capt.Soontorn Wutchapuech", nick: "ครูสุน", nickEn: "Kru Sun", role: "Flight Instructor", loc: "PHS", email: "soontorn.wut@tif.ac.th", pass: "G#896407835532om" },
+      { id: "600002", th: "พ.จ.อ.วินัย เกษม", en: "Po 1 Winai Kasem", nick: "วินัย", nickEn: "Winai", role: "Director of Maintenance", loc: "PHS", email: "winai.kas@tif.ac.th", pass: "Y#140737376116oh" },
+      { id: "610002", th: "นายนิรุทธ์ เพ็ชรมั่ง", en: "Mr.Nirut Pehtmung", nick: "รุทธ์", nickEn: "Rut", role: "Driver", loc: "PHS", email: "nirut.peh@tif.ac.th", pass: "S^720215979696om" },
+      { id: "620001", th: "นายเอกวรรธน์ ขาวสอาด", en: "Mr.Ekkawat Khaosa-ard", nick: "โอจีฟ", nickEn: "Ogeef", role: "Purchasing Manager", loc: "Part Time", email: "ekkawat.kha@tif.ac.th", pass: "J.529464670946uv" },
+      { id: "620002", th: "นายพัฒน์ โพธิ์ปฐมพร", en: "Mr.Phat Phopatompon", nick: "พัฒน์", nickEn: "Phat", role: "Chief Flight Instructor", loc: "PHS", email: "phat.pho@tif.ac.th", pass: "T@548536106195oj" },
+      { id: "650006", th: "น.ส.กชกร มณีนาค", en: "Ms.Kodchakorn Maneenart", nick: "เป้", nickEn: "Pae", role: "Store Keeper & Aircraft Mechanic", loc: "PHS", email: "kodchakorn.man@tif.ac.th", pass: "M@307041617156af" },
+      { id: "660002", th: "นายหนึ่งณัฐ ยิ้มศรี", en: "Mr.Nuengnat Yimsri", nick: "ณัฐ", nickEn: "Nat", role: "Aircraft Mechanic", loc: "PHS", email: "nuengnat.yim@tif.ac.th", pass: "Q%447138540692oq" },
+      { id: "670001", th: "นายชวัลวิทย์ วงศ์ชัย", en: "Mr.Chawanwit Wongchai", nick: "กัปตัน", nickEn: "Captain", role: "เจ้าหน้าที่สนามบินคลอง 11", loc: "PHS", email: "chawanwit.won@tif.ac.th", pass: "H#119282314687or" },
+      { id: "670002", th: "นายชยพล หารบุรุษ", en: "Mr.Chayapon Hanburuts", nick: "เก่ง", nickEn: "Keng", role: "Aircraft Mechanic", loc: "PHS", email: "chayapon.han@tif.ac.th", pass: "J$781171144247us" },
+      { id: "670005", th: "นายสิรวิชช์ อรชร", en: "Mr.Sirawit Aorachon", nick: "ปอ", nickEn: "Por", role: "Aircraft Mechanic", loc: "PHS", email: "sirawit.aor@tif.ac.th", pass: "F^497600667910ot" },
+      { id: "670008", th: "นายไพศาล อุบลวรรณ์", en: "Mr.Paisan Ubonwan", nick: "อ๊อฟ", nickEn: "Aof", role: "Aircraft Mechanic", loc: "PHS", email: "paisan.ubo@tif.ac.th", pass: "J!902129222241og" },
+      { id: "670010", th: "นายจักรี สุบงกฏ", en: "Mr.Chakri Subongkot", nick: "ตุ้ม", nickEn: "Toom", role: "Acting Accountable Executive", loc: "BKK", email: "chakri.sub@tif.ac.th", pass: "V*510608834741uv" },
+      { id: "680001", th: "น.ส.สิภาพันธุ์ พันธุ์เพ็ง", en: "Miss Sipapun Punpeng", nick: "เปียโน", nickEn: "Piano", role: "Training Officer", loc: "Part Time", email: "sipapun.pun@tif.ac.th", pass: "V#056525430292uk" },
+      { id: "680002", th: "น.ส.ศุภนุช ปัญโญกิจ", en: "Ms.Supanoot PunyoKit", nick: "หงษ์", nickEn: "Hong", role: "Aircraft Mechanic", loc: "PHS", email: "supanoot.pun@tif.ac.th", pass: "D/644495442020oq" },
+      { id: "680007", th: "นายภาณุ นิ่มสกุล", en: "Mr.Panu Nimsakul", nick: "หนึ่ง", nickEn: "Nueng", role: "CEO / ประธานเจ้าหน้าที่บริหาร", loc: "BKK", email: "panu.nim@tif.ac.th", pass: "D$493672531537us" },
+      { id: "680008", th: "นายจักรินทร์ กัญญาลักษณ์", en: "Mr.Jarkarin Kunyalak", nick: "หน่อย", nickEn: "Noi", role: "COO / ประธานเจ้าหน้าที่ฝ่ายปฏิบัติการ", loc: "BKK", email: "jarkarin.kun@tif.ac.th", pass: "F&577001290995ur" },
+      { id: "680009", th: "น.ส.พรปรียา ป้อมสุเมรุ", en: "Ms.Pornpreya Pomsumen", nick: "แอน", nickEn: "Ann", role: "CFO / ประธานเจ้าหน้าที่ฝ่ายการเงิน", loc: "BKK", email: "pornpreya.pom@tif.ac.th", pass: "M!740161403118as" },
+      { id: "680011", th: "นายณัฐพล สืบสุข", en: "Mr.Nattapon Suebsuk", nick: "เต๊าะ", nickEn: "Toh", role: "Director of Operations", loc: "PHS", email: "nattapon.sue@tif.ac.th", pass: "S)166284045349aj" },
+      { id: "680012", th: "นายคีทัน วีเค", en: "Mr.Keerthan VK", nick: "Keerthan", nickEn: "Keerthan", role: "Chief Training Officer", loc: "PHS", email: "keerthan.kar@tif.ac.th", pass: "P(419563033409of" },
+      { id: "680013", th: "นายธนวัฒน์ รอดสิน", en: "Mr.Thanawat Rodsin", nick: "คิว", nickEn: "Q", role: "Aircraft Mechanic", loc: "PHS", email: "thanawat.rod@tif.ac.th", pass: "M^386326178478or" },
+      { id: "680014", th: "นายมะกอยี สะอะ", en: "Mr.Magoryee Sa-a", nick: "ยี", nickEn: "Yee", role: "Aircraft Mechanic", loc: "PHS", email: "magoryee.saa@tif.ac.th", pass: "P#188590824396ud" },
+      { id: "680015", th: "นายณัฐดนัย มังสาทอง", en: "Mr.Natdanai Mangsathong", nick: "เควิ่น", nickEn: "Kevin", role: "Director of Standards", loc: "BKK", email: "natdanai.man@tif.ac.th", pass: "T*042434973799ay" },
+      { id: "680017", th: "น.ส.ภควรรณ ชูรัตน์", en: "Ms.Phakkawan Churat", nick: "ตูน", nickEn: "Toon", role: "Senior Finance & Accounting Officer", loc: "BKK", email: "phakkawan.chu@tif.ac.th", pass: "F#136395642749un" },
+      { id: "680019", th: "นายรพี อุชชิน", en: "Mr.Rapee Ujjin", nick: "ปุ๋ย", nickEn: "Pui", role: "Compliance Monitoring Manager (AMO)", loc: "BKK", email: "rapee.ujj@tif.ac.th", pass: "V&096885384722up" },
+      { id: "680020", th: "น.ส.จิณัฐตา สุทธาชีพ", en: "Miss Jinutta Suttacheep", nick: "หงษ์", nickEn: "Hong", role: "HR Manager", loc: "BKK", email: "jinutta.sut@tif.ac.th", pass: "M#238551254301uc" },
+      { id: "680022", th: "น.ส.อนาฐิตา เชาวนภรณ์", en: "Miss Anathita Chaowanaphon", nick: "นัตตี้", nickEn: "Nutty", role: "Training Coordinator", loc: "PHS", email: "anathita.cha@tif.ac.th", pass: "H(045959412216up" },
+      { id: "680023", th: "นายพสธร สืบสังข์", en: "Mr.Potsatorn Seubsang", nick: "ไฟท์", nickEn: "Fight", role: "Flight Instructor", loc: "PHS", email: "potsatorn.seu@tif.ac.th", pass: "C@730279678370uz" },
+      { id: "680024", th: "น.ส.ประภัสสร ทรัพย์ศาสตร์", en: "Miss Prapatsorn Sabsat", nick: "เบียร์", nickEn: "Beer", role: "Training Planner Manager", loc: "BKK", email: "prapatsorn.sab@tif.ac.th", pass: "L!359643614976uf" },
+      { id: "680025", th: "น.ส.จริยาภรณ์ เจริญพงศ์", en: "Miss Jariyaporn Charoenphong", nick: "อุ๋น", nickEn: "Oon", role: "TKI", loc: "PHS", email: "jariyaporn.cha@tif.ac.th", pass: "V&252909057133ap" },
+      { id: "680026", th: "น.ส.สุชีรา ถนอมเมฆ", en: "Miss Suchera Thanommake", nick: "ฝ้าย", nickEn: "Fai", role: "Operation Officer", loc: "PHS", email: "suchera.tha@tif.ac.th", pass: "H/930236734843og" },
+      { id: "690004", th: "นายสุวิชา บุญเลิศ", en: "Mr.Suvicha Boonlert", nick: "แจ็ค", nickEn: "Jack", role: "Compliance Monitoring Manager (FTO)", loc: "BKK", email: "suvicha.boo@tif.ac.th", pass: "L$372715683539op" },
+      { id: "690005", th: "นายธัชพงศ์ คงวุฒิ", en: "Mr.Tadchapong Khongwut", nick: "ก๊อง", nickEn: "Gong", role: "เจ้าหน้าที่วางแผนซ่อมบำรุง", loc: "PHS", email: "tadchapong.kho@tif.ac.th", pass: "R%601212144344uy" },
+      { id: "690006", th: "น.ส.กิตติวรรณ เมณฑ์กูล", en: "Miss Kittiwan Menkoon", nick: "อ๊ะอาย", nickEn: "Ah-Eye", role: "Sales Officer", loc: "BKK", email: "kittiwan.men@tif.ac.th", pass: "Y#845098702731oc" },
+      { id: "690007", th: "น.ส.ภัททิยา สามนฑา", en: "Miss Phattiya Samonta", nick: "ดัช", nickEn: "Dutch", role: "Safety Management Officer", loc: "PHS", email: "phattiya.sam@tif.ac.th", pass: "K/044361159417oy" },
+      { id: "690008", th: "น.ส.ศุภางค์ กำเนิดศิริ", en: "Miss Supang Kumnerdsiri", nick: "ปลาทู", nickEn: "Platoo", role: "Compliance and Monitoring Officer", loc: "BKK", email: "supang.kum@tif.ac.th", pass: "J.181367381758ur" },
+      { id: "690009", th: "น.ส.นิชานันท์ แซ่นึ่ง", en: "Miss Nichanan Saenung", nick: "ฟิ้นท์", nickEn: "Flint", role: "Registration and Licensing Officer", loc: "BKK", email: "nichanan.sae@tif.ac.th", pass: "T/557615524327us" },
+      { id: "690010", th: "น.ส.อัญชิษฐา ขุนล่ำ", en: "Miss Anchittha Khunlam", nick: "รุ้ง", nickEn: "Rung", role: "Business Assurance Manager / Secretary", loc: "BKK", email: "anchittha.khu@tif.ac.th", pass: "N$102057651850ux" },
+      { id: "690011", th: "นายปรารถนา พัฒนศิริ", en: "Mr.Pratana Patanasiri", nick: "ม่ำ", nickEn: "Mum", role: "Director, Safety and Compliance Monitoring", loc: "BKK", email: "pratana.pat@tif.ac.th", pass: "D/601931563214um" },
+      { id: "690012", th: "น.ส.วาสน์นิดา ชื่นสกุล", en: "Miss Wasnida Chuensakul", nick: "โจ๋", nickEn: "Joh", role: "Sale Supervisor", loc: "BKK", email: "wasnida.chu@tif.ac.th", pass: "C@975468836927uc" },
+      { id: "690013", th: "นายวัชระ ผลชัย", en: "Mr.Watchara Phonchai", nick: "เซฟ", nickEn: "Safe", role: "IT Support Officer", loc: "BKK", email: "watchara.pho@tif.ac.th", pass: "N!815681190871oz" },
+      { id: "690014", th: "น.ส.นภัทรธิราห์ วิทศิริ", en: "Miss Naphatthira Witsiri", nick: "หมิว", nickEn: "Mew", role: "Accounting and Finance Manager", loc: "BKK", email: "naphatthira.wit@tif.ac.th", pass: "T@334640530592us" },
+      { id: "690015", th: "น.ส.สิริภัทร ปาลี", en: "Miss Siriphat Palee", nick: "มีน", nickEn: "Mean", role: "Sales Officer", loc: "BKK", email: "siriphat.pal@tif.ac.th", pass: "D(449142846604oh" },
+    ];
+    defaultStaff.forEach(p => {
+      if (p.mailUsed === undefined) {
+        p.mailUsed = false;
+      }
+    });
+    let staff = [];
+    let mailFilter = 'ALL';
+
+    const translations = {
+      th: {
+        title: "TIF — ทำเนียบพนักงาน",
+        logoTextContent: "ทำเนียบพนักงาน",
+        searchPlaceholder: "ค้นหาชื่อ ตำแหน่ง nickname…",
+        tabDirectory: "✈ รายชื่อพนักงาน",
+        tabDashboard: "📊 สถิติองค์กร",
+        tabSettings: "⚙ จัดการระบบ",
+        sortBy: "เรียงลำดับ:",
+        sortIdAsc: "รหัสพนักงาน (เก่า - ใหม่)",
+        sortIdDesc: "รหัสพนักงาน (ใหม่ - เก่า)",
+        sortNameTh: "ชื่อภาษาไทย (ก - ฮ)",
+        sortNameEn: "ชื่อภาษาอังกฤษ (A - Z)",
+        addEmployee: "เพิ่มพนักงานใหม่",
+        filterAll: "ทั้งหมด",
+        showAll: "← แสดงทุกคน",
+        countText: (list, total) => `แสดง ${list} จาก ${total} คน`,
+        noResults: "ไม่พบข้อมูลที่ค้นหา",
+        clearSearch: "ล้างการค้นหา",
+        nicknameLabel: "ชื่อเล่น:",
+        nickPrefix: "คุณ",
+        copyName: "📋 คัดลอกชื่อจริง",
+        copyNick: "📋 คัดลอกชื่อเล่น",
+        copyPosition: "📋 คัดลอกตำแหน่ง",
+        copyId: "📋 คัดลอกรหัส",
+        copyEmail: "📋 คัดลอกเมล",
+        sendEmail: "✉️ ส่งอีเมล",
+        copyPassword: "📋 คัดลอกรหัส",
+        copyAllInfo: "📋 คัดลอกข้อมูลทั้งหมด",
+        editInfo: "✏️ แก้ไขข้อมูล",
+        deleteEmployee: "🗑️ ลบพนักงาน",
+        copied: "✅ คัดลอกแล้ว",
+        copiedAll: "✅ คัดลอกข้อมูลทั้งหมดแล้ว",
+        dbTitle: "ข้อมูลสถิติของพนักงาน TIF",
+        dbTotalCount: "พนักงานทั้งหมด",
+        dbActiveSystem: "คนในระบบปัจจุบัน",
+        dbBkkLoc: "สังกัด BKK",
+        dbBkkPct: (pct) => `${pct}% ของทั้งหมด`,
+        dbPhsLoc: "สังกัด PHS",
+        dbPhsPct: (pct) => `${pct}% ของทั้งหมด`,
+        dbPtLoc: "Part Time",
+        dbPtPct: (pct) => `${pct}% ของทั้งหมด`,
+        dbLocRatio: "สัดส่วนพนักงานแยกตามสังกัด/พื้นที่",
+        dbDeptRatio: "สัดส่วนตามกลุ่มสายงาน",
+        dbDeptFlight: "✈ ฝ่ายปฏิบัติการบินและฝึกอบรม (Flight Ops & Training)",
+        dbDeptMaint: "🛠 ฝ่ายซ่อมบำรุงอากาศยาน (Maintenance)",
+        dbDeptAdmin: "💼 ฝ่ายบริหารและสนับสนุนการบิน (Management, Admin & Sales)",
+        dbDeptOther: "❓ อื่นๆ / ยังไม่ระบุกลุ่ม",
+        deptAll: "ทั้งหมด",
+        deptFlight: "ปฏิบัติการบิน",
+        deptMaint: "ซ่อมบำรุง",
+        deptAdmin: "บริหาร/สนับสนุน",
+        deptOther: "อื่นๆ",
+        personUnit: "คน",
+        settingsTitle: "จัดการฐานข้อมูลระบบ (System Settings)",
+        settingsDesc: "คุณสามารถส่งออกข้อมูลพนักงานทั้งหมดเพื่อสำรองเก็บไว้เป็นไฟล์ JSON หรือทำการกู้คืนข้อมูลโดยเลือกไฟล์ที่เคยส่งออกไว้ รวมถึงการล้างข้อมูลกลับไปเป็นค่าเริ่มต้นจากทางระบบ",
+        backupTitle: "📥 ส่งออกข้อมูล (Backup Data)",
+        backupDesc: "บันทึกข้อมูลพนักงานทั้งหมดที่มีการอัปเดตปัจจุบันลงเครื่องคอมพิวเตอร์ของคุณเป็นไฟล์ JSON",
+        backupBtn: "ดาวน์โหลดข้อมูลสำรอง",
+        restoreTitle: "📤 นำเข้าข้อมูล (Restore Data)",
+        restoreDesc: "เลือกไฟล์สำรองข้อมูลพนักงาน (.json) เพื่ออัปโหลดและกู้คืนเข้าสู่ระบบนี้",
+        restoreBtn: "เลือกไฟล์สำหรับกู้คืนข้อมูล",
+        resetTitle: "⚠️ รีเซ็ตข้อมูลระบบ (System Reset)",
+        resetDesc: "ล้างข้อมูลที่มีการบันทึกไว้ในคอมพิวเตอร์เครื่องนี้ทั้งหมด แล้วคืนค่ากลับเป็นพนักงานเริ่มต้น 47 คน",
+        resetBtn: "รีเซ็ตเป็นค่าเริ่มต้น",
+        modalTitleAdd: "เพิ่มพนักงานใหม่",
+        modalTitleEdit: "แก้ไขข้อมูลพนักงาน",
+        formLabelId: "รหัสพนักงาน (6 หลัก)",
+        formHelpId: "รหัสตัวเลข 6 หลัก เช่น 680027",
+        formLabelNick: "ชื่อเล่น (ภาษาไทย)",
+        formLabelNickEn: "ชื่อเล่น (ภาษาอังกฤษ)",
+        formLabelTh: "ชื่อ-นามสกุล (ภาษาไทย)",
+        formLabelEn: "ชื่อ-นามสกุล (ภาษาอังกฤษ)",
+        formLabelRole: "ตำแหน่งงาน",
+        formLabelLoc: "สถานที่ปฏิบัติงาน",
+        formLabelEmail: "อีเมล",
+        formLabelPass: "รหัสผ่านสำหรับเข้าใช้งาน",
+        formPlaceholderNick: "เช่น แม็ค",
+        formPlaceholderNickEn: "เช่น Mac",
+        formPlaceholderTh: "เช่น นายพันธ์พิสุทธิ์ นุราช",
+        formPlaceholderEn: "เช่น Mr.Punpisut Nurach",
+        formPlaceholderRole: "เช่น Flight Instructor",
+        formPlaceholderEmail: "เช่น email@tif.ac.th",
+        formPlaceholderPass: "รหัสผ่าน",
+        formBtnRandom: "🎲 สุ่มรหัส",
+        formBtnCancel: "ยกเลิก",
+        formBtnSave: "บันทึกข้อมูล",
+        alertFillAll: "กรุณากรอกข้อมูลให้ครบถ้วน",
+        alertDuplicateId: (id) => `รหัสพนักงาน ${id} มีอยู่ในระบบแล้ว กรุณาใช้รหัสอื่น`,
+        confirmDelete: (name, id) => `คุณต้องการลบข้อมูลของ ${name} (รหัส: ${id}) ใช่หรือไม่?`,
+        confirmImport: (n) => `พบข้อมูลพนักงานทั้งหมด ${n} คนในไฟล์นี้ ต้องการนำเข้าเพื่อเขียนทับข้อมูลในระบบปัจจุบันใช่หรือไม่?`,
+        importSuccess: "นำเข้าข้อมูลพนักงานและกู้คืนระบบเสร็จเรียบร้อยแล้ว!",
+        importInvalid: "รูปแบบไฟล์ JSON ไม่ถูกต้อง กรุณาใช้ไฟล์ที่เคยส่งออกจากระบบนี้เท่านั้น",
+        importError: "ไม่สามารถอ่านไฟล์ JSON ได้ กรุณาตรวจสอบว่าไฟล์สมบูรณ์หรือไม่",
+        confirmReset: "คุณแน่ใจหรือไม่ว่าต้องการล้างข้อมูลระบบทั้งหมด? ข้อมูลพนักงานที่ถูกเพิ่มหรือแก้ไขหลังจากนี้จะสูญหาย และระบบจะกลับไปเป็นพนักงานเริ่มต้น 47 คน",
+        resetSuccess: "รีเซ็ตข้อมูลระบบกลับเป็นค่าเริ่มต้นเรียบร้อยแล้ว!",
+        mailStatusActive: "ใช้งานแล้ว",
+        mailStatusPending: "ยังไม่ใช้งาน",
+        lblFormMailUsed: "สถานะการใช้งานอีเมล",
+        optMailUsed: "ใช้งานแล้ว (Active)",
+        optMailPending: "ยังไม่ได้ใช้งาน (Pending)",
+        filterMailAll: "อีเมล: ทั้งหมด",
+        filterMailUsed: "อีเมล: ใช้งานแล้ว",
+        filterMailPending: "อีเมล: ยังไม่ใช้งาน",
+        dbMailLabel: "เปิดใช้งานอีเมล",
+        dbMailPct: (pct) => `${pct}% ของทั้งหมด`
+      },
+      en: {
+        title: "TIF — Employee Directory",
+        logoTextContent: "Employee Directory",
+        searchPlaceholder: "Search name, position, nickname...",
+        tabDirectory: "✈ Employee Directory",
+        tabDashboard: "📊 Organization Stats",
+        tabSettings: "⚙ System Settings",
+        sortBy: "Sort by:",
+        sortIdAsc: "Employee ID (Old - New)",
+        sortIdDesc: "Employee ID (New - Old)",
+        sortNameTh: "Thai Name (ก - ฮ)",
+        sortNameEn: "English Name (A - Z)",
+        addEmployee: "Add New Employee",
+        filterAll: "All",
+        showAll: "← Show All",
+        countText: (list, total) => `Showing ${list} of ${total} employees`,
+        noResults: "No results found",
+        clearSearch: "Clear Search",
+        nicknameLabel: "Nickname:",
+        nickPrefix: "Mr./Ms. ",
+        copyName: "📋 Copy Name",
+        copyNick: "📋 Copy Nickname",
+        copyPosition: "📋 Copy Position",
+        copyId: "📋 Copy ID",
+        copyEmail: "📋 Copy Email",
+        sendEmail: "✉️ Send Email",
+        copyPassword: "📋 Copy Password",
+        copyAllInfo: "📋 Copy All Info",
+        editInfo: "✏️ Edit Info",
+        deleteEmployee: "🗑️ Delete Employee",
+        copied: "✅ Copied!",
+        copiedAll: "✅ All info copied!",
+        dbTitle: "TIF Employee Statistics",
+        dbTotalCount: "Total Employees",
+        dbActiveSystem: "Active in system",
+        dbBkkLoc: "BKK Location",
+        dbBkkPct: (pct) => `${pct}% of total`,
+        dbPhsLoc: "PHS Location",
+        dbPhsPct: (pct) => `${pct}% of total`,
+        dbPtLoc: "Part Time",
+        dbPtPct: (pct) => `${pct}% of total`,
+        dbLocRatio: "Employee Ratio by Location/Area",
+        dbDeptRatio: "Ratio by Job Category",
+        dbDeptFlight: "✈ Flight Ops & Training Department",
+        dbDeptMaint: "🛠 Aircraft Maintenance Department",
+        dbDeptAdmin: "💼 Management, Admin & Sales Department",
+        dbDeptOther: "❓ Others / Uncategorized",
+        deptAll: "All",
+        deptFlight: "Flight Ops",
+        deptMaint: "Maintenance",
+        deptAdmin: "Admin & Sales",
+        deptOther: "Others",
+        personUnit: "people",
+        settingsTitle: "Manage System Database",
+        settingsDesc: "You can export all employee data to a JSON backup file, restore data by choosing a previously exported file, or reset the database back to system defaults.",
+        backupTitle: "📥 Export Data (Backup Data)",
+        backupDesc: "Save all current employee data to your computer as a JSON file.",
+        backupBtn: "Download Backup Data",
+        restoreTitle: "📤 Import Data (Restore Data)",
+        restoreDesc: "Select employee backup file (.json) to upload and restore to the system.",
+        restoreBtn: "Select File to Restore",
+        resetTitle: "⚠️ Reset System Data (System Reset)",
+        resetDesc: "Clear all saved data on this computer and restore back to the default 47 employees.",
+        resetBtn: "Reset to Default",
+        modalTitleAdd: "Add New Employee",
+        modalTitleEdit: "Edit Employee Info",
+        formLabelId: "Employee ID (6 digits)",
+        formHelpId: "6-digit number, e.g., 680027",
+        formLabelNick: "Nickname (Thai)",
+        formLabelNickEn: "Nickname (English)",
+        formLabelTh: "Full Name (Thai)",
+        formLabelEn: "Full Name (English)",
+        formLabelRole: "Job Title / Position",
+        formLabelLoc: "Work Location",
+        formLabelEmail: "Email",
+        formLabelPass: "Access Password",
+        formPlaceholderNick: "e.g., Mac",
+        formPlaceholderNickEn: "e.g., Mac",
+        formPlaceholderTh: "e.g., Mr. Punpisut Nurach",
+        formPlaceholderEn: "e.g., Mr. Punpisut Nurach",
+        formPlaceholderRole: "e.g., Flight Instructor",
+        formPlaceholderEmail: "e.g., email@tif.ac.th",
+        formPlaceholderPass: "Password",
+        formBtnRandom: "🎲 Generate",
+        formBtnCancel: "Cancel",
+        formBtnSave: "Save Info",
+        alertFillAll: "Please fill in all fields",
+        alertDuplicateId: (id) => `Employee ID ${id} already exists. Please use another ID.`,
+        confirmDelete: (name, id) => `Are you sure you want to delete ${name} (ID: ${id})?`,
+        confirmImport: (n) => `Found ${n} employees in this file. Do you want to import and overwrite the current data?`,
+        importSuccess: "Employee data imported and system restored successfully!",
+        importInvalid: "Invalid JSON file format. Please use backup files exported from this system only.",
+        importError: "Cannot read JSON file. Please check if the file is complete.",
+        confirmReset: "Are you sure you want to reset all system data? Any added or edited employees will be lost, and the system will return to the default 47 employees.",
+        resetSuccess: "System data has been reset to default!",
+        mailStatusActive: "Used",
+        mailStatusPending: "Pending",
+        lblFormMailUsed: "Mail Usage Status",
+        optMailUsed: "Used (Active)",
+        optMailPending: "Pending (Not Used)",
+        filterMailAll: "Email: All",
+        filterMailUsed: "Email: Activated",
+        filterMailPending: "Email: Pending",
+        dbMailLabel: "Email Activated",
+        dbMailPct: (pct) => `${pct}% of total`
+      }
+    };
+
+    let currentLang = localStorage.getItem('tif_lang') || 'th';
+
+    const palette = [
+      ["#dbeafe", "#1e40af"], ["#dcfce7", "#166534"], ["#fef3c7", "#92400e"],
+      ["#fce7f3", "#9d174d"], ["#ede9fe", "#5b21b6"], ["#fee2e2", "#991b1b"],
+      ["#d1fae5", "#065f46"], ["#e0f2fe", "#0c4a6e"],
+    ];
+
+    // Initialize theme
+    const currentTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    if (currentTheme === 'dark') {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+
+    document.getElementById('theme-toggle').addEventListener('click', () => {
+      const isDark = document.documentElement.classList.toggle('dark');
+      localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    });
+
+    function updateStaticTranslations() {
+      const t = translations[currentLang];
+      document.title = t.title;
+      document.querySelector('.logo-text').textContent = t.logoTextContent;
+      document.getElementById('search').placeholder = t.searchPlaceholder;
+      document.getElementById('nav-tab-directory').textContent = t.tabDirectory;
+      document.getElementById('nav-tab-dashboard').textContent = t.tabDashboard;
+      document.getElementById('nav-tab-settings').textContent = t.tabSettings;
+      
+      document.getElementById('sort-label').textContent = t.sortBy;
+      const sortSelect = document.getElementById('sort-select');
+      sortSelect.options[0].textContent = t.sortIdAsc;
+      sortSelect.options[1].textContent = t.sortIdDesc;
+      sortSelect.options[2].textContent = t.sortNameTh;
+      sortSelect.options[3].textContent = t.sortNameEn;
+      
+      document.getElementById('btn-add-text').textContent = t.addEmployee;
+      
+      // Update ALL filter button text while preserving the counter span
+      const allFilter = document.querySelector('[data-loc="ALL"]');
+      if (allFilter) {
+        allFilter.childNodes[0].textContent = t.filterAll + ' ';
+      }
+      
+      const deptAllFilter = document.querySelector('[data-dept="ALL"]');
+      if (deptAllFilter) {
+        deptAllFilter.childNodes[0].textContent = t.deptAll + ' ';
+      }
+      const deptFlightFilter = document.querySelector('[data-dept="flight"]');
+      if (deptFlightFilter) {
+        deptFlightFilter.childNodes[0].textContent = t.deptFlight + ' ';
+      }
+      const deptMaintFilter = document.querySelector('[data-dept="maint"]');
+      if (deptMaintFilter) {
+        deptMaintFilter.childNodes[0].textContent = t.deptMaint + ' ';
+      }
+      const deptAdminFilter = document.querySelector('[data-dept="admin"]');
+      if (deptAdminFilter) {
+        deptAdminFilter.childNodes[0].textContent = t.deptAdmin + ' ';
+      }
+      const deptOtherFilter = document.querySelector('[data-dept="other"]');
+      if (deptOtherFilter) {
+        deptOtherFilter.childNodes[0].textContent = t.deptOther + ' ';
+      }
+      
+      // Dashboard static texts
+      document.getElementById('db-title').textContent = t.dbTitle;
+      document.getElementById('db-total-label').textContent = t.dbTotalCount;
+      document.getElementById('db-total-sub').textContent = t.dbActiveSystem;
+      document.getElementById('db-bkk-label').textContent = t.dbBkkLoc;
+      document.getElementById('db-phs-label').textContent = t.dbPhsLoc;
+      document.getElementById('db-pt-label').textContent = t.dbPtLoc;
+      document.getElementById('db-loc-ratio-title').textContent = t.dbLocRatio;
+      document.getElementById('db-dept-ratio-title').textContent = t.dbDeptRatio;
+      
+      // Settings static texts
+      document.getElementById('settings-title').textContent = t.settingsTitle;
+      document.getElementById('settings-desc').textContent = t.settingsDesc;
+      document.getElementById('backup-title').textContent = t.backupTitle;
+      document.getElementById('backup-desc').textContent = t.backupDesc;
+      document.getElementById('backup-btn').textContent = t.backupBtn;
+      document.getElementById('restore-title').textContent = t.restoreTitle;
+      document.getElementById('restore-desc').textContent = t.restoreDesc;
+      document.getElementById('restore-btn').textContent = t.restoreBtn;
+      document.getElementById('reset-title').textContent = t.resetTitle;
+      document.getElementById('reset-desc').textContent = t.resetDesc;
+      document.getElementById('reset-btn').textContent = t.resetBtn;
+      
+      // Modal labels & buttons
+      document.getElementById('lbl-form-id').textContent = t.formLabelId;
+      document.getElementById('help-form-id').textContent = t.formHelpId;
+      document.getElementById('lbl-form-nick').textContent = t.formLabelNick;
+      document.getElementById('lbl-form-nick-en').textContent = t.formLabelNickEn;
+      document.getElementById('lbl-form-th').textContent = t.formLabelTh;
+      document.getElementById('lbl-form-en').textContent = t.formLabelEn;
+      document.getElementById('lbl-form-role').textContent = t.formLabelRole;
+      document.getElementById('lbl-form-loc').textContent = t.formLabelLoc;
+      document.getElementById('lbl-form-email').textContent = t.formLabelEmail;
+      document.getElementById('lbl-form-pass').textContent = t.formLabelPass;
+      
+      document.getElementById('form-nick').placeholder = t.formPlaceholderNick;
+      document.getElementById('form-nick-en').placeholder = t.formPlaceholderNickEn;
+      document.getElementById('form-th').placeholder = t.formPlaceholderTh;
+      document.getElementById('form-en').placeholder = t.formPlaceholderEn;
+      document.getElementById('form-role').placeholder = t.formPlaceholderRole;
+      document.getElementById('form-email').placeholder = t.formPlaceholderEmail;
+      document.getElementById('form-pass').placeholder = t.formPlaceholderPass;
+      
+      document.getElementById('btn-form-randpass').textContent = t.formBtnRandom;
+      document.getElementById('btn-form-cancel').textContent = t.formBtnCancel;
+      document.getElementById('btn-form-save').textContent = t.formBtnSave;
+
+      // Update static mail elements
+      document.getElementById('lbl-form-mail-used').textContent = t.lblFormMailUsed;
+      document.getElementById('opt-mail-pending').textContent = t.optMailPending;
+      document.getElementById('opt-mail-used').textContent = t.optMailUsed;
+
+      const mailAllFilter = document.querySelector('[data-mail="ALL"]');
+      if (mailAllFilter) {
+        mailAllFilter.childNodes[0].textContent = t.filterMailAll + ' ';
+      }
+      const mailUsedFilter = document.querySelector('[data-mail="used"]');
+      if (mailUsedFilter) {
+        mailUsedFilter.childNodes[0].textContent = t.filterMailUsed + ' ';
+      }
+      const mailPendingFilter = document.querySelector('[data-mail="pending"]');
+      if (mailPendingFilter) {
+        mailPendingFilter.childNodes[0].textContent = t.filterMailPending + ' ';
+      }
+
+      const dbMailLbl = document.getElementById('db-mail-label');
+      if (dbMailLbl) {
+        dbMailLbl.textContent = t.dbMailLabel;
+      }
+    }
+
+    function switchLang(langCode) {
+      currentLang = langCode;
+      localStorage.setItem('tif_lang', langCode);
+      
+      document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+      document.getElementById(`lang-${langCode}`).classList.add('active');
+      
+      updateStaticTranslations();
+      render();
+      if (document.getElementById('tab-dashboard').style.display !== 'none') {
+        renderDashboard();
+      }
+    }
+
+    function initials(en) {
+      const s = en.replace(/^(Miss|Mr\.|Ms\.|Capt\.|Po\s*1)\s*/i, '').trim().split(/\s+/);
+      return ((s[0] || '')[0] + (s[1] || '')[0] || '').toUpperCase();
+    }
+    function pal(id) { return palette[parseInt(id.slice(-2)) % palette.length] }
+
+    function badge(loc) {
+      if (loc === 'BKK') return `<span class="badge bkk">✈ BKK</span>`;
+      if (loc === 'PHS') return `<span class="badge phs">🛫 PHS</span>`;
+      return `<span class="badge pt">⏱ Part Time</span>`;
+    }
+    function mailBadge(mailUsed) {
+      const t = translations[currentLang];
+      if (mailUsed) {
+        return `<span class="badge b-mail-used" style="background:var(--success-bg); color:var(--success);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" style="width:10px; height:10px; margin-right:2px; display:inline-block; vertical-align:middle;"><polyline points="20 6 9 17 4 12"></polyline></svg>${t.mailStatusActive}</span>`;
+      }
+      return `<span class="badge b-mail-pending" style="background:var(--warn-bg); color:var(--warn);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" style="width:10px; height:10px; margin-right:2px; display:inline-block; vertical-align:middle;"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>${t.mailStatusPending}</span>`;
+    }
+
+    function getStaffDept(p) {
+      const role = p.role.toLowerCase();
+      if (role.includes('instructor') || role.includes('training') || role.includes('tki') || role.includes('operations')) {
+        return 'flight';
+      }
+      if (role.includes('maintenance') || role.includes('mechanic') || role.includes('store keeper') || role.includes('ซ่อมบำรุง')) {
+        return 'maint';
+      }
+      if (role.includes('ceo') || role.includes('coo') || role.includes('cfo') || role.includes('hr') ||
+        role.includes('finance') || role.includes('accounting') || role.includes('sales') ||
+        role.includes('purchasing') || role.includes('secretary') || role.includes('it') ||
+        role.includes('driver') || role.includes('สนามบิน') || role.includes('compliance') ||
+        role.includes('assurance') || role.includes('safety') || role.includes('executive') ||
+        role.includes('registration') || role.includes('licensing') || role.includes('officer') ||
+        role.includes('manager') || role.includes('supervisor')) {
+        return 'admin';
+      }
+      return 'other';
+    }
+
+    function highlightText(text, q) {
+      if (!q) return text;
+      const regex = new RegExp(`(${q.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&')})`, 'gi');
+      return text.replace(regex, '<mark class="hl">$1</mark>');
+    }
+
+    function card(p, q) {
+      const [bg, fg] = pal(p.id);
+      const isEn = currentLang === 'en';
+      const displayName = (isEn || p.id === '680012') ? p.en : p.th;
+      const displaySub = (isEn || p.id === '680012') ? p.th : p.en;
+      const nickPrefix = isEn ? '' : (p.id === '680012' ? 'Mr. ' : 'คุณ');
+      const nickname = (isEn && p.nickEn) ? p.nickEn : p.nick;
+      const t = translations[currentLang];
+
+      const highlightedName = highlightText(displayName, q);
+      const highlightedRole = highlightText(p.role, q);
+      const highlightedId = highlightText(p.id, q);
+      const highlightedEmail = highlightText(p.email, q);
+      const highlightedSub = highlightText(displaySub, q);
+      const highlightedNick = highlightText(nickname, q);
+
+      return `<div class="card" onclick="toggle(this)">
     <div class="card-top">
       <div class="ava" style="background:${bg};color:${fg}">${initials(p.en)}</div>
       <div class="info">
         <div class="nick">${highlightedName}</div>
-        <div style="font-size:11.5px; color:var(--text3); font-weight:500; margin-top:2px;">ชื่อเล่น: ${nickPrefix}${highlightedNick}</div>
+        <div style="font-size:11.5px; color:var(--text3); font-weight:500; margin-top:2px;">${t.nicknameLabel} ${nickPrefix}${highlightedNick}</div>
         <div class="eid">${highlightedId}</div>
         <div class="role">${highlightedRole}</div>
-        ${badge(p.loc)}
+        ${badge(p.loc)} ${mailBadge(p.mailUsed)}
       </div>
     </div>
     <div class="detail-wrapper">
@@ -1382,32 +1970,32 @@ function card(p, q){
         <div class="drow">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
           <div class="dval-wrap">
-            <div class="dname">ชื่อเล่น: ${nickPrefix}${highlightedNick}</div>
+            <div class="dname">${t.nicknameLabel} ${nickPrefix}${highlightedNick}</div>
             <div class="dsub">${highlightedSub}</div>
             <div style="display:flex;gap:6px;margin-top:4px;flex-wrap:wrap;">
-              <button class="copy" onclick="cp(event,'${displayName}',this)">📋 คัดลอกชื่อจริง</button>
-              <button class="copy" onclick="cp(event,'${p.nick}',this)">📋 คัดลอกชื่อเล่น</button>
+              <button class="copy" onclick="cp(event,'${displayName}',this)">${t.copyName}</button>
+              <button class="copy" onclick="cp(event,'${nickname}',this)">${t.copyNick}</button>
             </div>
           </div>
         </div>
         <div class="drow">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
           <div class="dval-wrap">
-            <div class="dname">ตำแหน่ง: ${highlightedRole}</div>
-            <div class="dsub">รหัสพนักงาน: ${highlightedId} (${p.loc})</div>
+            <div class="dname">${t.formLabelRole}: ${highlightedRole}</div>
+            <div class="dsub">${t.formLabelId}: ${highlightedId} (${p.loc})</div>
             <div style="display:flex;gap:6px;margin-top:4px;flex-wrap:wrap;">
-              <button class="copy" onclick="cp(event,'${p.role}',this)">📋 คัดลอกตำแหน่ง</button>
-              <button class="copy" onclick="cp(event,'${p.id}',this)">📋 คัดลอกรหัส</button>
+              <button class="copy" onclick="cp(event,'${p.role}',this)">${t.copyPosition}</button>
+              <button class="copy" onclick="cp(event,'${p.id}',this)">${t.copyId}</button>
             </div>
           </div>
         </div>
         <div class="drow">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
           <div class="dval-wrap">
-            <div class="dlink">${highlightedEmail}</div>
+            <div class="dlink" style="display:flex; align-items:center; gap:6px; flex-wrap:wrap;">${highlightedEmail} ${mailBadge(p.mailUsed)}</div>
             <div style="display:flex;gap:6px;margin-top:4px;flex-wrap:wrap;">
-              <button class="copy" onclick="cp(event,'${p.email}',this)">📋 คัดลอกเมล</button>
-              <a href="mailto:${p.email}" onclick="event.stopPropagation();" class="copy" style="text-decoration:none; display:inline-flex; align-items:center; gap:4px; margin-top:4px;">✉️ ส่งอีเมล</a>
+              <button class="copy" onclick="cp(event,'${p.email}',this)">${t.copyEmail}</button>
+              <a href="mailto:${p.email}" onclick="event.stopPropagation();" class="copy" style="text-decoration:none; display:inline-flex; align-items:center; gap:4px; margin-top:4px;">${t.sendEmail}</a>
             </div>
           </div>
         </div>
@@ -1416,353 +2004,445 @@ function card(p, q){
           <div class="dval-wrap">
             <div class="pwd-container">
               <span class="pwd-text masked" data-pwd="${p.pass}">••••••••</span>
-              <button class="pwd-toggle" onclick="togglePwd(event, this)" title="แสดง/ซ่อนรหัสผ่าน">
+              <button class="pwd-toggle" onclick="togglePwd(event, this)" title="${t.formLabelPass}">
                 <svg class="eye-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
                 <svg class="eye-closed" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:none;"><path d="M9.88 9.88a3 3 0 1 0 4.24 4.24M10.73 5.08A10.43 10.43 0 0 1 12 5c7 0 10 7 10 7a13.16 13.16 0 0 1-1.67 2.68M6.61 6.61A13.52 13.52 0 0 0 2 12s3 7 10 7a9.74 9.74 0 0 0 5.39-1.61M2 2l20 20"/></svg>
               </button>
-              <button class="copy" onclick="cp(event,'${p.pass}',this)" style="margin-top:0;">📋 คัดลอกรหัส</button>
+              <button class="copy" onclick="cp(event,'${p.pass}',this)" style="margin-top:0;">${t.copyPassword}</button>
             </div>
           </div>
         </div>
         <div style="margin-top: 14px; border-top: 1px dashed var(--border); padding-top: 14px; width: 100%;">
-          <button class="copy-all" onclick="copyAll(event,'${p.id}',this)">📋 คัดลอกข้อมูลทั้งหมด</button>
+          <button class="copy-all" onclick="copyAll(event,'${p.id}',this)">${t.copyAllInfo}</button>
         </div>
         <div style="margin-top: 12px; display:flex; gap:8px; width: 100%;">
-          <button class="btn-action btn-action-edit" onclick="openEditModal(event, '${p.id}')">✏️ แก้ไขข้อมูล</button>
-          <button class="btn-action btn-action-delete" onclick="deleteStaff(event, '${p.id}')">🗑️ ลบพนักงาน</button>
+          <button class="btn-action btn-action-edit" onclick="openEditModal(event, '${p.id}')">${t.editInfo}</button>
+          <button class="btn-action btn-action-delete" onclick="deleteStaff(event, '${p.id}')">${t.deleteEmployee}</button>
         </div>
       </div>
     </div>
   </div>`;
-}
-
-let loc='ALL';
-let currentEditId = null;
-
-function initData() {
-  const stored = localStorage.getItem('tif_staff_data');
-  if (stored) {
-    try {
-      staff = JSON.parse(stored);
-    } catch (e) {
-      console.error("Error parsing staff data", e);
-      staff = [...defaultStaff];
     }
-  } else {
-    staff = [...defaultStaff];
-    localStorage.setItem('tif_staff_data', JSON.stringify(staff));
-  }
-}
 
-function render(){
-  const q=document.getElementById('search').value.toLowerCase().trim();
-  const sortBy = document.getElementById('sort-select').value;
-  
-  let list=staff.filter(p=>{
-    const ml=loc==='ALL'||p.loc===loc;
-    const mq=!q||[p.th,p.en,p.nick,p.role,p.id,p.email].some(v=>v.toLowerCase().includes(q));
-    return ml&&mq;
-  });
-  
-  if (sortBy === 'id-asc') {
-    list.sort((a, b) => a.id.localeCompare(b.id));
-  } else if (sortBy === 'id-desc') {
-    list.sort((a, b) => b.id.localeCompare(a.id));
-  } else if (sortBy === 'name-th') {
-    list.sort((a, b) => a.th.localeCompare(b.th, 'th'));
-  } else if (sortBy === 'name-en') {
-    list.sort((a, b) => a.en.localeCompare(b.en));
-  }
-  
-  document.getElementById('grid').innerHTML=list.length
-    ?list.map(p => card(p, q)).join('')
-    :`<div class="empty"><div class="empty-icon">🔍</div>ไม่พบข้อมูลที่ค้นหา<button class="reset-btn" onclick="resetFilters()">ล้างการค้นหา</button></div>`;
-  document.getElementById('count').textContent=`แสดง ${list.length} จาก ${staff.length} คน`;
+    let loc = 'ALL';
+    let deptFilter = 'ALL';
+    let currentEditId = null;
 
-  // Reset single-view mode on render
-  document.getElementById('grid').classList.remove('single-view');
-  document.getElementById('back-btn').style.display = 'none';
-}
-
-function toggle(el){
-  const was=el.classList.contains('open');
-  document.querySelectorAll('.card.open').forEach(c=>c.classList.remove('open'));
-  
-  if(!was) {
-    el.classList.add('open');
-    document.getElementById('grid').classList.add('single-view');
-    document.getElementById('back-btn').style.display = 'inline-flex';
-    // Scroll to the top of the card smoothly
-    setTimeout(() => {
-      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }, 100);
-  } else {
-    document.getElementById('grid').classList.remove('single-view');
-    document.getElementById('back-btn').style.display = 'none';
-  }
-}
-
-function closeAllCards() {
-  resetFilters();
-}
-
-function cp(e,txt,btn){
-  e.stopPropagation();
-  navigator.clipboard.writeText(txt).then(()=>{
-    const oldText = btn.textContent;
-    btn.textContent='✅ คัดลอกแล้ว';btn.classList.add('ok');
-    setTimeout(()=>{btn.textContent=oldText;btn.classList.remove('ok');},1800);
-  });
-}
-
-function copyAll(e, id, btn){
-  e.stopPropagation();
-  const p=staff.find(x=>x.id===id);
-  if(!p) return;
-  const displayName = p.id === '680012' ? p.en : p.th;
-  const displaySub = p.id === '680012' ? p.th : p.en;
-  const nickPrefix = p.id === '680012' ? 'Mr. ' : 'คุณ';
-  const text = `ชื่อ-นามสกุล: ${displayName} (${nickPrefix}${p.nick})
-ชื่อภาษาอังกฤษ/ไทย: ${displaySub}
-รหัสพนักงาน: ${p.id}
-ตำแหน่ง: ${p.role}
-สังกัด/พื้นที่: ${p.loc}
-อีเมล: ${p.email}
-รหัสผ่าน: ${p.pass}`;
-
-  navigator.clipboard.writeText(text).then(()=>{
-    const oldText = btn.textContent;
-    btn.textContent = '✅ คัดลอกข้อมูลทั้งหมดแล้ว';
-    btn.classList.add('ok');
-    setTimeout(()=>{
-      btn.textContent = oldText;
-      btn.classList.remove('ok');
-    },1800);
-  });
-}
-
-function togglePwd(e, btn) {
-  e.stopPropagation();
-  const textEl = btn.previousElementSibling;
-  const pwd = textEl.dataset.pwd;
-  const isMasked = textEl.classList.contains('masked');
-  const eyeOpen = btn.querySelector('.eye-open');
-  const eyeClosed = btn.querySelector('.eye-closed');
-  if (isMasked) {
-    textEl.textContent = pwd;
-    textEl.classList.remove('masked');
-    eyeOpen.style.display = 'none';
-    eyeClosed.style.display = 'block';
-  } else {
-    textEl.textContent = '••••••••';
-    textEl.classList.add('masked');
-    eyeOpen.style.display = 'block';
-    eyeClosed.style.display = 'none';
-  }
-}
-
-function updateFilterCounts() {
-  const allCount = staff.length;
-  const bkkCount = staff.filter(p => p.loc === 'BKK').length;
-  const phsCount = staff.filter(p => p.loc === 'PHS').length;
-  const ptCount = staff.filter(p => p.loc === 'Part Time').length;
-
-  document.getElementById('count-all').textContent = allCount;
-  document.getElementById('count-bkk').textContent = bkkCount;
-  document.getElementById('count-phs').textContent = phsCount;
-  document.getElementById('count-pt').textContent = ptCount;
-}
-
-function resetFilters() {
-  document.getElementById('search').value = '';
-  document.getElementById('search-clear').style.display = 'none';
-  loc = 'ALL';
-  document.querySelectorAll('#filters .fbtn').forEach(x => {
-    if (x.dataset.loc === 'ALL') x.classList.add('on');
-    else x.classList.remove('on');
-  });
-  render();
-}
-
-// Modal actions
-function openAddModal() {
-  currentEditId = null;
-  document.getElementById('modal-title').textContent = 'เพิ่มพนักงานใหม่';
-  document.getElementById('form-id').disabled = false;
-  document.getElementById('staff-form').reset();
-  
-  document.getElementById('form-id').value = '';
-  document.getElementById('form-nick').value = '';
-  document.getElementById('form-th').value = '';
-  document.getElementById('form-en').value = '';
-  document.getElementById('form-role').value = '';
-  document.getElementById('form-loc').value = 'BKK';
-  document.getElementById('form-email').value = '';
-  document.getElementById('form-pass').value = '';
-  
-  generateRandomPass();
-  document.getElementById('staff-modal').style.display = 'flex';
-}
-
-function openEditModal(e, id) {
-  if (e) e.stopPropagation();
-  currentEditId = id;
-  const p = staff.find(x => x.id === id);
-  if (!p) return;
-  
-  document.getElementById('modal-title').textContent = 'แก้ไขข้อมูลพนักงาน';
-  document.getElementById('form-id').value = p.id;
-  document.getElementById('form-id').disabled = true;
-  document.getElementById('form-nick').value = p.nick;
-  document.getElementById('form-th').value = p.th;
-  document.getElementById('form-en').value = p.en;
-  document.getElementById('form-role').value = p.role;
-  document.getElementById('form-loc').value = p.loc;
-  document.getElementById('form-email').value = p.email;
-  document.getElementById('form-pass').value = p.pass;
-  
-  document.getElementById('staff-modal').style.display = 'flex';
-}
-
-function closeModal() {
-  document.getElementById('staff-modal').style.display = 'none';
-}
-
-function generateRandomPass() {
-  const chars = 'abcdefghijklmnopqrstuvwxyz';
-  const symbols = '!@#$%^&*()_+';
-  const upper = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-  
-  const randUpper = upper[Math.floor(Math.random() * upper.length)];
-  const randSymbol = symbols[Math.floor(Math.random() * symbols.length)];
-  let randDigits = '';
-  for(let i=0; i<12; i++){
-    randDigits += Math.floor(Math.random() * 10).toString();
-  }
-  let randChars = '';
-  for(let i=0; i<2; i++){
-    randChars += chars[Math.floor(Math.random() * chars.length)];
-  }
-  
-  const password = `${randUpper}${randSymbol}${randDigits}${randChars}`;
-  document.getElementById('form-pass').value = password;
-}
-
-function saveStaff(e) {
-  e.preventDefault();
-  const id = document.getElementById('form-id').value.trim();
-  const nick = document.getElementById('form-nick').value.trim();
-  const th = document.getElementById('form-th').value.trim();
-  const en = document.getElementById('form-en').value.trim();
-  const role = document.getElementById('form-role').value.trim();
-  const locVal = document.getElementById('form-loc').value;
-  const email = document.getElementById('form-email').value.trim();
-  const pass = document.getElementById('form-pass').value.trim();
-  
-  if (!id || !nick || !th || !en || !role || !email || !pass) {
-    alert('กรุณากรอกข้อมูลให้ครบถ้วน');
-    return;
-  }
-  
-  if (currentEditId === null) {
-    if (staff.some(x => x.id === id)) {
-      alert(`รหัสพนักงาน ${id} มีอยู่ในระบบแล้ว กรุณาใช้รหัสอื่น`);
-      return;
-    }
-    staff.push({ id, th, en, nick, role, loc: locVal, email, pass });
-  } else {
-    const idx = staff.findIndex(x => x.id === currentEditId);
-    if (idx !== -1) {
-      staff[idx] = { id: currentEditId, th, en, nick, role, loc: locVal, email, pass };
-    }
-  }
-  
-  localStorage.setItem('tif_staff_data', JSON.stringify(staff));
-  closeModal();
-  updateFilterCounts();
-  render();
-  
-  if (currentEditId) {
-    setTimeout(() => {
-      const cards = document.querySelectorAll('.card');
-      cards.forEach(c => {
-        const eidEl = c.querySelector('.eid');
-        if (eidEl && eidEl.textContent.trim() === currentEditId) {
-          toggle(c);
+    function initData() {
+      const stored = localStorage.getItem('tif_staff_data');
+      if (stored) {
+        try {
+          staff = JSON.parse(stored);
+          let upgraded = false;
+          staff.forEach(p => {
+            if (!p.nickEn) {
+              const def = defaultStaff.find(d => d.id === p.id);
+              p.nickEn = def ? def.nickEn : p.nick;
+              upgraded = true;
+            }
+            if (p.mailUsed === undefined) {
+              p.mailUsed = false;
+              upgraded = true;
+            }
+          });
+          if (upgraded) {
+            localStorage.setItem('tif_staff_data', JSON.stringify(staff));
+          }
+        } catch (e) {
+          console.error("Error parsing staff data", e);
+          staff = [...defaultStaff];
         }
+      } else {
+        staff = [...defaultStaff];
+        staff.forEach(p => {
+          if (p.mailUsed === undefined) {
+            p.mailUsed = false;
+          }
+        });
+        localStorage.setItem('tif_staff_data', JSON.stringify(staff));
+      }
+    }
+
+    function render() {
+      const q = document.getElementById('search').value.toLowerCase().trim();
+      const sortBy = document.getElementById('sort-select').value;
+
+      let list = staff.filter(p => {
+        const ml = loc === 'ALL' || p.loc === loc;
+        const md = deptFilter === 'ALL' || getStaffDept(p) === deptFilter;
+        const mm = mailFilter === 'ALL' || (mailFilter === 'used' ? p.mailUsed : !p.mailUsed);
+        const mq = !q || [p.th, p.en, p.nick, p.nickEn || '', p.role, p.id, p.email].some(v => v.toLowerCase().includes(q));
+        return ml && md && mm && mq;
       });
-    }, 150);
-  }
-}
 
-function deleteStaff(e, id) {
-  if (e) e.stopPropagation();
-  const p = staff.find(x => x.id === id);
-  if (!p) return;
-  
-  const displayName = p.id === '680012' ? p.en : p.th;
-  if (confirm(`คุณต้องการลบข้อมูลของ ${displayName} (รหัส: ${id}) ใช่หรือไม่?`)) {
-    staff = staff.filter(x => x.id !== id);
-    localStorage.setItem('tif_staff_data', JSON.stringify(staff));
-    
-    document.getElementById('grid').classList.remove('single-view');
-    document.getElementById('back-btn').style.display = 'none';
-    
-    updateFilterCounts();
-    render();
-  }
-}
+      if (sortBy === 'id-asc') {
+        list.sort((a, b) => a.id.localeCompare(b.id));
+      } else if (sortBy === 'id-desc') {
+        list.sort((a, b) => b.id.localeCompare(a.id));
+      } else if (sortBy === 'name-th') {
+        list.sort((a, b) => a.th.localeCompare(b.th, 'th'));
+      } else if (sortBy === 'name-en') {
+        list.sort((a, b) => a.en.localeCompare(b.en));
+      }
 
-// Tab switcher
-function switchTab(tabId) {
-  document.querySelectorAll('.nav-tab').forEach(btn => btn.classList.remove('active'));
-  document.querySelectorAll('.tab-content').forEach(content => content.style.display = 'none');
-  
-  const activeBtn = document.querySelector(`.nav-tab[onclick="switchTab('${tabId}')"]`);
-  if (activeBtn) activeBtn.classList.add('active');
-  
-  const activeContent = document.getElementById(`tab-${tabId}`);
-  if (activeContent) activeContent.style.display = 'block';
-  
-  const searchWrap = document.querySelector('.search-wrap');
-  if (tabId === 'directory') {
-    searchWrap.style.opacity = '1';
-    searchWrap.style.pointerEvents = 'auto';
-  } else {
-    searchWrap.style.opacity = '0';
-    searchWrap.style.pointerEvents = 'none';
-  }
-  
-  if (tabId === 'dashboard') {
-    renderDashboard();
-  }
-}
+      const t = translations[currentLang];
+      let html = '';
+      if (list.length) {
+        const flightDept = list.filter(p => getStaffDept(p) === 'flight');
+        const maintDept = list.filter(p => getStaffDept(p) === 'maint');
+        const adminDept = list.filter(p => getStaffDept(p) === 'admin');
+        const otherDept = list.filter(p => getStaffDept(p) === 'other');
 
-// Dashboard statistics
-function renderDashboard() {
-  const total = staff.length;
-  const bkk = staff.filter(p => p.loc === 'BKK').length;
-  const phs = staff.filter(p => p.loc === 'PHS').length;
-  const pt = staff.filter(p => p.loc === 'Part Time').length;
-  
-  document.getElementById('db-total-count').textContent = total;
-  document.getElementById('db-bkk-count').textContent = bkk;
-  document.getElementById('db-phs-count').textContent = phs;
-  document.getElementById('db-pt-count').textContent = pt;
-  
-  const bkkPct = total > 0 ? Math.round((bkk / total) * 100) : 0;
-  const phsPct = total > 0 ? Math.round((phs / total) * 100) : 0;
-  const ptPct = total > 0 ? Math.round((pt / total) * 100) : 0;
-  
-  document.getElementById('db-bkk-percent').textContent = `${bkkPct}% ของทั้งหมด`;
-  document.getElementById('db-phs-percent').textContent = `${phsPct}% ของทั้งหมด`;
-  document.getElementById('db-pt-percent').textContent = `${ptPct}% ของทั้งหมด`;
-  
-  const locHtml = `
+        if (flightDept.length) {
+          html += `<div class="dept-header">${t.dbDeptFlight}</div>`;
+          html += flightDept.map(p => card(p, q)).join('');
+        }
+        if (maintDept.length) {
+          html += `<div class="dept-header">${t.dbDeptMaint}</div>`;
+          html += maintDept.map(p => card(p, q)).join('');
+        }
+        if (adminDept.length) {
+          html += `<div class="dept-header">${t.dbDeptAdmin}</div>`;
+          html += adminDept.map(p => card(p, q)).join('');
+        }
+        if (otherDept.length) {
+          html += `<div class="dept-header">${t.dbDeptOther}</div>`;
+          html += otherDept.map(p => card(p, q)).join('');
+        }
+      } else {
+        html = `<div class="empty"><div class="empty-icon">🔍</div>${t.noResults}<button class="reset-btn" onclick="resetFilters()">${t.clearSearch}</button></div>`;
+      }
+      document.getElementById('grid').innerHTML = html;
+      document.getElementById('count').textContent = t.countText(list.length, staff.length);
+
+      // Reset single-view mode on render
+      document.getElementById('grid').classList.remove('single-view');
+      document.getElementById('back-btn').style.display = 'none';
+    }
+
+    function toggle(el) {
+      const was = el.classList.contains('open');
+      document.querySelectorAll('.card.open').forEach(c => c.classList.remove('open'));
+
+      if (!was) {
+        el.classList.add('open');
+        document.getElementById('grid').classList.add('single-view');
+        document.getElementById('back-btn').style.display = 'inline-flex';
+        // Scroll to the top of the card smoothly
+        setTimeout(() => {
+          el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 100);
+      } else {
+        document.getElementById('grid').classList.remove('single-view');
+        document.getElementById('back-btn').style.display = 'none';
+      }
+    }
+
+    function closeAllCards() {
+      resetFilters();
+    }
+
+    function cp(e, txt, btn) {
+      e.stopPropagation();
+      navigator.clipboard.writeText(txt).then(() => {
+        const oldText = btn.textContent;
+        btn.textContent = translations[currentLang].copied; btn.classList.add('ok');
+        setTimeout(() => { btn.textContent = oldText; btn.classList.remove('ok'); }, 1800);
+      });
+    }
+
+    function copyAll(e, id, btn) {
+      e.stopPropagation();
+      const p = staff.find(x => x.id === id);
+      if (!p) return;
+      const isEn = currentLang === 'en';
+      const displayName = (isEn || p.id === '680012') ? p.en : p.th;
+      const displaySub = (isEn || p.id === '680012') ? p.th : p.en;
+      const nickPrefix = isEn ? '' : (p.id === '680012' ? 'Mr. ' : 'คุณ');
+      const nickname = (isEn && p.nickEn) ? p.nickEn : p.nick;
+      const t = translations[currentLang];
+
+      const text = `${t.formLabelTh}/${t.formLabelEn}: ${displayName} (${t.nicknameLabel.replace(':', '')} ${nickPrefix}${nickname})
+${t.formLabelEn}/${t.formLabelTh}: ${displaySub}
+${t.formLabelId}: ${p.id}
+${t.formLabelRole}: ${p.role}
+${t.formLabelLoc}: ${p.loc}
+${t.formLabelEmail}: ${p.email}
+${t.formLabelPass}: ${p.pass}`;
+
+      navigator.clipboard.writeText(text).then(() => {
+        const oldText = btn.textContent;
+        btn.textContent = t.copiedAll;
+        btn.classList.add('ok');
+        setTimeout(() => {
+          btn.textContent = oldText;
+          btn.classList.remove('ok');
+        }, 1800);
+      });
+    }
+
+    function togglePwd(e, btn) {
+      e.stopPropagation();
+      const textEl = btn.previousElementSibling;
+      const pwd = textEl.dataset.pwd;
+      const isMasked = textEl.classList.contains('masked');
+      const eyeOpen = btn.querySelector('.eye-open');
+      const eyeClosed = btn.querySelector('.eye-closed');
+      if (isMasked) {
+        textEl.textContent = pwd;
+        textEl.classList.remove('masked');
+        eyeOpen.style.display = 'none';
+        eyeClosed.style.display = 'block';
+      } else {
+        textEl.textContent = '••••••••';
+        textEl.classList.add('masked');
+        eyeOpen.style.display = 'block';
+        eyeClosed.style.display = 'none';
+      }
+    }
+
+    function updateFilterCounts() {
+      const allCount = staff.length;
+      const bkkCount = staff.filter(p => p.loc === 'BKK').length;
+      const phsCount = staff.filter(p => p.loc === 'PHS').length;
+      const ptCount = staff.filter(p => p.loc === 'Part Time').length;
+
+      document.getElementById('count-all').textContent = allCount;
+      document.getElementById('count-bkk').textContent = bkkCount;
+      document.getElementById('count-phs').textContent = phsCount;
+      document.getElementById('count-pt').textContent = ptCount;
+
+      const flightCount = staff.filter(p => getStaffDept(p) === 'flight').length;
+      const maintCount = staff.filter(p => getStaffDept(p) === 'maint').length;
+      const adminCount = staff.filter(p => getStaffDept(p) === 'admin').length;
+      const otherCount = staff.filter(p => getStaffDept(p) === 'other').length;
+
+      document.getElementById('count-dept-all').textContent = allCount;
+      document.getElementById('count-dept-flight').textContent = flightCount;
+      document.getElementById('count-dept-maint').textContent = maintCount;
+      document.getElementById('count-dept-admin').textContent = adminCount;
+      document.getElementById('count-dept-other').textContent = otherCount;
+
+      const mailAllCount = staff.length;
+      const mailUsedCount = staff.filter(p => p.mailUsed).length;
+      const mailPendingCount = staff.filter(p => !p.mailUsed).length;
+
+      document.getElementById('count-mail-all').textContent = mailAllCount;
+      document.getElementById('count-mail-used').textContent = mailUsedCount;
+      document.getElementById('count-mail-pending').textContent = mailPendingCount;
+    }
+
+    function resetFilters() {
+      document.getElementById('search').value = '';
+      document.getElementById('search-clear').style.display = 'none';
+      loc = 'ALL';
+      deptFilter = 'ALL';
+      mailFilter = 'ALL';
+      document.querySelectorAll('#filters .fbtn').forEach(x => {
+        if (x.dataset.loc === 'ALL') x.classList.add('on');
+        else x.classList.remove('on');
+      });
+      document.querySelectorAll('#dept-filters .fbtn').forEach(x => {
+        if (x.dataset.dept === 'ALL') x.classList.add('on');
+        else x.classList.remove('on');
+      });
+      document.querySelectorAll('#mail-filters .fbtn').forEach(x => {
+        if (x.dataset.mail === 'ALL') x.classList.add('on');
+        else x.classList.remove('on');
+      });
+      render();
+    }
+
+    // Modal actions
+    function openAddModal() {
+      currentEditId = null;
+      document.getElementById('modal-title').textContent = translations[currentLang].modalTitleAdd;
+      document.getElementById('form-id').disabled = false;
+      document.getElementById('staff-form').reset();
+
+      document.getElementById('form-id').value = '';
+      document.getElementById('form-nick').value = '';
+      document.getElementById('form-nick-en').value = '';
+      document.getElementById('form-th').value = '';
+      document.getElementById('form-en').value = '';
+      document.getElementById('form-role').value = '';
+      document.getElementById('form-loc').value = 'BKK';
+      document.getElementById('form-email').value = '';
+      document.getElementById('form-pass').value = '';
+      document.getElementById('form-mail-used').value = 'false';
+
+      generateRandomPass();
+      document.getElementById('staff-modal').style.display = 'flex';
+    }
+
+    function openEditModal(e, id) {
+      if (e) e.stopPropagation();
+      currentEditId = id;
+      const p = staff.find(x => x.id === id);
+      if (!p) return;
+
+      document.getElementById('modal-title').textContent = translations[currentLang].modalTitleEdit;
+      document.getElementById('form-id').value = p.id;
+      document.getElementById('form-id').disabled = true;
+      document.getElementById('form-nick').value = p.nick;
+      document.getElementById('form-nick-en').value = p.nickEn || '';
+      document.getElementById('form-th').value = p.th;
+      document.getElementById('form-en').value = p.en;
+      document.getElementById('form-role').value = p.role;
+      document.getElementById('form-loc').value = p.loc;
+      document.getElementById('form-email').value = p.email;
+      document.getElementById('form-pass').value = p.pass;
+      document.getElementById('form-mail-used').value = p.mailUsed ? 'true' : 'false';
+
+      document.getElementById('staff-modal').style.display = 'flex';
+    }
+
+    function closeModal() {
+      document.getElementById('staff-modal').style.display = 'none';
+    }
+
+    function generateRandomPass() {
+      const chars = 'abcdefghijklmnopqrstuvwxyz';
+      const symbols = '!@#$%^&*()_+';
+      const upper = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+
+      const randUpper = upper[Math.floor(Math.random() * upper.length)];
+      const randSymbol = symbols[Math.floor(Math.random() * symbols.length)];
+      let randDigits = '';
+      for (let i = 0; i < 12; i++) {
+        randDigits += Math.floor(Math.random() * 10).toString();
+      }
+      let randChars = '';
+      for (let i = 0; i < 2; i++) {
+        randChars += chars[Math.floor(Math.random() * chars.length)];
+      }
+
+      const password = `${randUpper}${randSymbol}${randDigits}${randChars}`;
+      document.getElementById('form-pass').value = password;
+    }
+
+    function saveStaff(e) {
+      e.preventDefault();
+      const id = document.getElementById('form-id').value.trim();
+      const nick = document.getElementById('form-nick').value.trim();
+      const nickEn = document.getElementById('form-nick-en').value.trim();
+      const th = document.getElementById('form-th').value.trim();
+      const en = document.getElementById('form-en').value.trim();
+      const role = document.getElementById('form-role').value.trim();
+      const locVal = document.getElementById('form-loc').value;
+      const email = document.getElementById('form-email').value.trim();
+      const pass = document.getElementById('form-pass').value.trim();
+      const mailUsed = document.getElementById('form-mail-used').value === 'true';
+
+      if (!id || !nick || !nickEn || !th || !en || !role || !email || !pass) {
+        alert(translations[currentLang].alertFillAll);
+        return;
+      }
+
+      if (currentEditId === null) {
+        if (staff.some(x => x.id === id)) {
+          alert(translations[currentLang].alertDuplicateId(id));
+          return;
+        }
+        staff.push({ id, th, en, nick, nickEn, role, loc: locVal, email, pass, mailUsed });
+      } else {
+        const idx = staff.findIndex(x => x.id === currentEditId);
+        if (idx !== -1) {
+          staff[idx] = { id: currentEditId, th, en, nick, nickEn, role, loc: locVal, email, pass, mailUsed };
+        }
+      }
+
+      localStorage.setItem('tif_staff_data', JSON.stringify(staff));
+      closeModal();
+      updateFilterCounts();
+      render();
+
+      if (currentEditId) {
+        setTimeout(() => {
+          const cards = document.querySelectorAll('.card');
+          cards.forEach(c => {
+            const eidEl = c.querySelector('.eid');
+            if (eidEl && eidEl.textContent.trim() === currentEditId) {
+              toggle(c);
+            }
+          });
+        }, 150);
+      }
+    }
+
+    function deleteStaff(e, id) {
+      if (e) e.stopPropagation();
+      const p = staff.find(x => x.id === id);
+      if (!p) return;
+
+      const displayName = (currentLang === 'en' || p.id === '680012') ? p.en : p.th;
+      if (confirm(translations[currentLang].confirmDelete(displayName, id))) {
+        staff = staff.filter(x => x.id !== id);
+        localStorage.setItem('tif_staff_data', JSON.stringify(staff));
+
+        document.getElementById('grid').classList.remove('single-view');
+        document.getElementById('back-btn').style.display = 'none';
+
+        updateFilterCounts();
+        render();
+      }
+    }
+
+    // Tab switcher
+    function switchTab(tabId) {
+      document.querySelectorAll('.nav-tab').forEach(btn => btn.classList.remove('active'));
+      document.querySelectorAll('.tab-content').forEach(content => content.style.display = 'none');
+
+      const activeBtn = document.querySelector(`.nav-tab[onclick="switchTab('${tabId}')"]`);
+      if (activeBtn) activeBtn.classList.add('active');
+
+      const activeContent = document.getElementById(`tab-${tabId}`);
+      if (activeContent) activeContent.style.display = 'block';
+
+      const searchWrap = document.querySelector('.search-wrap');
+      if (tabId === 'directory') {
+        searchWrap.style.opacity = '1';
+        searchWrap.style.pointerEvents = 'auto';
+      } else {
+        searchWrap.style.opacity = '0';
+        searchWrap.style.pointerEvents = 'none';
+      }
+
+      if (tabId === 'dashboard') {
+        renderDashboard();
+      }
+    }
+
+    // Dashboard statistics
+    function renderDashboard() {
+      const total = staff.length;
+      const bkk = staff.filter(p => p.loc === 'BKK').length;
+      const phs = staff.filter(p => p.loc === 'PHS').length;
+      const pt = staff.filter(p => p.loc === 'Part Time').length;
+      const mail = staff.filter(p => p.mailUsed).length;
+
+      document.getElementById('db-total-count').textContent = total;
+      document.getElementById('db-bkk-count').textContent = bkk;
+      document.getElementById('db-phs-count').textContent = phs;
+      document.getElementById('db-pt-count').textContent = pt;
+      document.getElementById('db-mail-count').textContent = mail;
+
+      const bkkPct = total > 0 ? Math.round((bkk / total) * 100) : 0;
+      const phsPct = total > 0 ? Math.round((phs / total) * 100) : 0;
+      const ptPct = total > 0 ? Math.round((pt / total) * 100) : 0;
+      const mailPct = total > 0 ? Math.round((mail / total) * 100) : 0;
+
+      const t = translations[currentLang];
+      document.getElementById('db-bkk-percent').textContent = t.dbBkkPct(bkkPct);
+      document.getElementById('db-phs-percent').textContent = t.dbPhsPct(phsPct);
+      document.getElementById('db-pt-percent').textContent = t.dbPtPct(ptPct);
+      document.getElementById('db-mail-percent').textContent = t.dbMailPct(mailPct);
+
+      const locHtml = `
     <div class="stat-item">
       <div class="stat-header">
-        <span class="stat-name">✈ สังกัด BKK</span>
-        <span class="stat-count">${bkk} คน (${bkkPct}%)</span>
+        <span class="stat-name">✈ ${t.dbBkkLoc}</span>
+        <span class="stat-count">${bkk} ${t.personUnit} (${bkkPct}%)</span>
       </div>
       <div class="stat-bar-bg">
         <div class="stat-bar-fill" style="width: ${bkkPct}%; background: var(--accent);"></div>
@@ -1770,8 +2450,8 @@ function renderDashboard() {
     </div>
     <div class="stat-item">
       <div class="stat-header">
-        <span class="stat-name">🛫 สังกัด PHS</span>
-        <span class="stat-count">${phs} คน (${phsPct}%)</span>
+        <span class="stat-name">🛫 ${t.dbPhsLoc}</span>
+        <span class="stat-count">${phs} ${t.personUnit} (${phsPct}%)</span>
       </div>
       <div class="stat-bar-bg">
         <div class="stat-bar-fill" style="width: ${phsPct}%; background: var(--success);"></div>
@@ -1779,50 +2459,50 @@ function renderDashboard() {
     </div>
     <div class="stat-item">
       <div class="stat-header">
-        <span class="stat-name">⏱ Part Time</span>
-        <span class="stat-count">${pt} คน (${ptPct}%)</span>
+        <span class="stat-name">⏱ ${t.dbPtLoc}</span>
+        <span class="stat-count">${pt} ${t.personUnit} (${ptPct}%)</span>
       </div>
       <div class="stat-bar-bg">
         <div class="stat-bar-fill" style="width: ${ptPct}%; background: var(--warn);"></div>
       </div>
     </div>
   `;
-  document.getElementById('db-loc-bars').innerHTML = locHtml;
-  
-  let flightOps = 0;
-  let maintenance = 0;
-  let adminSalesSupport = 0;
-  let others = 0;
-  
-  staff.forEach(p => {
-    const role = p.role.toLowerCase();
-    if (role.includes('instructor') || role.includes('training') || role.includes('tki') || role.includes('operations')) {
-      flightOps++;
-    } else if (role.includes('maintenance') || role.includes('mechanic') || role.includes('store keeper') || role.includes('ซ่อมบำรุง')) {
-      maintenance++;
-    } else if (role.includes('ceo') || role.includes('coo') || role.includes('cfo') || role.includes('hr') || 
-               role.includes('finance') || role.includes('accounting') || role.includes('sales') || 
-               role.includes('purchasing') || role.includes('secretary') || role.includes('it') || 
-               role.includes('driver') || role.includes('สนามบิน') || role.includes('compliance') || 
-               role.includes('assurance') || role.includes('safety') || role.includes('executive') || 
-               role.includes('registration') || role.includes('licensing') || role.includes('officer') || 
-               role.includes('manager') || role.includes('supervisor')) {
-      adminSalesSupport++;
-    } else {
-      others++;
-    }
-  });
-  
-  const flightPct = total > 0 ? Math.round((flightOps / total) * 100) : 0;
-  const maintPct = total > 0 ? Math.round((maintenance / total) * 100) : 0;
-  const adminPct = total > 0 ? Math.round((adminSalesSupport / total) * 100) : 0;
-  const otherPct = total > 0 ? Math.round((others / total) * 100) : 0;
-  
-  let deptHtml = `
+      document.getElementById('db-loc-bars').innerHTML = locHtml;
+
+      let flightOps = 0;
+      let maintenance = 0;
+      let adminSalesSupport = 0;
+      let others = 0;
+
+      staff.forEach(p => {
+        const role = p.role.toLowerCase();
+        if (role.includes('instructor') || role.includes('training') || role.includes('tki') || role.includes('operations')) {
+          flightOps++;
+        } else if (role.includes('maintenance') || role.includes('mechanic') || role.includes('store keeper') || role.includes('ซ่อมบำรุง')) {
+          maintenance++;
+        } else if (role.includes('ceo') || role.includes('coo') || role.includes('cfo') || role.includes('hr') ||
+          role.includes('finance') || role.includes('accounting') || role.includes('sales') ||
+          role.includes('purchasing') || role.includes('secretary') || role.includes('it') ||
+          role.includes('driver') || role.includes('สนามบิน') || role.includes('compliance') ||
+          role.includes('assurance') || role.includes('safety') || role.includes('executive') ||
+          role.includes('registration') || role.includes('licensing') || role.includes('officer') ||
+          role.includes('manager') || role.includes('supervisor')) {
+          adminSalesSupport++;
+        } else {
+          others++;
+        }
+      });
+
+      const flightPct = total > 0 ? Math.round((flightOps / total) * 100) : 0;
+      const maintPct = total > 0 ? Math.round((maintenance / total) * 100) : 0;
+      const adminPct = total > 0 ? Math.round((adminSalesSupport / total) * 100) : 0;
+      const otherPct = total > 0 ? Math.round((others / total) * 100) : 0;
+
+      let deptHtml = `
     <div class="stat-item">
       <div class="stat-header">
-        <span class="stat-name">✈ ฝ่ายปฏิบัติการบินและฝึกอบรม (Flight Ops & Training)</span>
-        <span class="stat-count">${flightOps} คน (${flightPct}%)</span>
+        <span class="stat-name">${t.dbDeptFlight}</span>
+        <span class="stat-count">${flightOps} ${t.personUnit} (${flightPct}%)</span>
       </div>
       <div class="stat-bar-bg">
         <div class="stat-bar-fill" style="width: ${flightPct}%; background: #a855f7;"></div>
@@ -1830,8 +2510,8 @@ function renderDashboard() {
     </div>
     <div class="stat-item">
       <div class="stat-header">
-        <span class="stat-name">🛠 ฝ่ายซ่อมบำรุงอากาศยาน (Maintenance)</span>
-        <span class="stat-count">${maintenance} คน (${maintPct}%)</span>
+        <span class="stat-name">${t.dbDeptMaint}</span>
+        <span class="stat-count">${maintenance} ${t.personUnit} (${maintPct}%)</span>
       </div>
       <div class="stat-bar-bg">
         <div class="stat-bar-fill" style="width: ${maintPct}%; background: #06b6d4;"></div>
@@ -1839,140 +2519,154 @@ function renderDashboard() {
     </div>
     <div class="stat-item">
       <div class="stat-header">
-        <span class="stat-name">💼 ฝ่ายบริหารและสนับสนุนการบิน (Management, Admin & Sales)</span>
-        <span class="stat-count">${adminSalesSupport} คน (${adminPct}%)</span>
+        <span class="stat-name">${t.dbDeptAdmin}</span>
+        <span class="stat-count">${adminSalesSupport} ${t.personUnit} (${adminPct}%)</span>
       </div>
       <div class="stat-bar-bg">
         <div class="stat-bar-fill" style="width: ${adminPct}%; background: #f43f5e;"></div>
       </div>
     </div>
   `;
-  if (others > 0) {
-    deptHtml += `
+      if (others > 0) {
+        deptHtml += `
       <div class="stat-item">
         <div class="stat-header">
-          <span class="stat-name">❓ อื่นๆ / ยังไม่ระบุกลุ่ม</span>
-          <span class="stat-count">${others} คน (${otherPct}%)</span>
+          <span class="stat-name">${t.dbDeptOther}</span>
+          <span class="stat-count">${others} ${t.personUnit} (${otherPct}%)</span>
         </div>
         <div class="stat-bar-bg">
           <div class="stat-bar-fill" style="width: ${otherPct}%; background: #64748b;"></div>
         </div>
       </div>
     `;
-  }
-  document.getElementById('db-dept-bars').innerHTML = deptHtml;
-}
-
-// Backup & Restore
-function exportStaffJSON() {
-  const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(staff, null, 2));
-  const downloadAnchor = document.createElement('a');
-  downloadAnchor.setAttribute("href",     dataStr);
-  downloadAnchor.setAttribute("download", `tif_staff_backup_${new Date().toISOString().slice(0,10)}.json`);
-  document.body.appendChild(downloadAnchor);
-  downloadAnchor.click();
-  downloadAnchor.remove();
-}
-
-function importStaffJSON(event) {
-  const input = event.target;
-  if (!input.files || input.files.length === 0) return;
-  const file = input.files[0];
-  const reader = new FileReader();
-  reader.onload = function() {
-    try {
-      const parsed = JSON.parse(reader.result);
-      if (Array.isArray(parsed) && parsed.length > 0 && parsed[0].id && parsed[0].th && parsed[0].en && parsed[0].nick) {
-        if (confirm(`พบข้อมูลพนักงานทั้งหมด ${parsed.length} คนในไฟล์นี้ ต้องการนำเข้าเพื่อเขียนทับข้อมูลในระบบปัจจุบันใช่หรือไม่?`)) {
-          staff = parsed;
-          localStorage.setItem('tif_staff_data', JSON.stringify(staff));
-          updateFilterCounts();
-          render();
-          alert('นำเข้าข้อมูลพนักงานและกู้คืนระบบเสร็จเรียบร้อยแล้ว!');
-          switchTab('directory');
-        }
-      } else {
-        alert('รูปแบบไฟล์ JSON ไม่ถูกต้อง กรุณาใช้ไฟล์ที่เคยส่งออกจากระบบนี้เท่านั้น');
       }
-    } catch (e) {
-      alert('ไม่สามารถอ่านไฟล์ JSON ได้ กรุณาตรวจสอบว่าไฟล์สมบูรณ์หรือไม่');
+      document.getElementById('db-dept-bars').innerHTML = deptHtml;
     }
-    input.value = '';
-  };
-  reader.readAsText(file);
-}
 
-function resetSystemToDefault() {
-  if (confirm('คุณแน่ใจหรือไม่ว่าต้องการล้างข้อมูลระบบทั้งหมด? ข้อมูลพนักงานที่ถูกเพิ่มหรือแก้ไขหลังจากนี้จะสูญหาย และระบบจะกลับไปเป็นพนักงานเริ่มต้น 47 คน')) {
-    staff = [...defaultStaff];
-    localStorage.setItem('tif_staff_data', JSON.stringify(staff));
-    updateFilterCounts();
-    render();
-    alert('รีเซ็ตข้อมูลระบบกลับเป็นค่าเริ่มต้นเรียบร้อยแล้ว!');
-    switchTab('directory');
-  }
-}
+    // Backup & Restore
+    function exportStaffJSON() {
+      const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(staff, null, 2));
+      const downloadAnchor = document.createElement('a');
+      downloadAnchor.setAttribute("href", dataStr);
+      downloadAnchor.setAttribute("download", `tif_staff_backup_${new Date().toISOString().slice(0, 10)}.json`);
+      document.body.appendChild(downloadAnchor);
+      downloadAnchor.click();
+      downloadAnchor.remove();
+    }
 
-// Deep linking URL query check
-function handleUrlQuery() {
-  const urlParams = new URLSearchParams(window.location.search);
-  const id = urlParams.get('id');
-  if (id) {
-    const p = staff.find(x => x.id === id);
-    if (p) {
-      switchTab('directory');
-      document.getElementById('search').value = '';
-      document.getElementById('search-clear').style.display = 'none';
-      loc = 'ALL';
-      document.querySelectorAll('#filters .fbtn').forEach(x => {
-        if (x.dataset.loc === 'ALL') x.classList.add('on');
-        else x.classList.remove('on');
-      });
-      render();
-      
-      setTimeout(() => {
-        const cards = document.querySelectorAll('.card');
-        let targetCard = null;
-        cards.forEach(c => {
-          const eidEl = c.querySelector('.eid');
-          if (eidEl && eidEl.textContent.trim() === id) {
-            targetCard = c;
+    function importStaffJSON(event) {
+      const input = event.target;
+      if (!input.files || input.files.length === 0) return;
+      const file = input.files[0];
+      const reader = new FileReader();
+      reader.onload = function () {
+        try {
+          const parsed = JSON.parse(reader.result);
+          if (Array.isArray(parsed) && parsed.length > 0 && parsed[0].id && parsed[0].th && parsed[0].en && parsed[0].nick) {
+            if (confirm(translations[currentLang].confirmImport(parsed.length))) {
+              staff = parsed;
+              localStorage.setItem('tif_staff_data', JSON.stringify(staff));
+              initData();
+              updateFilterCounts();
+              render();
+              alert(translations[currentLang].importSuccess);
+              switchTab('directory');
+            }
+          } else {
+            alert(translations[currentLang].importInvalid);
           }
-        });
-        if (targetCard) {
-          toggle(targetCard);
+        } catch (e) {
+          alert(translations[currentLang].importError);
         }
-      }, 200);
+        input.value = '';
+      };
+      reader.readAsText(file);
     }
-  }
-}
 
-const searchInput = document.getElementById('search');
-const searchClearBtn = document.getElementById('search-clear');
+    function resetSystemToDefault() {
+      if (confirm(translations[currentLang].confirmReset)) {
+        staff = [...defaultStaff];
+        localStorage.setItem('tif_staff_data', JSON.stringify(staff));
+        updateFilterCounts();
+        render();
+        alert(translations[currentLang].resetSuccess);
+        switchTab('directory');
+      }
+    }
 
-searchInput.addEventListener('input', () => {
-  searchClearBtn.style.display = searchInput.value ? 'flex' : 'none';
-  render();
-});
+    // Deep linking URL query check
+    function handleUrlQuery() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const id = urlParams.get('id');
+      if (id) {
+        const p = staff.find(x => x.id === id);
+        if (p) {
+          switchTab('directory');
+          document.getElementById('search').value = '';
+          document.getElementById('search-clear').style.display = 'none';
+          loc = 'ALL';
+          document.querySelectorAll('#filters .fbtn').forEach(x => {
+            if (x.dataset.loc === 'ALL') x.classList.add('on');
+            else x.classList.remove('on');
+          });
+          render();
 
-searchClearBtn.addEventListener('click', () => {
-  searchInput.value = '';
-  searchClearBtn.style.display = 'none';
-  searchInput.focus();
-  render();
-});
+          setTimeout(() => {
+            const cards = document.querySelectorAll('.card');
+            let targetCard = null;
+            cards.forEach(c => {
+              const eidEl = c.querySelector('.eid');
+              if (eidEl && eidEl.textContent.trim() === id) {
+                targetCard = c;
+              }
+            });
+            if (targetCard) {
+              toggle(targetCard);
+            }
+          }, 200);
+        }
+      }
+    }
 
-document.querySelectorAll('#filters .fbtn').forEach(b=>b.addEventListener('click',()=>{
-  loc=b.dataset.loc;
-  document.querySelectorAll('#filters .fbtn').forEach(x=>x.classList.remove('on'));
-  b.classList.add('on');render();
-}));
+    const searchInput = document.getElementById('search');
+    const searchClearBtn = document.getElementById('search-clear');
 
-// Startup initialization
-initData();
-updateFilterCounts();
-render();
-handleUrlQuery();
-</script>
+    searchInput.addEventListener('input', () => {
+      searchClearBtn.style.display = searchInput.value ? 'flex' : 'none';
+      render();
+    });
+
+    searchClearBtn.addEventListener('click', () => {
+      searchInput.value = '';
+      searchClearBtn.style.display = 'none';
+      searchInput.focus();
+      render();
+    });
+
+    document.querySelectorAll('#filters .fbtn').forEach(b => b.addEventListener('click', () => {
+      loc = b.dataset.loc;
+      document.querySelectorAll('#filters .fbtn').forEach(x => x.classList.remove('on'));
+      b.classList.add('on'); render();
+    }));
+
+    document.querySelectorAll('#dept-filters .fbtn').forEach(b => b.addEventListener('click', () => {
+      deptFilter = b.dataset.dept;
+      document.querySelectorAll('#dept-filters .fbtn').forEach(x => x.classList.remove('on'));
+      b.classList.add('on'); render();
+    }));
+
+    document.querySelectorAll('#mail-filters .fbtn').forEach(b => b.addEventListener('click', () => {
+      mailFilter = b.dataset.mail;
+      document.querySelectorAll('#mail-filters .fbtn').forEach(x => x.classList.remove('on'));
+      b.classList.add('on'); render();
+    }));
+
+    // Startup initialization
+    initData();
+    updateFilterCounts();
+    switchLang(currentLang);
+    handleUrlQuery();
+  </script>
 </body>
+
 </html>
