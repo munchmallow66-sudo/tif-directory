@@ -139,68 +139,7 @@
       min-width: 280px;
     }
 
-    .search-wrap {
-      position: relative;
-      flex: 1;
-      max-width: 320px;
-    }
-
-    .search-icon {
-      position: absolute;
-      left: 12px;
-      top: 50%;
-      transform: translateY(-50%);
-      color: var(--text3);
-      pointer-events: none;
-      width: 16px;
-      height: 16px;
-    }
-
-    #search {
-      width: 100%;
-      padding: 0 34px 0 34px;
-      height: 38px;
-      background: var(--surface2);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      font-size: 14px;
-      font-family: inherit;
-      color: var(--text);
-      outline: none;
-      transition: all 0.2s ease;
-    }
-
-    #search:focus {
-      border-color: var(--accent);
-      background: var(--surface);
-      box-shadow: 0 0 0 3px var(--accent-focus);
-    }
-
-    #search-clear {
-      position: absolute;
-      right: 10px;
-      top: 50%;
-      transform: translateY(-50%);
-      background: none;
-      border: none;
-      cursor: pointer;
-      color: var(--text3);
-      display: flex;
-      align-items: center;
-      padding: 4px;
-      border-radius: 50%;
-      transition: all 0.2s;
-    }
-
-    #search-clear:hover {
-      background: var(--surface2);
-      color: var(--text2);
-    }
-
-    #search-clear svg {
-      width: 14px;
-      height: 14px;
-    }
+    /* Search styling has been moved to the unified toolbar controls section */
 
     .theme-toggle-btn {
       background: var(--surface2);
@@ -438,27 +377,31 @@
     .badge {
       display: inline-flex;
       align-items: center;
-      gap: 3px;
+      gap: 4px;
       font-size: 10px;
       margin-top: 10px;
-      padding: 2px 8px;
+      padding: 3px 10px;
       border-radius: 9999px;
       font-weight: 600;
+      letter-spacing: 0.02em;
     }
 
     .bkk {
-      background: var(--accent-bg);
-      color: var(--accent-text)
+      background: rgba(24, 95, 165, 0.08);
+      color: var(--accent-text);
+      border: 1px solid rgba(24, 95, 165, 0.15);
     }
 
     .phs {
-      background: var(--success-bg);
-      color: var(--success)
+      background: rgba(15, 118, 110, 0.08);
+      color: var(--success);
+      border: 1px solid rgba(15, 118, 110, 0.15);
     }
 
     .pt {
-      background: var(--warn-bg);
-      color: var(--warn)
+      background: rgba(180, 83, 9, 0.08);
+      color: var(--warn);
+      border: 1px solid rgba(180, 83, 9, 0.15);
     }
 
     /* Smooth Expand details transition */
@@ -730,44 +673,42 @@
       border-color: var(--success-bg);
     }
 
-    /* Tabs Navigation */
-    .nav-tabs {
+    /* Header Navigation Capsule Tabs */
+    .header-nav {
       display: flex;
-      justify-content: center;
-      gap: 8px;
-      background: var(--surface);
-      border-bottom: 1px solid var(--border);
-      padding: 12px 24px;
-      position: sticky;
-      top: 67px;
-      z-index: 99;
-      transition: all 0.2s;
+      align-items: center;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      padding: 3px;
+      border-radius: 9999px;
+      gap: 2px;
+      transition: all 0.2s ease;
     }
 
     .nav-tab {
-      padding: 8px 16px;
-      border-radius: 8px;
+      padding: 6px 14px;
+      border-radius: 9999px;
       font-size: 13px;
       font-weight: 600;
       color: var(--text2);
       background: none;
-      border: 1px solid transparent;
+      border: none;
       cursor: pointer;
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      transition: all 0.2s;
+      transition: all 0.2s ease;
+      white-space: nowrap;
     }
 
     .nav-tab:hover {
       color: var(--text);
-      background: var(--surface2);
     }
 
     .nav-tab.active {
-      background: var(--accent-bg);
-      border-color: var(--accent);
-      color: var(--accent-text);
+      background: var(--surface);
+      color: var(--accent);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
     }
 
     /* Toolbar Styles */
@@ -781,7 +722,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 12px;
+      gap: 16px;
       flex-wrap: wrap;
       background: var(--surface);
       border: 1px solid var(--border);
@@ -791,68 +732,323 @@
       transition: all 0.2s;
     }
 
-    .toolbar-left,
-    .toolbar-right {
+    .toolbar-controls-left {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
+      flex-wrap: wrap;
+      flex: 1;
     }
 
-    .sort-select-wrap {
+    .toolbar-controls-right {
       display: flex;
       align-items: center;
-      gap: 8px;
+      justify-content: flex-end;
     }
 
-    #sort-select {
-      height: 32px;
-      padding: 0 10px;
-      border-radius: 6px;
-      border: 1px solid var(--border);
+    .search-input-wrapper {
+      position: relative;
+      width: 240px;
+      min-width: 180px;
+    }
+
+    .search-input-wrapper input {
+      width: 100%;
+      padding: 0 12px 0 34px;
+      height: 36px;
       background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-size: 13px;
+      font-family: inherit;
+      color: var(--text);
+      outline: none;
+      transition: all 0.2s ease;
+    }
+
+    .search-input-wrapper input:focus {
+      border-color: var(--accent);
+      background: var(--surface);
+      box-shadow: 0 0 0 3px var(--accent-focus);
+    }
+
+    .search-input-wrapper .search-icon {
+      position: absolute;
+      left: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text3);
+      pointer-events: none;
+      width: 15px;
+      height: 15px;
+    }
+
+    .search-input-wrapper #search-clear {
+      position: absolute;
+      right: 8px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--text3);
+      display: flex;
+      align-items: center;
+      padding: 4px;
+      border-radius: 50%;
+      transition: all 0.2s;
+    }
+
+    .search-input-wrapper #search-clear:hover {
+      background: var(--border);
+      color: var(--text2);
+    }
+
+    .search-input-wrapper #search-clear svg {
+      width: 12px;
+      height: 12px;
+    }
+
+    .filter-select-group {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 0 10px;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      height: 36px;
+      transition: all 0.2s ease;
+    }
+
+    .filter-select-group:focus-within {
+      border-color: var(--accent);
+      background: var(--surface);
+      box-shadow: 0 0 0 3px var(--accent-focus);
+    }
+
+    .filter-select-group select {
+      border: none;
+      background: transparent;
       color: var(--text);
       font-family: inherit;
-      font-size: 12px;
+      font-size: 13px;
       font-weight: 500;
       outline: none;
       cursor: pointer;
-      transition: all 0.2s;
+      padding-right: 4px;
     }
 
-    #sort-select:focus {
-      border-color: var(--accent);
+    .filter-icon {
+      font-size: 14px;
+      user-select: none;
     }
 
-    /* Action Buttons in Card Details */
-    .btn-action {
+    .btn-add-new {
+      height: 36px;
+      padding: 0 16px;
+      background: var(--accent);
+      color: #fff;
+      border: 1px solid var(--accent);
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 13px;
+      font-family: inherit;
+      cursor: pointer;
+      transition: all 0.2s ease;
       display: inline-flex;
       align-items: center;
-      justify-content: center;
       gap: 4px;
-      font-size: 11px;
-      font-weight: 600;
-      padding: 6px 12px;
-      border-radius: 6px;
-      border: 1px solid var(--border);
-      cursor: pointer;
-      background: var(--surface);
-      color: var(--text2);
-      font-family: inherit;
-      transition: all 0.2s;
-      flex: 1;
+      box-shadow: 0 2px 4px rgba(24, 95, 165, 0.15);
+    }
+
+    .btn-add-new:hover {
+      background: #14508c;
+      border-color: #14508c;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 6px rgba(24, 95, 165, 0.2);
+    }
+
+    .btn-add-new:active {
+      transform: translateY(0);
+    }
+
+    /* Premium Action Buttons and Key-Value Details in Card */
+    .card-details-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
       margin-top: 4px;
     }
 
-    .btn-action-edit:hover {
-      background: var(--accent-bg);
-      color: var(--accent-text);
-      border-color: var(--accent);
+    .detail-item {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
     }
 
-    .btn-action-delete:hover {
+    .detail-item.full-width {
+      grid-column: 1 / -1;
+    }
+
+    .detail-label {
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--text3);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .detail-value-row {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      min-height: 22px;
+    }
+
+    .detail-value {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text);
+      word-break: break-all;
+    }
+
+    .detail-value.monospace {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 11.5px;
+      letter-spacing: 0.02em;
+    }
+
+    .detail-subvalue {
+      font-size: 11px;
+      color: var(--text3);
+    }
+
+    .inline-copy-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 2px;
+      border-radius: 4px;
+      color: var(--text3);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.15s ease;
+      opacity: 0;
+    }
+
+    .detail-value-row:hover .inline-copy-btn,
+    .inline-copy-btn.ok {
+      opacity: 1;
+    }
+
+    .inline-copy-btn:hover {
+      color: var(--text2);
+      background: var(--surface2);
+    }
+
+    .inline-copy-btn svg {
+      width: 12px;
+      height: 12px;
+    }
+
+    .inline-email-link {
+      color: var(--text3);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.15s ease;
+      padding: 2px;
+      border-radius: 4px;
+    }
+
+    .inline-email-link:hover {
+      color: var(--accent);
+      background: var(--surface2);
+    }
+
+    .inline-email-link svg {
+      width: 12px;
+      height: 12px;
+    }
+
+    .card-details-divider {
+      height: 1px;
+      border-top: 1px dashed var(--border);
+      margin: 12px 0;
+    }
+
+    .card-details-copy-all {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 12px;
+    }
+
+    .copy-all-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11.5px;
+      font-weight: 600;
+      padding: 6px 14px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      cursor: pointer;
+      background: var(--surface2);
+      color: var(--text2);
+      transition: all 0.2s ease;
+    }
+
+    .copy-all-btn:hover {
+      background: var(--border);
+      color: var(--text);
+    }
+
+    .card-details-actions {
+      display: flex;
+      gap: 8px;
+    }
+
+    .btn-action-premium {
+      flex: 1;
+      height: 32px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--text2);
+      font-family: inherit;
+      font-size: 11.5px;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+    }
+
+    .btn-action-premium svg {
+      width: 12px;
+      height: 12px;
+    }
+
+    .btn-action-premium.btn-edit:hover {
+      background: var(--accent-bg);
+      border-color: var(--accent);
+      color: var(--accent-text);
+    }
+
+    .btn-action-premium.btn-dept:hover {
+      background: rgba(168, 85, 247, 0.08);
+      border-color: #a855f7;
+      color: #a855f7;
+    }
+
+    .btn-action-premium.btn-delete:hover {
       background: var(--warn-bg);
-      color: var(--warn);
       border-color: var(--warn);
+      color: var(--warn);
     }
 
     /* Dashboard Styles */
@@ -1007,6 +1203,115 @@
       transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
+    /* Media Queries for full responsiveness */
+    @media (max-width: 768px) {
+      header {
+        padding: 10px 16px;
+      }
+
+      .header-inner {
+        gap: 12px;
+      }
+
+      .header-nav {
+        order: 3;
+        width: 100%;
+        justify-content: center;
+      }
+
+      .controls {
+        order: 2;
+      }
+
+      .toolbar-wrap {
+        padding: 0 16px;
+      }
+      
+      .toolbar-inner {
+        padding: 12px;
+        gap: 12px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      header {
+        padding: 8px 12px;
+      }
+      
+      .logo-sub {
+        display: none; /* Hide flying sub-text on mobile for clean spacing */
+      }
+
+      .header-nav {
+        padding: 2px;
+      }
+
+      .nav-tab {
+        padding: 5px 10px;
+        font-size: 12px;
+      }
+
+      .toolbar-wrap {
+        padding: 0 12px;
+      }
+
+      .toolbar-controls-left {
+        gap: 8px;
+        width: 100%;
+      }
+
+      .search-input-wrapper {
+        width: 100%;
+        flex: 1 1 100%;
+      }
+
+      .filter-select-group {
+        flex: 1 1 calc(50% - 4px);
+        justify-content: center;
+      }
+
+      .filter-select-group select {
+        width: 100%;
+      }
+
+      .toolbar-controls-right {
+        width: 100%;
+      }
+
+      .btn-add-new {
+        width: 100%;
+        justify-content: center;
+      }
+
+      .grid {
+        grid-template-columns: 1fr; /* Single column grid for mobile cards */
+        gap: 12px;
+      }
+
+      .card-details-grid {
+        grid-template-columns: 1fr; /* 1 column layout inside cards on mobile */
+        gap: 10px;
+      }
+
+      .copy-all-btn {
+        width: 100%;
+        justify-content: center;
+      }
+
+      .card-details-actions {
+        flex-direction: column;
+        gap: 6px;
+      }
+      
+      .btn-action-premium {
+        width: 100%;
+      }
+
+      .inline-copy-btn {
+        opacity: 1 !important;
+      }
+    }
+
     /* Modal Styles */
     .modal-overlay {
       position: fixed;
@@ -1078,39 +1383,66 @@
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 16px;
-      max-height: 70vh;
+      max-height: 65vh;
       overflow-y: auto;
+      overflow-x: hidden;
     }
 
-    @media(max-width: 500px) {
+    /* Premium Custom Scrollbars for modal grid */
+    .form-grid::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    .form-grid::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    .form-grid::-webkit-scrollbar-thumb {
+      background: var(--border);
+      border-radius: 999px;
+    }
+    .form-grid::-webkit-scrollbar-thumb:hover {
+      background: var(--text3);
+    }
+
+    @media(max-width: 640px) {
       .form-grid {
         grid-template-columns: 1fr;
+        max-height: 75vh;
       }
     }
 
     .form-group {
       display: flex;
       flex-direction: column;
-      gap: 6px;
+      gap: 5px;
+    }
+
+    .form-group.full-width {
+      grid-column: 1 / -1;
     }
 
     .form-group label {
-      font-size: 12px;
-      font-weight: 600;
-      color: var(--text2);
+      font-size: 10.5px;
+      font-weight: 700;
+      color: var(--text3);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
     }
 
     .form-group input,
     .form-group select {
-      height: 38px;
+      height: 36px;
       border: 1px solid var(--border);
-      border-radius: var(--radius);
+      border-radius: 8px;
       padding: 0 12px;
-      font-size: 14px;
+      font-size: 13px;
+      font-weight: 500;
       background: var(--surface2);
       color: var(--text);
       outline: none;
       transition: all 0.2s;
+      width: 100%;
+      box-sizing: border-box;
     }
 
     .form-group input:focus,
@@ -1123,17 +1455,36 @@
     .form-help {
       font-size: 10px;
       color: var(--text3);
-      margin-top: 2px;
+      margin-top: 1px;
     }
 
     .pwd-input-wrap {
       display: flex;
       align-items: center;
+      gap: 6px;
+      width: 100%;
+      box-sizing: border-box;
     }
 
     .pwd-input-wrap input {
       flex: 1;
       min-width: 0;
+    }
+
+    .form-section-title {
+      grid-column: 1 / -1;
+      font-size: 11.5px;
+      font-weight: 700;
+      color: var(--accent);
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 6px;
+      margin-top: 12px;
+      margin-bottom: 2px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      display: flex;
+      align-items: center;
+      gap: 6px;
     }
 
     .modal-footer {
@@ -1142,7 +1493,7 @@
       display: flex;
       justify-content: flex-end;
       gap: 12px;
-      background: var(--surface2);
+      background: var(--surface);
     }
 
     @keyframes fadeIn {
@@ -1182,21 +1533,19 @@
         </div>
       </div>
 
-      <div class="controls">
-        <div class="search-wrap">
-          <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <circle cx="11" cy="11" r="8" />
-            <path d="m21 21-4.35-4.35" />
-          </svg>
-          <input id="search" type="search" placeholder="ค้นหาชื่อ ตำแหน่ง nickname…" autocomplete="off">
-          <button id="search-clear" type="button" aria-label="Clear search" style="display:none;">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <line x1="18" y1="6" x2="6" y2="18" />
-              <line x1="6" y1="6" x2="18" y2="18" />
-            </svg>
-          </button>
-        </div>
+      <nav class="header-nav">
+        <button class="nav-tab active" id="nav-tab-directory" onclick="switchTab('directory')">
+          ✈ รายชื่อพนักงาน
+        </button>
+        <button class="nav-tab" id="nav-tab-dashboard" onclick="switchTab('dashboard')">
+          📊 สถิติองค์กร
+        </button>
+        <button class="nav-tab" id="nav-tab-settings" onclick="switchTab('settings')">
+          ⚙ จัดการระบบ
+        </button>
+      </nav>
 
+      <div class="controls">
         <div class="lang-switch">
           <button class="lang-btn active" id="lang-th" onclick="switchLang('th')">TH</button>
           <button class="lang-btn" id="lang-en" onclick="switchLang('en')">EN</button>
@@ -1216,25 +1565,62 @@
     </div>
   </header>
 
-  <nav class="nav-tabs">
-    <button class="nav-tab active" id="nav-tab-directory" onclick="switchTab('directory')">
-      ✈ รายชื่อพนักงาน
-    </button>
-    <button class="nav-tab" id="nav-tab-dashboard" onclick="switchTab('dashboard')">
-      📊 สถิติองค์กร
-    </button>
-    <button class="nav-tab" id="nav-tab-settings" onclick="switchTab('settings')">
-      ⚙ จัดการระบบ
-    </button>
-  </nav>
-
   <!-- Tab 1: Directory -->
   <div id="tab-directory" class="tab-content">
     <div class="toolbar-wrap">
       <div class="toolbar-inner">
-        <div class="toolbar-left">
-          <div class="sort-select-wrap">
-            <span id="sort-label" style="font-size:12px; font-weight:600; color:var(--text3); white-space:nowrap;">เรียงลำดับ:</span>
+        <div class="toolbar-controls-left">
+          <!-- Search Box -->
+          <div class="search-input-wrapper">
+            <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="11" cy="11" r="8" />
+              <path d="m21 21-4.35-4.35" />
+            </svg>
+            <input id="search" type="search" placeholder="ค้นหาชื่อ ตำแหน่ง nickname…" autocomplete="off">
+            <button id="search-clear" type="button" aria-label="Clear search" style="display:none;">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="18" y1="6" x2="6" y2="18" />
+                <line x1="6" y1="6" x2="18" y2="18" />
+              </svg>
+            </button>
+          </div>
+
+          <!-- Location Select -->
+          <div class="filter-select-group">
+            <span class="filter-icon">📍</span>
+            <select id="loc-filter-select">
+              <option value="ALL" id="opt-loc-filter-all">ทุกพื้นที่</option>
+              <option value="BKK" id="opt-loc-filter-bkk">BKK</option>
+              <option value="PHS" id="opt-loc-filter-phs">PHS</option>
+              <option value="Part Time" id="opt-loc-filter-pt">Part Time</option>
+            </select>
+          </div>
+
+          <!-- Department Select -->
+          <div class="filter-select-group">
+            <span class="filter-icon">📂</span>
+            <select id="dept-filter-select">
+              <option value="ALL" id="opt-dept-filter-all">ทุกฝ่าย</option>
+              <option value="flight" id="opt-dept-filter-flight">ปฏิบัติการบิน</option>
+              <option value="maint" id="opt-dept-filter-maint">ซ่อมบำรุง</option>
+              <option value="admin" id="opt-dept-filter-admin">บริหาร/สนับสนุน</option>
+              <option value="other" id="opt-dept-filter-other">อื่นๆ</option>
+            </select>
+          </div>
+
+          <!-- Email Status Select -->
+          <div class="filter-select-group">
+            <span class="filter-icon">✉</span>
+            <select id="mail-filter-select">
+              <option value="ALL" id="opt-mail-filter-all">เมลทั้งหมด</option>
+              <option value="used" id="opt-mail-filter-used">ใช้งานแล้ว</option>
+              <option value="pending" id="opt-mail-filter-pending">ยังไม่ใช้งาน</option>
+            </select>
+          </div>
+
+          <!-- Sort Select -->
+          <div class="filter-select-group">
+            <span class="filter-icon">⇅</span>
             <select id="sort-select" onchange="render()">
               <option value="id-asc">รหัสพนักงาน (เก่า - ใหม่)</option>
               <option value="id-desc">รหัสพนักงาน (ใหม่ - เก่า)</option>
@@ -1243,38 +1629,16 @@
             </select>
           </div>
         </div>
-        <div class="toolbar-right">
-          <button class="fbtn on" onclick="openAddModal()"
-            style="height:34px; background:var(--accent); color:#fff; border-color:var(--accent); font-weight:600; gap:4px; display:inline-flex; align-items:center;">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-              style="width:14px; height:14px;">
+
+        <div class="toolbar-controls-right">
+          <button class="btn-add-new" onclick="openAddModal()">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:14px; height:14px; margin-right:4px;">
               <line x1="12" y1="5" x2="12" y2="19" />
               <line x1="5" y1="12" x2="19" y2="12" />
             </svg>
             <span id="btn-add-text">เพิ่มพนักงานใหม่</span>
           </button>
         </div>
-      </div>
-    </div>
-
-    <div class="filters-wrap">
-      <div class="filters" id="filters">
-        <button class="fbtn on" data-loc="ALL">ทั้งหมด <span class="fcount" id="count-all">0</span></button>
-        <button class="fbtn" data-loc="BKK">BKK <span class="fcount" id="count-bkk">0</span></button>
-        <button class="fbtn" data-loc="PHS">PHS <span class="fcount" id="count-phs">0</span></button>
-        <button class="fbtn" data-loc="Part Time">Part Time <span class="fcount" id="count-pt">0</span></button>
-      </div>
-      <div class="filters" id="dept-filters" style="margin-top: 10px;">
-        <button class="fbtn on" data-dept="ALL">ทั้งหมด <span class="fcount" id="count-dept-all">0</span></button>
-        <button class="fbtn" data-dept="flight">ปฏิบัติการบิน <span class="fcount" id="count-dept-flight">0</span></button>
-        <button class="fbtn" data-dept="maint">ซ่อมบำรุง <span class="fcount" id="count-dept-maint">0</span></button>
-        <button class="fbtn" data-dept="admin">บริหาร/สนับสนุน <span class="fcount" id="count-dept-admin">0</span></button>
-        <button class="fbtn" data-dept="other">อื่นๆ <span class="fcount" id="count-dept-other">0</span></button>
-      </div>
-      <div class="filters" id="mail-filters" style="margin-top: 10px;">
-        <button class="fbtn on" data-mail="ALL">เมล: ทั้งหมด <span class="fcount" id="count-mail-all">0</span></button>
-        <button class="fbtn" data-mail="used">เมล: ใช้งานแล้ว <span class="fcount" id="count-mail-used">0</span></button>
-        <button class="fbtn" data-mail="pending">เมล: ยังไม่ใช้งาน <span class="fcount" id="count-mail-pending">0</span></button>
       </div>
     </div>
 
@@ -1409,11 +1773,17 @@
       </div>
       <form id="staff-form" onsubmit="saveStaff(event)">
         <div class="form-grid">
+          
+          <!-- Section 1: Personal Info -->
+          <div class="form-section-title" id="lbl-form-sec-personal">👤 ข้อมูลส่วนตัว (Personal Info)</div>
+          
           <div class="form-group">
             <label for="form-id" id="lbl-form-id">รหัสพนักงาน (6 หลัก)</label>
             <input type="text" id="form-id" required pattern="\d{6}" placeholder="เช่น 680027" maxlength="6">
             <div class="form-help" id="help-form-id">รหัสตัวเลข 6 หลัก เช่น 680027</div>
           </div>
+          <div></div> <!-- Spacing placeholder to keep Employee ID isolated on its row -->
+
           <div class="form-group">
             <label for="form-nick" id="lbl-form-nick">ชื่อเล่น</label>
             <input type="text" id="form-nick" required placeholder="เช่น แม็ค">
@@ -1422,17 +1792,33 @@
             <label for="form-nick-en" id="lbl-form-nick-en">ชื่อเล่น (ภาษาอังกฤษ)</label>
             <input type="text" id="form-nick-en" required placeholder="เช่น Mac">
           </div>
-          <div class="form-group">
+
+          <div class="form-group full-width">
             <label for="form-th" id="lbl-form-th">ชื่อ-นามสกุล (ภาษาไทย)</label>
             <input type="text" id="form-th" required placeholder="เช่น นายพันธ์พิสุทธิ์ นุราช">
           </div>
-          <div class="form-group">
+          <div class="form-group full-width">
             <label for="form-en" id="lbl-form-en">ชื่อ-นามสกุล (ภาษาอังกฤษ)</label>
             <input type="text" id="form-en" required placeholder="เช่น Mr.Punpisut Nurach">
           </div>
-          <div class="form-group">
+
+          <!-- Section 2: Work & Access -->
+          <div class="form-section-title" id="lbl-form-sec-work">💼 ข้อมูลการทำงานและการเข้าระบบ (Work & Access)</div>
+
+          <div class="form-group full-width">
             <label for="form-role" id="lbl-form-role">ตำแหน่งงาน</label>
             <input type="text" id="form-role" required placeholder="เช่น Flight Instructor">
+          </div>
+
+          <div class="form-group">
+            <label for="form-dept" id="lbl-form-dept">ฝ่าย/กลุ่มสายงาน</label>
+            <select id="form-dept" required>
+              <option value="default" id="opt-dept-default">ตามตำแหน่งงาน (Auto)</option>
+              <option value="flight">✈ ปฏิบัติการบินและฝึกอบรม (Flight Ops & Training)</option>
+              <option value="maint">🛠 ฝ่ายซ่อมบำรุงอากาศยาน (Maintenance)</option>
+              <option value="admin">💼 ฝ่ายบริหารและสนับสนุนการบิน (Admin & Sales)</option>
+              <option value="other">❓ อื่นๆ / ยังไม่ระบุกลุ่ม (Others)</option>
+            </select>
           </div>
           <div class="form-group">
             <label for="form-loc" id="lbl-form-loc">สถานที่ปฏิบัติงาน</label>
@@ -1442,9 +1828,15 @@
               <option value="Part Time">⏱ Part Time</option>
             </select>
           </div>
-          <div class="form-group">
+
+          <div class="form-group full-width">
             <label for="form-email" id="lbl-form-email">อีเมล</label>
             <input type="email" id="form-email" required placeholder="เช่น email@tif.ac.th">
+          </div>
+
+          <div class="form-group">
+            <label for="form-pass" id="lbl-form-pass">รหัสผ่านสำหรับเข้าใช้งาน</label>
+            <input type="text" id="form-pass" required placeholder="รหัสผ่าน">
           </div>
           <div class="form-group">
             <label for="form-mail-used" id="lbl-form-mail-used">สถานะการใช้งานเมล</label>
@@ -1453,21 +1845,46 @@
               <option value="true" id="opt-mail-used">ใช้งานแล้ว (Active)</option>
             </select>
           </div>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="copy-all-btn" id="btn-form-cancel" onclick="closeModal()" style="font-size: 12.5px; font-weight: 600; padding: 0 16px; height: 36px; border-radius: 8px; border: 1px solid var(--border); background: var(--surface2); color: var(--text2); cursor: pointer; transition: all 0.2s;">ยกเลิก</button>
+          <button type="submit" class="copy-all-btn" id="btn-form-save" style="font-size: 12.5px; font-weight: 600; padding: 0 20px; height: 36px; border-radius: 8px; border: 1px solid var(--accent); background: var(--accent); color: #fff; cursor: pointer; transition: all 0.2s; box-shadow: 0 2px 4px rgba(24, 95, 165, 0.15);">บันทึกข้อมูล</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Change Dept Modal -->
+  <div id="dept-modal" class="modal-overlay" style="display:none;">
+    <div class="modal-card" style="max-width: 400px;">
+      <div class="modal-header">
+        <h3 id="dept-modal-title" style="color:var(--text);">ย้ายฝ่ายพนักงาน</h3>
+        <button class="modal-close" onclick="closeDeptModal()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="6" x2="6" y2="18" />
+            <line x1="6" y1="6" x2="18" y2="18" />
+          </svg>
+        </button>
+      </div>
+      <form id="dept-form" onsubmit="saveDeptTransfer(event)">
+        <div class="form-grid" style="grid-template-columns: 1fr; padding: 20px;">
           <div class="form-group">
-            <label for="form-pass" id="lbl-form-pass">รหัสผ่านสำหรับเข้าใช้งาน</label>
-            <div class="pwd-input-wrap">
-              <input type="text" id="form-pass" required placeholder="รหัสผ่าน">
-              <button type="button" class="fbtn" id="btn-form-randpass" onclick="generateRandomPass()"
-                style="height:38px; border-radius:8px; margin-left:6px; flex-shrink:0; display:inline-flex; align-items:center;">🎲
-                สุ่มรหัส</button>
-            </div>
+            <label id="lbl-dept-staff-name" style="font-weight: 500; font-size: 14px; margin-bottom: 8px;"></label>
+          </div>
+          <div class="form-group">
+            <label for="form-dept-select" id="lbl-form-dept-select">เลือกฝ่ายที่ต้องการย้ายไป</label>
+            <select id="form-dept-select" required>
+              <option value="flight">✈ ปฏิบัติการบินและฝึกอบรม (Flight Ops & Training)</option>
+              <option value="maint">🛠 ฝ่ายซ่อมบำรุงอากาศยาน (Maintenance)</option>
+              <option value="admin">💼 ฝ่ายบริหารและสนับสนุนการบิน (Admin & Sales)</option>
+              <option value="other">❓ อื่นๆ / ยังไม่ระบุกลุ่ม (Others)</option>
+            </select>
           </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="fbtn" id="btn-form-cancel" onclick="closeModal()"
-            style="border-radius:8px; display:inline-flex; align-items:center;">ยกเลิก</button>
-          <button type="submit" class="fbtn on" id="btn-form-save"
-            style="border-radius:8px; background:var(--accent); color:#fff; border:none; padding:0 24px; height:32px; display:inline-flex; align-items:center; font-weight:600;">บันทึกข้อมูล</button>
+          <button type="button" class="fbtn" id="btn-dept-cancel" onclick="closeDeptModal()">ยกเลิก</button>
+          <button type="submit" class="fbtn on" id="btn-dept-save" style="background:var(--accent); color:#fff; border:none; padding:0 24px; height:32px; font-weight:600;">ยืนยันการย้าย</button>
         </div>
       </form>
     </div>
@@ -1475,7 +1892,7 @@
 
   <script>
     const defaultStaff = [
-      { id: "000000", th: "นายพันธ์พิสุทธิ์ นุราช", en: "Mr.Punpisut Nurach", nick: "แม็ค", nickEn: "Mac", role: "—", loc: "BKK", email: "punpisut.nur@tif.ac.th", pass: "B!182705302131us" },
+      { id: "000000", th: "นายพันธ์พิสุทธิ์ นุราช", en: "Mr.Punpisut Nurach", nick: "แม็ค", nickEn: "Mac", role: "Founder / ผู้ก่อตั้ง", loc: "BKK", email: "punpisut.nur@tif.ac.th", pass: "B!182705302131us" },
       { id: "600001", th: "ร.อ.สุนทร วัชพืช", en: "Capt.Soontorn Wutchapuech", nick: "ครูสุน", nickEn: "Kru Sun", role: "Flight Instructor", loc: "PHS", email: "soontorn.wut@tif.ac.th", pass: "G#896407835532om" },
       { id: "600002", th: "พ.จ.อ.วินัย เกษม", en: "Po 1 Winai Kasem", nick: "วินัย", nickEn: "Winai", role: "Director of Maintenance", loc: "PHS", email: "winai.kas@tif.ac.th", pass: "Y#140737376116oh" },
       { id: "610002", th: "นายนิรุทธ์ เพ็ชรมั่ง", en: "Mr.Nirut Pehtmung", nick: "รุทธ์", nickEn: "Rut", role: "Driver", loc: "PHS", email: "nirut.peh@tif.ac.th", pass: "S^720215979696om" },
@@ -1483,7 +1900,7 @@
       { id: "620002", th: "นายพัฒน์ โพธิ์ปฐมพร", en: "Mr.Phat Phopatompon", nick: "พัฒน์", nickEn: "Phat", role: "Chief Flight Instructor", loc: "PHS", email: "phat.pho@tif.ac.th", pass: "T@548536106195oj" },
       { id: "650006", th: "น.ส.กชกร มณีนาค", en: "Ms.Kodchakorn Maneenart", nick: "เป้", nickEn: "Pae", role: "Store Keeper & Aircraft Mechanic", loc: "PHS", email: "kodchakorn.man@tif.ac.th", pass: "M@307041617156af" },
       { id: "660002", th: "นายหนึ่งณัฐ ยิ้มศรี", en: "Mr.Nuengnat Yimsri", nick: "ณัฐ", nickEn: "Nat", role: "Aircraft Mechanic", loc: "PHS", email: "nuengnat.yim@tif.ac.th", pass: "Q%447138540692oq" },
-      { id: "670001", th: "นายชวัลวิทย์ วงศ์ชัย", en: "Mr.Chawanwit Wongchai", nick: "กัปตัน", nickEn: "Captain", role: "เจ้าหน้าที่สนามบินคลอง 11", loc: "PHS", email: "chawanwit.won@tif.ac.th", pass: "H#119282314687or" },
+      { id: "670001", th: "นายชวัลวิทย์ วงศ์ชัย", en: "Mr.Chawanwit Wongchai", nick: "กัปตัน", nickEn: "Captain", role: "เจ้าหน้าที่สนามบินคลอง 11", loc: "PHS", email: "chawanwit.won@tif.ac.th", pass: "H#119282314687or", dept: "flight" },
       { id: "670002", th: "นายชยพล หารบุรุษ", en: "Mr.Chayapon Hanburuts", nick: "เก่ง", nickEn: "Keng", role: "Aircraft Mechanic", loc: "PHS", email: "chayapon.han@tif.ac.th", pass: "J$781171144247us" },
       { id: "670005", th: "นายสิรวิชช์ อรชร", en: "Mr.Sirawit Aorachon", nick: "ปอ", nickEn: "Por", role: "Aircraft Mechanic", loc: "PHS", email: "sirawit.aor@tif.ac.th", pass: "F^497600667910ot" },
       { id: "670008", th: "นายไพศาล อุบลวรรณ์", en: "Mr.Paisan Ubonwan", nick: "อ๊อฟ", nickEn: "Aof", role: "Aircraft Mechanic", loc: "PHS", email: "paisan.ubo@tif.ac.th", pass: "J!902129222241og" },
@@ -1497,7 +1914,7 @@
       { id: "680012", th: "นายคีทัน วีเค", en: "Mr.Keerthan VK", nick: "Keerthan", nickEn: "Keerthan", role: "Chief Training Officer", loc: "PHS", email: "keerthan.kar@tif.ac.th", pass: "P(419563033409of" },
       { id: "680013", th: "นายธนวัฒน์ รอดสิน", en: "Mr.Thanawat Rodsin", nick: "คิว", nickEn: "Q", role: "Aircraft Mechanic", loc: "PHS", email: "thanawat.rod@tif.ac.th", pass: "M^386326178478or" },
       { id: "680014", th: "นายมะกอยี สะอะ", en: "Mr.Magoryee Sa-a", nick: "ยี", nickEn: "Yee", role: "Aircraft Mechanic", loc: "PHS", email: "magoryee.saa@tif.ac.th", pass: "P#188590824396ud" },
-      { id: "680015", th: "นายณัฐดนัย มังสาทอง", en: "Mr.Natdanai Mangsathong", nick: "เควิ่น", nickEn: "Kevin", role: "Director of Standards", loc: "BKK", email: "natdanai.man@tif.ac.th", pass: "T*042434973799ay" },
+      { id: "680015", th: "นายณัฐดนัย มังสาทอง", en: "Mr.Natdanai Mangsathong", nick: "เควิ่น", nickEn: "Kevin", role: "Director of Standards", loc: "BKK", email: "natdanai.man@tif.ac.th", pass: "T*042434973799ay", dept: "flight" },
       { id: "680017", th: "น.ส.ภควรรณ ชูรัตน์", en: "Ms.Phakkawan Churat", nick: "ตูน", nickEn: "Toon", role: "Senior Finance & Accounting Officer", loc: "BKK", email: "phakkawan.chu@tif.ac.th", pass: "F#136395642749un" },
       { id: "680019", th: "นายรพี อุชชิน", en: "Mr.Rapee Ujjin", nick: "ปุ๋ย", nickEn: "Pui", role: "Compliance Monitoring Manager (AMO)", loc: "BKK", email: "rapee.ujj@tif.ac.th", pass: "V&096885384722up" },
       { id: "680020", th: "น.ส.จิณัฐตา สุทธาชีพ", en: "Miss Jinutta Suttacheep", nick: "หงษ์", nickEn: "Hong", role: "HR Manager", loc: "BKK", email: "jinutta.sut@tif.ac.th", pass: "M#238551254301uc" },
@@ -1505,7 +1922,7 @@
       { id: "680023", th: "นายพสธร สืบสังข์", en: "Mr.Potsatorn Seubsang", nick: "ไฟท์", nickEn: "Fight", role: "Flight Instructor", loc: "PHS", email: "potsatorn.seu@tif.ac.th", pass: "C@730279678370uz" },
       { id: "680024", th: "น.ส.ประภัสสร ทรัพย์ศาสตร์", en: "Miss Prapatsorn Sabsat", nick: "เบียร์", nickEn: "Beer", role: "Training Planner Manager", loc: "BKK", email: "prapatsorn.sab@tif.ac.th", pass: "L!359643614976uf" },
       { id: "680025", th: "น.ส.จริยาภรณ์ เจริญพงศ์", en: "Miss Jariyaporn Charoenphong", nick: "อุ๋น", nickEn: "Oon", role: "TKI", loc: "PHS", email: "jariyaporn.cha@tif.ac.th", pass: "V&252909057133ap" },
-      { id: "680026", th: "น.ส.สุชีรา ถนอมเมฆ", en: "Miss Suchera Thanommake", nick: "ฝ้าย", nickEn: "Fai", role: "Operation Officer", loc: "PHS", email: "suchera.tha@tif.ac.th", pass: "H/930236734843og" },
+      { id: "680026", th: "น.ส.สุชีรา ถนอมเมฆ", en: "Miss Suchera Thanommake", nick: "ฝ้าย", nickEn: "Fai", role: "Operations Officer", loc: "PHS", email: "suchera.tha@tif.ac.th", pass: "H/930236734843og" },
       { id: "690004", th: "นายสุวิชา บุญเลิศ", en: "Mr.Suvicha Boonlert", nick: "แจ็ค", nickEn: "Jack", role: "Compliance Monitoring Manager (FTO)", loc: "BKK", email: "suvicha.boo@tif.ac.th", pass: "L$372715683539op" },
       { id: "690005", th: "นายธัชพงศ์ คงวุฒิ", en: "Mr.Tadchapong Khongwut", nick: "ก๊อง", nickEn: "Gong", role: "เจ้าหน้าที่วางแผนซ่อมบำรุง", loc: "PHS", email: "tadchapong.kho@tif.ac.th", pass: "R%601212144344uy" },
       { id: "690006", th: "น.ส.กิตติวรรณ เมณฑ์กูล", en: "Miss Kittiwan Menkoon", nick: "อ๊ะอาย", nickEn: "Ah-Eye", role: "Sales Officer", loc: "BKK", email: "kittiwan.men@tif.ac.th", pass: "Y#845098702731oc" },
@@ -1526,6 +1943,56 @@
     });
     let staff = [];
     let mailFilter = 'ALL';
+
+    let sql;
+    const dbUrl = "postgresql://neondb_owner:npg_7Zsl6DxiEuXk@ep-fragrant-band-aodsvoe5.c-2.ap-southeast-1.aws.neon.tech/neondb?sslmode=require";
+
+    async function initDb() {
+      if (!sql) {
+        const module = await import('https://esm.sh/@neondatabase/serverless@0.9.0');
+        sql = module.neon(dbUrl);
+      }
+    }
+
+    async function initDbTable() {
+      try {
+        await sql`
+          CREATE TABLE IF NOT EXISTS staff (
+            id VARCHAR(6) PRIMARY KEY,
+            th VARCHAR(255) NOT NULL,
+            en VARCHAR(255) NOT NULL,
+            nick VARCHAR(255) NOT NULL,
+            nick_en VARCHAR(255) NOT NULL,
+            role VARCHAR(255) NOT NULL,
+            loc VARCHAR(50) NOT NULL,
+            email VARCHAR(255) NOT NULL,
+            pass VARCHAR(255) NOT NULL,
+            mail_used BOOLEAN NOT NULL DEFAULT FALSE,
+            dept VARCHAR(50)
+          )
+        `;
+        
+        try {
+          await sql`ALTER TABLE staff ADD COLUMN IF NOT EXISTS dept VARCHAR(50)`;
+        } catch (e) {
+          console.warn("Failed to alter table, it might already have 'dept' or alter not supported", e);
+        }
+
+        const countRes = await sql`SELECT COUNT(*) FROM staff`;
+        const count = parseInt(countRes[0].count);
+        if (count === 0) {
+          for (const p of defaultStaff) {
+            await sql`
+              INSERT INTO staff (id, th, en, nick, nick_en, role, loc, email, pass, mail_used, dept)
+              VALUES (${p.id}, ${p.th}, ${p.en}, ${p.nick}, ${p.nickEn || p.nick}, ${p.role}, ${p.loc}, ${p.email}, ${p.pass}, ${p.mailUsed || false}, ${p.dept || null})
+            `;
+          }
+        }
+      } catch (err) {
+        console.error("Database table initialization error:", err);
+        throw err;
+      }
+    }
 
     const translations = {
       th: {
@@ -1555,9 +2022,15 @@
         copyEmail: "📋 คัดลอกเมล",
         sendEmail: "✉️ ส่งอีเมล",
         copyPassword: "📋 คัดลอกรหัส",
-        copyAllInfo: "📋 คัดลอกข้อมูลทั้งหมด",
-        editInfo: "✏️ แก้ไขข้อมูล",
-        deleteEmployee: "🗑️ ลบพนักงาน",
+        copyAllInfo: "คัดลอกข้อมูลทั้งหมด",
+        editInfo: "แก้ไขข้อมูล",
+        moveDept: "ย้ายฝ่าย",
+        moveDeptTitle: "ย้ายฝ่ายพนักงาน",
+        employeeNameLabel: "พนักงาน",
+        lblFormDeptSelect: "เลือกฝ่ายที่ต้องการย้ายไป",
+        lblFormDept: "ฝ่าย/กลุ่มสายงาน",
+        optDeptDefault: "ตามตำแหน่งงาน (Auto)",
+        deleteEmployee: "ลบพนักงาน",
         copied: "✅ คัดลอกแล้ว",
         copiedAll: "✅ คัดลอกข้อมูลทั้งหมดแล้ว",
         dbTitle: "ข้อมูลสถิติของพนักงาน TIF",
@@ -1581,6 +2054,14 @@
         deptAdmin: "บริหาร/สนับสนุน",
         deptOther: "อื่นๆ",
         personUnit: "คน",
+        deptLabel: "ฝ่าย:",
+        locAll: "ทุกพื้นที่",
+        locBkk: "BKK",
+        locPhs: "PHS",
+        locPt: "Part Time",
+        mailAll: "อีเมลทั้งหมด",
+        mailUsed: "ใช้งานแล้ว",
+        mailPending: "ยังไม่ใช้งาน",
         settingsTitle: "จัดการฐานข้อมูลระบบ (System Settings)",
         settingsDesc: "คุณสามารถส่งออกข้อมูลพนักงานทั้งหมดเพื่อสำรองเก็บไว้เป็นไฟล์ JSON หรือทำการกู้คืนข้อมูลโดยเลือกไฟล์ที่เคยส่งออกไว้ รวมถึงการล้างข้อมูลกลับไปเป็นค่าเริ่มต้นจากทางระบบ",
         backupTitle: "📥 ส่งออกข้อมูล (Backup Data)",
@@ -1604,6 +2085,8 @@
         formLabelLoc: "สถานที่ปฏิบัติงาน",
         formLabelEmail: "อีเมล",
         formLabelPass: "รหัสผ่านสำหรับเข้าใช้งาน",
+        formSecPersonal: "👤 ข้อมูลส่วนตัว (Personal Info)",
+        formSecWork: "💼 ข้อมูลการทำงานและการเข้าระบบ (Work & Access)",
         formPlaceholderNick: "เช่น แม็ค",
         formPlaceholderNickEn: "เช่น Mac",
         formPlaceholderTh: "เช่น นายพันธ์พิสุทธิ์ นุราช",
@@ -1661,9 +2144,15 @@
         copyEmail: "📋 Copy Email",
         sendEmail: "✉️ Send Email",
         copyPassword: "📋 Copy Password",
-        copyAllInfo: "📋 Copy All Info",
-        editInfo: "✏️ Edit Info",
-        deleteEmployee: "🗑️ Delete Employee",
+        copyAllInfo: "Copy All Info",
+        editInfo: "Edit Info",
+        moveDept: "Transfer Dept",
+        moveDeptTitle: "Transfer Employee Department",
+        employeeNameLabel: "Employee",
+        lblFormDeptSelect: "Select target department",
+        lblFormDept: "Department/Job Category",
+        optDeptDefault: "Job Position Base (Auto)",
+        deleteEmployee: "Delete Employee",
         copied: "✅ Copied!",
         copiedAll: "✅ All info copied!",
         dbTitle: "TIF Employee Statistics",
@@ -1687,6 +2176,14 @@
         deptAdmin: "Admin & Sales",
         deptOther: "Others",
         personUnit: "people",
+        deptLabel: "Department:",
+        locAll: "All Areas",
+        locBkk: "BKK",
+        locPhs: "PHS",
+        locPt: "Part Time",
+        mailAll: "All Emails",
+        mailUsed: "Active",
+        mailPending: "Pending",
         settingsTitle: "Manage System Database",
         settingsDesc: "You can export all employee data to a JSON backup file, restore data by choosing a previously exported file, or reset the database back to system defaults.",
         backupTitle: "📥 Export Data (Backup Data)",
@@ -1710,6 +2207,8 @@
         formLabelLoc: "Work Location",
         formLabelEmail: "Email",
         formLabelPass: "Access Password",
+        formSecPersonal: "👤 Personal Info",
+        formSecWork: "💼 Work & Access",
         formPlaceholderNick: "e.g., Mac",
         formPlaceholderNickEn: "e.g., Mac",
         formPlaceholderTh: "e.g., Mr. Punpisut Nurach",
@@ -1772,7 +2271,8 @@
       document.getElementById('nav-tab-dashboard').textContent = t.tabDashboard;
       document.getElementById('nav-tab-settings').textContent = t.tabSettings;
       
-      document.getElementById('sort-label').textContent = t.sortBy;
+      const sortLabel = document.getElementById('sort-label');
+      if (sortLabel) sortLabel.textContent = t.sortBy;
       const sortSelect = document.getElementById('sort-select');
       sortSelect.options[0].textContent = t.sortIdAsc;
       sortSelect.options[1].textContent = t.sortIdDesc;
@@ -1780,33 +2280,9 @@
       sortSelect.options[3].textContent = t.sortNameEn;
       
       document.getElementById('btn-add-text').textContent = t.addEmployee;
+      document.getElementById('back-btn').textContent = t.showAll;
       
-      // Update ALL filter button text while preserving the counter span
-      const allFilter = document.querySelector('[data-loc="ALL"]');
-      if (allFilter) {
-        allFilter.childNodes[0].textContent = t.filterAll + ' ';
-      }
-      
-      const deptAllFilter = document.querySelector('[data-dept="ALL"]');
-      if (deptAllFilter) {
-        deptAllFilter.childNodes[0].textContent = t.deptAll + ' ';
-      }
-      const deptFlightFilter = document.querySelector('[data-dept="flight"]');
-      if (deptFlightFilter) {
-        deptFlightFilter.childNodes[0].textContent = t.deptFlight + ' ';
-      }
-      const deptMaintFilter = document.querySelector('[data-dept="maint"]');
-      if (deptMaintFilter) {
-        deptMaintFilter.childNodes[0].textContent = t.deptMaint + ' ';
-      }
-      const deptAdminFilter = document.querySelector('[data-dept="admin"]');
-      if (deptAdminFilter) {
-        deptAdminFilter.childNodes[0].textContent = t.deptAdmin + ' ';
-      }
-      const deptOtherFilter = document.querySelector('[data-dept="other"]');
-      if (deptOtherFilter) {
-        deptOtherFilter.childNodes[0].textContent = t.deptOther + ' ';
-      }
+      // We will refresh dropdown option texts at the end of the function using updateFilterCounts()
       
       // Dashboard static texts
       document.getElementById('db-title').textContent = t.dbTitle;
@@ -1843,6 +2319,11 @@
       document.getElementById('lbl-form-email').textContent = t.formLabelEmail;
       document.getElementById('lbl-form-pass').textContent = t.formLabelPass;
       
+      const lblFormSecPersonal = document.getElementById('lbl-form-sec-personal');
+      if (lblFormSecPersonal) lblFormSecPersonal.textContent = t.formSecPersonal;
+      const lblFormSecWork = document.getElementById('lbl-form-sec-work');
+      if (lblFormSecWork) lblFormSecWork.textContent = t.formSecWork;
+      
       document.getElementById('form-nick').placeholder = t.formPlaceholderNick;
       document.getElementById('form-nick-en').placeholder = t.formPlaceholderNickEn;
       document.getElementById('form-th').placeholder = t.formPlaceholderTh;
@@ -1851,31 +2332,40 @@
       document.getElementById('form-email').placeholder = t.formPlaceholderEmail;
       document.getElementById('form-pass').placeholder = t.formPlaceholderPass;
       
-      document.getElementById('btn-form-randpass').textContent = t.formBtnRandom;
+      const btnRandText = document.getElementById('btn-form-randpass-text');
+      if (btnRandText) btnRandText.textContent = t.formBtnRandom.replace(/🎲\s*/, '');
       document.getElementById('btn-form-cancel').textContent = t.formBtnCancel;
       document.getElementById('btn-form-save').textContent = t.formBtnSave;
+
+      // New form department labels
+      const lblFormDept = document.getElementById('lbl-form-dept');
+      if (lblFormDept) lblFormDept.textContent = t.lblFormDept;
+      const optDeptDefault = document.getElementById('opt-dept-default');
+      if (optDeptDefault) optDeptDefault.textContent = t.optDeptDefault;
+
+      // New department modal translations
+      const lblFormDeptSelect = document.getElementById('lbl-form-dept-select');
+      if (lblFormDeptSelect) lblFormDeptSelect.textContent = t.lblFormDeptSelect;
+      const btnDeptCancel = document.getElementById('btn-dept-cancel');
+      if (btnDeptCancel) btnDeptCancel.textContent = t.formBtnCancel;
+      const btnDeptSave = document.getElementById('btn-dept-save');
+      if (btnDeptSave) btnDeptSave.textContent = t.moveDept;
 
       // Update static mail elements
       document.getElementById('lbl-form-mail-used').textContent = t.lblFormMailUsed;
       document.getElementById('opt-mail-pending').textContent = t.optMailPending;
       document.getElementById('opt-mail-used').textContent = t.optMailUsed;
 
-      const mailAllFilter = document.querySelector('[data-mail="ALL"]');
-      if (mailAllFilter) {
-        mailAllFilter.childNodes[0].textContent = t.filterMailAll + ' ';
-      }
-      const mailUsedFilter = document.querySelector('[data-mail="used"]');
-      if (mailUsedFilter) {
-        mailUsedFilter.childNodes[0].textContent = t.filterMailUsed + ' ';
-      }
-      const mailPendingFilter = document.querySelector('[data-mail="pending"]');
-      if (mailPendingFilter) {
-        mailPendingFilter.childNodes[0].textContent = t.filterMailPending + ' ';
-      }
+
 
       const dbMailLbl = document.getElementById('db-mail-label');
       if (dbMailLbl) {
         dbMailLbl.textContent = t.dbMailLabel;
+      }
+      
+      // Update filter counts to refresh dynamic dropdown labels
+      if (typeof staff !== 'undefined' && staff.length > 0) {
+        updateFilterCounts();
       }
     }
 
@@ -1907,14 +2397,20 @@
     function mailBadge(mailUsed) {
       const t = translations[currentLang];
       if (mailUsed) {
-        return `<span class="badge b-mail-used" style="background:var(--success-bg); color:var(--success);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" style="width:10px; height:10px; margin-right:2px; display:inline-block; vertical-align:middle;"><polyline points="20 6 9 17 4 12"></polyline></svg>${t.mailStatusActive}</span>`;
+        return `<span class="badge b-mail-used" style="background:rgba(16, 185, 129, 0.08); color:#10b981; border:1px solid rgba(16, 185, 129, 0.15);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" style="width:10px; height:10px; margin-right:2px; display:inline-block; vertical-align:middle;"><polyline points="20 6 9 17 4 12"></polyline></svg>${t.mailStatusActive}</span>`;
       }
-      return `<span class="badge b-mail-pending" style="background:var(--warn-bg); color:var(--warn);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" style="width:10px; height:10px; margin-right:2px; display:inline-block; vertical-align:middle;"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>${t.mailStatusPending}</span>`;
+      return `<span class="badge b-mail-pending" style="background:rgba(100, 116, 139, 0.08); color:#64748b; border:1px solid rgba(100, 116, 139, 0.15);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" style="width:10px; height:10px; margin-right:2px; display:inline-block; vertical-align:middle;"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>${t.mailStatusPending}</span>`;
     }
 
     function getStaffDept(p) {
+      if (p.dept) {
+        return p.dept;
+      }
+      if (p.id === '680015' || p.id === '670001') {
+        return 'flight';
+      }
       const role = p.role.toLowerCase();
-      if (role.includes('instructor') || role.includes('training') || role.includes('tki') || role.includes('operations')) {
+      if (role.includes('instructor') || role.includes('training') || role.includes('tki') || role.includes('operations') || role.includes('operation')) {
         return 'flight';
       }
       if (role.includes('maintenance') || role.includes('mechanic') || role.includes('store keeper') || role.includes('ซ่อมบำรุง')) {
@@ -1926,7 +2422,8 @@
         role.includes('driver') || role.includes('สนามบิน') || role.includes('compliance') ||
         role.includes('assurance') || role.includes('safety') || role.includes('executive') ||
         role.includes('registration') || role.includes('licensing') || role.includes('officer') ||
-        role.includes('manager') || role.includes('supervisor')) {
+        role.includes('manager') || role.includes('supervisor') || role.includes('founder') ||
+        role.includes('ผู้ก่อตั้ง')) {
         return 'admin';
       }
       return 'other';
@@ -1936,6 +2433,13 @@
       if (!q) return text;
       const regex = new RegExp(`(${q.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&')})`, 'gi');
       return text.replace(regex, '<mark class="hl">$1</mark>');
+    }
+
+    function copyIcon(text) {
+      return `<button class="inline-copy-btn" onclick="cp(event, '${text.replace(/'/g, "\\'")}', this)" title="Copy">
+        <svg class="copy-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+        <svg class="check-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" style="display:none; color:var(--success);"><polyline points="20 6 9 17 4 12"></polyline></svg>
+      </button>`;
     }
 
     function card(p, q) {
@@ -1951,12 +2455,13 @@
       const highlightedRole = highlightText(p.role, q);
       const highlightedId = highlightText(p.id, q);
       const highlightedEmail = highlightText(p.email, q);
-      const highlightedSub = highlightText(displaySub, q);
       const highlightedNick = highlightText(nickname, q);
+      const highlightedTh = highlightText(p.th, q);
+      const highlightedEn = highlightText(p.en, q);
 
       return `<div class="card" onclick="toggle(this)">
     <div class="card-top">
-      <div class="ava" style="background:${bg};color:${fg}">${initials(p.en)}</div>
+      <div class="ava" style="background:${bg};color:${fg};box-shadow: 0 0 0 3px ${bg}25, 0 0 0 1px ${bg}aa;">${initials(p.en)}</div>
       <div class="info">
         <div class="nick">${highlightedName}</div>
         <div style="font-size:11.5px; color:var(--text3); font-weight:500; margin-top:2px;">${t.nicknameLabel} ${nickPrefix}${highlightedNick}</div>
@@ -1966,58 +2471,95 @@
       </div>
     </div>
     <div class="detail-wrapper">
-      <div class="detail-content">
-        <div class="drow">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-          <div class="dval-wrap">
-            <div class="dname">${t.nicknameLabel} ${nickPrefix}${highlightedNick}</div>
-            <div class="dsub">${highlightedSub}</div>
-            <div style="display:flex;gap:6px;margin-top:4px;flex-wrap:wrap;">
-              <button class="copy" onclick="cp(event,'${displayName}',this)">${t.copyName}</button>
-              <button class="copy" onclick="cp(event,'${nickname}',this)">${t.copyNick}</button>
+      <div class="detail-content" onclick="event.stopPropagation();">
+        <div class="card-details-grid">
+          
+          <!-- Thai Name -->
+          <div class="detail-item">
+            <span class="detail-label">${t.formLabelTh}</span>
+            <div class="detail-value-row">
+              <span class="detail-value" style="font-weight: 600;">${highlightedTh}</span>
+              ${copyIcon(p.th)}
             </div>
           </div>
-        </div>
-        <div class="drow">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
-          <div class="dval-wrap">
-            <div class="dname">${t.formLabelRole}: ${highlightedRole}</div>
-            <div class="dsub">${t.formLabelId}: ${highlightedId} (${p.loc})</div>
-            <div style="display:flex;gap:6px;margin-top:4px;flex-wrap:wrap;">
-              <button class="copy" onclick="cp(event,'${p.role}',this)">${t.copyPosition}</button>
-              <button class="copy" onclick="cp(event,'${p.id}',this)">${t.copyId}</button>
+
+          <!-- English Name -->
+          <div class="detail-item">
+            <span class="detail-label">${t.formLabelEn}</span>
+            <div class="detail-value-row">
+              <span class="detail-value">${highlightedEn}</span>
+              ${copyIcon(p.en)}
             </div>
           </div>
-        </div>
-        <div class="drow">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
-          <div class="dval-wrap">
-            <div class="dlink" style="display:flex; align-items:center; gap:6px; flex-wrap:wrap;">${highlightedEmail} ${mailBadge(p.mailUsed)}</div>
-            <div style="display:flex;gap:6px;margin-top:4px;flex-wrap:wrap;">
-              <button class="copy" onclick="cp(event,'${p.email}',this)">${t.copyEmail}</button>
-              <a href="mailto:${p.email}" onclick="event.stopPropagation();" class="copy" style="text-decoration:none; display:inline-flex; align-items:center; gap:4px; margin-top:4px;">${t.sendEmail}</a>
+
+          <!-- Employee ID -->
+          <div class="detail-item">
+            <span class="detail-label">${t.formLabelId}</span>
+            <div class="detail-value-row">
+              <span class="detail-value monospace">${highlightedId}</span>
+              ${copyIcon(p.id)}
             </div>
           </div>
-        </div>
-        <div class="drow">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-          <div class="dval-wrap">
-            <div class="pwd-container">
-              <span class="pwd-text masked" data-pwd="${p.pass}">••••••••</span>
-              <button class="pwd-toggle" onclick="togglePwd(event, this)" title="${t.formLabelPass}">
-                <svg class="eye-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
-                <svg class="eye-closed" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:none;"><path d="M9.88 9.88a3 3 0 1 0 4.24 4.24M10.73 5.08A10.43 10.43 0 0 1 12 5c7 0 10 7 10 7a13.16 13.16 0 0 1-1.67 2.68M6.61 6.61A13.52 13.52 0 0 0 2 12s3 7 10 7a9.74 9.74 0 0 0 5.39-1.61M2 2l20 20"/></svg>
-              </button>
-              <button class="copy" onclick="cp(event,'${p.pass}',this)" style="margin-top:0;">${t.copyPassword}</button>
+
+          <!-- Position -->
+          <div class="detail-item">
+            <span class="detail-label">${t.formLabelRole}</span>
+            <div class="detail-value-row">
+              <span class="detail-value">${highlightedRole}</span>
+              ${copyIcon(p.role)}
             </div>
           </div>
+
+          <!-- Email -->
+          <div class="detail-item">
+            <span class="detail-label">${t.formLabelEmail}</span>
+            <div class="detail-value-row">
+              <span class="detail-value" style="color:var(--accent-text); font-weight: 500;">${highlightedEmail}</span>
+              ${copyIcon(p.email)}
+              <a href="mailto:${p.email}" class="inline-email-link" title="${t.sendEmail}">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+              </a>
+            </div>
+          </div>
+
+          <!-- Password -->
+          <div class="detail-item">
+            <span class="detail-label">${t.formLabelPass}</span>
+            <div class="detail-value-row">
+              <div class="pwd-container" style="margin-top: 0;">
+                <span class="pwd-text masked" data-pwd="${p.pass}">••••••••</span>
+                <button class="pwd-toggle" onclick="togglePwd(event, this)" title="${t.formLabelPass}">
+                  <svg class="eye-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
+                  <svg class="eye-closed" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:none;"><path d="M9.88 9.88a3 3 0 1 0 4.24 4.24M10.73 5.08A10.43 10.43 0 0 1 12 5c7 0 10 7 10 7a13.16 13.16 0 0 1-1.67 2.68M6.61 6.61A13.52 13.52 0 0 0 2 12s3 7 10 7a9.74 9.74 0 0 0 5.39-1.61M2 2l20 20"/></svg>
+                </button>
+              </div>
+              ${copyIcon(p.pass)}
+            </div>
+          </div>
+
         </div>
-        <div style="margin-top: 14px; border-top: 1px dashed var(--border); padding-top: 14px; width: 100%;">
-          <button class="copy-all" onclick="copyAll(event,'${p.id}',this)">${t.copyAllInfo}</button>
+
+        <div class="card-details-divider"></div>
+        <div class="card-details-copy-all">
+          <button class="copy-all-btn" onclick="copyAll(event,'${p.id}',this)">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:12px; height:12px; margin-right:4px;"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+            <span>${t.copyAllInfo}</span>
+          </button>
         </div>
-        <div style="margin-top: 12px; display:flex; gap:8px; width: 100%;">
-          <button class="btn-action btn-action-edit" onclick="openEditModal(event, '${p.id}')">${t.editInfo}</button>
-          <button class="btn-action btn-action-delete" onclick="deleteStaff(event, '${p.id}')">${t.deleteEmployee}</button>
+
+        <div class="card-details-actions">
+          <button class="btn-action-premium btn-edit" onclick="openEditModal(event, '${p.id}')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 1 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+            <span>${t.editInfo.replace(/✏️\s*/, '')}</span>
+          </button>
+          <button class="btn-action-premium btn-dept" onclick="openDeptModal(event, '${p.id}')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 2.1l4 4-4 4"></path><path d="M3 22v-6c0-1.1.9-2 2-2h14M3 14H1.8L1 13V1l1-1h16a2 2 0 0 2 2 2v12"></path></svg>
+            <span>${t.moveDept}</span>
+          </button>
+          <button class="btn-action-premium btn-delete" onclick="deleteStaff(event, '${p.id}')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
+            <span>${t.deleteEmployee.replace(/🗑️\s*/, '')}</span>
+          </button>
         </div>
       </div>
     </div>
@@ -2028,38 +2570,28 @@
     let deptFilter = 'ALL';
     let currentEditId = null;
 
-    function initData() {
-      const stored = localStorage.getItem('tif_staff_data');
-      if (stored) {
-        try {
-          staff = JSON.parse(stored);
-          let upgraded = false;
-          staff.forEach(p => {
-            if (!p.nickEn) {
-              const def = defaultStaff.find(d => d.id === p.id);
-              p.nickEn = def ? def.nickEn : p.nick;
-              upgraded = true;
-            }
-            if (p.mailUsed === undefined) {
-              p.mailUsed = false;
-              upgraded = true;
-            }
-          });
-          if (upgraded) {
-            localStorage.setItem('tif_staff_data', JSON.stringify(staff));
+    async function initData() {
+      await initDb();
+      try {
+        await initDbTable();
+        const rows = await sql`SELECT id, th, en, nick, nick_en as "nickEn", role, loc, email, pass, mail_used as "mailUsed", dept FROM staff`;
+        staff = rows;
+        updateFilterCounts();
+        render();
+      } catch (e) {
+        console.error("Error loading staff data from database, falling back to localStorage", e);
+        const stored = localStorage.getItem('tif_staff_data');
+        if (stored) {
+          try {
+            staff = JSON.parse(stored);
+          } catch (err) {
+            staff = [...defaultStaff];
           }
-        } catch (e) {
-          console.error("Error parsing staff data", e);
+        } else {
           staff = [...defaultStaff];
         }
-      } else {
-        staff = [...defaultStaff];
-        staff.forEach(p => {
-          if (p.mailUsed === undefined) {
-            p.mailUsed = false;
-          }
-        });
-        localStorage.setItem('tif_staff_data', JSON.stringify(staff));
+        updateFilterCounts();
+        render();
       }
     }
 
@@ -2139,15 +2671,32 @@
     }
 
     function closeAllCards() {
-      resetFilters();
+      document.querySelectorAll('.card.open').forEach(c => c.classList.remove('open'));
+      document.getElementById('grid').classList.remove('single-view');
+      document.getElementById('back-btn').style.display = 'none';
     }
 
     function cp(e, txt, btn) {
       e.stopPropagation();
       navigator.clipboard.writeText(txt).then(() => {
-        const oldText = btn.textContent;
-        btn.textContent = translations[currentLang].copied; btn.classList.add('ok');
-        setTimeout(() => { btn.textContent = oldText; btn.classList.remove('ok'); }, 1800);
+        if (btn.classList.contains('inline-copy-btn')) {
+          const copySvg = btn.querySelector('.copy-svg');
+          const checkSvg = btn.querySelector('.check-svg');
+          if (copySvg && checkSvg) {
+            copySvg.style.display = 'none';
+            checkSvg.style.display = 'block';
+            btn.classList.add('ok');
+            setTimeout(() => {
+              copySvg.style.display = 'block';
+              checkSvg.style.display = 'none';
+              btn.classList.remove('ok');
+            }, 1800);
+          }
+        } else {
+          const oldText = btn.textContent;
+          btn.textContent = translations[currentLang].copied; btn.classList.add('ok');
+          setTimeout(() => { btn.textContent = oldText; btn.classList.remove('ok'); }, 1800);
+        }
       });
     }
 
@@ -2207,29 +2756,46 @@ ${t.formLabelPass}: ${p.pass}`;
       const phsCount = staff.filter(p => p.loc === 'PHS').length;
       const ptCount = staff.filter(p => p.loc === 'Part Time').length;
 
-      document.getElementById('count-all').textContent = allCount;
-      document.getElementById('count-bkk').textContent = bkkCount;
-      document.getElementById('count-phs').textContent = phsCount;
-      document.getElementById('count-pt').textContent = ptCount;
-
       const flightCount = staff.filter(p => getStaffDept(p) === 'flight').length;
       const maintCount = staff.filter(p => getStaffDept(p) === 'maint').length;
       const adminCount = staff.filter(p => getStaffDept(p) === 'admin').length;
       const otherCount = staff.filter(p => getStaffDept(p) === 'other').length;
 
-      document.getElementById('count-dept-all').textContent = allCount;
-      document.getElementById('count-dept-flight').textContent = flightCount;
-      document.getElementById('count-dept-maint').textContent = maintCount;
-      document.getElementById('count-dept-admin').textContent = adminCount;
-      document.getElementById('count-dept-other').textContent = otherCount;
-
       const mailAllCount = staff.length;
       const mailUsedCount = staff.filter(p => p.mailUsed).length;
       const mailPendingCount = staff.filter(p => !p.mailUsed).length;
 
-      document.getElementById('count-mail-all').textContent = mailAllCount;
-      document.getElementById('count-mail-used').textContent = mailUsedCount;
-      document.getElementById('count-mail-pending').textContent = mailPendingCount;
+      const t = translations[currentLang];
+
+      // Update Location select options
+      const optLocAll = document.getElementById('opt-loc-filter-all');
+      if (optLocAll) optLocAll.textContent = `${t.locAll} (${allCount})`;
+      const optLocBkk = document.getElementById('opt-loc-filter-bkk');
+      if (optLocBkk) optLocBkk.textContent = `${t.locBkk} (${bkkCount})`;
+      const optLocPhs = document.getElementById('opt-loc-filter-phs');
+      if (optLocPhs) optLocPhs.textContent = `${t.locPhs} (${phsCount})`;
+      const optLocPt = document.getElementById('opt-loc-filter-pt');
+      if (optLocPt) optLocPt.textContent = `${t.locPt} (${ptCount})`;
+
+      // Update Department select options
+      const optDeptAll = document.getElementById('opt-dept-filter-all');
+      if (optDeptAll) optDeptAll.textContent = `${t.deptAll} (${allCount})`;
+      const optDeptFlight = document.getElementById('opt-dept-filter-flight');
+      if (optDeptFlight) optDeptFlight.textContent = `${t.deptFlight} (${flightCount})`;
+      const optDeptMaint = document.getElementById('opt-dept-filter-maint');
+      if (optDeptMaint) optDeptMaint.textContent = `${t.deptMaint} (${maintCount})`;
+      const optDeptAdmin = document.getElementById('opt-dept-filter-admin');
+      if (optDeptAdmin) optDeptAdmin.textContent = `${t.deptAdmin} (${adminCount})`;
+      const optDeptOther = document.getElementById('opt-dept-filter-other');
+      if (optDeptOther) optDeptOther.textContent = `${t.deptOther} (${otherCount})`;
+
+      // Update Mail select options
+      const optMailAll = document.getElementById('opt-mail-filter-all');
+      if (optMailAll) optMailAll.textContent = `${t.mailAll} (${mailAllCount})`;
+      const optMailUsed = document.getElementById('opt-mail-filter-used');
+      if (optMailUsed) optMailUsed.textContent = `${t.mailUsed} (${mailUsedCount})`;
+      const optMailPending = document.getElementById('opt-mail-filter-pending');
+      if (optMailPending) optMailPending.textContent = `${t.mailPending} (${mailPendingCount})`;
     }
 
     function resetFilters() {
@@ -2238,22 +2804,20 @@ ${t.formLabelPass}: ${p.pass}`;
       loc = 'ALL';
       deptFilter = 'ALL';
       mailFilter = 'ALL';
-      document.querySelectorAll('#filters .fbtn').forEach(x => {
-        if (x.dataset.loc === 'ALL') x.classList.add('on');
-        else x.classList.remove('on');
-      });
-      document.querySelectorAll('#dept-filters .fbtn').forEach(x => {
-        if (x.dataset.dept === 'ALL') x.classList.add('on');
-        else x.classList.remove('on');
-      });
-      document.querySelectorAll('#mail-filters .fbtn').forEach(x => {
-        if (x.dataset.mail === 'ALL') x.classList.add('on');
-        else x.classList.remove('on');
-      });
+      
+      const locFilterSelect = document.getElementById('loc-filter-select');
+      if (locFilterSelect) locFilterSelect.value = 'ALL';
+      
+      const deptFilterSelect = document.getElementById('dept-filter-select');
+      if (deptFilterSelect) deptFilterSelect.value = 'ALL';
+      
+      const mailFilterSelect = document.getElementById('mail-filter-select');
+      if (mailFilterSelect) mailFilterSelect.value = 'ALL';
+      
       render();
     }
 
-    // Modal actions
+     // Modal actions
     function openAddModal() {
       currentEditId = null;
       document.getElementById('modal-title').textContent = translations[currentLang].modalTitleAdd;
@@ -2270,9 +2834,12 @@ ${t.formLabelPass}: ${p.pass}`;
       document.getElementById('form-email').value = '';
       document.getElementById('form-pass').value = '';
       document.getElementById('form-mail-used').value = 'false';
+      document.getElementById('form-dept').value = 'default';
 
-      generateRandomPass();
       document.getElementById('staff-modal').style.display = 'flex';
+
+      const grid = document.querySelector('#staff-modal .form-grid');
+      if (grid) grid.scrollTop = 0;
     }
 
     function openEditModal(e, id) {
@@ -2293,12 +2860,77 @@ ${t.formLabelPass}: ${p.pass}`;
       document.getElementById('form-email').value = p.email;
       document.getElementById('form-pass').value = p.pass;
       document.getElementById('form-mail-used').value = p.mailUsed ? 'true' : 'false';
+      document.getElementById('form-dept').value = p.dept || 'default';
 
       document.getElementById('staff-modal').style.display = 'flex';
+
+      const grid = document.querySelector('#staff-modal .form-grid');
+      if (grid) grid.scrollTop = 0;
     }
 
     function closeModal() {
       document.getElementById('staff-modal').style.display = 'none';
+    }
+
+    let currentDeptTransferId = null;
+
+    function openDeptModal(e, id) {
+      if (e) e.stopPropagation();
+      currentDeptTransferId = id;
+      const p = staff.find(x => x.id === id);
+      if (!p) return;
+
+      const isEn = currentLang === 'en';
+      const displayName = (isEn || p.id === '680012') ? p.en : p.th;
+      const deptName = getStaffDept(p);
+      
+      const t = translations[currentLang];
+      document.getElementById('dept-modal-title').textContent = t.moveDeptTitle || "ย้ายฝ่ายพนักงาน";
+      document.getElementById('lbl-dept-staff-name').innerHTML = `${t.employeeNameLabel || "พนักงาน"}: <strong>${displayName}</strong><br><span style="font-size:12px; color:var(--text3);">${t.formLabelRole}: ${p.role}</span>`;
+      document.getElementById('form-dept-select').value = deptName;
+
+      document.getElementById('dept-modal').style.display = 'flex';
+    }
+
+    function closeDeptModal() {
+      document.getElementById('dept-modal').style.display = 'none';
+      currentDeptTransferId = null;
+    }
+
+    async function saveDeptTransfer(e) {
+      e.preventDefault();
+      if (!currentDeptTransferId) return;
+
+      const newDept = document.getElementById('form-dept-select').value;
+      const p = staff.find(x => x.id === currentDeptTransferId);
+      if (!p) return;
+
+      try {
+        await initDb();
+        p.dept = newDept;
+        
+        await sql`
+          UPDATE staff 
+          SET dept = ${newDept} 
+          WHERE id = ${currentDeptTransferId}
+        `;
+
+        await initData();
+        closeDeptModal();
+        
+        setTimeout(() => {
+          const cards = document.querySelectorAll('.card');
+          cards.forEach(c => {
+            const eidEl = c.querySelector('.eid');
+            if (eidEl && eidEl.textContent.trim() === currentDeptTransferId) {
+              toggle(c);
+            }
+          });
+        }, 150);
+      } catch (error) {
+        console.error("Dept transfer error:", error);
+        alert("ไม่สามารถย้ายฝ่ายได้: " + error.message);
+      }
     }
 
     function generateRandomPass() {
@@ -2321,7 +2953,7 @@ ${t.formLabelPass}: ${p.pass}`;
       document.getElementById('form-pass').value = password;
     }
 
-    function saveStaff(e) {
+    async function saveStaff(e) {
       e.preventDefault();
       const id = document.getElementById('form-id').value.trim();
       const nick = document.getElementById('form-nick').value.trim();
@@ -2333,58 +2965,93 @@ ${t.formLabelPass}: ${p.pass}`;
       const email = document.getElementById('form-email').value.trim();
       const pass = document.getElementById('form-pass').value.trim();
       const mailUsed = document.getElementById('form-mail-used').value === 'true';
+      const deptVal = document.getElementById('form-dept').value;
+      const dept = deptVal === 'default' ? null : deptVal;
 
       if (!id || !nick || !nickEn || !th || !en || !role || !email || !pass) {
         alert(translations[currentLang].alertFillAll);
         return;
       }
 
-      if (currentEditId === null) {
-        if (staff.some(x => x.id === id)) {
-          alert(translations[currentLang].alertDuplicateId(id));
-          return;
+      try {
+        await initDb();
+        if (currentEditId === null) {
+          const existing = await sql`SELECT id FROM staff WHERE id = ${id}`;
+          if (existing.length > 0) {
+            alert(translations[currentLang].alertDuplicateId(id));
+            return;
+          }
         }
-        staff.push({ id, th, en, nick, nickEn, role, loc: locVal, email, pass, mailUsed });
-      } else {
-        const idx = staff.findIndex(x => x.id === currentEditId);
-        if (idx !== -1) {
-          staff[idx] = { id: currentEditId, th, en, nick, nickEn, role, loc: locVal, email, pass, mailUsed };
+
+        await sql`
+          INSERT INTO staff (id, th, en, nick, nick_en, role, loc, email, pass, mail_used, dept)
+          VALUES (${id}, ${th}, ${en}, ${nick}, ${nickEn}, ${role}, ${locVal}, ${email}, ${pass}, ${mailUsed}, ${dept})
+          ON CONFLICT (id) DO UPDATE SET
+            th = EXCLUDED.th,
+            en = EXCLUDED.en,
+            nick = EXCLUDED.nick,
+            nick_en = EXCLUDED.nick_en,
+            role = EXCLUDED.role,
+            loc = EXCLUDED.loc,
+            email = EXCLUDED.email,
+            pass = EXCLUDED.pass,
+            mail_used = EXCLUDED.mail_used,
+            dept = EXCLUDED.dept
+        `;
+
+        await initData();
+        closeModal();
+
+        if (currentEditId) {
+          setTimeout(() => {
+            const cards = document.querySelectorAll('.card');
+            cards.forEach(c => {
+              const eidEl = c.querySelector('.eid');
+              if (eidEl && eidEl.textContent.trim() === currentEditId) {
+                toggle(c);
+              }
+            });
+          }, 150);
         }
-      }
-
-      localStorage.setItem('tif_staff_data', JSON.stringify(staff));
-      closeModal();
-      updateFilterCounts();
-      render();
-
-      if (currentEditId) {
-        setTimeout(() => {
-          const cards = document.querySelectorAll('.card');
-          cards.forEach(c => {
-            const eidEl = c.querySelector('.eid');
-            if (eidEl && eidEl.textContent.trim() === currentEditId) {
-              toggle(c);
-            }
-          });
-        }, 150);
+      } catch (error) {
+        console.error("Save staff error:", error);
+        alert("ไม่สามารถบันทึกข้อมูลได้: " + error.message);
       }
     }
 
-    function deleteStaff(e, id) {
+    async function deleteStaff(e, id) {
       if (e) e.stopPropagation();
       const p = staff.find(x => x.id === id);
       if (!p) return;
 
       const displayName = (currentLang === 'en' || p.id === '680012') ? p.en : p.th;
-      if (confirm(translations[currentLang].confirmDelete(displayName, id))) {
-        staff = staff.filter(x => x.id !== id);
-        localStorage.setItem('tif_staff_data', JSON.stringify(staff));
+      const promptMsg = currentLang === 'en'
+        ? `Please type 'confirm' to confirm deleting employee ${displayName} (ID: ${id}):`
+        : `กรุณาพิมพ์คำว่า 'confirm' เพื่อยืนยันการลบพนักงาน ${displayName} (รหัสพนักงาน: ${id}):`;
+      
+      const userInput = prompt(promptMsg);
+      if (userInput === null) {
+        return; // User clicked Cancel
+      }
 
-        document.getElementById('grid').classList.remove('single-view');
-        document.getElementById('back-btn').style.display = 'none';
+      if (userInput.trim().toLowerCase() === 'confirm') {
+        try {
+          await initDb();
+          await sql`DELETE FROM staff WHERE id = ${id}`;
+          
+          document.getElementById('grid').classList.remove('single-view');
+          document.getElementById('back-btn').style.display = 'none';
 
-        updateFilterCounts();
-        render();
+          await initData();
+        } catch (error) {
+          console.error("Delete staff error:", error);
+          alert("ไม่สามารถลบข้อมูลได้: " + error.message);
+        }
+      } else {
+        const errorMsg = currentLang === 'en'
+          ? "Confirmation failed. The employee will not be deleted."
+          : "การยืนยันไม่ถูกต้อง ข้อมูลจะไม่ถูกลบ";
+        alert(errorMsg);
       }
     }
 
@@ -2399,14 +3066,7 @@ ${t.formLabelPass}: ${p.pass}`;
       const activeContent = document.getElementById(`tab-${tabId}`);
       if (activeContent) activeContent.style.display = 'block';
 
-      const searchWrap = document.querySelector('.search-wrap');
-      if (tabId === 'directory') {
-        searchWrap.style.opacity = '1';
-        searchWrap.style.pointerEvents = 'auto';
-      } else {
-        searchWrap.style.opacity = '0';
-        searchWrap.style.pointerEvents = 'none';
-      }
+
 
       if (tabId === 'dashboard') {
         renderDashboard();
@@ -2475,18 +3135,12 @@ ${t.formLabelPass}: ${p.pass}`;
       let others = 0;
 
       staff.forEach(p => {
-        const role = p.role.toLowerCase();
-        if (role.includes('instructor') || role.includes('training') || role.includes('tki') || role.includes('operations')) {
+        const dept = getStaffDept(p);
+        if (dept === 'flight') {
           flightOps++;
-        } else if (role.includes('maintenance') || role.includes('mechanic') || role.includes('store keeper') || role.includes('ซ่อมบำรุง')) {
+        } else if (dept === 'maint') {
           maintenance++;
-        } else if (role.includes('ceo') || role.includes('coo') || role.includes('cfo') || role.includes('hr') ||
-          role.includes('finance') || role.includes('accounting') || role.includes('sales') ||
-          role.includes('purchasing') || role.includes('secretary') || role.includes('it') ||
-          role.includes('driver') || role.includes('สนามบิน') || role.includes('compliance') ||
-          role.includes('assurance') || role.includes('safety') || role.includes('executive') ||
-          role.includes('registration') || role.includes('licensing') || role.includes('officer') ||
-          role.includes('manager') || role.includes('supervisor')) {
+        } else if (dept === 'admin') {
           adminSalesSupport++;
         } else {
           others++;
@@ -2559,16 +3213,20 @@ ${t.formLabelPass}: ${p.pass}`;
       if (!input.files || input.files.length === 0) return;
       const file = input.files[0];
       const reader = new FileReader();
-      reader.onload = function () {
+      reader.onload = async function () {
         try {
           const parsed = JSON.parse(reader.result);
           if (Array.isArray(parsed) && parsed.length > 0 && parsed[0].id && parsed[0].th && parsed[0].en && parsed[0].nick) {
             if (confirm(translations[currentLang].confirmImport(parsed.length))) {
-              staff = parsed;
-              localStorage.setItem('tif_staff_data', JSON.stringify(staff));
-              initData();
-              updateFilterCounts();
-              render();
+              await initDb();
+              await sql`TRUNCATE TABLE staff`;
+              for (const p of parsed) {
+                await sql`
+                  INSERT INTO staff (id, th, en, nick, nick_en, role, loc, email, pass, mail_used, dept)
+                  VALUES (${p.id}, ${p.th}, ${p.en}, ${p.nick}, ${p.nickEn || p.nick}, ${p.role}, ${p.loc}, ${p.email}, ${p.pass}, ${p.mailUsed || false}, ${p.dept || null})
+                `;
+              }
+              await initData();
               alert(translations[currentLang].importSuccess);
               switchTab('directory');
             }
@@ -2576,6 +3234,7 @@ ${t.formLabelPass}: ${p.pass}`;
             alert(translations[currentLang].importInvalid);
           }
         } catch (e) {
+          console.error("Import JSON error:", e);
           alert(translations[currentLang].importError);
         }
         input.value = '';
@@ -2583,14 +3242,18 @@ ${t.formLabelPass}: ${p.pass}`;
       reader.readAsText(file);
     }
 
-    function resetSystemToDefault() {
+    async function resetSystemToDefault() {
       if (confirm(translations[currentLang].confirmReset)) {
-        staff = [...defaultStaff];
-        localStorage.setItem('tif_staff_data', JSON.stringify(staff));
-        updateFilterCounts();
-        render();
-        alert(translations[currentLang].resetSuccess);
-        switchTab('directory');
+        try {
+          await initDb();
+          await sql`TRUNCATE TABLE staff`;
+          await initData();
+          alert(translations[currentLang].resetSuccess);
+          switchTab('directory');
+        } catch (error) {
+          console.error("Reset system error:", error);
+          alert("ไม่สามารถรีเซ็ตระบบได้: " + error.message);
+        }
       }
     }
 
@@ -2643,29 +3306,36 @@ ${t.formLabelPass}: ${p.pass}`;
       render();
     });
 
-    document.querySelectorAll('#filters .fbtn').forEach(b => b.addEventListener('click', () => {
-      loc = b.dataset.loc;
-      document.querySelectorAll('#filters .fbtn').forEach(x => x.classList.remove('on'));
-      b.classList.add('on'); render();
-    }));
+    const locFilterSelect = document.getElementById('loc-filter-select');
+    if (locFilterSelect) {
+      locFilterSelect.addEventListener('change', (e) => {
+        loc = e.target.value;
+        render();
+      });
+    }
 
-    document.querySelectorAll('#dept-filters .fbtn').forEach(b => b.addEventListener('click', () => {
-      deptFilter = b.dataset.dept;
-      document.querySelectorAll('#dept-filters .fbtn').forEach(x => x.classList.remove('on'));
-      b.classList.add('on'); render();
-    }));
+    const deptFilterSelect = document.getElementById('dept-filter-select');
+    if (deptFilterSelect) {
+      deptFilterSelect.addEventListener('change', (e) => {
+        deptFilter = e.target.value;
+        render();
+      });
+    }
 
-    document.querySelectorAll('#mail-filters .fbtn').forEach(b => b.addEventListener('click', () => {
-      mailFilter = b.dataset.mail;
-      document.querySelectorAll('#mail-filters .fbtn').forEach(x => x.classList.remove('on'));
-      b.classList.add('on'); render();
-    }));
+    const mailFilterSelect = document.getElementById('mail-filter-select');
+    if (mailFilterSelect) {
+      mailFilterSelect.addEventListener('change', (e) => {
+        mailFilter = e.target.value;
+        render();
+      });
+    }
 
     // Startup initialization
-    initData();
-    updateFilterCounts();
-    switchLang(currentLang);
-    handleUrlQuery();
+    (async () => {
+      await initData();
+      switchLang(currentLang);
+      handleUrlQuery();
+    })();
   </script>
 </body>
 
