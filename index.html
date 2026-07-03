@@ -748,39 +748,58 @@
 
     .search-input-wrapper {
       position: relative;
-      width: 240px;
-      min-width: 180px;
+      flex: 1 1 280px;
+      min-width: 200px;
+      max-width: 420px;
     }
 
     .search-input-wrapper input {
       width: 100%;
-      padding: 0 12px 0 34px;
-      height: 36px;
-      background: var(--surface2);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      font-size: 13px;
+      padding: 0 38px 0 42px;
+      height: 42px;
+      background: var(--surface);
+      border: 1.5px solid var(--border2);
+      border-radius: 12px;
+      font-size: 14px;
       font-family: inherit;
       color: var(--text);
       outline: none;
-      transition: all 0.2s ease;
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    }
+
+    .search-input-wrapper input::placeholder {
+      color: var(--text3);
+      font-weight: 400;
+    }
+
+    .search-input-wrapper input:hover {
+      border-color: var(--accent);
+      box-shadow: 0 1px 4px rgba(24, 95, 165, 0.08);
     }
 
     .search-input-wrapper input:focus {
       border-color: var(--accent);
       background: var(--surface);
-      box-shadow: 0 0 0 3px var(--accent-focus);
+      box-shadow: 0 0 0 3.5px var(--accent-focus), 0 2px 8px rgba(24, 95, 165, 0.1);
     }
 
     .search-input-wrapper .search-icon {
       position: absolute;
-      left: 10px;
+      left: 13px;
       top: 50%;
       transform: translateY(-50%);
-      color: var(--text3);
+      color: var(--accent);
       pointer-events: none;
-      width: 15px;
-      height: 15px;
+      width: 17px;
+      height: 17px;
+      opacity: 0.7;
+      transition: opacity 0.2s;
+    }
+
+    .search-input-wrapper:focus-within .search-icon,
+    .search-input-wrapper:hover .search-icon {
+      opacity: 1;
     }
 
     .search-input-wrapper #search-clear {
@@ -788,25 +807,25 @@
       right: 8px;
       top: 50%;
       transform: translateY(-50%);
-      background: none;
+      background: var(--surface2);
       border: none;
       cursor: pointer;
       color: var(--text3);
       display: flex;
       align-items: center;
-      padding: 4px;
+      padding: 5px;
       border-radius: 50%;
       transition: all 0.2s;
     }
 
     .search-input-wrapper #search-clear:hover {
       background: var(--border);
-      color: var(--text2);
+      color: var(--text);
     }
 
     .search-input-wrapper #search-clear svg {
-      width: 12px;
-      height: 12px;
+      width: 13px;
+      height: 13px;
     }
 
     .filter-select-group {
