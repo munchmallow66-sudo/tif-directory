@@ -10,6 +10,7 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+Thai:wght@400;500;600;700&display=swap"
     rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
     * {
       box-sizing: border-box;
@@ -1071,39 +1072,183 @@
     }
 
     /* Dashboard Styles */
+    .db-hero {
+      background: linear-gradient(135deg, rgba(24, 95, 165, 0.08) 0%, rgba(56, 189, 248, 0.04) 100%);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 24px 30px;
+      margin-bottom: 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    html.dark .db-hero {
+      background: linear-gradient(135deg, rgba(56, 189, 248, 0.12) 0%, rgba(15, 23, 42, 0.4) 100%);
+      border-color: rgba(56, 189, 248, 0.15);
+    }
+
+    .db-hero-content {
+      position: relative;
+      z-index: 2;
+    }
+
+    .db-hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--accent-bg);
+      color: var(--accent-text);
+      font-size: 11px;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 999px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 12px;
+    }
+
+    .db-hero-title {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.3;
+      margin-bottom: 4px;
+    }
+
+    .db-hero-subtitle {
+      font-size: 13px;
+      color: var(--text3);
+    }
+
+    .db-hero-decor {
+      position: absolute;
+      right: 40px;
+      opacity: 0.07;
+      pointer-events: none;
+      transition: all 0.5s ease;
+      color: var(--text);
+    }
+
+    html.dark .db-hero-decor {
+      opacity: 0.12;
+    }
+
+    .db-hero-decor svg {
+      width: 140px;
+      height: 140px;
+      transform: rotate(-15deg);
+    }
+
+    .db-hero:hover .db-hero-decor {
+      transform: scale(1.05) rotate(-10deg);
+    }
+
     .dashboard-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      grid-template-columns: repeat(5, 1fr);
       gap: 16px;
       margin-bottom: 24px;
+    }
+
+    @media (max-width: 1024px) {
+      .dashboard-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .dashboard-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 480px) {
+      .dashboard-grid {
+        grid-template-columns: 1fr;
+      }
     }
 
     .dash-card {
       background: var(--surface);
       border: 1px solid var(--border);
-      border-radius: 12px;
+      border-radius: 16px;
       padding: 20px;
       box-shadow: var(--shadow);
       display: flex;
-      align-items: center;
+      flex-direction: column;
+      align-items: flex-start;
       gap: 16px;
-      transition: all 0.2s;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .dash-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: transparent;
+      transition: background-color 0.3s ease;
+    }
+
+    .total-card::before { background: #5b21b6; }
+    .bkk-card::before { background: var(--accent); }
+    .phs-card::before { background: var(--success); }
+    .pt-card::before { background: var(--warn); }
+    .mail-card::before { background: #10b981; }
+
+    .dash-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--border-hover);
+      box-shadow: 0 12px 20px -8px rgba(0, 0, 0, 0.08);
+    }
+
+    html.dark .dash-card:hover {
+      box-shadow: 0 12px 24px -8px rgba(0, 0, 0, 0.4);
+    }
+
+    /* Glows matching the indicators */
+    .total-card:hover { box-shadow: 0 10px 15px -3px rgba(91, 33, 182, 0.08), 0 4px 6px -2px rgba(91, 33, 182, 0.05); }
+    .bkk-card:hover { box-shadow: 0 10px 15px -3px rgba(24, 95, 165, 0.08), 0 4px 6px -2px rgba(24, 95, 165, 0.05); }
+    .phs-card:hover { box-shadow: 0 10px 15px -3px rgba(15, 118, 110, 0.08), 0 4px 6px -2px rgba(15, 118, 110, 0.05); }
+    .pt-card:hover { box-shadow: 0 10px 15px -3px rgba(180, 83, 9, 0.08), 0 4px 6px -2px rgba(180, 83, 9, 0.05); }
+    .mail-card:hover { box-shadow: 0 10px 15px -3px rgba(16, 185, 129, 0.08), 0 4px 6px -2px rgba(16, 185, 129, 0.05); }
+
+    .dash-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
     }
 
     .dash-card-icon {
-      font-size: 24px;
-      width: 48px;
-      height: 48px;
-      border-radius: 50%;
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
       display: flex;
       align-items: center;
       justify-content: center;
-      background: var(--surface2);
+      transition: all 0.3s ease;
+    }
+
+    .dash-card-icon svg {
+      width: 22px;
+      height: 22px;
     }
 
     .total-card .dash-card-icon {
-      background: rgba(91, 33, 182, 0.1);
+      background: rgba(91, 33, 182, 0.08);
       color: #5b21b6;
+    }
+    html.dark .total-card .dash-card-icon {
+      background: rgba(139, 92, 246, 0.15);
+      color: #a78bfa;
     }
 
     .bkk-card .dash-card-icon {
@@ -1115,48 +1260,84 @@
       background: var(--success-bg);
       color: var(--success);
     }
+    html.dark .phs-card .dash-card-icon {
+      background: rgba(45, 212, 191, 0.15);
+      color: #2dd4bf;
+    }
 
     .pt-card .dash-card-icon {
       background: var(--warn-bg);
       color: var(--warn);
     }
+    html.dark .pt-card .dash-card-icon {
+      background: rgba(251, 191, 36, 0.15);
+      color: #fbbf24;
+    }
 
     .mail-card .dash-card-icon {
-      background: rgba(16, 185, 129, 0.1);
+      background: rgba(16, 185, 129, 0.08);
       color: #10b981;
+    }
+    html.dark .mail-card .dash-card-icon {
+      background: rgba(52, 211, 153, 0.15);
+      color: #34d399;
+    }
+
+    .dash-card-trend {
+      font-size: 11px;
+      font-weight: 600;
+      padding: 3px 8px;
+      border-radius: 999px;
+      display: flex;
+      align-items: center;
+      gap: 2px;
+    }
+
+    .trend-up {
+      background: var(--success-bg);
+      color: var(--success);
+    }
+    html.dark .trend-up {
+      background: rgba(45, 212, 191, 0.15);
+      color: #2dd4bf;
     }
 
     .dash-card-info {
-      flex: 1;
+      width: 100%;
     }
 
     .dash-card-label {
       font-size: 11px;
-      font-weight: 600;
+      font-weight: 700;
       color: var(--text3);
       text-transform: uppercase;
-      letter-spacing: 0.05em;
+      letter-spacing: 0.06em;
+      margin-bottom: 4px;
     }
 
     .dash-card-val {
-      font-size: 24px;
+      font-size: 32px;
       font-weight: 700;
       color: var(--text);
-      margin: 2px 0;
+      line-height: 1.1;
+      margin-bottom: 4px;
+      font-family: 'Inter', sans-serif;
     }
 
     .dash-card-sub {
       font-size: 11px;
       color: var(--text3);
+      font-weight: 500;
     }
 
     .dashboard-section-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 20px;
+      grid-template-columns: 1.2fr 1.8fr;
+      gap: 24px;
+      margin-bottom: 24px;
     }
 
-    @media(max-width: 768px) {
+    @media (max-width: 900px) {
       .dashboard-section-grid {
         grid-template-columns: 1fr;
       }
@@ -1165,61 +1346,156 @@
     .section-card {
       background: var(--surface);
       border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 20px;
+      border-radius: 16px;
+      padding: 24px;
       box-shadow: var(--shadow);
       transition: all 0.2s;
+      display: flex;
+      flex-direction: column;
     }
 
     .section-card-title {
-      font-size: 14px;
+      font-size: 15px;
       font-weight: 600;
-      margin-bottom: 16px;
+      margin-bottom: 20px;
       color: var(--text);
-      border-left: 3px solid var(--accent);
-      padding-left: 8px;
+      border-left: 4px solid var(--accent);
+      padding-left: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
     }
 
-    .stat-list {
+    .chart-wrapper {
+      position: relative;
+      width: 100%;
+      height: 240px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .chart-legend-custom {
       display: flex;
       flex-direction: column;
+      gap: 10px;
+      margin-top: 16px;
+      padding-top: 16px;
+      border-top: 1px solid var(--border);
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 12px;
+      color: var(--text2);
+    }
+
+    .legend-item-left {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .legend-color-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+
+    .legend-val {
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    /* Quick Actions Hub styles */
+    .quick-actions-section {
+      margin-top: 24px;
+    }
+
+    .quick-actions-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
       gap: 16px;
     }
 
-    .stat-item {
+    @media (max-width: 768px) {
+      .quick-actions-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 480px) {
+      .quick-actions-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .quick-action-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      cursor: pointer;
+      box-shadow: var(--shadow);
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .quick-action-card:hover {
+      transform: translateY(-2px);
+      border-color: var(--accent);
+      background: linear-gradient(135deg, var(--surface) 0%, rgba(24, 95, 165, 0.02) 100%);
+      box-shadow: 0 6px 12px rgba(24, 95, 165, 0.05);
+    }
+
+    html.dark .quick-action-card:hover {
+      background: linear-gradient(135deg, var(--surface) 0%, rgba(56, 189, 248, 0.05) 100%);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    .quick-action-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      background: var(--surface2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent);
+      transition: all 0.25s;
+    }
+
+    .quick-action-card:hover .quick-action-icon {
+      background: var(--accent-bg);
+      color: var(--accent-text);
+      transform: scale(1.05);
+    }
+
+    .quick-action-icon svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    .quick-action-info {
       display: flex;
       flex-direction: column;
-      gap: 6px;
+      gap: 2px;
     }
 
-    .stat-header {
-      display: flex;
-      justify-content: space-between;
-      font-size: 12px;
-      font-weight: 500;
-    }
-
-    .stat-name {
-      color: var(--text2);
+    .quick-action-title {
+      font-size: 13px;
       font-weight: 600;
+      color: var(--text);
     }
 
-    .stat-count {
+    .quick-action-desc {
+      font-size: 11px;
       color: var(--text3);
-    }
-
-    .stat-bar-bg {
-      height: 8px;
-      background: var(--surface2);
-      border-radius: 999px;
-      overflow: hidden;
-    }
-
-    .stat-bar-fill {
-      height: 100%;
-      border-radius: 999px;
-      background: var(--accent);
-      transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     /* Media Queries for full responsiveness */
@@ -1673,11 +1949,36 @@
   <!-- Tab 2: Dashboard -->
   <div id="tab-dashboard" class="tab-content" style="display:none;">
     <main>
-      <h2 id="db-title" style="font-size: 18px; font-weight: 600; margin-bottom: 20px; color: var(--text);">ข้อมูลสถิติของพนักงาน TIF</h2>
+      <!-- Hero Welcome Section -->
+      <div class="db-hero">
+        <div class="db-hero-content">
+          <div class="db-hero-tag">
+            <span style="font-size: 10px;">✈</span> TIF Operations Control
+          </div>
+          <h2 class="db-hero-title" id="db-hero-title">ระบบรายงานสถิติของพนักงาน</h2>
+          <p class="db-hero-subtitle" id="db-hero-subtitle">ภาพรวมข้อมูลสังกัดพนักงาน, สายงาน และความครอบคลุมของระบบสมาชิก</p>
+        </div>
+        <div class="db-hero-decor">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L14 19v-5.5l8 2.5z"/>
+          </svg>
+        </div>
+      </div>
 
+      <!-- KPI Dashboard Grid -->
       <div class="dashboard-grid">
         <div class="dash-card total-card">
-          <div class="dash-card-icon">👥</div>
+          <div class="dash-card-header">
+            <div class="dash-card-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                <circle cx="9" cy="7" r="4"/>
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+              </svg>
+            </div>
+            <span class="dash-card-trend trend-up">Active</span>
+          </div>
           <div class="dash-card-info">
             <div class="dash-card-label" id="db-total-label">พนักงานทั้งหมด</div>
             <div class="dash-card-val" id="db-total-count">0</div>
@@ -1686,7 +1987,14 @@
         </div>
 
         <div class="dash-card bkk-card">
-          <div class="dash-card-icon">✈</div>
+          <div class="dash-card-header">
+            <div class="dash-card-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L14 19v-5.5l8 2.5z"/>
+              </svg>
+            </div>
+            <span class="dash-card-trend" style="background:rgba(24, 95, 165, 0.08); color:var(--accent-text);">BKK Base</span>
+          </div>
           <div class="dash-card-info">
             <div class="dash-card-label" id="db-bkk-label">สังกัด BKK</div>
             <div class="dash-card-val" id="db-bkk-count">0</div>
@@ -1695,7 +2003,14 @@
         </div>
 
         <div class="dash-card phs-card">
-          <div class="dash-card-icon">🛫</div>
+          <div class="dash-card-header">
+            <div class="dash-card-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L14 19v-5.5l8 2.5z" style="transform: rotate(30deg); transform-origin: center;"/>
+              </svg>
+            </div>
+            <span class="dash-card-trend" style="background:rgba(15, 118, 110, 0.08); color:var(--success);">PHS Base</span>
+          </div>
           <div class="dash-card-info">
             <div class="dash-card-label" id="db-phs-label">สังกัด PHS</div>
             <div class="dash-card-val" id="db-phs-count">0</div>
@@ -1704,7 +2019,15 @@
         </div>
 
         <div class="dash-card pt-card">
-          <div class="dash-card-icon">⏱</div>
+          <div class="dash-card-header">
+            <div class="dash-card-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"/>
+                <polyline points="12 6 12 12 16 14"/>
+              </svg>
+            </div>
+            <span class="dash-card-trend" style="background:rgba(180, 83, 9, 0.08); color:var(--warn);">Flex-Time</span>
+          </div>
           <div class="dash-card-info">
             <div class="dash-card-label" id="db-pt-label">Part Time</div>
             <div class="dash-card-val" id="db-pt-count">0</div>
@@ -1713,7 +2036,15 @@
         </div>
 
         <div class="dash-card mail-card">
-          <div class="dash-card-icon">✉</div>
+          <div class="dash-card-header">
+            <div class="dash-card-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="4" width="20" height="16" rx="2"/>
+                <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+              </svg>
+            </div>
+            <span class="dash-card-trend" style="background:rgba(16, 185, 129, 0.08); color:#10b981;" id="db-mail-badge">Adoption</span>
+          </div>
           <div class="dash-card-info">
             <div class="dash-card-label" id="db-mail-label">เปิดใช้งานอีเมล</div>
             <div class="dash-card-val" id="db-mail-count">0</div>
@@ -1722,15 +2053,86 @@
         </div>
       </div>
 
+      <!-- Charts Area -->
       <div class="dashboard-section-grid">
         <div class="section-card">
-          <h3 class="section-card-title" id="db-loc-ratio-title">สัดส่วนพนักงานแยกตามสังกัด/พื้นที่</h3>
-          <div class="stat-list" id="db-loc-bars"></div>
+          <h3 class="section-card-title">
+            <span id="db-loc-ratio-title">สัดส่วนพนักงานแยกตามสังกัด/พื้นที่</span>
+            <span style="font-size:11px; font-weight:500; color:var(--text3);">Donut Chart</span>
+          </h3>
+          <div class="chart-wrapper">
+            <canvas id="locationChartCanvas"></canvas>
+          </div>
+          <div id="locationChartLegend" class="chart-legend-custom"></div>
         </div>
 
         <div class="section-card">
-          <h3 class="section-card-title" id="db-dept-ratio-title">สัดส่วนตามกลุ่มสายงาน</h3>
-          <div class="stat-list" id="db-dept-bars"></div>
+          <h3 class="section-card-title">
+            <span id="db-dept-ratio-title">สัดส่วนตามกลุ่มสายงาน</span>
+            <span style="font-size:11px; font-weight:500; color:var(--text3);">Polar Distribution</span>
+          </h3>
+          <div class="chart-wrapper" style="height: 250px;">
+            <canvas id="deptChartCanvas"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Actions Grid -->
+      <div class="quick-actions-section">
+        <h3 style="font-size: 15px; font-weight: 600; margin-bottom: 16px; color: var(--text); border-left: 4px solid var(--accent); padding-left: 10px;" id="db-quick-actions-title">คีย์ลัดการทำงานระบบ (Quick Actions)</h3>
+        <div class="quick-actions-grid">
+          <div class="quick-action-card" onclick="openAddModalFromDashboard()">
+            <div class="quick-action-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="12" y1="5" x2="12" y2="19"/>
+                <line x1="5" y1="12" x2="19" y2="12"/>
+              </svg>
+            </div>
+            <div class="quick-action-info">
+              <span class="quick-action-title" id="qa-add-title">เพิ่มพนักงานใหม่</span>
+              <span class="quick-action-desc" id="qa-add-desc">บันทึกข้อมูลบุคลากรเพิ่ม</span>
+            </div>
+          </div>
+
+          <div class="quick-action-card" onclick="switchTab('directory')">
+            <div class="quick-action-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="11" cy="11" r="8"/>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+              </svg>
+            </div>
+            <div class="quick-action-info">
+              <span class="quick-action-title" id="qa-view-title">ค้นหารายชื่อ</span>
+              <span class="quick-action-desc" id="qa-view-desc">เปิดดูข้อมูลพนักงานทุกคน</span>
+            </div>
+          </div>
+
+          <div class="quick-action-card" onclick="exportStaffJSON()">
+            <div class="quick-action-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                <polyline points="7 10 12 15 17 10"/>
+                <line x1="12" y1="15" x2="12" y2="3"/>
+              </svg>
+            </div>
+            <div class="quick-action-info">
+              <span class="quick-action-title" id="qa-backup-title">สำรองข้อมูล JSON</span>
+              <span class="quick-action-desc" id="qa-backup-desc">ดาวน์โหลดพนักงานทั้งหมด</span>
+            </div>
+          </div>
+
+          <div class="quick-action-card" onclick="switchTab('settings')">
+            <div class="quick-action-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="3"/>
+                <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+              </svg>
+            </div>
+            <div class="quick-action-info">
+              <span class="quick-action-title" id="qa-settings-title">การตั้งค่าระบบ</span>
+              <span class="quick-action-desc" id="qa-settings-desc">กู้คืนหรือตั้งค่าเริ่มต้น</span>
+            </div>
+          </div>
         </div>
       </div>
     </main>
@@ -1962,6 +2364,8 @@
     });
     let staff = [];
     let mailFilter = 'ALL';
+    let locationChartInstance = null;
+    let deptChartInstance = null;
 
     let sql;
     const dbUrl = "postgresql://neondb_owner:npg_7Zsl6DxiEuXk@ep-fragrant-band-aodsvoe5.c-2.ap-southeast-1.aws.neon.tech/neondb?sslmode=require";
@@ -2134,7 +2538,18 @@
         filterMailUsed: "อีเมล: ใช้งานแล้ว",
         filterMailPending: "อีเมล: ยังไม่ใช้งาน",
         dbMailLabel: "เปิดใช้งานอีเมล",
-        dbMailPct: (pct) => `${pct}% ของทั้งหมด`
+        dbMailPct: (pct) => `${pct}% ของทั้งหมด`,
+        dbHeroTitle: "ระบบรายงานสถิติของพนักงาน",
+        dbHeroSubtitle: "ภาพรวมข้อมูลสังกัดพนักงาน, สายงาน และความครอบคลุมของระบบสมาชิก",
+        dbQuickActionsTitle: "คีย์ลัดการทำงานระบบ (Quick Actions)",
+        qaAddTitle: "เพิ่มพนักงานใหม่",
+        qaAddDesc: "บันทึกข้อมูลบุคลากรเพิ่ม",
+        qaViewTitle: "ค้นหารายชื่อ",
+        qaViewDesc: "เปิดดูข้อมูลพนักงานทุกคน",
+        qaBackupTitle: "สำรองข้อมูล JSON",
+        qaBackupDesc: "ดาวน์โหลดพนักงานทั้งหมด",
+        qaSettingsTitle: "การตั้งค่าระบบ",
+        qaSettingsDesc: "กู้คืนหรือตั้งค่าเริ่มต้น"
       },
       en: {
         title: "TIF — Employee Directory",
@@ -2256,7 +2671,18 @@
         filterMailUsed: "Email: Activated",
         filterMailPending: "Email: Pending",
         dbMailLabel: "Email Activated",
-        dbMailPct: (pct) => `${pct}% of total`
+        dbMailPct: (pct) => `${pct}% of total`,
+        dbHeroTitle: "Employee Statistics Report",
+        dbHeroSubtitle: "Overview of employee locations, departments, and system adoption.",
+        dbQuickActionsTitle: "System Quick Actions",
+        qaAddTitle: "Add New Employee",
+        qaAddDesc: "Register new staff details",
+        qaViewTitle: "Browse Directory",
+        qaViewDesc: "View all employee listings",
+        qaBackupTitle: "Backup Data JSON",
+        qaBackupDesc: "Export staff database",
+        qaSettingsTitle: "System Settings",
+        qaSettingsDesc: "Restore or reset defaults"
       }
     };
 
@@ -2279,6 +2705,9 @@
     document.getElementById('theme-toggle').addEventListener('click', () => {
       const isDark = document.documentElement.classList.toggle('dark');
       localStorage.setItem('theme', isDark ? 'dark' : 'light');
+      if (document.getElementById('tab-dashboard').style.display !== 'none') {
+        renderDashboard();
+      }
     });
 
     function updateStaticTranslations() {
@@ -2301,10 +2730,12 @@
       document.getElementById('btn-add-text').textContent = t.addEmployee;
       document.getElementById('back-btn').textContent = t.showAll;
       
-      // We will refresh dropdown option texts at the end of the function using updateFilterCounts()
-      
       // Dashboard static texts
-      document.getElementById('db-title').textContent = t.dbTitle;
+      const dbHeroTitleEl = document.getElementById('db-hero-title');
+      if (dbHeroTitleEl) dbHeroTitleEl.textContent = t.dbHeroTitle;
+      const dbHeroSubEl = document.getElementById('db-hero-subtitle');
+      if (dbHeroSubEl) dbHeroSubEl.textContent = t.dbHeroSubtitle;
+
       document.getElementById('db-total-label').textContent = t.dbTotalCount;
       document.getElementById('db-total-sub').textContent = t.dbActiveSystem;
       document.getElementById('db-bkk-label').textContent = t.dbBkkLoc;
@@ -2312,6 +2743,25 @@
       document.getElementById('db-pt-label').textContent = t.dbPtLoc;
       document.getElementById('db-loc-ratio-title').textContent = t.dbLocRatio;
       document.getElementById('db-dept-ratio-title').textContent = t.dbDeptRatio;
+
+      const dbQATitleEl = document.getElementById('db-quick-actions-title');
+      if (dbQATitleEl) dbQATitleEl.textContent = t.dbQuickActionsTitle;
+      const qaAddTitleEl = document.getElementById('qa-add-title');
+      if (qaAddTitleEl) qaAddTitleEl.textContent = t.qaAddTitle;
+      const qaAddDescEl = document.getElementById('qa-add-desc');
+      if (qaAddDescEl) qaAddDescEl.textContent = t.qaAddDesc;
+      const qaViewTitleEl = document.getElementById('qa-view-title');
+      if (qaViewTitleEl) qaViewTitleEl.textContent = t.qaViewTitle;
+      const qaViewDescEl = document.getElementById('qa-view-desc');
+      if (qaViewDescEl) qaViewDescEl.textContent = t.qaViewDesc;
+      const qaBackupTitleEl = document.getElementById('qa-backup-title');
+      if (qaBackupTitleEl) qaBackupTitleEl.textContent = t.qaBackupTitle;
+      const qaBackupDescEl = document.getElementById('qa-backup-desc');
+      if (qaBackupDescEl) qaBackupDescEl.textContent = t.qaBackupDesc;
+      const qaSettingsTitleEl = document.getElementById('qa-settings-title');
+      if (qaSettingsTitleEl) qaSettingsTitleEl.textContent = t.qaSettingsTitle;
+      const qaSettingsDescEl = document.getElementById('qa-settings-desc');
+      if (qaSettingsDescEl) qaSettingsDescEl.textContent = t.qaSettingsDesc;
       
       // Settings static texts
       document.getElementById('settings-title').textContent = t.settingsTitle;
@@ -3093,6 +3543,45 @@ ${t.formLabelPass}: ${p.pass}`;
     }
 
     // Dashboard statistics
+    function animateValue(id, start, end, duration) {
+      const obj = document.getElementById(id);
+      if (!obj) return;
+      let startTimestamp = null;
+      const step = (timestamp) => {
+        if (!startTimestamp) startTimestamp = timestamp;
+        const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+        obj.innerHTML = Math.floor(progress * (end - start) + start);
+        if (progress < 1) {
+          window.requestAnimationFrame(step);
+        } else {
+          obj.innerHTML = end;
+        }
+      };
+      window.requestAnimationFrame(step);
+    }
+
+    function openAddModalFromDashboard() {
+      switchTab('directory');
+      openAddModal();
+    }
+
+    function getThemeColors() {
+      const isDark = document.documentElement.classList.contains('dark');
+      return {
+        text: isDark ? '#94a3b8' : '#475569',
+        titleText: isDark ? '#f8fafc' : '#0f172a',
+        grid: isDark ? 'rgba(148, 163, 184, 0.1)' : 'rgba(71, 85, 105, 0.08)',
+        border: isDark ? '#151d30' : '#ffffff',
+        bkkColor: isDark ? '#38bdf8' : '#185FA5',
+        phsColor: isDark ? '#2dd4bf' : '#0f766e',
+        ptColor: isDark ? '#fbbf24' : '#b45309',
+        flightColor: isDark ? '#c084fc' : '#a855f7',
+        maintColor: isDark ? '#22d3ee' : '#06b6d4',
+        adminColor: isDark ? '#fb7185' : '#f43f5e',
+        otherColor: isDark ? '#94a3b8' : '#64748b'
+      };
+    }
+
     function renderDashboard() {
       const total = staff.length;
       const bkk = staff.filter(p => p.loc === 'BKK').length;
@@ -3100,11 +3589,11 @@ ${t.formLabelPass}: ${p.pass}`;
       const pt = staff.filter(p => p.loc === 'Part Time').length;
       const mail = staff.filter(p => p.mailUsed).length;
 
-      document.getElementById('db-total-count').textContent = total;
-      document.getElementById('db-bkk-count').textContent = bkk;
-      document.getElementById('db-phs-count').textContent = phs;
-      document.getElementById('db-pt-count').textContent = pt;
-      document.getElementById('db-mail-count').textContent = mail;
+      animateValue('db-total-count', 0, total, 600);
+      animateValue('db-bkk-count', 0, bkk, 600);
+      animateValue('db-phs-count', 0, phs, 600);
+      animateValue('db-pt-count', 0, pt, 600);
+      animateValue('db-mail-count', 0, mail, 600);
 
       const bkkPct = total > 0 ? Math.round((bkk / total) * 100) : 0;
       const phsPct = total > 0 ? Math.round((phs / total) * 100) : 0;
@@ -3116,38 +3605,91 @@ ${t.formLabelPass}: ${p.pass}`;
       document.getElementById('db-phs-percent').textContent = t.dbPhsPct(phsPct);
       document.getElementById('db-pt-percent').textContent = t.dbPtPct(ptPct);
       document.getElementById('db-mail-percent').textContent = t.dbMailPct(mailPct);
+      
+      const mailBadgeEl = document.getElementById('db-mail-badge');
+      if (mailBadgeEl) {
+        mailBadgeEl.textContent = `Adoption ${mailPct}%`;
+      }
 
-      const locHtml = `
-    <div class="stat-item">
-      <div class="stat-header">
-        <span class="stat-name">✈ ${t.dbBkkLoc}</span>
-        <span class="stat-count">${bkk} ${t.personUnit} (${bkkPct}%)</span>
-      </div>
-      <div class="stat-bar-bg">
-        <div class="stat-bar-fill" style="width: ${bkkPct}%; background: var(--accent);"></div>
-      </div>
-    </div>
-    <div class="stat-item">
-      <div class="stat-header">
-        <span class="stat-name">🛫 ${t.dbPhsLoc}</span>
-        <span class="stat-count">${phs} ${t.personUnit} (${phsPct}%)</span>
-      </div>
-      <div class="stat-bar-bg">
-        <div class="stat-bar-fill" style="width: ${phsPct}%; background: var(--success);"></div>
-      </div>
-    </div>
-    <div class="stat-item">
-      <div class="stat-header">
-        <span class="stat-name">⏱ ${t.dbPtLoc}</span>
-        <span class="stat-count">${pt} ${t.personUnit} (${ptPct}%)</span>
-      </div>
-      <div class="stat-bar-bg">
-        <div class="stat-bar-fill" style="width: ${ptPct}%; background: var(--warn);"></div>
-      </div>
-    </div>
-  `;
-      document.getElementById('db-loc-bars').innerHTML = locHtml;
+      const colors = getThemeColors();
 
+      // Location Chart (Doughnut)
+      const ctxLoc = document.getElementById('locationChartCanvas').getContext('2d');
+      if (locationChartInstance) {
+        locationChartInstance.destroy();
+      }
+      locationChartInstance = new Chart(ctxLoc, {
+        type: 'doughnut',
+        data: {
+          labels: [t.dbBkkLoc || 'BKK', t.dbPhsLoc || 'PHS', t.dbPtLoc || 'Part Time'],
+          datasets: [{
+            data: [bkk, phs, pt],
+            backgroundColor: [colors.bkkColor, colors.phsColor, colors.ptColor],
+            borderColor: colors.border,
+            borderWidth: 2,
+            hoverOffset: 4
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              display: false
+            },
+            tooltip: {
+              backgroundColor: document.documentElement.classList.contains('dark') ? '#1e2942' : '#ffffff',
+              titleColor: colors.titleText,
+              bodyColor: colors.text,
+              borderColor: colors.grid,
+              borderWidth: 1,
+              padding: 10,
+              displayColors: true,
+              boxWidth: 8,
+              boxHeight: 8,
+              boxPadding: 4,
+              callbacks: {
+                label: function(context) {
+                  const value = context.raw || 0;
+                  const percentage = total > 0 ? Math.round((value / total) * 100) : 0;
+                  return ` ${context.label}: ${value} ${t.personUnit} (${percentage}%)`;
+                }
+              }
+            }
+          },
+          cutout: '72%'
+        }
+      });
+
+      // Custom Legend for Location Chart
+      const legendContainer = document.getElementById('locationChartLegend');
+      if (legendContainer) {
+        legendContainer.innerHTML = `
+          <div class="legend-item">
+            <div class="legend-item-left">
+              <div class="legend-color-dot" style="background: ${colors.bkkColor}"></div>
+              <span>✈ ${t.dbBkkLoc}</span>
+            </div>
+            <span class="legend-val">${bkk} ${t.personUnit} (${bkkPct}%)</span>
+          </div>
+          <div class="legend-item">
+            <div class="legend-item-left">
+              <div class="legend-color-dot" style="background: ${colors.phsColor}"></div>
+              <span>🛫 ${t.dbPhsLoc}</span>
+            </div>
+            <span class="legend-val">${phs} ${t.personUnit} (${phsPct}%)</span>
+          </div>
+          <div class="legend-item">
+            <div class="legend-item-left">
+              <div class="legend-color-dot" style="background: ${colors.ptColor}"></div>
+              <span>⏱ ${t.dbPtLoc}</span>
+            </div>
+            <span class="legend-val">${pt} ${t.personUnit} (${ptPct}%)</span>
+          </div>
+        `;
+      }
+
+      // Department Distribution Chart (Polar Area)
       let flightOps = 0;
       let maintenance = 0;
       let adminSalesSupport = 0;
@@ -3166,54 +3708,86 @@ ${t.formLabelPass}: ${p.pass}`;
         }
       });
 
-      const flightPct = total > 0 ? Math.round((flightOps / total) * 100) : 0;
-      const maintPct = total > 0 ? Math.round((maintenance / total) * 100) : 0;
-      const adminPct = total > 0 ? Math.round((adminSalesSupport / total) * 100) : 0;
-      const otherPct = total > 0 ? Math.round((others / total) * 100) : 0;
+      const labels = [
+        t.deptFlight || 'Flight Ops',
+        t.deptMaint || 'Maintenance',
+        t.deptAdmin || 'Admin & Support'
+      ];
+      const deptData = [flightOps, maintenance, adminSalesSupport];
+      const deptColors = [colors.flightColor, colors.maintColor, colors.adminColor];
 
-      let deptHtml = `
-    <div class="stat-item">
-      <div class="stat-header">
-        <span class="stat-name">${t.dbDeptFlight}</span>
-        <span class="stat-count">${flightOps} ${t.personUnit} (${flightPct}%)</span>
-      </div>
-      <div class="stat-bar-bg">
-        <div class="stat-bar-fill" style="width: ${flightPct}%; background: #a855f7;"></div>
-      </div>
-    </div>
-    <div class="stat-item">
-      <div class="stat-header">
-        <span class="stat-name">${t.dbDeptMaint}</span>
-        <span class="stat-count">${maintenance} ${t.personUnit} (${maintPct}%)</span>
-      </div>
-      <div class="stat-bar-bg">
-        <div class="stat-bar-fill" style="width: ${maintPct}%; background: #06b6d4;"></div>
-      </div>
-    </div>
-    <div class="stat-item">
-      <div class="stat-header">
-        <span class="stat-name">${t.dbDeptAdmin}</span>
-        <span class="stat-count">${adminSalesSupport} ${t.personUnit} (${adminPct}%)</span>
-      </div>
-      <div class="stat-bar-bg">
-        <div class="stat-bar-fill" style="width: ${adminPct}%; background: #f43f5e;"></div>
-      </div>
-    </div>
-  `;
       if (others > 0) {
-        deptHtml += `
-      <div class="stat-item">
-        <div class="stat-header">
-          <span class="stat-name">${t.dbDeptOther}</span>
-          <span class="stat-count">${others} ${t.personUnit} (${otherPct}%)</span>
-        </div>
-        <div class="stat-bar-bg">
-          <div class="stat-bar-fill" style="width: ${otherPct}%; background: #64748b;"></div>
-        </div>
-      </div>
-    `;
+        labels.push(t.deptOther || 'Others');
+        deptData.push(others);
+        deptColors.push(colors.otherColor);
       }
-      document.getElementById('db-dept-bars').innerHTML = deptHtml;
+
+      const ctxDept = document.getElementById('deptChartCanvas').getContext('2d');
+      if (deptChartInstance) {
+        deptChartInstance.destroy();
+      }
+      deptChartInstance = new Chart(ctxDept, {
+        type: 'polarArea',
+        data: {
+          labels: labels,
+          datasets: [{
+            data: deptData,
+            backgroundColor: deptColors.map(c => c + '22'),
+            borderColor: deptColors,
+            borderWidth: 1.5
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          scales: {
+            r: {
+              grid: {
+                color: colors.grid
+              },
+              angleLines: {
+                color: colors.grid
+              },
+              ticks: {
+                backdropColor: 'transparent',
+                color: colors.text,
+                font: {
+                  family: "'Inter', 'Noto Sans Thai'",
+                  size: 9
+                }
+              }
+            }
+          },
+          plugins: {
+            legend: {
+              position: 'right',
+              labels: {
+                color: colors.text,
+                boxWidth: 10,
+                font: {
+                  family: "'Inter', 'Noto Sans Thai'",
+                  size: 11
+                }
+              }
+            },
+            tooltip: {
+              backgroundColor: document.documentElement.classList.contains('dark') ? '#1e2942' : '#ffffff',
+              titleColor: colors.titleText,
+              bodyColor: colors.text,
+              borderColor: colors.grid,
+              borderWidth: 1,
+              padding: 10,
+              callbacks: {
+                label: function(context) {
+                  const value = context.raw || 0;
+                  const percentage = total > 0 ? Math.round((value / total) * 100) : 0;
+                  return ` ${context.label}: ${value} ${t.personUnit} (${percentage}%)`;
+                }
+              }
+            }
+          }
+        }
+      });
     }
 
     // Backup & Restore
