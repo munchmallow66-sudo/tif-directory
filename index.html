@@ -3038,6 +3038,7 @@
     let loc = 'ALL';
     let deptFilter = 'ALL';
     let currentEditId = null;
+    let lastScrollY = 0;
 
     async function initData() {
       await initDb();
@@ -3123,9 +3124,12 @@
 
     function toggle(el) {
       const was = el.classList.contains('open');
-      document.querySelectorAll('.card.open').forEach(c => c.classList.remove('open'));
 
       if (!was) {
+        // Save the scroll position before hiding all other cards
+        lastScrollY = window.scrollY;
+
+        document.querySelectorAll('.card.open').forEach(c => c.classList.remove('open'));
         el.classList.add('open');
         document.getElementById('grid').classList.add('single-view');
         document.getElementById('back-btn').style.display = 'inline-flex';
@@ -3134,8 +3138,12 @@
           el.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }, 100);
       } else {
+        document.querySelectorAll('.card.open').forEach(c => c.classList.remove('open'));
         document.getElementById('grid').classList.remove('single-view');
         document.getElementById('back-btn').style.display = 'none';
+        
+        // Restore scroll position instantly
+        window.scrollTo({ top: lastScrollY, behavior: 'instant' });
       }
     }
 
@@ -3143,6 +3151,9 @@
       document.querySelectorAll('.card.open').forEach(c => c.classList.remove('open'));
       document.getElementById('grid').classList.remove('single-view');
       document.getElementById('back-btn').style.display = 'none';
+
+      // Restore scroll position instantly
+      window.scrollTo({ top: lastScrollY, behavior: 'instant' });
     }
 
     function cp(e, txt, btn) {
