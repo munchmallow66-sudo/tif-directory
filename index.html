@@ -2670,14 +2670,36 @@
         p.mailUsed = false;
       }
     });
+    /* ==========================================================================
+       CONTEXT7 ARCHITECTURE FRAMEWORK
+       ==========================================================================
+       [Context 1] State & Configuration Context
+       [Context 2] Database & Persistent Storage Context
+       [Context 3] I18n & Internationalization Context
+       [Context 4] UI & Animation Rendering Context (Cards & Skeleton Shimmer)
+       [Context 5] Navigation & Action Event Handlers Context
+       [Context 6] Modal & Dialog Management Context
+       [Context 7] Lifecycle & Startup Bootstrap Context
+       ========================================================================== */
+
+    // --------------------------------------------------------------------------
+    // [Context 1] State & Configuration Context
+    // --------------------------------------------------------------------------
     let staff = [];
+    let loc = 'ALL';
+    let deptFilter = 'ALL';
     let mailFilter = 'ALL';
+    let currentEditId = null;
+    let lastScrollY = 0;
+    let currentLang = localStorage.getItem('tif_lang') || 'th';
     let locationChartInstance = null;
     let deptChartInstance = null;
-
-    let sql;
+    let sql = null;
     const dbUrl = "postgresql://neondb_owner:npg_7Zsl6DxiEuXk@ep-fragrant-band-aodsvoe5.c-2.ap-southeast-1.aws.neon.tech/neondb?sslmode=require";
 
+    // --------------------------------------------------------------------------
+    // [Context 2] Database & Persistent Storage Context
+    // --------------------------------------------------------------------------
     async function initDb() {
       if (!sql) {
         const module = await import('https://esm.sh/@neondatabase/serverless@0.9.0');
@@ -2993,8 +3015,6 @@
         qaSettingsDesc: "Restore or reset defaults"
       }
     };
-
-    let currentLang = localStorage.getItem('tif_lang') || 'th';
 
     const palette = [
       ["#dbeafe", "#1e40af"], ["#dcfce7", "#166534"], ["#fef3c7", "#92400e"],
@@ -3375,6 +3395,9 @@
   </div>`;
     }
 
+    // --------------------------------------------------------------------------
+    // [Context 4] UI & Animation Rendering Context (Cards & Skeleton Shimmer)
+    // --------------------------------------------------------------------------
     function showSkeleton(count = 6) {
       const grid = document.getElementById('grid');
       if (!grid) return;
@@ -3400,12 +3423,9 @@
       grid.innerHTML = html;
     }
 
-    let loc = 'ALL';
-    let deptFilter = 'ALL';
-    let mailFilter = 'ALL';
-    let currentEditId = null;
-    let lastScrollY = 0;
-
+    // --------------------------------------------------------------------------
+    // [Context 7] Lifecycle & Startup Bootstrap Context
+    // --------------------------------------------------------------------------
     async function initData() {
       showSkeleton(6);
       await initDb();
@@ -4301,6 +4321,33 @@ ${t.formLabelPass}: ${p.pass}`;
         render();
       });
     }
+
+    // --------------------------------------------------------------------------
+    // [Global Window Method Registration for Bulletproof HTML Event Binding]
+    // --------------------------------------------------------------------------
+    window.switchTab = switchTab;
+    window.switchLang = switchLang;
+    window.render = render;
+    window.showSkeleton = showSkeleton;
+    window.initData = initData;
+    window.toggle = toggle;
+    window.closeAllCards = closeAllCards;
+    window.openAddModal = openAddModal;
+    window.openEditModal = openEditModal;
+    window.closeModal = closeModal;
+    window.openDeptModal = openDeptModal;
+    window.closeDeptModal = closeDeptModal;
+    window.saveDeptTransfer = saveDeptTransfer;
+    window.generateRandomPass = generateRandomPass;
+    window.saveStaff = saveStaff;
+    window.deleteStaff = deleteStaff;
+    window.cp = cp;
+    window.copyAll = copyAll;
+    window.togglePwd = togglePwd;
+    window.resetFilters = resetFilters;
+    window.exportStaffJSON = exportStaffJSON;
+    window.importStaffJSON = importStaffJSON;
+    window.resetSystemToDefault = resetSystemToDefault;
 
     // Startup initialization
     (async () => {
