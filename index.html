@@ -3377,6 +3377,12 @@
       grid.innerHTML = html;
     }
 
+    let loc = 'ALL';
+    let deptFilter = 'ALL';
+    let mailFilter = 'ALL';
+    let currentEditId = null;
+    let lastScrollY = 0;
+
     async function initData() {
       showSkeleton(6);
       await initDb();
