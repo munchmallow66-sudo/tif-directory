@@ -302,25 +302,49 @@
       gap: 16px;
     }
 
+    @keyframes cardStaggerFadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(18px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
     .card {
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: 12px;
       padding: 16px;
       cursor: pointer;
-      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
       box-shadow: var(--shadow);
       display: flex;
       flex-direction: column;
+      transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1),
+                  box-shadow 0.28s cubic-bezier(0.16, 1, 0.3, 1),
+                  border-color 0.28s ease,
+                  background-color 0.28s ease;
+      animation: cardStaggerFadeIn 0.45s cubic-bezier(0.16, 1, 0.3, 1) both;
+      animation-delay: calc(min(var(--stagger, 0), 20) * 0.04s);
+      will-change: transform, opacity;
     }
 
     .card:hover {
-      transform: translateY(-2px);
+      transform: translateY(-4px);
       border-color: var(--border-hover);
-      box-shadow: var(--shadow-hover);
+      box-shadow: 0 12px 24px -6px rgba(0, 0, 0, 0.08), 0 4px 10px -2px rgba(0, 0, 0, 0.04);
+    }
+
+    html.dark .card:hover {
+      border-color: var(--accent);
+      box-shadow: 0 12px 28px -6px rgba(0, 0, 0, 0.45), 0 0 18px rgba(56, 189, 248, 0.15);
     }
 
     .card.open {
+      animation: none;
+      transform: none;
       border-color: var(--accent);
       box-shadow: var(--shadow-hover);
     }
@@ -342,6 +366,11 @@
       font-weight: 600;
       flex-shrink: 0;
       box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.05);
+      transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .card:hover .ava {
+      transform: scale(1.06);
     }
 
     .info {
@@ -3066,7 +3095,7 @@
       </button>`;
     }
 
-    function card(p, q) {
+    function card(p, q, index = 0) {
       const [bg, fg] = pal(p.id);
       const isEn = currentLang === 'en';
       const displayName = (isEn || p.id === '680012') ? p.en : p.th;
@@ -3083,7 +3112,7 @@
       const highlightedTh = highlightText(p.th, q);
       const highlightedEn = highlightText(p.en, q);
 
-      return `<div class="card" onclick="toggle(this)">
+      return `<div class="card" style="--stagger: ${index};" onclick="toggle(this)">
     <div class="card-top">
       <div class="ava" style="background:${bg};color:${fg};box-shadow: 0 0 0 3px ${bg}25, 0 0 0 1px ${bg}aa;">${initials(p.en)}</div>
       <div class="info">
@@ -3250,21 +3279,22 @@
         const adminDept = list.filter(p => getStaffDept(p) === 'admin');
         const otherDept = list.filter(p => getStaffDept(p) === 'other');
 
+        let cardIndex = 0;
         if (flightDept.length) {
           html += `<div class="dept-header">${t.dbDeptFlight}</div>`;
-          html += flightDept.map(p => card(p, q)).join('');
+          html += flightDept.map(p => card(p, q, cardIndex++)).join('');
         }
         if (maintDept.length) {
           html += `<div class="dept-header">${t.dbDeptMaint}</div>`;
-          html += maintDept.map(p => card(p, q)).join('');
+          html += maintDept.map(p => card(p, q, cardIndex++)).join('');
         }
         if (adminDept.length) {
           html += `<div class="dept-header">${t.dbDeptAdmin}</div>`;
-          html += adminDept.map(p => card(p, q)).join('');
+          html += adminDept.map(p => card(p, q, cardIndex++)).join('');
         }
         if (otherDept.length) {
           html += `<div class="dept-header">${t.dbDeptOther}</div>`;
-          html += otherDept.map(p => card(p, q)).join('');
+          html += otherDept.map(p => card(p, q, cardIndex++)).join('');
         }
       } else {
         html = `<div class="empty"><div class="empty-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:48px; height:48px; color:var(--text3);"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></div>${t.noResults}<button class="reset-btn" onclick="resetFilters()">${t.clearSearch}</button></div>`;
