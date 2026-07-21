@@ -1150,6 +1150,151 @@
       background: var(--surface2);
     }
 
+    /* -------------------------------------------------------------------------- */
+    /* Organization Chart Visual Tree Styles                                      */
+    /* -------------------------------------------------------------------------- */
+    .org-chart-section {
+      overflow-x: auto;
+      padding: 24px;
+      margin-top: 24px;
+    }
+    .org-tree-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-width: 960px;
+    }
+    .org-level {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 16px;
+      position: relative;
+    }
+    .org-level-row {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      width: 100%;
+      flex-wrap: wrap;
+    }
+    .org-divisions-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 12px;
+      width: 100%;
+      margin-top: 10px;
+    }
+    .org-div-col {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .org-box {
+      padding: 12px 14px;
+      border-radius: 10px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      border: 1.5px solid transparent;
+      user-select: none;
+    }
+    .org-box:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px -5px rgba(0,0,0,0.18);
+    }
+    .org-box-role {
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+    .org-box-title {
+      font-size: 12px;
+      font-weight: 700;
+      margin-top: 2px;
+    }
+    .org-box-person {
+      font-size: 11px;
+      margin-top: 4px;
+      opacity: 0.95;
+    }
+    .org-box-badge {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 999px;
+      margin-top: 6px;
+      background: rgba(255,255,255,0.25);
+    }
+
+    /* Official Chart Colors */
+    .box-board { background: #1d4ed8; color: #ffffff; }
+    .box-ceo { background: #1e40af; color: #ffffff; border-color: #ef4444 !important; border-width: 2px; }
+    .box-mg { background: #2563eb; color: #ffffff; }
+    .box-secretary { background: #0d9488; color: #ffffff; }
+    .box-support { background: var(--surface2); color: var(--text); border-color: var(--border); }
+    .box-support:hover { border-color: var(--accent); }
+
+    .box-maint { background: #15803d; color: #ffffff; }
+    .box-training { background: #d97706; color: #ffffff; }
+    .box-standard { background: #db2777; color: #ffffff; }
+    .box-qa { background: #7e22ce; color: #ffffff; }
+    .box-flight { background: #ea580c; color: #ffffff; }
+
+    .org-sub-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .org-sub-box {
+      padding: 8px 10px;
+      border-radius: 8px;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text);
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .org-sub-box span {
+      font-size: 10px;
+      font-weight: 500;
+      color: var(--text3);
+      display: block;
+      margin-top: 1px;
+    }
+    .org-sub-box:hover {
+      border-color: var(--accent);
+      background: var(--surface);
+      transform: translateX(2px);
+    }
+    .org-line-v {
+      width: 2px;
+      height: 16px;
+      background: var(--border);
+      margin: 4px auto;
+    }
+    .org-dashed-line {
+      width: 24px;
+      height: 2px;
+      border-top: 2px dashed var(--text3);
+    }
+    .org-section-label {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text3);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin: 14px 0 8px 0;
+      text-align: center;
+    }
+
     .inline-email-link svg {
       width: 12px;
       height: 12px;
@@ -2407,6 +2552,163 @@
           </div>
         </div>
       </div>
+
+      <!-- Interactive Organization Chart (Official TIF Hierarchy) -->
+      <div class="section-card org-chart-section">
+        <div class="org-chart-header" style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px; border-bottom:1px solid var(--border); padding-bottom:16px;">
+          <div>
+            <h3 style="font-size:18px; font-weight:700; color:var(--text); display:flex; align-items:center; gap:8px;">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:20px; height:20px; color:var(--accent);"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="8" x2="20" y2="14"/><line x1="23" y1="11" x2="17" y2="11"/></svg>
+              <span id="org-chart-title">โครงสร้างองค์กร (Thai Inter Flying Organization Structure)</span>
+            </h3>
+            <p style="font-size:13px; color:var(--text3); margin-top:4px;" id="org-chart-sub">ผังแสดงสายการบังคับบัญชา และแผนกปฏิบัติการบิน ศูนย์พิจิตร</p>
+          </div>
+        </div>
+
+        <!-- Interactive Org Tree Diagram Container -->
+        <div class="org-tree-wrapper" id="org-tree-wrapper">
+          <!-- Level 1: Board of Directors -->
+          <div class="org-level level-board">
+            <div class="org-box box-board" onclick="openOrgDeptModal('board')">
+              <div class="org-box-role">BOARD OF DIRECTORS</div>
+              <div class="org-box-title">คณะกรรมการบริษัท</div>
+              <div class="org-box-badge" id="org-badge-board">0 คน</div>
+            </div>
+          </div>
+          <div class="org-line-v"></div>
+
+          <!-- Level 2: CEO -->
+          <div class="org-level level-ceo">
+            <div class="org-box box-ceo" onclick="openOrgDeptModal('ceo')">
+              <div class="org-box-role">CHIEF EXECUTIVE OFFICER : CEO</div>
+              <div class="org-box-title">ประธานเจ้าหน้าที่บริหาร</div>
+              <div class="org-box-person" id="org-person-ceo">นายภาณุ นิ่มสกุล (หนึ่ง)</div>
+              <div class="org-box-badge" id="org-badge-ceo">1 คน</div>
+            </div>
+          </div>
+          <div class="org-line-v"></div>
+
+          <!-- Level 3: MG / ACCOUNTABLE & COMPANY SECRETARY -->
+          <div class="org-level level-mg">
+            <div class="org-box box-mg" onclick="openOrgDeptModal('mg')">
+              <div class="org-box-role">MG / ACCOUNTABLE</div>
+              <div class="org-box-title">ผู้จัดการรับผิดชอบ</div>
+              <div class="org-box-person" id="org-person-mg">นายจักรี สุบงกฏ (ตุ้ม)</div>
+              <div class="org-box-badge" id="org-badge-mg">1 คน</div>
+            </div>
+            <div class="org-dashed-line"></div>
+            <div class="org-box box-secretary" onclick="openOrgDeptModal('secretary')">
+              <div class="org-box-role">COMPANY SECRETARY</div>
+              <div class="org-box-title">เลขานุการบริษัท</div>
+              <div class="org-box-person" id="org-person-sec">น.ส.อัญชิษฐา ขุนล่ำ (รุ้ง)</div>
+            </div>
+          </div>
+          <div class="org-line-v"></div>
+
+          <!-- Level 4: Support & Admin Depts Row -->
+          <div class="org-section-label">แผนกสนับสนุนและบริหาร (Support & Management Depts)</div>
+          <div class="org-level-row level-support">
+            <div class="org-box box-support" onclick="openOrgDeptModal('admin_hr')">
+              <div class="org-box-role">ADMIN & HR DEPT.</div>
+              <div class="org-box-title">ธุรการและทรัพยากรบุคคล</div>
+              <div class="org-box-badge" id="org-badge-admin_hr">0 คน</div>
+            </div>
+            <div class="org-box box-support" onclick="openOrgDeptModal('finance')">
+              <div class="org-box-role">FINANCE & ACCOUNTING DEPT.</div>
+              <div class="org-box-title">การเงินและบัญชี</div>
+              <div class="org-box-badge" id="org-badge-finance">0 คน</div>
+            </div>
+            <div class="org-box box-support" onclick="openOrgDeptModal('safety')">
+              <div class="org-box-role">SAFETY DEPT.</div>
+              <div class="org-box-title">แผนกความปลอดภัย</div>
+              <div class="org-box-badge" id="org-badge-safety">0 คน</div>
+            </div>
+            <div class="org-box box-support" onclick="openOrgDeptModal('it')">
+              <div class="org-box-role">IT DEPT.</div>
+              <div class="org-box-title">เทคโนโลยีสารสนเทศ</div>
+              <div class="org-box-badge" id="org-badge-it">0 คน</div>
+            </div>
+          </div>
+          <div class="org-line-v" style="margin:20px 0;"></div>
+
+          <!-- Level 5: Core Divisions Grid (5 Main Divisions) -->
+          <div class="org-section-label">ฝ่ายปฏิบัติการหลัก (Operational Divisions)</div>
+          <div class="org-divisions-grid">
+            <!-- 1. Maintenance Division (Green) -->
+            <div class="org-div-col col-maint">
+              <div class="org-box box-maint" onclick="openOrgDeptModal('maint')">
+                <div class="org-box-role">MAINTENANCE DIVISION</div>
+                <div class="org-box-title">ฝ่ายซ่อมบำรุง</div>
+                <div class="org-box-badge" id="org-badge-maint">0 คน</div>
+              </div>
+              <div class="org-sub-list">
+                <div class="org-sub-box" onclick="openOrgDeptModal('maint_aircraft')">AIRCRAFT MAINTENANCE DEPT.<span>ซ่อมบำรุงอากาศยาน</span></div>
+                <div class="org-sub-box" onclick="openOrgDeptModal('maint_plan')">PLANNING DEPT.<span>แผนกวางแผน</span></div>
+                <div class="org-sub-box" onclick="openOrgDeptModal('maint_material')">MATERIAL DEPT.<span>แผนกพัสดุ</span></div>
+                <div class="org-sub-box" onclick="openOrgDeptModal('maint_qa')">QA / QC DEPT.<span>ประกันคุณภาพ</span></div>
+              </div>
+            </div>
+
+            <!-- 2. Training Division (Yellow) -->
+            <div class="org-div-col col-training">
+              <div class="org-box box-training" onclick="openOrgDeptModal('training')">
+                <div class="org-box-role">TRAINING DIVISION</div>
+                <div class="org-box-title">ฝ่ายอบรม</div>
+                <div class="org-box-badge" id="org-badge-training">0 คน</div>
+              </div>
+              <div class="org-sub-list">
+                <div class="org-sub-box" onclick="openOrgDeptModal('training')">TRAINING DEPT.<span>แผนกอบรม</span></div>
+              </div>
+            </div>
+
+            <!-- 3. Standard Division (Pink) -->
+            <div class="org-div-col col-standard">
+              <div class="org-box box-standard" onclick="openOrgDeptModal('standard')">
+                <div class="org-box-role">STANDARD DIVISION</div>
+                <div class="org-box-title">ฝ่ายมาตรฐาน</div>
+                <div class="org-box-badge" id="org-badge-standard">0 คน</div>
+              </div>
+              <div class="org-sub-list">
+                <div class="org-sub-box" onclick="openOrgDeptModal('standard')">STANDARD DEPT.<span>แผนกมาตรฐาน</span></div>
+              </div>
+            </div>
+
+            <!-- 4. Quality Assurance Division (Purple) -->
+            <div class="org-div-col col-qa">
+              <div class="org-box box-qa" onclick="openOrgDeptModal('qa')">
+                <div class="org-box-role">QUALITY ASSURANCE DIVISION</div>
+                <div class="org-box-title">ฝ่ายประกันคุณภาพ</div>
+                <div class="org-box-badge" id="org-badge-qa">0 คน</div>
+              </div>
+              <div class="org-sub-list">
+                <div class="org-sub-box" onclick="openOrgDeptModal('qa')">QA / QC DEPT.<span>แผนกประกันคุณภาพ</span></div>
+              </div>
+            </div>
+
+            <!-- 5. Flight Operations Dept (Orange) -->
+            <div class="org-div-col col-flight">
+              <div class="org-box box-flight" onclick="openOrgDeptModal('flight')">
+                <div class="org-box-role">FLIGHT OPERATIONS DEPT.</div>
+                <div class="org-box-title">แผนกปฏิบัติการบิน</div>
+                <div class="org-box-badge" id="org-badge-flight">0 คน</div>
+              </div>
+              <div class="org-sub-list">
+                <div class="org-sub-box" onclick="openOrgDeptModal('flight')">OPERATIONS CONTROL<span>ควบคุมการปฏิบัติการบิน</span></div>
+                <div class="org-sub-box" onclick="openOrgDeptModal('flight')">FLIGHT DISPATCH<span>วางแผนการบิน</span></div>
+                <div class="org-sub-box" onclick="openOrgDeptModal('flight')">CREW MANAGEMENT<span>บริหารจัดการนักบิน</span></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Legend Footer -->
+          <div style="display:flex; justify-content:center; gap:20px; flex-wrap:wrap; margin-top:24px; padding-top:16px; border-top:1px dashed var(--border); font-size:12px; color:var(--text3);">
+            <span><strong style="color:#2563eb;">—</strong> สายการบังคับบัญชา (Command Line)</span>
+            <span><strong style="color:#64748b; border-bottom:1px dashed #64748b;">- - -</strong> สายประสานงาน (Coordination Line)</span>
+            <span>📅 ฉบับอนุมัติ ณ วันที่ 25 กรกฎาคม พ.ศ. 2568 (อนุมัติโดย CEO นายภาณุ นิ่มสกุล)</span>
+          </div>
+        </div>
+      </div>
+
     </main>
   </div>
 
@@ -4297,6 +4599,58 @@ ${t.formLabelPass}: ${p.pass}`;
           }
         }
       });
+
+      // Update Org Chart badge numbers dynamically
+      updateOrgChartCounts();
+    }
+
+    function updateOrgChartCounts() {
+      if (typeof staff === 'undefined') return;
+
+      const countMap = {
+        board: staff.filter(p => p.role.toLowerCase().includes('board') || p.role.toLowerCase().includes('founder')).length,
+        ceo: staff.filter(p => p.role.toLowerCase().includes('ceo') || p.id === '680007').length,
+        mg: staff.filter(p => p.role.toLowerCase().includes('accountable') || p.id === '670010').length,
+        secretary: staff.filter(p => p.role.toLowerCase().includes('secretary') || p.id === '690010').length,
+        admin_hr: staff.filter(p => p.role.toLowerCase().includes('hr') || p.role.toLowerCase().includes('admin')).length,
+        finance: staff.filter(p => p.role.toLowerCase().includes('finance') || p.role.toLowerCase().includes('accounting') || p.role.toLowerCase().includes('cfo')).length,
+        safety: staff.filter(p => p.role.toLowerCase().includes('safety') || p.role.toLowerCase().includes('compliance')).length,
+        it: staff.filter(p => p.role.toLowerCase().includes('it')).length,
+        maint: staff.filter(p => getStaffDept(p) === 'maint').length,
+        training: staff.filter(p => getStaffDept(p) === 'flight' && (p.role.toLowerCase().includes('training') || p.role.toLowerCase().includes('instructor') || p.role.toLowerCase().includes('tki'))).length,
+        standard: staff.filter(p => p.role.toLowerCase().includes('standards') || p.role.toLowerCase().includes('standard')).length,
+        qa: staff.filter(p => p.role.toLowerCase().includes('quality') || p.role.toLowerCase().includes('assurance') || p.role.toLowerCase().includes('fto')).length,
+        flight: staff.filter(p => getStaffDept(p) === 'flight').length
+      };
+
+      Object.keys(countMap).forEach(key => {
+        const el = document.getElementById(`org-badge-${key}`);
+        if (el) {
+          el.textContent = `${countMap[key]} คน`;
+        }
+      });
+    }
+
+    function openOrgDeptModal(deptKey) {
+      let filterDept = 'ALL';
+
+      if (deptKey === 'maint' || deptKey === 'maint_aircraft' || deptKey === 'maint_plan' || deptKey === 'maint_material' || deptKey === 'maint_qa') {
+        filterDept = 'maint';
+      } else if (deptKey === 'flight' || deptKey === 'training' || deptKey === 'flight_control' || deptKey === 'flight_dispatch' || deptKey === 'crew_mgt') {
+        filterDept = 'flight';
+      } else if (deptKey === 'admin_hr' || deptKey === 'finance' || deptKey === 'it' || deptKey === 'secretary' || deptKey === 'ceo' || deptKey === 'board' || deptKey === 'mg') {
+        filterDept = 'admin';
+      } else {
+        filterDept = 'other';
+      }
+
+      deptFilter = filterDept;
+      const deptSelect = document.getElementById('dept-filter-select');
+      if (deptSelect) deptSelect.value = filterDept;
+
+      switchTab('directory');
+      updateFilterCounts();
+      render();
     }
 
     function renderGroupsDashboard() {
