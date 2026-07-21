@@ -1151,305 +1151,100 @@
     }
 
     /* -------------------------------------------------------------------------- */
-    /* Organization Chart — Exact Official TIF Layout (Matching Reference Image)  */
+    /* Organization Chart — TIF Rev 07 Full Company Structure                     */
     /* -------------------------------------------------------------------------- */
-    #tab-org main {
-      max-width: 1520px !important;
-      width: 100% !important;
-      padding: 16px 20px !important;
-    }
-    .org-chart-section {
-      overflow-x: auto;
-      width: 100%;
-      padding: 10px 0 30px 0;
-      margin-top: 6px;
-      background: transparent;
-      border: none;
-      box-shadow: none;
-    }
-    .org-tree-wrapper {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      width: max-content;
-      min-width: 100%;
-      margin: 0 auto;
-      padding: 10px 16px;
-      box-sizing: border-box;
-      position: relative;
-    }
+    #tab-org main { max-width: 1600px !important; width: 100% !important; padding: 16px 12px !important; }
+    .org-chart-section { overflow-x: auto; width: 100%; padding: 10px 0 30px 0; margin-top: 6px; background: transparent; border: none; box-shadow: none; }
+    .org-tree-wrapper { display: flex; flex-direction: column; align-items: center; width: max-content; min-width: 100%; margin: 0 auto; padding: 10px 8px; box-sizing: border-box; position: relative; }
 
     /* ── Connector Lines ── */
-    .org-line-v {
-      width: 2.5px;
-      height: 24px;
-      background: #1d4ed8;
-      margin: 0 auto;
-      flex-shrink: 0;
-    }
-    .org-branch-bar {
-      height: 2.5px;
-      background: #1d4ed8;
-      margin: 0 auto;
-      flex-shrink: 0;
-    }
-    .org-dashed-h {
-      height: 0;
-      border-top: 2.5px dashed #64748b;
-      flex-shrink: 0;
-    }
-    .org-line-h-stub {
-      width: 40px;
-      height: 2.5px;
-      background: #1d4ed8;
-      flex-shrink: 0;
-    }
+    .org-line-v { width: 2px; height: 20px; background: #475569; margin: 0 auto; flex-shrink: 0; }
+    .org-branch-bar { height: 2px; background: #475569; margin: 0 auto; flex-shrink: 0; }
+    .org-dashed-h { height: 0; border-top: 2px dashed #94a3b8; flex-shrink: 0; }
 
     /* ── Level containers ── */
-    .org-level {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 0;
-      position: relative;
-      width: 100%;
-    }
-    .org-level-row {
-      display: flex;
-      justify-content: center;
-      align-items: stretch;
-      gap: 12px;
-      width: 100%;
-      max-width: 1400px;
-      box-sizing: border-box;
-    }
+    .org-level { display: flex; justify-content: center; align-items: center; gap: 0; width: 100%; }
 
     /* ── Box base ── */
-    .org-box {
-      padding: 10px 14px;
-      border-radius: 8px;
-      text-align: center;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      position: relative;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-      border: 2px solid transparent;
-      user-select: none;
-      box-sizing: border-box;
-    }
-    .org-box:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 20px -4px rgba(0,0,0,0.18);
-    }
-    .org-box-role {
-      font-size: 10px;
-      font-weight: 800;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-    }
-    .org-box-title {
-      font-size: 11.5px;
-      font-weight: 700;
-      margin-top: 2px;
-      line-height: 1.3;
-    }
-    .org-box-person {
-      font-size: 10.5px;
-      margin-top: 3px;
-      opacity: 0.95;
-      font-weight: 600;
-    }
-    .org-box-badge {
-      display: inline-block;
-      font-size: 9.5px;
-      font-weight: 700;
-      padding: 2px 8px;
-      border-radius: 999px;
-      margin-top: 4px;
-      background: rgba(255,255,255,0.25);
-    }
+    .org-box { padding: 8px 12px; border-radius: 6px; text-align: center; cursor: pointer; transition: all 0.2s ease; position: relative; box-shadow: 0 1px 4px rgba(0,0,0,0.08); border: 1.5px solid transparent; user-select: none; box-sizing: border-box; }
+    .org-box:hover { transform: translateY(-2px); box-shadow: 0 6px 16px -4px rgba(0,0,0,0.15); }
+    .org-box-role { font-size: 9px; font-weight: 800; letter-spacing: 0.04em; text-transform: uppercase; }
+    .org-box-title { font-size: 10px; font-weight: 600; margin-top: 1px; line-height: 1.3; }
+    .org-box-person { font-size: 9.5px; margin-top: 2px; opacity: 0.9; font-weight: 600; }
+    .org-box-badge { display: inline-block; font-size: 8.5px; font-weight: 700; padding: 1px 6px; border-radius: 999px; margin-top: 3px; background: rgba(255,255,255,0.3); }
 
-    /* ── Official Colour Palette ── */
-    .box-board { background: #1e3a5f; color: #fff; border-color: #1e3a5f; }
-    .box-ceo   { background: #1d4ed8; color: #fff; border: 3px solid #1d4ed8; outline: 2px solid #93c5fd; }
-    .box-mg    { background: #e0f2fe; color: #1e3a5f; border: 2px solid #1d4ed8; }
-    .box-secretary { background: #e0f2fe; color: #1e3a5f; border: 2px solid #1d4ed8; }
+    /* ── Official Rev 07 Colour Palette ── */
+    .box-bod { background: linear-gradient(135deg, #1e3a5f, #2563eb); color: #fff; border-radius: 8px; }
+    .box-ceo { background: linear-gradient(135deg, #3b82f6, #2563eb); color: #fff; border: 2.5px dashed #ef4444 !important; border-radius: 8px; }
+    .box-vp  { background: linear-gradient(135deg, #3b82f6, #60a5fa); color: #fff; border-radius: 20px; }
+    .box-secretary { background: #bfdbfe; color: #1e3a5f; border-color: #60a5fa; border-radius: 4px; }
+    .box-support { background: linear-gradient(135deg, #60a5fa, #3b82f6); color: #fff; border-radius: 4px; }
+    .box-consultant { background: #fef3c7; color: #78350f; border: 1.5px dashed #f59e0b; border-radius: 4px; }
+    .box-facilities { background: #bfdbfe; color: #1e3a5f; border-color: #60a5fa; border-radius: 4px; font-size: 9px; }
 
-    .box-support-admin   { background: #fef3c7; color: #78350f; border-color: #f59e0b; }
-    .box-support-finance { background: #d1fae5; color: #065f46; border-color: #10b981; }
-    .box-support-safety  { background: #fce7f3; color: #831843; border-color: #ec4899; }
-    .box-support-it      { background: #ede9fe; color: #5b21b6; border-color: #8b5cf6; }
+    /* C-Level Officers */
+    .box-cto { background: linear-gradient(135deg, #06b6d4, #0891b2); color: #fff; border: 2.5px dashed #ef4444 !important; }
+    .box-cco { background: linear-gradient(135deg, #22c55e, #16a34a); color: #fff; }
+    .box-cfo { background: linear-gradient(135deg, #f97316, #ea580c); color: #fff; }
+    .box-cbo { background: linear-gradient(135deg, #eab308, #ca8a04); color: #fff; }
 
-    .box-maint    { background: #15803d; color: #fff; }
-    .box-training { background: #d97706; color: #fff; }
-    .box-standard { background: #db2777; color: #fff; }
-    .box-qa       { background: #7e22ce; color: #fff; }
-    .box-flight   { background: #ea580c; color: #fff; }
+    /* Director-level boxes */
+    .box-dir-cto { background: #cffafe; color: #155e75; border-color: #06b6d4; }
+    .box-dir-cco { background: #dcfce7; color: #166534; border-color: #22c55e; }
+    .box-dir-cfo { background: #ffedd5; color: #9a3412; border-color: #f97316; }
+    .box-dir-cbo { background: #fef9c3; color: #713f12; border-color: #eab308; }
+    .box-dir-dscm { background: #d1fae5; color: #065f46; border-color: #10b981; }
 
-    /* ── MG row with dashed coordination line to Flight Ops ── */
-    .org-mg-row {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0;
-      width: 100%;
-    }
-    .org-mg-dashed-connector {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-    .org-mg-dashed-connector .org-dashed-h {
-      width: 80px;
-    }
+    /* Division/Unit boxes */
+    .unit-cto { background: #ecfeff; color: #155e75; border-color: #a5f3fc; }
+    .unit-cco { background: #f0fdf4; color: #166534; border-color: #bbf7d0; }
+    .unit-cfo { background: #fff7ed; color: #9a3412; border-color: #fed7aa; }
+    .unit-cbo { background: #fefce8; color: #713f12; border-color: #fef08a; }
+    .unit-dscm { background: #ecfdf5; color: #065f46; border-color: #a7f3d0; }
 
-    /* ── Secretary side branch ── */
-    .org-secretary-branch {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0;
-      width: 100%;
-    }
+    /* ── VP row with dashed line to DSCM ── */
+    .org-vp-row { display: flex; align-items: center; justify-content: center; gap: 0; width: 100%; }
 
     /* ── Support depts row ── */
-    .org-support-row {
-      display: flex;
-      justify-content: center;
-      align-items: stretch;
-      gap: 10px;
-      width: 100%;
-      max-width: 1050px;
-      box-sizing: border-box;
-    }
-    .org-support-row .org-box {
-      flex: 1;
-      padding: 8px 6px;
-      min-width: 0;
-    }
+    .org-support-row { display: flex; justify-content: center; align-items: stretch; gap: 8px; box-sizing: border-box; }
+    .org-support-row .org-box { flex: 1; padding: 6px 8px; min-width: 0; }
 
-    /* ── Divisions grid ── */
-    .org-divisions-grid {
-      display: grid;
-      grid-template-columns: repeat(5, minmax(200px, 1fr));
-      gap: 12px;
-      width: 100%;
-      max-width: 1400px;
-      margin-top: 0;
-      box-sizing: border-box;
-    }
-    .org-div-col {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      width: 100%;
-      box-sizing: border-box;
-    }
+    /* ── Chiefs row ── */
+    .org-chiefs-row { display: flex; justify-content: center; align-items: stretch; gap: 16px; width: 100%; max-width: 1500px; box-sizing: border-box; }
 
-    /* ── Sub-department & Unit Cards ── */
-    .org-sub-list { display: flex; flex-direction: column; gap: 8px; }
-    .org-dept-block { display: flex; flex-direction: column; gap: 4px; }
-    .org-sub-box {
-      padding: 7px 10px;
-      border-radius: 7px;
-      background: var(--surface2);
-      border: 1.5px solid var(--border);
-      font-size: 10.5px;
-      font-weight: 700;
-      color: var(--text);
-      text-align: center;
-      cursor: pointer;
-      transition: all 0.2s ease;
-    }
-    .org-sub-box span { font-size: 9.5px; font-weight: 500; color: var(--text3); display: block; margin-top: 1px; }
-    .org-sub-box:hover { border-color: var(--accent); transform: translateY(-2px); }
-    .main-dept-box { border-color: var(--border-hover); }
-    .org-unit-list {
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-      padding-left: 8px;
-      border-left: 2px solid var(--border);
-      margin-left: 6px;
-      margin-top: 3px;
-    }
-    .org-unit-box {
-      padding: 5px 8px;
-      border-radius: 6px;
-      background: var(--surface);
-      border: 1.5px solid var(--border);
-      font-size: 9.5px;
-      font-weight: 600;
-      color: var(--text);
-      cursor: pointer;
-      transition: all 0.15s ease;
-    }
-    .org-unit-box span { font-size: 8.5px; font-weight: 500; color: var(--text3); display: block; margin-top: 1px; }
-    .org-unit-box:hover { border-color: var(--accent); transform: translateX(3px); }
+    /* ── Directors grid under each chief ── */
+    .org-directors-row { display: flex; justify-content: flex-start; align-items: flex-start; gap: 6px; width: 100%; flex-wrap: nowrap; }
 
-    /* ── Coordination badge ── */
-    .org-coord-badge {
-      font-size: 9px;
-      font-weight: 700;
-      color: var(--text2);
-      background: var(--surface2);
-      border: 1.5px dashed #64748b;
-      padding: 3px 10px;
-      border-radius: 999px;
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-      white-space: nowrap;
-    }
+    /* ── Chief column (chief + directors + units) ── */
+    .org-chief-col { display: flex; flex-direction: column; align-items: center; gap: 0; flex: 1; min-width: 0; }
 
-    /* ── Section label ── */
-    .org-section-label {
-      font-size: 10px;
-      font-weight: 700;
-      color: var(--text3);
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      margin: 10px 0 6px 0;
-      text-align: center;
-    }
+    /* ── Director column ── */
+    .org-dir-col { display: flex; flex-direction: column; gap: 4px; min-width: 120px; flex: 1; }
+    .org-dir-col .org-box { font-size: 9px; padding: 6px 6px; }
+    .org-dir-col .unit-box { padding: 4px 6px; border-radius: 4px; font-size: 8.5px; font-weight: 600; text-align: center; cursor: pointer; transition: all 0.15s; border: 1px solid transparent; }
+    .org-dir-col .unit-box:hover { transform: translateY(-1px); box-shadow: 0 3px 8px rgba(0,0,0,0.1); }
+    .org-dir-col .unit-box span { font-size: 7.5px; font-weight: 500; display: block; opacity: 0.7; margin-top: 1px; }
 
-    /* ── Footer Meta ── */
-    .org-footer-meta {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
-      width: 100%;
-      max-width: 1400px;
-      margin-top: 32px;
-      padding-top: 20px;
-      border-top: 1.5px dashed var(--border);
-      flex-wrap: wrap;
-      gap: 16px;
-    }
-    .org-legend-card {
-      background: var(--surface2);
-      border: 1.5px solid var(--border);
-      border-radius: 10px;
-      padding: 12px 18px;
-      font-size: 11px;
-    }
-    .org-legend-title { font-weight: 700; color: var(--text); margin-bottom: 8px; display: flex; align-items: center; gap: 6px; font-size: 12px; }
-    .org-legend-item { display: flex; align-items: center; gap: 10px; color: var(--text2); font-size: 11px; margin-top: 6px; }
-    .legend-line-solid { width: 28px; height: 3px; background: #1d4ed8; border-radius: 2px; flex-shrink: 0; }
-    .legend-line-dashed { width: 28px; height: 0; border-top: 2.5px dashed #64748b; flex-shrink: 0; }
-    .org-approval-card {
-      background: var(--surface2);
-      border: 1.5px dashed var(--accent);
-      border-radius: 10px;
-      padding: 12px 18px;
-      text-align: right;
-      font-size: 11px;
-    }
-    .approval-date { color: var(--text3); font-weight: 500; }
-    .approval-name { color: var(--text); font-weight: 700; font-size: 12.5px; margin-top: 4px; }
-    .approval-title { color: var(--accent); font-weight: 600; font-size: 11px; }
-    .approval-company { color: var(--text3); font-size: 10.5px; margin-top: 2px; }
-    .org-dashed-line { width: 24px; height: 0; border-top: 2px dashed var(--text3); }
+    /* ── DSCM separate column ── */
+    .org-dscm-col { display: flex; flex-direction: column; gap: 4px; min-width: 140px; max-width: 180px; }
+
+    /* ── Coord badge ── */
+    .org-coord-badge { font-size: 8px; font-weight: 700; color: var(--text3); background: var(--surface2); border: 1px dashed #94a3b8; padding: 2px 8px; border-radius: 999px; display: inline-flex; align-items: center; gap: 4px; white-space: nowrap; }
+
+    /* ── Footer ── */
+    .org-footer-meta { display: flex; justify-content: space-between; align-items: flex-end; width: 100%; max-width: 1500px; margin-top: 32px; padding-top: 20px; border-top: 1.5px dashed var(--border); flex-wrap: wrap; gap: 16px; }
+    .org-legend-card { background: var(--surface2); border: 1.5px solid var(--border); border-radius: 8px; padding: 10px 14px; font-size: 10px; }
+    .org-legend-title { font-weight: 700; color: var(--text); margin-bottom: 6px; font-size: 11px; }
+    .org-legend-item { display: flex; align-items: center; gap: 8px; color: var(--text2); font-size: 10px; margin-top: 5px; }
+    .legend-box-caat { width: 24px; height: 14px; border: 2px dashed #ef4444; border-radius: 3px; background: #dbeafe; flex-shrink: 0; }
+    .legend-box-tif { width: 24px; height: 14px; border: 1.5px solid #475569; border-radius: 3px; background: #dbeafe; flex-shrink: 0; }
+    .org-approval-card { background: var(--surface2); border: 1.5px dashed var(--accent); border-radius: 8px; padding: 10px 14px; text-align: right; font-size: 10px; }
+    .approval-date { color: var(--text3); font-weight: 600; font-size: 11px; }
+    .approval-name { color: var(--text); font-weight: 700; font-size: 12px; margin-top: 6px; }
+    .approval-title { color: var(--accent); font-weight: 600; font-size: 10.5px; }
+    .approval-company { color: var(--text3); font-size: 10px; margin-top: 1px; }
+
+
 
     .inline-email-link svg {
       width: 12px;
@@ -2779,230 +2574,226 @@
           <div>
             <h3 style="font-size:19px; font-weight:700; color:var(--text); display:flex; align-items:center; gap:8px;">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:22px; height:22px; color:var(--accent);"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="8" x2="20" y2="14"/><line x1="23" y1="11" x2="17" y2="11"/></svg>
-              <span>โครงสร้างองค์กรไทย อินเตอร์ ไฟลิ่ง จำกัด (แผนกการบิน)</span>
+              <span>โครงสร้าง บริษัท ไทย อินเตอร์ ไฟลิ่ง จำกัด (Rev 07)</span>
             </h3>
-            <p style="font-size:13px; color:var(--text3); margin-top:4px;">ณ ศูนย์การบินพิจิตร / Thai Inter Flying Co., Ltd.</p>
+            <p style="font-size:13px; color:var(--text3); margin-top:4px;">Organization: Thai Inter Flying Co., Ltd.</p>
           </div>
-          <div style="font-size:12px; font-weight:600; color:var(--accent-text); background:rgba(24, 95, 165, 0.08); padding:6px 14px; border-radius:999px; border:1px solid rgba(24, 95, 165, 0.15);">
+          <div style="font-size:12px; font-weight:700; color:var(--accent-text); background:rgba(24, 95, 165, 0.08); padding:6px 14px; border-radius:999px; border:1px solid rgba(24, 95, 165, 0.15); display:flex; align-items:center; gap:6px;">
             ✈️ THAI INTER FLYING
           </div>
         </div>
 
+        <!-- VIEW MODE 1: Full Hierarchy Tree Diagram (Rev 07) -->
         <div class="org-tree-wrapper" id="org-tree-wrapper">
 
-          <!-- ═══════ Level 1: BOARD OF DIRECTORS ═══════ -->
+          <!-- ═══════ Level 1: Board of Directors (BOD) ═══════ -->
           <div class="org-level">
-            <div class="org-box box-board" onclick="openOrgDeptModal('board')" style="width:260px;">
-              <div class="org-box-role">BOARD OF DIRECTORS</div>
+            <div class="org-box box-bod" onclick="openOrgDeptModal('board')" style="width:260px;">
+              <div class="org-box-role">BOARD OF DIRECTORS (BOD)</div>
               <div class="org-box-title">คณะกรรมการบริษัท</div>
               <div class="org-box-badge" id="org-badge-board">0 คน</div>
             </div>
           </div>
           <div class="org-line-v"></div>
 
-          <!-- ═══════ Level 2: CEO ═══════ -->
+          <!-- ═══════ Level 2: CEO / AM (CAAT Compliant) ═══════ -->
           <div class="org-level">
-            <div class="org-box box-ceo" onclick="openOrgDeptModal('ceo')" style="width:300px;">
-              <div class="org-box-role">CHIEF EXECUTIVE OFFICER : CEO</div>
-              <div class="org-box-title">ประธานเจ้าหน้าที่บริหาร</div>
-              <div class="org-box-person" id="org-person-ceo">นายภาณุ นิ่มสกุล (หนึ่ง)</div>
+            <div class="org-box box-ceo" onclick="openOrgDeptModal('ceo')" style="width:320px;" title="TCAR Part-ORA Compliant Position">
+              <div class="org-box-role">CHIEF EXECUTIVE OFFICER (CEO)</div>
+              <div class="org-box-role" style="color:#fef08a; margin-top:1px;">ACCOUNTABLE MANAGER (AM)</div>
+              <div class="org-box-person" id="org-person-ceo" style="margin-top:4px; font-weight:700;">นายภาณุ นิ่มสกุล (หนึ่ง)</div>
               <div class="org-box-badge" id="org-badge-ceo">1 คน</div>
             </div>
           </div>
           <div class="org-line-v"></div>
 
-          <!-- ═══════ Level 3: MG / ACCOUNTABLE  ──── dashed ────  FLIGHT OPS (coordination) ═══════ -->
-          <div class="org-mg-row">
-            <div class="org-box box-mg" onclick="openOrgDeptModal('mg')" style="width:260px;">
-              <div class="org-box-role">MG / ACCOUNTABLE</div>
-              <div class="org-box-title">ผู้จัดการรับผิดชอบ</div>
-              <div class="org-box-person" id="org-person-mg">นายจักรี สุบงกฏ (ตุ้ม)</div>
-              <div class="org-box-badge" id="org-badge-mg">1 คน</div>
+          <!-- ═══════ Level 3: Vice President (VP) & Dashed Line to DSCM ═══════ -->
+          <div class="org-vp-row">
+            <div class="org-box box-vp" onclick="openOrgDeptModal('vp')" style="width:260px;">
+              <div class="org-box-role">VICE PRESIDENT (VP)</div>
+              <div class="org-box-title">รองประธานบริหาร</div>
+              <div class="org-box-person" id="org-person-vp">ผู้บริหารระดับสูง</div>
             </div>
-            <!-- Dashed coordination connector -->
-            <div class="org-mg-dashed-connector">
-              <div class="org-dashed-h" style="width:120px;"></div>
-              <div class="org-coord-badge">
-                <span style="display:inline-block;width:16px;height:0;border-top:2px dashed #ea580c;"></span>
-                สายประสานงาน
-              </div>
-              <div class="org-dashed-h" style="width:120px;"></div>
-            </div>
-            <div class="org-box box-flight" onclick="openOrgDeptModal('flight')" style="width:220px;">
-              <div class="org-box-role">FLIGHT OPERATIONS DEPT.</div>
-              <div class="org-box-title">แผนกปฏิบัติการบิน</div>
-              <div class="org-box-badge" id="org-badge-flight">0 คน</div>
-            </div>
+            <!-- Dashed Line spanning right to DSCM -->
+            <div class="org-dashed-h" style="width:580px; margin-left:10px;"></div>
           </div>
           <div class="org-line-v"></div>
 
-          <!-- ═══════ Level 3.5: COMPANY SECRETARY (side branch) ═══════ -->
-          <div class="org-secretary-branch">
-            <div class="org-box box-secretary" onclick="openOrgDeptModal('secretary')" style="width:240px;">
-              <div class="org-box-role">COMPANY SECRETARY</div>
-              <div class="org-box-title">เลขานุการบริษัท</div>
-              <div class="org-box-person" id="org-person-sec">น.ส.อัญชิษฐา ขุนล่ำ (รุ้ง)</div>
+          <!-- ═══════ Staff & Support Offices (Secretary, BD, HR, IT, Consultant) ═══════ -->
+          <div class="org-level" style="margin-bottom:4px;">
+            <div class="org-box box-secretary" onclick="openOrgDeptModal('secretary')" style="width:200px;">
+              <div class="org-box-role">SECRETARY OFFICE</div>
+              <div class="org-box-title">สำนักงานเลขานุการ</div>
             </div>
           </div>
-          <div class="org-line-v"></div>
-
-          <!-- ═══════ Level 4: Support & Admin Depts ═══════ -->
-          <div class="org-branch-bar" style="width:90%; max-width:1050px;"></div>
-          <div style="display:flex; gap:0; justify-content:center; width:100%; max-width:1050px;">
-            <div class="org-line-v" style="flex:1; max-width:2.5px;"></div>
-            <div style="flex:1;"></div>
-            <div class="org-line-v" style="flex:1; max-width:2.5px;"></div>
-            <div style="flex:1;"></div>
-            <div class="org-line-v" style="flex:1; max-width:2.5px;"></div>
-            <div style="flex:1;"></div>
-            <div class="org-line-v" style="flex:1; max-width:2.5px;"></div>
-          </div>
-          <div class="org-support-row">
-            <div class="org-box box-support-admin" onclick="openOrgDeptModal('admin_hr')">
-              <div class="org-box-role">ADMIN & HR DEPT.</div>
-              <div class="org-box-title">แผนกธุรการและทรัพยากรบุคคล</div>
-              <div class="org-box-badge" id="org-badge-admin_hr">0 คน</div>
+          <div class="org-line-v" style="height:14px;"></div>
+          <div class="org-branch-bar" style="width:680px;"></div>
+          <div class="org-support-row" style="margin-top:6px; margin-bottom:12px;">
+            <div class="org-box box-support" onclick="openOrgDeptModal('bd')" style="width:160px;">
+              <div class="org-box-role">BUSINESS DEVELOPMENT</div>
+              <div class="org-box-title">(BD)</div>
             </div>
-            <div class="org-box box-support-finance" onclick="openOrgDeptModal('finance')">
-              <div class="org-box-role">FINANCE & ACCOUNTING DEPT.</div>
-              <div class="org-box-title">แผนกการเงินและบัญชี</div>
-              <div class="org-box-badge" id="org-badge-finance">0 คน</div>
+            <div class="org-div-col" style="width:160px; gap:4px;">
+              <div class="org-box box-support" onclick="openOrgDeptModal('hr')">
+                <div class="org-box-role">HUMAN RESOURCE</div>
+                <div class="org-box-title">(HR)</div>
+              </div>
+              <div class="org-box box-facilities" onclick="openOrgDeptModal('facilities')">
+                <div class="org-box-role" style="font-size:8.5px;">FACILITIES MANAGEMENT</div>
+              </div>
             </div>
-            <div class="org-box box-support-safety" onclick="openOrgDeptModal('safety')">
-              <div class="org-box-role">SAFETY DEPT.</div>
-              <div class="org-box-title">แผนกความปลอดภัย</div>
-              <div class="org-box-badge" id="org-badge-safety">0 คน</div>
+            <div class="org-box box-support" onclick="openOrgDeptModal('it')" style="width:160px;">
+              <div class="org-box-role">INFORMATION TECHNOLOGY</div>
+              <div class="org-box-title">(IT)</div>
             </div>
-            <div class="org-box box-support-it" onclick="openOrgDeptModal('it')">
-              <div class="org-box-role">IT DEPT.</div>
-              <div class="org-box-title">แผนกเทคโนโลยีสารสนเทศ</div>
-              <div class="org-box-badge" id="org-badge-it">0 คน</div>
+            <div style="width:40px;"></div>
+            <div class="org-box box-consultant" onclick="openOrgDeptModal('consultant')" style="width:140px;">
+              <div class="org-box-role">CONSULTANT</div>
+              <div class="org-box-title">ที่ปรึกษา</div>
             </div>
           </div>
-          <div class="org-line-v" style="height:28px;"></div>
+          <div class="org-line-v" style="height:20px;"></div>
 
-          <!-- ═══════ Level 5: Main Trunk Bar → 5 Core Divisions ═══════ -->
-          <div class="org-branch-bar" style="width:95%; max-width:1400px;"></div>
-          <div style="display:flex; gap:0; justify-content:center; width:100%; max-width:1400px;">
-            <div style="flex:1; display:flex; justify-content:center;"><div class="org-line-v"></div></div>
-            <div style="flex:1; display:flex; justify-content:center;"><div class="org-line-v"></div></div>
-            <div style="flex:1; display:flex; justify-content:center;"><div class="org-line-v"></div></div>
-            <div style="flex:1; display:flex; justify-content:center;"><div class="org-line-v"></div></div>
-            <div style="flex:1; display:flex; justify-content:center;"><div class="org-line-v"></div></div>
+          <!-- ═══════ Level 4: 4 Chief Officers + DSCM ═══════ -->
+          <div class="org-branch-bar" style="width:96%; max-width:1500px;"></div>
+          <div style="display:flex; gap:0; justify-content:center; width:100%; max-width:1500px; margin-bottom:6px;">
+            <div style="flex:3.8; display:flex; justify-content:center;"><div class="org-line-v"></div></div>
+            <div style="flex:1.2; display:flex; justify-content:center;"><div class="org-line-v"></div></div>
+            <div style="flex:1.2; display:flex; justify-content:center;"><div class="org-line-v"></div></div>
+            <div style="flex:1.2; display:flex; justify-content:center;"><div class="org-line-v"></div></div>
+            <div style="flex:1.2; display:flex; justify-content:center;"><div class="org-line-v" style="border-left:2px dashed #94a3b8; background:transparent;"></div></div>
           </div>
 
-          <div class="org-divisions-grid">
+          <!-- 5 Executive Streams Grid -->
+          <div class="org-chiefs-row">
 
-            <!-- ── 1. MAINTENANCE DIVISION (Green) ── -->
-            <div class="org-div-col col-maint">
-              <div class="org-box box-maint" onclick="openOrgDeptModal('maint')">
-                <div class="org-box-role">MAINTENANCE DIVISION</div>
-                <div class="org-box-title">ฝ่ายซ่อมบำรุง</div>
-                <div class="org-box-badge" id="org-badge-maint">0 คน</div>
+            <!-- Stream 1: Chief Training Officer (CTO) with 4 Directors -->
+            <div class="org-chief-col" style="flex:4;">
+              <div class="org-box box-cto" onclick="openOrgDeptModal('cto')" style="width:95%;" title="TCAR Part-ORA Compliant Position">
+                <div class="org-box-role">CHIEF TRAINING OFFICER</div>
+                <div class="org-box-role" style="color:#cffafe;">(CTO)</div>
               </div>
-              <div class="org-sub-list">
-                <div class="org-dept-block">
-                  <div class="org-sub-box main-dept-box" onclick="openOrgDeptModal('maint_aircraft')">AIRCRAFT MAINTENANCE DEPT.<span>แผนกซ่อมบำรุงอากาศยาน</span></div>
-                  <div class="org-unit-list">
-                    <div class="org-unit-box" onclick="openOrgDeptModal('maint_aircraft')">AIRFRAME SECTION<span>ส่วนโครงสร้างอากาศยาน</span></div>
-                    <div class="org-unit-box" onclick="openOrgDeptModal('maint_aircraft')">POWER PLANT SECTION<span>ส่วนเครื่องยนต์อากาศยาน</span></div>
-                    <div class="org-unit-box" onclick="openOrgDeptModal('maint_aircraft')">AVIONICS SECTION<span>ส่วนอิเล็กทรอนิกส์การบิน</span></div>
+              <div class="org-line-v" style="height:14px;"></div>
+              <div class="org-branch-bar" style="width:92%;"></div>
+              <div style="display:flex; justify-content:space-around; width:92%; margin-bottom:6px;">
+                <div class="org-line-v"></div>
+                <div class="org-line-v"></div>
+                <div class="org-line-v"></div>
+                <div class="org-line-v"></div>
+              </div>
+              <div class="org-directors-row">
+                <!-- 1.1 DOM -->
+                <div class="org-dir-col">
+                  <div class="org-box box-dir-cto" onclick="openOrgDeptModal('dom')">
+                    <div class="org-box-role">DIRECTOR OF MAINTENANCE</div>
+                    <div class="org-box-title">(DOM)</div>
                   </div>
+                  <div class="unit-box unit-cto" onclick="openOrgDeptModal('maint_div')">Maintenance Division</div>
+                  <div class="unit-box unit-cto" onclick="openOrgDeptModal('maint_cert')">Maintenance Certify</div>
+                  <div class="unit-box unit-cto" onclick="openOrgDeptModal('maint_plan')">Maintenance Planning</div>
+                  <div class="unit-box unit-cto" onclick="openOrgDeptModal('store_insp')">Store Inspector</div>
                 </div>
-                <div class="org-dept-block">
-                  <div class="org-sub-box main-dept-box" onclick="openOrgDeptModal('maint_planning')">PLANNING DEPT.<span>แผนกวางแผน</span></div>
-                  <div class="org-unit-list">
-                    <div class="org-unit-box" onclick="openOrgDeptModal('maint_planning')">MAINTENANCE PLAN<span>แผนงานซ่อมบำรุง</span></div>
-                    <div class="org-unit-box" onclick="openOrgDeptModal('maint_planning')">SCHEDULE CONTROL<span>ควบคุมการบำรุงรักษา</span></div>
-                    <div class="org-unit-box" onclick="openOrgDeptModal('maint_planning')">MATERIAL PLANNING<span>วางแผนพัสดุอุปกรณ์</span></div>
+                <!-- 1.2 DO -->
+                <div class="org-dir-col">
+                  <div class="org-box box-dir-cto" onclick="openOrgDeptModal('do')">
+                    <div class="org-box-role">DIRECTOR OF OPERATIONS</div>
+                    <div class="org-box-title">(DO)</div>
                   </div>
+                  <div class="unit-box unit-cto" onclick="openOrgDeptModal('ops_div')">Operation Division</div>
+                  <div class="unit-box unit-cto" onclick="openOrgDeptModal('ops_sched')">Operation Scheduler</div>
+                  <div class="unit-box unit-cto" onclick="openOrgDeptModal('ops_disp')">Operation Dispatch</div>
+                  <div class="unit-box unit-cto" onclick="openOrgDeptModal('sim_coord')">Simulator Coordinator</div>
                 </div>
-                <div class="org-dept-block">
-                  <div class="org-sub-box main-dept-box" onclick="openOrgDeptModal('maint_material')">MATERIAL DEPT.<span>แผนกพัสดุ</span></div>
-                  <div class="org-unit-list">
-                    <div class="org-unit-box" onclick="openOrgDeptModal('maint_material')">STORE MANAGEMENT<span>บริหารพัสดุ</span></div>
-                    <div class="org-unit-box" onclick="openOrgDeptModal('maint_material')">INVENTORY CONTROL<span>ควบคุมสินค้าคงคลัง</span></div>
-                    <div class="org-unit-box" onclick="openOrgDeptModal('maint_material')">PURCHASING<span>จัดซื้อจัดจ้าง</span></div>
-                    <div class="org-unit-box" onclick="openOrgDeptModal('maint_material')">RECEIVING / SHIPPING<span>รับ - จ่ายพัสดุ</span></div>
+                <!-- 1.3 DS -->
+                <div class="org-dir-col">
+                  <div class="org-box box-dir-cto" onclick="openOrgDeptModal('ds')">
+                    <div class="org-box-role">DIRECTOR OF STANDARD</div>
+                    <div class="org-box-title">(DS)</div>
                   </div>
+                  <div class="unit-box unit-cto" onclick="openOrgDeptModal('std_div')">Standard Division</div>
+                  <div class="unit-box unit-cto" onclick="openOrgDeptModal('std_flight')">Standard Flight</div>
+                  <div class="unit-box unit-cto" style="border:1.5px dashed #06b6d4;" onclick="openOrgDeptModal('std_theory')">Standard Theory</div>
+                  <div class="unit-box unit-cto" onclick="openOrgDeptModal('std_sim')">Standard Simulators</div>
+                  <div class="unit-box unit-cto" onclick="openOrgDeptModal('std_course')">Standards Course Development</div>
                 </div>
-                <div class="org-dept-block">
-                  <div class="org-sub-box main-dept-box" onclick="openOrgDeptModal('maint_qa')">QA / QC DEPT.<span>แผนกประกันคุณภาพ</span></div>
-                  <div class="org-unit-list">
-                    <div class="org-unit-box" onclick="openOrgDeptModal('maint_qa')">QUALITY ASSURANCE<span>ประกันคุณภาพ</span></div>
-                    <div class="org-unit-box" onclick="openOrgDeptModal('maint_qa')">QUALITY CONTROL<span>ควบคุมคุณภาพ</span></div>
-                    <div class="org-unit-box" onclick="openOrgDeptModal('maint_qa')">DOCUMENT CONTROL<span>ควบคุมเอกสาร</span></div>
-                    <div class="org-unit-box" onclick="openOrgDeptModal('maint_qa')">CALIBRATION CONTROL<span>ควบคุมเครื่องมือวัด</span></div>
+                <!-- 1.4 DT -->
+                <div class="org-dir-col">
+                  <div class="org-box box-dir-cto" onclick="openOrgDeptModal('dt')">
+                    <div class="org-box-role">DIRECTOR OF TRAINING</div>
+                    <div class="org-box-title">(DT)</div>
                   </div>
+                  <div class="unit-box unit-cto" onclick="openOrgDeptModal('train_div')">Training Admin. Division</div>
+                  <div class="unit-box unit-cto" onclick="openOrgDeptModal('train_coord')">Training Coordinator</div>
+                  <div class="unit-box unit-cto" onclick="openOrgDeptModal('train_conduct')">Training Compliance & Conduct</div>
+                  <div class="unit-box unit-cto" onclick="openOrgDeptModal('train_plan')">Training Planner</div>
+                  <div class="unit-box unit-cto" onclick="openOrgDeptModal('train_license')">Training Registration & Licensing</div>
                 </div>
               </div>
             </div>
 
-            <!-- ── 2. TRAINING DIVISION (Yellow/Orange) ── -->
-            <div class="org-div-col col-training">
-              <div class="org-box box-training" onclick="openOrgDeptModal('training')">
-                <div class="org-box-role">TRAINING DIVISION</div>
-                <div class="org-box-title">ฝ่ายอบรม</div>
-                <div class="org-box-badge" id="org-badge-training">0 คน</div>
+            <!-- Stream 2: Chief Commercial Officer (CCO) -->
+            <div class="org-chief-col" style="flex:1.2;">
+              <div class="org-box box-cco" onclick="openOrgDeptModal('cco')" style="width:100%;">
+                <div class="org-box-role">CHIEF COMMERCIAL OFFICER</div>
+                <div class="org-box-role" style="color:#dcfce7;">(CCO)</div>
               </div>
-              <div class="org-sub-list">
-                <div class="org-dept-block">
-                  <div class="org-sub-box main-dept-box" onclick="openOrgDeptModal('training')">TRAINING DEPT.<span>แผนกอบรม</span></div>
-                  <div class="org-unit-list">
-                    <div class="org-unit-box" onclick="openOrgDeptModal('training')">COURSE PLANNING<span>วางแผนหลักสูตร</span></div>
-                    <div class="org-unit-box" onclick="openOrgDeptModal('training')">TRAINING DELIVERY<span>ดำเนินการอบรม</span></div>
-                    <div class="org-unit-box" onclick="openOrgDeptModal('training')">TRAINING SUPPORT<span>สนับสนุนการอบรม</span></div>
-                  </div>
+              <div class="org-line-v" style="height:14px;"></div>
+              <div class="org-dir-col" style="width:100%;">
+                <div class="org-box box-dir-cco" onclick="openOrgDeptModal('dir_sale')">
+                  <div class="org-box-role">DIRECTOR OF SALE & MARKETING</div>
                 </div>
+                <div class="unit-box unit-cco" onclick="openOrgDeptModal('sale_mkt_div')">Sale and Marketing</div>
+                <div class="unit-box unit-cco" onclick="openOrgDeptModal('sale_dept')">Sale</div>
+                <div class="unit-box unit-cco" onclick="openOrgDeptModal('mkt_dept')">Marketing</div>
               </div>
             </div>
 
-            <!-- ── 3. STANDARD DIVISION (Pink) ── -->
-            <div class="org-div-col col-standard">
-              <div class="org-box box-standard" onclick="openOrgDeptModal('standard')">
-                <div class="org-box-role">STANDARD DIVISION</div>
-                <div class="org-box-title">ฝ่ายมาตรฐาน</div>
-                <div class="org-box-badge" id="org-badge-standard">0 คน</div>
+            <!-- Stream 3: Chief Financial and Accounting Officer (CFO) -->
+            <div class="org-chief-col" style="flex:1.2;">
+              <div class="org-box box-cfo" onclick="openOrgDeptModal('cfo')" style="width:100%;">
+                <div class="org-box-role">CHIEF FINANCIAL & ACCOUNTING OFFICER</div>
+                <div class="org-box-role" style="color:#ffedd5;">(CFO)</div>
               </div>
-              <div class="org-sub-list">
-                <div class="org-dept-block">
-                  <div class="org-sub-box main-dept-box" onclick="openOrgDeptModal('standard')">STANDARD DEPT.<span>แผนกมาตรฐาน</span></div>
-                  <div class="org-unit-list">
-                    <div class="org-unit-box" onclick="openOrgDeptModal('standard')">DOCUMENTATION<span>จัดทำเอกสาร</span></div>
-                    <div class="org-unit-box" onclick="openOrgDeptModal('standard')">AUDIT & INSPECTION<span>ตรวจสอบคุณภาพ</span></div>
-                    <div class="org-unit-box" onclick="openOrgDeptModal('standard')">CONTINUOUS IMPROVEMENT<span>พัฒนาคุณภาพอย่างต่อเนื่อง</span></div>
-                  </div>
+              <div class="org-line-v" style="height:14px;"></div>
+              <div class="org-dir-col" style="width:100%;">
+                <div class="org-box box-dir-cfo" onclick="openOrgDeptModal('dir_fa')">
+                  <div class="org-box-role">DIRECTOR OF FINANCIAL & ACCOUNTING</div>
                 </div>
+                <div class="unit-box unit-cfo" onclick="openOrgDeptModal('fa_div')">Finance & Accounting Division</div>
+                <div class="unit-box unit-cfo" onclick="openOrgDeptModal('fa_dept')">Finance and Accounting</div>
+                <div class="unit-box unit-cfo" onclick="openOrgDeptModal('purchasing')">Purchasing</div>
               </div>
             </div>
 
-            <!-- ── 4. QUALITY ASSURANCE DIVISION (Purple) ── -->
-            <div class="org-div-col col-qa">
-              <div class="org-box box-qa" onclick="openOrgDeptModal('qa')">
-                <div class="org-box-role">QUALITY ASSURANCE DIVISION</div>
-                <div class="org-box-title">ฝ่ายประกันคุณภาพ</div>
-                <div class="org-box-badge" id="org-badge-qa">0 คน</div>
+            <!-- Stream 4: Chief Business Assurance Officer (CBO) -->
+            <div class="org-chief-col" style="flex:1.2;">
+              <div class="org-box box-cbo" onclick="openOrgDeptModal('cbo')" style="width:100%;">
+                <div class="org-box-role">CHIEF BUSINESS ASSURANCE OFFICER</div>
+                <div class="org-box-role" style="color:#fef9c3;">(CBO)</div>
               </div>
-              <div class="org-sub-list">
-                <div class="org-dept-block">
-                  <div class="org-sub-box main-dept-box" onclick="openOrgDeptModal('qa')">QA / QC DEPT.<span>แผนกประกันคุณภาพ</span></div>
-                  <div class="org-unit-list">
-                    <div class="org-unit-box" onclick="openOrgDeptModal('qa')">QUALITY PLANNING<span>วางแผนคุณภาพ</span></div>
-                    <div class="org-unit-box" onclick="openOrgDeptModal('qa')">QUALITY CONTROL<span>ควบคุมคุณภาพ</span></div>
-                    <div class="org-unit-box" onclick="openOrgDeptModal('qa')">INTERNAL AUDIT<span>ตรวจสอบภายใน</span></div>
-                    <div class="org-unit-box" onclick="openOrgDeptModal('qa')">QUALITY SYSTEM<span>ระบบคุณภาพ</span></div>
-                  </div>
+              <div class="org-line-v" style="height:14px;"></div>
+              <div class="org-dir-col" style="width:100%;">
+                <div class="org-box box-dir-cbo" onclick="openOrgDeptModal('dir_ba')">
+                  <div class="org-box-role">DIRECTOR OF BUSINESS ASSURANCE</div>
                 </div>
+                <div class="unit-box unit-cbo" onclick="openOrgDeptModal('ba_div')">Business Assurance Division</div>
+                <div class="unit-box unit-cbo" onclick="openOrgDeptModal('assurance_mgmt')">Assurance Management</div>
+                <div class="unit-box unit-cbo" onclick="openOrgDeptModal('risk_loss')">Risk and Loss Management</div>
+                <div class="unit-box unit-cbo" onclick="openOrgDeptModal('process_impr')">Process Improvement</div>
               </div>
             </div>
 
-            <!-- ── 5. FLIGHT OPERATIONS DEPT (Orange) — sub-units only ── -->
-            <div class="org-div-col col-flight">
-              <div class="org-sub-box main-dept-box" onclick="openOrgDeptModal('flight')" style="background:rgba(234,88,12,0.1); border-color:#ea580c; font-weight:800; color:#ea580c;">FLIGHT OPERATIONS DEPT.<span style="color:var(--text3);">แผนกปฏิบัติการบิน</span></div>
-              <div class="org-unit-list" style="margin-top:0; border-color:rgba(234,88,12,0.3);">
-                <div class="org-unit-box" onclick="openOrgDeptModal('flight')" style="background:rgba(234,88,12,0.06); border-color:rgba(234,88,12,0.2);">OPERATIONS CONTROL<span>ควบคุมการปฏิบัติการบิน</span></div>
-                <div class="org-unit-box" onclick="openOrgDeptModal('flight')" style="background:rgba(234,88,12,0.06); border-color:rgba(234,88,12,0.2);">FLIGHT DISPATCH<span>วางแผนการบิน</span></div>
-                <div class="org-unit-box" onclick="openOrgDeptModal('flight')" style="background:rgba(234,88,12,0.06); border-color:rgba(234,88,12,0.2);">CREW MANAGEMENT<span>บริหารจัดการนักบิน</span></div>
+            <!-- Stream 5: Director of Safety and Compliance Monitoring (DSCM) -->
+            <div class="org-chief-col org-dscm-col" style="flex:1.2;">
+              <div style="height:36px;"></div><!-- Alignment spacing with C-level row -->
+              <div class="org-dir-col" style="width:100%;">
+                <div class="org-box box-dir-dscm" onclick="openOrgDeptModal('dscm')" style="border:2px dashed #f59e0b;" title="TCAR Part-ORA Compliant Position">
+                  <div class="org-box-role">DIRECTOR OF SAFETY & COMPLIANCE MONITORING</div>
+                  <div class="org-box-role" style="color:#047857;">(DSCM)</div>
+                </div>
+                <div class="unit-box unit-dscm" onclick="openOrgDeptModal('safety_div')">Safety & Compliance Monitoring Division</div>
+                <div class="unit-box unit-dscm" style="border:1.5px dashed #10b981;" onclick="openOrgDeptModal('safety_mgmt')">Safety Management</div>
+                <div class="unit-box unit-dscm" style="border:1.5px dashed #10b981;" onclick="openOrgDeptModal('compliance_mon')">Compliance Monitoring</div>
               </div>
             </div>
 
@@ -3011,20 +2802,20 @@
           <!-- ═══════ Chart Footer: Legend & Approval Stamp ═══════ -->
           <div class="org-footer-meta">
             <div class="org-legend-card">
-              <div class="org-legend-title">📌 หมายเหตุ (Legend)</div>
+              <div class="org-legend-title">📌 LEGEND / หมายเหตุ</div>
               <div class="org-legend-item">
-                <span class="legend-line-solid"></span>
-                <span>สายการบังคับบัญชา (Line of Command)</span>
+                <div class="legend-box-caat"></div>
+                <span><strong>TCAR Part-ORA compliant position</strong> (ตำแหน่งตามมาตรฐาน CAAT)</span>
               </div>
               <div class="org-legend-item">
-                <span class="legend-line-dashed"></span>
-                <span>สายประสานงาน (Coordination Line)</span>
+                <div class="legend-box-tif"></div>
+                <span><strong>TIF designated position</strong> (ตำแหน่งบริหารภายในบริษัท TIF)</span>
               </div>
             </div>
             <div class="org-approval-card">
-              <div class="approval-date">ฉบับอนุมัติ ณ วันที่ 25 กรกฎาคม พ.ศ. 2568</div>
-              <div class="approval-name">อนุมัติโดย นายภาณุ นิ่มสกุล</div>
-              <div class="approval-title">ประธานเจ้าหน้าที่บริหาร (CEO)</div>
+              <div class="approval-date">ประกาศ ณ วันที่ 1 กรกฎาคม 2569</div>
+              <div class="approval-name">( ภาณุ นิ่มสกุล )</div>
+              <div class="approval-title">ประธานเจ้าหน้าที่บริหาร</div>
               <div class="approval-company">บริษัท ไทย อินเตอร์ ไฟลิ่ง จำกัด</div>
             </div>
           </div>
