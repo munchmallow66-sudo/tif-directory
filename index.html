@@ -766,7 +766,7 @@
       color: var(--text);
       outline: none;
       transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-      box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
     }
 
     .search-input-wrapper input::placeholder {
@@ -1197,11 +1197,25 @@
       transition: background-color 0.3s ease;
     }
 
-    .total-card::before { background: #5b21b6; }
-    .bkk-card::before { background: var(--accent); }
-    .phs-card::before { background: var(--success); }
-    .pt-card::before { background: var(--warn); }
-    .mail-card::before { background: #10b981; }
+    .total-card::before {
+      background: #5b21b6;
+    }
+
+    .bkk-card::before {
+      background: var(--accent);
+    }
+
+    .phs-card::before {
+      background: var(--success);
+    }
+
+    .pt-card::before {
+      background: var(--warn);
+    }
+
+    .mail-card::before {
+      background: #10b981;
+    }
 
     .dash-card:hover {
       transform: translateY(-4px);
@@ -1214,11 +1228,25 @@
     }
 
     /* Glows matching the indicators */
-    .total-card:hover { box-shadow: 0 10px 15px -3px rgba(91, 33, 182, 0.08), 0 4px 6px -2px rgba(91, 33, 182, 0.05); }
-    .bkk-card:hover { box-shadow: 0 10px 15px -3px rgba(24, 95, 165, 0.08), 0 4px 6px -2px rgba(24, 95, 165, 0.05); }
-    .phs-card:hover { box-shadow: 0 10px 15px -3px rgba(15, 118, 110, 0.08), 0 4px 6px -2px rgba(15, 118, 110, 0.05); }
-    .pt-card:hover { box-shadow: 0 10px 15px -3px rgba(180, 83, 9, 0.08), 0 4px 6px -2px rgba(180, 83, 9, 0.05); }
-    .mail-card:hover { box-shadow: 0 10px 15px -3px rgba(16, 185, 129, 0.08), 0 4px 6px -2px rgba(16, 185, 129, 0.05); }
+    .total-card:hover {
+      box-shadow: 0 10px 15px -3px rgba(91, 33, 182, 0.08), 0 4px 6px -2px rgba(91, 33, 182, 0.05);
+    }
+
+    .bkk-card:hover {
+      box-shadow: 0 10px 15px -3px rgba(24, 95, 165, 0.08), 0 4px 6px -2px rgba(24, 95, 165, 0.05);
+    }
+
+    .phs-card:hover {
+      box-shadow: 0 10px 15px -3px rgba(15, 118, 110, 0.08), 0 4px 6px -2px rgba(15, 118, 110, 0.05);
+    }
+
+    .pt-card:hover {
+      box-shadow: 0 10px 15px -3px rgba(180, 83, 9, 0.08), 0 4px 6px -2px rgba(180, 83, 9, 0.05);
+    }
+
+    .mail-card:hover {
+      box-shadow: 0 10px 15px -3px rgba(16, 185, 129, 0.08), 0 4px 6px -2px rgba(16, 185, 129, 0.05);
+    }
 
     .dash-card-header {
       display: flex;
@@ -1246,6 +1274,7 @@
       background: rgba(91, 33, 182, 0.08);
       color: #5b21b6;
     }
+
     html.dark .total-card .dash-card-icon {
       background: rgba(139, 92, 246, 0.15);
       color: #a78bfa;
@@ -1260,6 +1289,7 @@
       background: var(--success-bg);
       color: var(--success);
     }
+
     html.dark .phs-card .dash-card-icon {
       background: rgba(45, 212, 191, 0.15);
       color: #2dd4bf;
@@ -1269,6 +1299,7 @@
       background: var(--warn-bg);
       color: var(--warn);
     }
+
     html.dark .pt-card .dash-card-icon {
       background: rgba(251, 191, 36, 0.15);
       color: #fbbf24;
@@ -1278,6 +1309,7 @@
       background: rgba(16, 185, 129, 0.08);
       color: #10b981;
     }
+
     html.dark .mail-card .dash-card-icon {
       background: rgba(52, 211, 153, 0.15);
       color: #34d399;
@@ -1297,6 +1329,7 @@
       background: var(--success-bg);
       color: var(--success);
     }
+
     html.dark .trend-up {
       background: rgba(45, 212, 191, 0.15);
       color: #2dd4bf;
@@ -1521,7 +1554,7 @@
       .toolbar-wrap {
         padding: 0 16px;
       }
-      
+
       .toolbar-inner {
         padding: 12px;
         gap: 12px;
@@ -1532,9 +1565,10 @@
       header {
         padding: 8px 12px;
       }
-      
+
       .logo-sub {
-        display: none; /* Hide flying sub-text on mobile for clean spacing */
+        display: none;
+        /* Hide flying sub-text on mobile for clean spacing */
       }
 
       .header-nav {
@@ -1579,12 +1613,14 @@
       }
 
       .grid {
-        grid-template-columns: 1fr; /* Single column grid for mobile cards */
+        grid-template-columns: 1fr;
+        /* Single column grid for mobile cards */
         gap: 12px;
       }
 
       .card-details-grid {
-        grid-template-columns: 1fr; /* 1 column layout inside cards on mobile */
+        grid-template-columns: 1fr;
+        /* 1 column layout inside cards on mobile */
         gap: 10px;
       }
 
@@ -1597,7 +1633,7 @@
         flex-direction: column;
         gap: 6px;
       }
-      
+
       .btn-action-premium {
         width: 100%;
       }
@@ -1688,13 +1724,16 @@
       width: 6px;
       height: 6px;
     }
+
     .form-grid::-webkit-scrollbar-track {
       background: transparent;
     }
+
     .form-grid::-webkit-scrollbar-thumb {
       background: var(--border);
       border-radius: 999px;
     }
+
     .form-grid::-webkit-scrollbar-thumb:hover {
       background: var(--text3);
     }
@@ -1830,13 +1869,32 @@
 
       <nav class="header-nav">
         <button class="nav-tab active" id="nav-tab-directory" onclick="switchTab('directory')">
-          ✈ รายชื่อพนักงาน
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            style="width:15px; height:15px; flex-shrink:0;">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+            <circle cx="9" cy="7" r="4" />
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+            <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+          </svg>
+          <span id="nav-tab-dir-text">รายชื่อพนักงาน</span>
         </button>
         <button class="nav-tab" id="nav-tab-dashboard" onclick="switchTab('dashboard')">
-          📊 สถิติองค์กร
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            style="width:15px; height:15px; flex-shrink:0;">
+            <line x1="18" y1="20" x2="18" y2="10" />
+            <line x1="12" y1="20" x2="12" y2="4" />
+            <line x1="6" y1="20" x2="6" y2="14" />
+          </svg>
+          <span id="nav-tab-dash-text">สถิติองค์กร</span>
         </button>
         <button class="nav-tab" id="nav-tab-settings" onclick="switchTab('settings')">
-          ⚙ จัดการระบบ
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            style="width:15px; height:15px; flex-shrink:0;">
+            <circle cx="12" cy="12" r="3" />
+            <path
+              d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z" />
+          </svg>
+          <span id="nav-tab-set-text">จัดการระบบ</span>
         </button>
       </nav>
 
@@ -1882,7 +1940,11 @@
 
           <!-- Location Select -->
           <div class="filter-select-group">
-            <span class="filter-icon">📍</span>
+            <span class="filter-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                style="width:14px; height:14px; display:inline-block; vertical-align:middle;">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                <circle cx="12" cy="10" r="3" />
+              </svg></span>
             <select id="loc-filter-select">
               <option value="ALL" id="opt-loc-filter-all">ทุกพื้นที่</option>
               <option value="BKK" id="opt-loc-filter-bkk">BKK</option>
@@ -1893,7 +1955,10 @@
 
           <!-- Department Select -->
           <div class="filter-select-group">
-            <span class="filter-icon">📂</span>
+            <span class="filter-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                style="width:14px; height:14px; display:inline-block; vertical-align:middle;">
+                <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z" />
+              </svg></span>
             <select id="dept-filter-select">
               <option value="ALL" id="opt-dept-filter-all">ทุกฝ่าย</option>
               <option value="flight" id="opt-dept-filter-flight">ปฏิบัติการบิน</option>
@@ -1905,7 +1970,11 @@
 
           <!-- Email Status Select -->
           <div class="filter-select-group">
-            <span class="filter-icon">✉</span>
+            <span class="filter-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                style="width:14px; height:14px; display:inline-block; vertical-align:middle;">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                <polyline points="22,6 12,13 2,6" />
+              </svg></span>
             <select id="mail-filter-select">
               <option value="ALL" id="opt-mail-filter-all">เมลทั้งหมด</option>
               <option value="used" id="opt-mail-filter-used">ใช้งานแล้ว</option>
@@ -1915,7 +1984,12 @@
 
           <!-- Sort Select -->
           <div class="filter-select-group">
-            <span class="filter-icon">⇅</span>
+            <span class="filter-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                style="width:14px; height:14px; display:inline-block; vertical-align:middle;">
+                <path d="m7 15 5 5 5-5" />
+                <path d="m7 9 5-5 5 5" />
+                <line x1="12" y1="4" x2="12" y2="20" />
+              </svg></span>
             <select id="sort-select" onchange="render()">
               <option value="id-asc">รหัสพนักงาน (เก่า - ใหม่)</option>
               <option value="id-desc">รหัสพนักงาน (ใหม่ - เก่า)</option>
@@ -1927,7 +2001,8 @@
 
         <div class="toolbar-controls-right">
           <button class="btn-add-new" onclick="openAddModal()">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:14px; height:14px; margin-right:4px;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+              style="width:14px; height:14px; margin-right:4px;">
               <line x1="12" y1="5" x2="12" y2="19" />
               <line x1="5" y1="12" x2="19" y2="12" />
             </svg>
@@ -1953,14 +2028,21 @@
       <div class="db-hero">
         <div class="db-hero-content">
           <div class="db-hero-tag">
-            <span style="font-size: 10px;">✈</span> TIF Operations Control
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              style="width:13px; height:13px; display:inline-block; vertical-align:middle; margin-right:3px;">
+              <path
+                d="M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L14 19v-5.5l8 2.5z" />
+            </svg> TIF Operations Control
           </div>
           <h2 class="db-hero-title" id="db-hero-title">ระบบรายงานสถิติของพนักงาน</h2>
-          <p class="db-hero-subtitle" id="db-hero-subtitle">ภาพรวมข้อมูลสังกัดพนักงาน, สายงาน และความครอบคลุมของระบบสมาชิก</p>
+          <p class="db-hero-subtitle" id="db-hero-subtitle">ภาพรวมข้อมูลสังกัดพนักงาน, สายงาน
+            และความครอบคลุมของระบบสมาชิก</p>
         </div>
         <div class="db-hero-decor">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L14 19v-5.5l8 2.5z"/>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"
+            stroke-linejoin="round">
+            <path
+              d="M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L14 19v-5.5l8 2.5z" />
           </svg>
         </div>
       </div>
@@ -1970,11 +2052,12 @@
         <div class="dash-card total-card">
           <div class="dash-card-header">
             <div class="dash-card-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
-                <circle cx="9" cy="7" r="4"/>
-                <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
-                <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                <circle cx="9" cy="7" r="4" />
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                <path d="M16 3.13a4 4 0 0 1 0 7.75" />
               </svg>
             </div>
             <span class="dash-card-trend trend-up">Active</span>
@@ -1989,11 +2072,14 @@
         <div class="dash-card bkk-card">
           <div class="dash-card-header">
             <div class="dash-card-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L14 19v-5.5l8 2.5z"/>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round">
+                <path
+                  d="M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L14 19v-5.5l8 2.5z" />
               </svg>
             </div>
-            <span class="dash-card-trend" style="background:rgba(24, 95, 165, 0.08); color:var(--accent-text);">BKK Base</span>
+            <span class="dash-card-trend" style="background:rgba(24, 95, 165, 0.08); color:var(--accent-text);">BKK
+              Base</span>
           </div>
           <div class="dash-card-info">
             <div class="dash-card-label" id="db-bkk-label">สังกัด BKK</div>
@@ -2005,11 +2091,15 @@
         <div class="dash-card phs-card">
           <div class="dash-card-header">
             <div class="dash-card-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L14 19v-5.5l8 2.5z" style="transform: rotate(30deg); transform-origin: center;"/>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round">
+                <path
+                  d="M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L14 19v-5.5l8 2.5z"
+                  style="transform: rotate(30deg); transform-origin: center;" />
               </svg>
             </div>
-            <span class="dash-card-trend" style="background:rgba(15, 118, 110, 0.08); color:var(--success);">PHS Base</span>
+            <span class="dash-card-trend" style="background:rgba(15, 118, 110, 0.08); color:var(--success);">PHS
+              Base</span>
           </div>
           <div class="dash-card-info">
             <div class="dash-card-label" id="db-phs-label">สังกัด PHS</div>
@@ -2021,9 +2111,10 @@
         <div class="dash-card pt-card">
           <div class="dash-card-header">
             <div class="dash-card-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="12" cy="12" r="10"/>
-                <polyline points="12 6 12 12 16 14"/>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10" />
+                <polyline points="12 6 12 12 16 14" />
               </svg>
             </div>
             <span class="dash-card-trend" style="background:rgba(180, 83, 9, 0.08); color:var(--warn);">Flex-Time</span>
@@ -2038,12 +2129,14 @@
         <div class="dash-card mail-card">
           <div class="dash-card-header">
             <div class="dash-card-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <rect x="2" y="4" width="20" height="16" rx="2"/>
-                <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round">
+                <rect x="2" y="4" width="20" height="16" rx="2" />
+                <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
               </svg>
             </div>
-            <span class="dash-card-trend" style="background:rgba(16, 185, 129, 0.08); color:#10b981;" id="db-mail-badge">Adoption</span>
+            <span class="dash-card-trend" style="background:rgba(16, 185, 129, 0.08); color:#10b981;"
+              id="db-mail-badge">Adoption</span>
           </div>
           <div class="dash-card-info">
             <div class="dash-card-label" id="db-mail-label">เปิดใช้งานอีเมล</div>
@@ -2079,13 +2172,16 @@
 
       <!-- Quick Actions Grid -->
       <div class="quick-actions-section">
-        <h3 style="font-size: 15px; font-weight: 600; margin-bottom: 16px; color: var(--text); border-left: 4px solid var(--accent); padding-left: 10px;" id="db-quick-actions-title">คีย์ลัดการทำงานระบบ (Quick Actions)</h3>
+        <h3
+          style="font-size: 15px; font-weight: 600; margin-bottom: 16px; color: var(--text); border-left: 4px solid var(--accent); padding-left: 10px;"
+          id="db-quick-actions-title">คีย์ลัดการทำงานระบบ (Quick Actions)</h3>
         <div class="quick-actions-grid">
           <div class="quick-action-card" onclick="openAddModalFromDashboard()">
             <div class="quick-action-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                <line x1="12" y1="5" x2="12" y2="19"/>
-                <line x1="5" y1="12" x2="19" y2="12"/>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                stroke-linejoin="round">
+                <line x1="12" y1="5" x2="12" y2="19" />
+                <line x1="5" y1="12" x2="19" y2="12" />
               </svg>
             </div>
             <div class="quick-action-info">
@@ -2096,9 +2192,10 @@
 
           <div class="quick-action-card" onclick="switchTab('directory')">
             <div class="quick-action-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="11" cy="11" r="8"/>
-                <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round">
+                <circle cx="11" cy="11" r="8" />
+                <line x1="21" y1="21" x2="16.65" y2="16.65" />
               </svg>
             </div>
             <div class="quick-action-info">
@@ -2109,10 +2206,11 @@
 
           <div class="quick-action-card" onclick="exportStaffJSON()">
             <div class="quick-action-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-                <polyline points="7 10 12 15 17 10"/>
-                <line x1="12" y1="15" x2="12" y2="3"/>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                <polyline points="7 10 12 15 17 10" />
+                <line x1="12" y1="15" x2="12" y2="3" />
               </svg>
             </div>
             <div class="quick-action-info">
@@ -2123,9 +2221,11 @@
 
           <div class="quick-action-card" onclick="switchTab('settings')">
             <div class="quick-action-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="12" cy="12" r="3"/>
-                <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round">
+                <circle cx="12" cy="12" r="3" />
+                <path
+                  d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z" />
               </svg>
             </div>
             <div class="quick-action-info">
@@ -2142,7 +2242,8 @@
   <div id="tab-settings" class="tab-content" style="display:none;">
     <main style="max-width: 600px; margin: 0 auto;">
       <div class="section-card">
-        <h2 id="settings-title" style="font-size: 18px; font-weight: 600; margin-bottom: 8px; color: var(--text);">จัดการฐานข้อมูลระบบ (System Settings)</h2>
+        <h2 id="settings-title" style="font-size: 18px; font-weight: 600; margin-bottom: 8px; color: var(--text);">
+          จัดการฐานข้อมูลระบบ (System Settings)</h2>
         <p id="settings-desc" style="font-size: 13px; color: var(--text3); line-height: 1.6; margin-bottom: 24px;">
           คุณสามารถส่งออกข้อมูลพนักงานทั้งหมดเพื่อสำรองเก็บไว้เป็นไฟล์ JSON
           หรือทำการกู้คืนข้อมูลโดยเลือกไฟล์ที่เคยส่งออกไว้ รวมถึงการล้างข้อมูลกลับไปเป็นค่าเริ่มต้นจากทางระบบ
@@ -2150,7 +2251,16 @@
 
         <div style="display:flex; flex-direction:column; gap:16px;">
           <div style="padding:16px; border:1px solid var(--border); border-radius:10px; background:var(--surface2);">
-            <h3 id="backup-title" style="font-size:14px; font-weight:600; margin-bottom:6px; color:var(--text);">📥 ส่งออกข้อมูล (Backup Data)</h3>
+            <h3 id="backup-title"
+              style="font-size:14px; font-weight:600; margin-bottom:6px; color:var(--text); display:flex; align-items:center; gap:6px;">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                style="width:16px; height:16px; color:var(--accent);">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                <polyline points="7 10 12 15 17 10" />
+                <line x1="12" y1="15" x2="12" y2="3" />
+              </svg>
+              <span>ส่งออกข้อมูล (Backup Data)</span>
+            </h3>
             <p id="backup-desc" style="font-size:12px; color:var(--text3); margin-bottom:12px;">
               บันทึกข้อมูลพนักงานทั้งหมดที่มีการอัปเดตปัจจุบันลงเครื่องคอมพิวเตอร์ของคุณเป็นไฟล์ JSON</p>
             <button id="backup-btn" class="fbtn on" onclick="exportStaffJSON()"
@@ -2158,8 +2268,18 @@
           </div>
 
           <div style="padding:16px; border:1px solid var(--border); border-radius:10px; background:var(--surface2);">
-            <h3 id="restore-title" style="font-size:14px; font-weight:600; margin-bottom:6px; color:var(--text);">📤 นำเข้าข้อมูล (Restore Data)</h3>
-            <p id="restore-desc" style="font-size:12px; color:var(--text3); margin-bottom:12px;">เลือกไฟล์สำรองข้อมูลพนักงาน (.json)
+            <h3 id="restore-title"
+              style="font-size:14px; font-weight:600; margin-bottom:6px; color:var(--text); display:flex; align-items:center; gap:6px;">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                style="width:16px; height:16px; color:var(--accent);">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                <polyline points="17 8 12 3 7 8" />
+                <line x1="12" y1="3" x2="12" y2="15" />
+              </svg>
+              <span>นำเข้าข้อมูล (Restore Data)</span>
+            </h3>
+            <p id="restore-desc" style="font-size:12px; color:var(--text3); margin-bottom:12px;">
+              เลือกไฟล์สำรองข้อมูลพนักงาน (.json)
               เพื่ออัปโหลดและกู้คืนเข้าสู่ระบบนี้</p>
             <input type="file" id="import-file-input" accept=".json" style="display:none;"
               onchange="importStaffJSON(event)">
@@ -2169,7 +2289,16 @@
 
           <div
             style="padding:16px; border:1px dashed var(--warn); border-radius:10px; background:rgba(180, 83, 9, 0.03);">
-            <h3 id="reset-title" style="font-size:14px; font-weight:600; color:var(--warn); margin-bottom:6px;">⚠️ รีเซ็ตข้อมูลระบบ (System Reset)</h3>
+            <h3 id="reset-title"
+              style="font-size:14px; font-weight:600; color:var(--warn); margin-bottom:6px; display:flex; align-items:center; gap:6px;">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                style="width:16px; height:16px; color:var(--warn);">
+                <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z" />
+                <line x1="12" y1="9" x2="12" y2="13" />
+                <line x1="12" y1="17" x2="12.01" y2="17" />
+              </svg>
+              <span>รีเซ็ตข้อมูลระบบ (System Reset)</span>
+            </h3>
             <p id="reset-desc" style="font-size:12px; color:var(--text3); margin-bottom:12px;">
               ล้างข้อมูลที่มีการบันทึกไว้ในคอมพิวเตอร์เครื่องนี้ทั้งหมด แล้วคืนค่ากลับเป็นพนักงานเริ่มต้น 47 คน</p>
             <button id="reset-btn" class="fbtn" onclick="resetSystemToDefault()"
@@ -2194,10 +2323,17 @@
       </div>
       <form id="staff-form" onsubmit="saveStaff(event)">
         <div class="form-grid">
-          
+
           <!-- Section 1: Personal Info -->
-          <div class="form-section-title" id="lbl-form-sec-personal">👤 ข้อมูลส่วนตัว (Personal Info)</div>
-          
+          <div class="form-section-title" id="lbl-form-sec-personal">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              style="width:14px; height:14px;">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+              <circle cx="12" cy="7" r="4" />
+            </svg>
+            <span>ข้อมูลส่วนตัว (Personal Info)</span>
+          </div>
+
           <div class="form-group">
             <label for="form-id" id="lbl-form-id">รหัสพนักงาน (6 หลัก)</label>
             <input type="text" id="form-id" required pattern="\d{6}" placeholder="เช่น 680027" maxlength="6">
@@ -2224,7 +2360,14 @@
           </div>
 
           <!-- Section 2: Work & Access -->
-          <div class="form-section-title" id="lbl-form-sec-work">💼 ข้อมูลการทำงานและการเข้าระบบ (Work & Access)</div>
+          <div class="form-section-title" id="lbl-form-sec-work">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              style="width:14px; height:14px;">
+              <rect x="2" y="7" width="20" height="14" rx="2" ry="2" />
+              <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
+            </svg>
+            <span>ข้อมูลการทำงานและการเข้าระบบ (Work & Access)</span>
+          </div>
 
           <div class="form-group full-width">
             <label for="form-role" id="lbl-form-role">ตำแหน่งงาน</label>
@@ -2235,18 +2378,18 @@
             <label for="form-dept" id="lbl-form-dept">ฝ่าย/กลุ่มสายงาน</label>
             <select id="form-dept" required>
               <option value="default" id="opt-dept-default">ตามตำแหน่งงาน (Auto)</option>
-              <option value="flight">✈ ปฏิบัติการบินและฝึกอบรม (Flight Ops & Training)</option>
-              <option value="maint">🛠 ฝ่ายซ่อมบำรุงอากาศยาน (Maintenance)</option>
-              <option value="admin">💼 ฝ่ายบริหารและสนับสนุนการบิน (Admin & Sales)</option>
-              <option value="other">❓ อื่นๆ / ยังไม่ระบุกลุ่ม (Others)</option>
+              <option value="flight">ปฏิบัติการบินและฝึกอบรม (Flight Ops & Training)</option>
+              <option value="maint">ฝ่ายซ่อมบำรุงอากาศยาน (Maintenance)</option>
+              <option value="admin">ฝ่ายบริหารและสนับสนุนการบิน (Admin & Sales)</option>
+              <option value="other">อื่นๆ / ยังไม่ระบุกลุ่ม (Others)</option>
             </select>
           </div>
           <div class="form-group">
             <label for="form-loc" id="lbl-form-loc">สถานที่ปฏิบัติงาน</label>
             <select id="form-loc" required>
-              <option value="BKK">✈ BKK</option>
-              <option value="PHS">🛫 PHS</option>
-              <option value="Part Time">⏱ Part Time</option>
+              <option value="BKK">BKK</option>
+              <option value="PHS">PHS</option>
+              <option value="Part Time">Part Time</option>
             </select>
           </div>
 
@@ -2269,8 +2412,10 @@
 
         </div>
         <div class="modal-footer">
-          <button type="button" class="copy-all-btn" id="btn-form-cancel" onclick="closeModal()" style="font-size: 12.5px; font-weight: 600; padding: 0 16px; height: 36px; border-radius: 8px; border: 1px solid var(--border); background: var(--surface2); color: var(--text2); cursor: pointer; transition: all 0.2s;">ยกเลิก</button>
-          <button type="submit" class="copy-all-btn" id="btn-form-save" style="font-size: 12.5px; font-weight: 600; padding: 0 20px; height: 36px; border-radius: 8px; border: 1px solid var(--accent); background: var(--accent); color: #fff; cursor: pointer; transition: all 0.2s; box-shadow: 0 2px 4px rgba(24, 95, 165, 0.15);">บันทึกข้อมูล</button>
+          <button type="button" class="copy-all-btn" id="btn-form-cancel" onclick="closeModal()"
+            style="font-size: 12.5px; font-weight: 600; padding: 0 16px; height: 36px; border-radius: 8px; border: 1px solid var(--border); background: var(--surface2); color: var(--text2); cursor: pointer; transition: all 0.2s;">ยกเลิก</button>
+          <button type="submit" class="copy-all-btn" id="btn-form-save"
+            style="font-size: 12.5px; font-weight: 600; padding: 0 20px; height: 36px; border-radius: 8px; border: 1px solid var(--accent); background: var(--accent); color: #fff; cursor: pointer; transition: all 0.2s; box-shadow: 0 2px 4px rgba(24, 95, 165, 0.15);">บันทึกข้อมูล</button>
         </div>
       </form>
     </div>
@@ -2296,16 +2441,17 @@
           <div class="form-group">
             <label for="form-dept-select" id="lbl-form-dept-select">เลือกฝ่ายที่ต้องการย้ายไป</label>
             <select id="form-dept-select" required>
-              <option value="flight">✈ ปฏิบัติการบินและฝึกอบรม (Flight Ops & Training)</option>
-              <option value="maint">🛠 ฝ่ายซ่อมบำรุงอากาศยาน (Maintenance)</option>
-              <option value="admin">💼 ฝ่ายบริหารและสนับสนุนการบิน (Admin & Sales)</option>
-              <option value="other">❓ อื่นๆ / ยังไม่ระบุกลุ่ม (Others)</option>
+              <option value="flight">ปฏิบัติการบินและฝึกอบรม (Flight Ops & Training)</option>
+              <option value="maint">ฝ่ายซ่อมบำรุงอากาศยาน (Maintenance)</option>
+              <option value="admin">ฝ่ายบริหารและสนับสนุนการบิน (Admin & Sales)</option>
+              <option value="other">อื่นๆ / ยังไม่ระบุกลุ่ม (Others)</option>
             </select>
           </div>
         </div>
         <div class="modal-footer">
           <button type="button" class="fbtn" id="btn-dept-cancel" onclick="closeDeptModal()">ยกเลิก</button>
-          <button type="submit" class="fbtn on" id="btn-dept-save" style="background:var(--accent); color:#fff; border:none; padding:0 24px; height:32px; font-weight:600;">ยืนยันการย้าย</button>
+          <button type="submit" class="fbtn on" id="btn-dept-save"
+            style="background:var(--accent); color:#fff; border:none; padding:0 24px; height:32px; font-weight:600;">ยืนยันการย้าย</button>
         </div>
       </form>
     </div>
@@ -2394,7 +2540,7 @@
             dept VARCHAR(50)
           )
         `;
-        
+
         try {
           await sql`ALTER TABLE staff ADD COLUMN IF NOT EXISTS dept VARCHAR(50)`;
         } catch (e) {
@@ -2422,9 +2568,9 @@
         title: "TIF — ทำเนียบพนักงาน",
         logoTextContent: "ทำเนียบพนักงาน",
         searchPlaceholder: "ค้นหาชื่อ ตำแหน่ง nickname…",
-        tabDirectory: "✈ รายชื่อพนักงาน",
-        tabDashboard: "📊 สถิติองค์กร",
-        tabSettings: "⚙ จัดการระบบ",
+        tabDirectory: "รายชื่อพนักงาน",
+        tabDashboard: "สถิติองค์กร",
+        tabSettings: "จัดการระบบ",
         sortBy: "เรียงลำดับ:",
         sortIdAsc: "รหัสพนักงาน (เก่า - ใหม่)",
         sortIdDesc: "รหัสพนักงาน (ใหม่ - เก่า)",
@@ -2438,13 +2584,13 @@
         clearSearch: "ล้างการค้นหา",
         nicknameLabel: "ชื่อเล่น:",
         nickPrefix: "คุณ",
-        copyName: "📋 คัดลอกชื่อจริง",
-        copyNick: "📋 คัดลอกชื่อเล่น",
-        copyPosition: "📋 คัดลอกตำแหน่ง",
-        copyId: "📋 คัดลอกรหัส",
-        copyEmail: "📋 คัดลอกเมล",
-        sendEmail: "✉️ ส่งอีเมล",
-        copyPassword: "📋 คัดลอกรหัส",
+        copyName: "คัดลอกชื่อจริง",
+        copyNick: "คัดลอกชื่อเล่น",
+        copyPosition: "คัดลอกตำแหน่ง",
+        copyId: "คัดลอกรหัส",
+        copyEmail: "คัดลอกเมล",
+        sendEmail: "ส่งอีเมล",
+        copyPassword: "คัดลอกรหัส",
         copyAllInfo: "คัดลอกข้อมูลทั้งหมด",
         editInfo: "แก้ไขข้อมูล",
         moveDept: "ย้ายฝ่าย",
@@ -2454,8 +2600,8 @@
         lblFormDept: "ฝ่าย/กลุ่มสายงาน",
         optDeptDefault: "ตามตำแหน่งงาน (Auto)",
         deleteEmployee: "ลบพนักงาน",
-        copied: "✅ คัดลอกแล้ว",
-        copiedAll: "✅ คัดลอกข้อมูลทั้งหมดแล้ว",
+        copied: "คัดลอกแล้ว",
+        copiedAll: "คัดลอกข้อมูลทั้งหมดแล้ว",
         dbTitle: "ข้อมูลสถิติของพนักงาน TIF",
         dbTotalCount: "พนักงานทั้งหมด",
         dbActiveSystem: "คนในระบบปัจจุบัน",
@@ -2467,10 +2613,10 @@
         dbPtPct: (pct) => `${pct}% ของทั้งหมด`,
         dbLocRatio: "สัดส่วนพนักงานแยกตามสังกัด/พื้นที่",
         dbDeptRatio: "สัดส่วนตามกลุ่มสายงาน",
-        dbDeptFlight: "✈ ฝ่ายปฏิบัติการบินและฝึกอบรม (Flight Ops & Training)",
-        dbDeptMaint: "🛠 ฝ่ายซ่อมบำรุงอากาศยาน (Maintenance)",
-        dbDeptAdmin: "💼 ฝ่ายบริหารและสนับสนุนการบิน (Management, Admin & Sales)",
-        dbDeptOther: "❓ อื่นๆ / ยังไม่ระบุกลุ่ม",
+        dbDeptFlight: "ฝ่ายปฏิบัติการบินและฝึกอบรม (Flight Ops & Training)",
+        dbDeptMaint: "ฝ่ายซ่อมบำรุงอากาศยาน (Maintenance)",
+        dbDeptAdmin: "ฝ่ายบริหารและสนับสนุนการบิน (Management, Admin & Sales)",
+        dbDeptOther: "อื่นๆ / ยังไม่ระบุกลุ่ม",
         deptAll: "ทั้งหมด",
         deptFlight: "ปฏิบัติการบิน",
         deptMaint: "ซ่อมบำรุง",
@@ -2487,13 +2633,13 @@
         mailPending: "ยังไม่ใช้งาน",
         settingsTitle: "จัดการฐานข้อมูลระบบ (System Settings)",
         settingsDesc: "คุณสามารถส่งออกข้อมูลพนักงานทั้งหมดเพื่อสำรองเก็บไว้เป็นไฟล์ JSON หรือทำการกู้คืนข้อมูลโดยเลือกไฟล์ที่เคยส่งออกไว้ รวมถึงการล้างข้อมูลกลับไปเป็นค่าเริ่มต้นจากทางระบบ",
-        backupTitle: "📥 ส่งออกข้อมูล (Backup Data)",
+        backupTitle: "ส่งออกข้อมูล (Backup Data)",
         backupDesc: "บันทึกข้อมูลพนักงานทั้งหมดที่มีการอัปเดตปัจจุบันลงเครื่องคอมพิวเตอร์ของคุณเป็นไฟล์ JSON",
         backupBtn: "ดาวน์โหลดข้อมูลสำรอง",
-        restoreTitle: "📤 นำเข้าข้อมูล (Restore Data)",
+        restoreTitle: "นำเข้าข้อมูล (Restore Data)",
         restoreDesc: "เลือกไฟล์สำรองข้อมูลพนักงาน (.json) เพื่ออัปโหลดและกู้คืนเข้าสู่ระบบนี้",
         restoreBtn: "เลือกไฟล์สำหรับกู้คืนข้อมูล",
-        resetTitle: "⚠️ รีเซ็ตข้อมูลระบบ (System Reset)",
+        resetTitle: "รีเซ็ตข้อมูลระบบ (System Reset)",
         resetDesc: "ล้างข้อมูลที่มีการบันทึกไว้ในคอมพิวเตอร์เครื่องนี้ทั้งหมด แล้วคืนค่ากลับเป็นพนักงานเริ่มต้น 47 คน",
         resetBtn: "รีเซ็ตเป็นค่าเริ่มต้น",
         modalTitleAdd: "เพิ่มพนักงานใหม่",
@@ -2508,8 +2654,8 @@
         formLabelLoc: "สถานที่ปฏิบัติงาน",
         formLabelEmail: "อีเมล",
         formLabelPass: "รหัสผ่านสำหรับเข้าใช้งาน",
-        formSecPersonal: "👤 ข้อมูลส่วนตัว (Personal Info)",
-        formSecWork: "💼 ข้อมูลการทำงานและการเข้าระบบ (Work & Access)",
+        formSecPersonal: "ข้อมูลส่วนตัว (Personal Info)",
+        formSecWork: "ข้อมูลการทำงานและการเข้าระบบ (Work & Access)",
         formPlaceholderNick: "เช่น แม็ค",
         formPlaceholderNickEn: "เช่น Mac",
         formPlaceholderTh: "เช่น นายพันธ์พิสุทธิ์ นุราช",
@@ -2517,14 +2663,14 @@
         formPlaceholderRole: "เช่น Flight Instructor",
         formPlaceholderEmail: "เช่น email@tif.ac.th",
         formPlaceholderPass: "รหัสผ่าน",
-        formBtnRandom: "🎲 สุ่มรหัส",
+        formBtnRandom: "สุ่มรหัส",
         formBtnCancel: "ยกเลิก",
         formBtnSave: "บันทึกข้อมูล",
         alertFillAll: "กรุณากรอกข้อมูลให้ครบถ้วน",
         alertDuplicateId: (id) => `รหัสพนักงาน ${id} มีอยู่ในระบบแล้ว กรุณาใช้รหัสอื่น`,
         confirmDelete: (name, id) => `คุณต้องการลบข้อมูลของ ${name} (รหัส: ${id}) ใช่หรือไม่?`,
         confirmImport: (n) => `พบข้อมูลพนักงานทั้งหมด ${n} คนในไฟล์นี้ ต้องการนำเข้าเพื่อเขียนทับข้อมูลในระบบปัจจุบันใช่หรือไม่?`,
-        importSuccess: "นำเข้าข้อมูลพนักงานและกู้คืนระบบเสร็จเรียบร้อยแล้ว!",
+        importSuccess: "นำเข้าข้อมูลพนักงานและกู้คืนระบบเสร็จเรีย้อยแล้ว!",
         importInvalid: "รูปแบบไฟล์ JSON ไม่ถูกต้อง กรุณาใช้ไฟล์ที่เคยส่งออกจากระบบนี้เท่านั้น",
         importError: "ไม่สามารถอ่านไฟล์ JSON ได้ กรุณาตรวจสอบว่าไฟล์สมบูรณ์หรือไม่",
         confirmReset: "คุณแน่ใจหรือไม่ว่าต้องการล้างข้อมูลระบบทั้งหมด? ข้อมูลพนักงานที่ถูกเพิ่มหรือแก้ไขหลังจากนี้จะสูญหาย และระบบจะกลับไปเป็นพนักงานเริ่มต้น 47 คน",
@@ -2555,9 +2701,9 @@
         title: "TIF — Employee Directory",
         logoTextContent: "Employee Directory",
         searchPlaceholder: "Search name, position, nickname...",
-        tabDirectory: "✈ Employee Directory",
-        tabDashboard: "📊 Organization Stats",
-        tabSettings: "⚙ System Settings",
+        tabDirectory: "Employee Directory",
+        tabDashboard: "Organization Stats",
+        tabSettings: "System Settings",
         sortBy: "Sort by:",
         sortIdAsc: "Employee ID (Old - New)",
         sortIdDesc: "Employee ID (New - Old)",
@@ -2571,13 +2717,13 @@
         clearSearch: "Clear Search",
         nicknameLabel: "Nickname:",
         nickPrefix: "Mr./Ms. ",
-        copyName: "📋 Copy Name",
-        copyNick: "📋 Copy Nickname",
-        copyPosition: "📋 Copy Position",
-        copyId: "📋 Copy ID",
-        copyEmail: "📋 Copy Email",
-        sendEmail: "✉️ Send Email",
-        copyPassword: "📋 Copy Password",
+        copyName: "Copy Name",
+        copyNick: "Copy Nickname",
+        copyPosition: "Copy Position",
+        copyId: "Copy ID",
+        copyEmail: "Copy Email",
+        sendEmail: "Send Email",
+        copyPassword: "Copy Password",
         copyAllInfo: "Copy All Info",
         editInfo: "Edit Info",
         moveDept: "Transfer Dept",
@@ -2587,8 +2733,8 @@
         lblFormDept: "Department/Job Category",
         optDeptDefault: "Job Position Base (Auto)",
         deleteEmployee: "Delete Employee",
-        copied: "✅ Copied!",
-        copiedAll: "✅ All info copied!",
+        copied: "Copied!",
+        copiedAll: "All info copied!",
         dbTitle: "TIF Employee Statistics",
         dbTotalCount: "Total Employees",
         dbActiveSystem: "Active in system",
@@ -2600,10 +2746,10 @@
         dbPtPct: (pct) => `${pct}% of total`,
         dbLocRatio: "Employee Ratio by Location/Area",
         dbDeptRatio: "Ratio by Job Category",
-        dbDeptFlight: "✈ Flight Ops & Training Department",
-        dbDeptMaint: "🛠 Aircraft Maintenance Department",
-        dbDeptAdmin: "💼 Management, Admin & Sales Department",
-        dbDeptOther: "❓ Others / Uncategorized",
+        dbDeptFlight: "Flight Ops & Training Department",
+        dbDeptMaint: "Aircraft Maintenance Department",
+        dbDeptAdmin: "Management, Admin & Sales Department",
+        dbDeptOther: "Others / Uncategorized",
         deptAll: "All",
         deptFlight: "Flight Ops",
         deptMaint: "Maintenance",
@@ -2620,13 +2766,13 @@
         mailPending: "Pending",
         settingsTitle: "Manage System Database",
         settingsDesc: "You can export all employee data to a JSON backup file, restore data by choosing a previously exported file, or reset the database back to system defaults.",
-        backupTitle: "📥 Export Data (Backup Data)",
+        backupTitle: "Export Data (Backup Data)",
         backupDesc: "Save all current employee data to your computer as a JSON file.",
         backupBtn: "Download Backup Data",
-        restoreTitle: "📤 Import Data (Restore Data)",
+        restoreTitle: "Import Data (Restore Data)",
         restoreDesc: "Select employee backup file (.json) to upload and restore to the system.",
         restoreBtn: "Select File to Restore",
-        resetTitle: "⚠️ Reset System Data (System Reset)",
+        resetTitle: "Reset System Data (System Reset)",
         resetDesc: "Clear all saved data on this computer and restore back to the default 47 employees.",
         resetBtn: "Reset to Default",
         modalTitleAdd: "Add New Employee",
@@ -2641,8 +2787,8 @@
         formLabelLoc: "Work Location",
         formLabelEmail: "Email",
         formLabelPass: "Access Password",
-        formSecPersonal: "👤 Personal Info",
-        formSecWork: "💼 Work & Access",
+        formSecPersonal: "Personal Info",
+        formSecWork: "Work & Access",
         formPlaceholderNick: "e.g., Mac",
         formPlaceholderNickEn: "e.g., Mac",
         formPlaceholderTh: "e.g., Mr. Punpisut Nurach",
@@ -2650,7 +2796,7 @@
         formPlaceholderRole: "e.g., Flight Instructor",
         formPlaceholderEmail: "e.g., email@tif.ac.th",
         formPlaceholderPass: "Password",
-        formBtnRandom: "🎲 Generate",
+        formBtnRandom: "Generate",
         formBtnCancel: "Cancel",
         formBtnSave: "Save Info",
         alertFillAll: "Please fill in all fields",
@@ -2715,10 +2861,13 @@
       document.title = t.title;
       document.querySelector('.logo-text').textContent = t.logoTextContent;
       document.getElementById('search').placeholder = t.searchPlaceholder;
-      document.getElementById('nav-tab-directory').textContent = t.tabDirectory;
-      document.getElementById('nav-tab-dashboard').textContent = t.tabDashboard;
-      document.getElementById('nav-tab-settings').textContent = t.tabSettings;
-      
+      const navDirText = document.getElementById('nav-tab-dir-text');
+      if (navDirText) navDirText.textContent = t.tabDirectory;
+      const navDashText = document.getElementById('nav-tab-dash-text');
+      if (navDashText) navDashText.textContent = t.tabDashboard;
+      const navSetText = document.getElementById('nav-tab-set-text');
+      if (navSetText) navSetText.textContent = t.tabSettings;
+
       const sortLabel = document.getElementById('sort-label');
       if (sortLabel) sortLabel.textContent = t.sortBy;
       const sortSelect = document.getElementById('sort-select');
@@ -2726,10 +2875,10 @@
       sortSelect.options[1].textContent = t.sortIdDesc;
       sortSelect.options[2].textContent = t.sortNameTh;
       sortSelect.options[3].textContent = t.sortNameEn;
-      
+
       document.getElementById('btn-add-text').textContent = t.addEmployee;
       document.getElementById('back-btn').textContent = t.showAll;
-      
+
       // Dashboard static texts
       const dbHeroTitleEl = document.getElementById('db-hero-title');
       if (dbHeroTitleEl) dbHeroTitleEl.textContent = t.dbHeroTitle;
@@ -2762,20 +2911,26 @@
       if (qaSettingsTitleEl) qaSettingsTitleEl.textContent = t.qaSettingsTitle;
       const qaSettingsDescEl = document.getElementById('qa-settings-desc');
       if (qaSettingsDescEl) qaSettingsDescEl.textContent = t.qaSettingsDesc;
-      
+
       // Settings static texts
       document.getElementById('settings-title').textContent = t.settingsTitle;
       document.getElementById('settings-desc').textContent = t.settingsDesc;
-      document.getElementById('backup-title').textContent = t.backupTitle;
+      const backupTitleSpan = document.querySelector('#backup-title span');
+      if (backupTitleSpan) backupTitleSpan.textContent = t.backupTitle;
+      else document.getElementById('backup-title').textContent = t.backupTitle;
       document.getElementById('backup-desc').textContent = t.backupDesc;
       document.getElementById('backup-btn').textContent = t.backupBtn;
-      document.getElementById('restore-title').textContent = t.restoreTitle;
+      const restoreTitleSpan = document.querySelector('#restore-title span');
+      if (restoreTitleSpan) restoreTitleSpan.textContent = t.restoreTitle;
+      else document.getElementById('restore-title').textContent = t.restoreTitle;
       document.getElementById('restore-desc').textContent = t.restoreDesc;
       document.getElementById('restore-btn').textContent = t.restoreBtn;
-      document.getElementById('reset-title').textContent = t.resetTitle;
+      const resetTitleSpan = document.querySelector('#reset-title span');
+      if (resetTitleSpan) resetTitleSpan.textContent = t.resetTitle;
+      else document.getElementById('reset-title').textContent = t.resetTitle;
       document.getElementById('reset-desc').textContent = t.resetDesc;
       document.getElementById('reset-btn').textContent = t.resetBtn;
-      
+
       // Modal labels & buttons
       document.getElementById('lbl-form-id').textContent = t.formLabelId;
       document.getElementById('help-form-id').textContent = t.formHelpId;
@@ -2787,12 +2942,12 @@
       document.getElementById('lbl-form-loc').textContent = t.formLabelLoc;
       document.getElementById('lbl-form-email').textContent = t.formLabelEmail;
       document.getElementById('lbl-form-pass').textContent = t.formLabelPass;
-      
-      const lblFormSecPersonal = document.getElementById('lbl-form-sec-personal');
-      if (lblFormSecPersonal) lblFormSecPersonal.textContent = t.formSecPersonal;
-      const lblFormSecWork = document.getElementById('lbl-form-sec-work');
-      if (lblFormSecWork) lblFormSecWork.textContent = t.formSecWork;
-      
+
+      const lblFormSecPersonalSpan = document.querySelector('#lbl-form-sec-personal span');
+      if (lblFormSecPersonalSpan) lblFormSecPersonalSpan.textContent = t.formSecPersonal;
+      const lblFormSecWorkSpan = document.querySelector('#lbl-form-sec-work span');
+      if (lblFormSecWorkSpan) lblFormSecWorkSpan.textContent = t.formSecWork;
+
       document.getElementById('form-nick').placeholder = t.formPlaceholderNick;
       document.getElementById('form-nick-en').placeholder = t.formPlaceholderNickEn;
       document.getElementById('form-th').placeholder = t.formPlaceholderTh;
@@ -2800,9 +2955,9 @@
       document.getElementById('form-role').placeholder = t.formPlaceholderRole;
       document.getElementById('form-email').placeholder = t.formPlaceholderEmail;
       document.getElementById('form-pass').placeholder = t.formPlaceholderPass;
-      
+
       const btnRandText = document.getElementById('btn-form-randpass-text');
-      if (btnRandText) btnRandText.textContent = t.formBtnRandom.replace(/🎲\s*/, '');
+      if (btnRandText) btnRandText.textContent = t.formBtnRandom;
       document.getElementById('btn-form-cancel').textContent = t.formBtnCancel;
       document.getElementById('btn-form-save').textContent = t.formBtnSave;
 
@@ -2831,7 +2986,7 @@
       if (dbMailLbl) {
         dbMailLbl.textContent = t.dbMailLabel;
       }
-      
+
       // Update filter counts to refresh dynamic dropdown labels
       if (typeof staff !== 'undefined' && staff.length > 0) {
         updateFilterCounts();
@@ -2841,10 +2996,10 @@
     function switchLang(langCode) {
       currentLang = langCode;
       localStorage.setItem('tif_lang', langCode);
-      
+
       document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
       document.getElementById(`lang-${langCode}`).classList.add('active');
-      
+
       updateStaticTranslations();
       render();
       if (document.getElementById('tab-dashboard').style.display !== 'none') {
@@ -2859,9 +3014,9 @@
     function pal(id) { return palette[parseInt(id.slice(-2)) % palette.length] }
 
     function badge(loc) {
-      if (loc === 'BKK') return `<span class="badge bkk">✈ BKK</span>`;
-      if (loc === 'PHS') return `<span class="badge phs">🛫 PHS</span>`;
-      return `<span class="badge pt">⏱ Part Time</span>`;
+      if (loc === 'BKK') return `<span class="badge bkk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:10px; height:10px; margin-right:2px; display:inline-block; vertical-align:middle;"><path d="M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L14 19v-5.5l8 2.5z"/></svg>BKK</span>`;
+      if (loc === 'PHS') return `<span class="badge phs"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:10px; height:10px; margin-right:2px; display:inline-block; vertical-align:middle;"><path d="M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L14 19v-5.5l8 2.5z" style="transform: rotate(30deg); transform-origin: center;"/></svg>PHS</span>`;
+      return `<span class="badge pt"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:10px; height:10px; margin-right:2px; display:inline-block; vertical-align:middle;"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Part Time</span>`;
     }
     function mailBadge(mailUsed) {
       const t = translations[currentLang];
@@ -3019,7 +3174,7 @@
         <div class="card-details-actions">
           <button class="btn-action-premium btn-edit" onclick="openEditModal(event, '${p.id}')">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 1 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
-            <span>${t.editInfo.replace(/✏️\s*/, '')}</span>
+            <span>${t.editInfo}</span>
           </button>
           <button class="btn-action-premium btn-dept" onclick="openDeptModal(event, '${p.id}')">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 2.1l4 4-4 4"></path><path d="M3 22v-6c0-1.1.9-2 2-2h14M3 14H1.8L1 13V1l1-1h16a2 2 0 0 2 2 2v12"></path></svg>
@@ -3027,7 +3182,7 @@
           </button>
           <button class="btn-action-premium btn-delete" onclick="deleteStaff(event, '${p.id}')">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
-            <span>${t.deleteEmployee.replace(/🗑️\s*/, '')}</span>
+            <span>${t.deleteEmployee}</span>
           </button>
         </div>
       </div>
@@ -3112,7 +3267,7 @@
           html += otherDept.map(p => card(p, q)).join('');
         }
       } else {
-        html = `<div class="empty"><div class="empty-icon">🔍</div>${t.noResults}<button class="reset-btn" onclick="resetFilters()">${t.clearSearch}</button></div>`;
+        html = `<div class="empty"><div class="empty-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:48px; height:48px; color:var(--text3);"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></div>${t.noResults}<button class="reset-btn" onclick="resetFilters()">${t.clearSearch}</button></div>`;
       }
       document.getElementById('grid').innerHTML = html;
       document.getElementById('count').textContent = t.countText(list.length, staff.length);
@@ -3141,7 +3296,7 @@
         document.querySelectorAll('.card.open').forEach(c => c.classList.remove('open'));
         document.getElementById('grid').classList.remove('single-view');
         document.getElementById('back-btn').style.display = 'none';
-        
+
         // Restore scroll position instantly
         window.scrollTo({ top: lastScrollY, behavior: 'instant' });
       }
@@ -3284,20 +3439,20 @@ ${t.formLabelPass}: ${p.pass}`;
       loc = 'ALL';
       deptFilter = 'ALL';
       mailFilter = 'ALL';
-      
+
       const locFilterSelect = document.getElementById('loc-filter-select');
       if (locFilterSelect) locFilterSelect.value = 'ALL';
-      
+
       const deptFilterSelect = document.getElementById('dept-filter-select');
       if (deptFilterSelect) deptFilterSelect.value = 'ALL';
-      
+
       const mailFilterSelect = document.getElementById('mail-filter-select');
       if (mailFilterSelect) mailFilterSelect.value = 'ALL';
-      
+
       render();
     }
 
-     // Modal actions
+    // Modal actions
     function openAddModal() {
       currentEditId = null;
       document.getElementById('modal-title').textContent = translations[currentLang].modalTitleAdd;
@@ -3363,7 +3518,7 @@ ${t.formLabelPass}: ${p.pass}`;
       const isEn = currentLang === 'en';
       const displayName = (isEn || p.id === '680012') ? p.en : p.th;
       const deptName = getStaffDept(p);
-      
+
       const t = translations[currentLang];
       document.getElementById('dept-modal-title').textContent = t.moveDeptTitle || "ย้ายฝ่ายพนักงาน";
       document.getElementById('lbl-dept-staff-name').innerHTML = `${t.employeeNameLabel || "พนักงาน"}: <strong>${displayName}</strong><br><span style="font-size:12px; color:var(--text3);">${t.formLabelRole}: ${p.role}</span>`;
@@ -3388,7 +3543,7 @@ ${t.formLabelPass}: ${p.pass}`;
       try {
         await initDb();
         p.dept = newDept;
-        
+
         await sql`
           UPDATE staff 
           SET dept = ${newDept} 
@@ -3397,7 +3552,7 @@ ${t.formLabelPass}: ${p.pass}`;
 
         await initData();
         closeDeptModal();
-        
+
         setTimeout(() => {
           const cards = document.querySelectorAll('.card');
           cards.forEach(c => {
@@ -3508,7 +3663,7 @@ ${t.formLabelPass}: ${p.pass}`;
       const promptMsg = currentLang === 'en'
         ? `Please type 'confirm' to confirm deleting employee ${displayName} (ID: ${id}):`
         : `กรุณาพิมพ์คำว่า 'confirm' เพื่อยืนยันการลบพนักงาน ${displayName} (รหัสพนักงาน: ${id}):`;
-      
+
       const userInput = prompt(promptMsg);
       if (userInput === null) {
         return; // User clicked Cancel
@@ -3518,7 +3673,7 @@ ${t.formLabelPass}: ${p.pass}`;
         try {
           await initDb();
           await sql`DELETE FROM staff WHERE id = ${id}`;
-          
+
           document.getElementById('grid').classList.remove('single-view');
           document.getElementById('back-btn').style.display = 'none';
 
@@ -3616,7 +3771,7 @@ ${t.formLabelPass}: ${p.pass}`;
       document.getElementById('db-phs-percent').textContent = t.dbPhsPct(phsPct);
       document.getElementById('db-pt-percent').textContent = t.dbPtPct(ptPct);
       document.getElementById('db-mail-percent').textContent = t.dbMailPct(mailPct);
-      
+
       const mailBadgeEl = document.getElementById('db-mail-badge');
       if (mailBadgeEl) {
         mailBadgeEl.textContent = `Adoption ${mailPct}%`;
@@ -3660,7 +3815,7 @@ ${t.formLabelPass}: ${p.pass}`;
               boxHeight: 8,
               boxPadding: 4,
               callbacks: {
-                label: function(context) {
+                label: function (context) {
                   const value = context.raw || 0;
                   const percentage = total > 0 ? Math.round((value / total) * 100) : 0;
                   return ` ${context.label}: ${value} ${t.personUnit} (${percentage}%)`;
@@ -3679,21 +3834,21 @@ ${t.formLabelPass}: ${p.pass}`;
           <div class="legend-item">
             <div class="legend-item-left">
               <div class="legend-color-dot" style="background: ${colors.bkkColor}"></div>
-              <span>✈ ${t.dbBkkLoc}</span>
+              <span>${t.dbBkkLoc}</span>
             </div>
             <span class="legend-val">${bkk} ${t.personUnit} (${bkkPct}%)</span>
           </div>
           <div class="legend-item">
             <div class="legend-item-left">
               <div class="legend-color-dot" style="background: ${colors.phsColor}"></div>
-              <span>🛫 ${t.dbPhsLoc}</span>
+              <span>${t.dbPhsLoc}</span>
             </div>
             <span class="legend-val">${phs} ${t.personUnit} (${phsPct}%)</span>
           </div>
           <div class="legend-item">
             <div class="legend-item-left">
               <div class="legend-color-dot" style="background: ${colors.ptColor}"></div>
-              <span>⏱ ${t.dbPtLoc}</span>
+              <span>${t.dbPtLoc}</span>
             </div>
             <span class="legend-val">${pt} ${t.personUnit} (${ptPct}%)</span>
           </div>
@@ -3789,7 +3944,7 @@ ${t.formLabelPass}: ${p.pass}`;
               borderWidth: 1,
               padding: 10,
               callbacks: {
-                label: function(context) {
+                label: function (context) {
                   const value = context.raw || 0;
                   const percentage = total > 0 ? Math.round((value / total) * 100) : 0;
                   return ` ${context.label}: ${value} ${t.personUnit} (${percentage}%)`;
