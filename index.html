@@ -2049,6 +2049,16 @@
           </svg>
           <span id="nav-tab-dash-text">สถิติองค์กร</span>
         </button>
+        <button class="nav-tab" id="nav-tab-groups" onclick="switchTab('groups')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            style="width:15px; height:15px; flex-shrink:0;">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+            <circle cx="9" cy="7" r="4" />
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+            <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+          </svg>
+          <span id="nav-tab-groups-text">กลุ่มพนักงาน</span>
+        </button>
         <button class="nav-tab" id="nav-tab-settings" onclick="switchTab('settings')">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
             style="width:15px; height:15px; flex-shrink:0;">
@@ -2400,7 +2410,86 @@
     </main>
   </div>
 
-  <!-- Tab 3: Settings -->
+  <!-- Tab 3: Groups -->
+  <div id="tab-groups" class="tab-content" style="display:none;">
+    <main>
+      <!-- Hero Welcome Section -->
+      <div class="db-hero">
+        <div class="db-hero-content">
+          <div class="db-hero-tag">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              style="width:13px; height:13px; display:inline-block; vertical-align:middle; margin-right:3px;">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+              <circle cx="9" cy="7" r="4" />
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+              <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+            </svg> TIF Groups Control
+          </div>
+          <h2 class="db-hero-title" id="groups-hero-title">ระบบจัดกลุ่มพนักงาน (Employee Groups)</h2>
+          <p class="db-hero-subtitle" id="groups-hero-subtitle">บริหารจัดการและจัดระเบียบพนักงานตามกลุ่ม สายงาน หรือทีมปฏิบัติงาน</p>
+        </div>
+        <div class="db-hero-decor">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"
+            stroke-linejoin="round">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+            <circle cx="9" cy="7" r="4" />
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+            <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+          </svg>
+        </div>
+      </div>
+
+      <!-- KPI Dashboard Grid -->
+      <div class="dashboard-grid" style="margin-bottom: 24px;">
+        <div class="dash-card total-card">
+          <div class="dash-card-header">
+            <div class="dash-card-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+            </div>
+            <span class="dash-card-trend trend-up">Groups</span>
+          </div>
+          <div class="dash-card-info">
+            <div class="dash-card-label" id="lbl-kpi-total-groups">กลุ่มทั้งหมด</div>
+            <div class="dash-card-val" id="kpi-total-groups-val">0</div>
+            <div class="dash-card-sub" id="lbl-kpi-total-groups-sub">กลุ่มในระบบ</div>
+          </div>
+        </div>
+
+        <div class="dash-card bkk-card">
+          <div class="dash-card-header">
+            <div class="dash-card-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><polyline points="17 11 19 13 23 9"/></svg>
+            </div>
+            <span class="dash-card-trend trend-up">Assigned</span>
+          </div>
+          <div class="dash-card-info">
+            <div class="dash-card-label" id="lbl-kpi-assigned">พนักงานที่มีกลุ่ม</div>
+            <div class="dash-card-val" id="kpi-assigned-val">0</div>
+            <div class="dash-card-sub" id="kpi-assigned-pct">0% ของทั้งหมด</div>
+          </div>
+        </div>
+
+        <div class="dash-card phs-card">
+          <div class="dash-card-header">
+            <div class="dash-card-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            </div>
+            <span class="dash-card-trend" style="background:rgba(239,68,68,0.1); color:#ef4444;">Unassigned</span>
+          </div>
+          <div class="dash-card-info">
+            <div class="dash-card-label" id="lbl-kpi-unassigned">ยังไม่ได้ระบุกลุ่ม</div>
+            <div class="dash-card-val" id="kpi-unassigned-val">0</div>
+            <div class="dash-card-sub" id="kpi-unassigned-pct">0% ของทั้งหมด</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dynamic Groups List Container -->
+      <div id="groups-list-container" class="groups-list-wrap"></div>
+    </main>
+  </div>
+
+  <!-- Tab 4: Settings -->
   <div id="tab-settings" class="tab-content" style="display:none;">
     <main style="max-width: 600px; margin: 0 auto;">
       <div class="section-card">
@@ -2553,6 +2642,10 @@
               <option value="PHS">PHS</option>
               <option value="Part Time">Part Time</option>
             </select>
+          </div>
+          <div class="form-group">
+            <label for="form-group-val" id="lbl-form-group-val">กลุ่ม / สังกัดย่อย (ถ้ามี)</label>
+            <input type="text" id="form-group-val" placeholder="เช่น กลุ่ม 1, Team A (ระบุหรือไม่ก็ได้)">
           </div>
 
           <div class="form-group full-width">
@@ -2721,14 +2814,16 @@
             email VARCHAR(255) NOT NULL,
             pass VARCHAR(255) NOT NULL,
             mail_used BOOLEAN NOT NULL DEFAULT FALSE,
-            dept VARCHAR(50)
+            dept VARCHAR(50),
+            group_val VARCHAR(100)
           )
         `;
 
         try {
           await sql`ALTER TABLE staff ADD COLUMN IF NOT EXISTS dept VARCHAR(50)`;
+          await sql`ALTER TABLE staff ADD COLUMN IF NOT EXISTS group_val VARCHAR(100)`;
         } catch (e) {
-          console.warn("Failed to alter table, it might already have 'dept' or alter not supported", e);
+          console.warn("Failed to alter table", e);
         }
 
         const countRes = await sql`SELECT COUNT(*) FROM staff`;
@@ -3047,6 +3142,8 @@
       if (navDirText) navDirText.textContent = t.tabDirectory;
       const navDashText = document.getElementById('nav-tab-dash-text');
       if (navDashText) navDashText.textContent = t.tabDashboard;
+      const navGroupsText = document.getElementById('nav-tab-groups-text');
+      if (navGroupsText) navGroupsText.textContent = t.tabGroups;
       const navSetText = document.getElementById('nav-tab-set-text');
       if (navSetText) navSetText.textContent = t.tabSettings;
 
@@ -3195,6 +3292,8 @@
 
       if (tabName === 'dashboard') {
         renderDashboard();
+      } else if (tabName === 'groups') {
+        renderGroupsDashboard();
       }
     }
 
@@ -3209,6 +3308,9 @@
       render();
       if (document.getElementById('tab-dashboard').style.display !== 'none') {
         renderDashboard();
+      }
+      if (document.getElementById('tab-groups').style.display !== 'none') {
+        renderGroupsDashboard();
       }
     }
 
@@ -3229,6 +3331,10 @@
         return `<span class="badge b-mail-used" style="background:rgba(16, 185, 129, 0.08); color:#10b981; border:1px solid rgba(16, 185, 129, 0.15);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" style="width:10px; height:10px; margin-right:2px; display:inline-block; vertical-align:middle;"><polyline points="20 6 9 17 4 12"></polyline></svg>${t.mailStatusActive}</span>`;
       }
       return `<span class="badge b-mail-pending" style="background:rgba(100, 116, 139, 0.08); color:#64748b; border:1px solid rgba(100, 116, 139, 0.15);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" style="width:10px; height:10px; margin-right:2px; display:inline-block; vertical-align:middle;"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>${t.mailStatusPending}</span>`;
+    }
+    function groupBadge(groupVal) {
+      if (!groupVal) return '';
+      return `<span class="badge b-group" style="background:rgba(124, 58, 237, 0.08); color:#7c3aed; border:1px solid rgba(124, 58, 237, 0.2);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:10px; height:10px; margin-right:2px; display:inline-block; vertical-align:middle;"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>${groupVal}</span>`;
     }
 
     function getStaffDept(p) {
@@ -3296,7 +3402,7 @@
         <div style="font-size:11.5px; color:var(--text3); font-weight:500; margin-top:2px;">${t.nicknameLabel} ${nickPrefix}${highlightedNick}</div>
         <div class="eid">${highlightedId}</div>
         <div class="role">${highlightedRole}</div>
-        ${badge(p.loc)} ${mailBadge(p.mailUsed)}
+        ${badge(p.loc)} ${mailBadge(p.mailUsed)} ${groupBadge(p.groupVal)}
       </div>
     </div>
     <div class="detail-wrapper">
@@ -3431,7 +3537,7 @@
       await initDb();
       try {
         await initDbTable();
-        const rows = await sql`SELECT id, th, en, nick, nick_en as "nickEn", role, loc, email, pass, mail_used as "mailUsed", dept FROM staff`;
+        const rows = await sql`SELECT id, th, en, nick, nick_en as "nickEn", role, loc, email, pass, mail_used as "mailUsed", dept, group_val as "groupVal" FROM staff`;
         staff = rows;
         updateFilterCounts();
         render();
@@ -3460,7 +3566,7 @@
         const ml = loc === 'ALL' || p.loc === loc;
         const md = deptFilter === 'ALL' || getStaffDept(p) === deptFilter;
         const mm = mailFilter === 'ALL' || (mailFilter === 'used' ? p.mailUsed : !p.mailUsed);
-        const mq = !q || [p.th, p.en, p.nick, p.nickEn || '', p.role, p.id, p.email].some(v => v.toLowerCase().includes(q));
+        const mq = !q || [p.th, p.en, p.nick, p.nickEn || '', p.role, p.id, p.email, p.groupVal || ''].some(v => v.toLowerCase().includes(q));
         return ml && md && mm && mq;
       });
 
@@ -3703,6 +3809,7 @@ ${t.formLabelPass}: ${p.pass}`;
       document.getElementById('form-pass').value = '';
       document.getElementById('form-mail-used').value = 'false';
       document.getElementById('form-dept').value = 'default';
+      document.getElementById('form-group-val').value = '';
 
       document.getElementById('staff-modal').style.display = 'flex';
 
@@ -3729,6 +3836,7 @@ ${t.formLabelPass}: ${p.pass}`;
       document.getElementById('form-pass').value = p.pass;
       document.getElementById('form-mail-used').value = p.mailUsed ? 'true' : 'false';
       document.getElementById('form-dept').value = p.dept || 'default';
+      document.getElementById('form-group-val').value = p.groupVal || '';
 
       document.getElementById('staff-modal').style.display = 'flex';
 
@@ -3835,6 +3943,7 @@ ${t.formLabelPass}: ${p.pass}`;
       const mailUsed = document.getElementById('form-mail-used').value === 'true';
       const deptVal = document.getElementById('form-dept').value;
       const dept = deptVal === 'default' ? null : deptVal;
+      const groupVal = document.getElementById('form-group-val').value.trim() || null;
 
       if (!id || !nick || !nickEn || !th || !en || !role || !email || !pass) {
         alert(translations[currentLang].alertFillAll);
@@ -3852,8 +3961,8 @@ ${t.formLabelPass}: ${p.pass}`;
         }
 
         await sql`
-          INSERT INTO staff (id, th, en, nick, nick_en, role, loc, email, pass, mail_used, dept)
-          VALUES (${id}, ${th}, ${en}, ${nick}, ${nickEn}, ${role}, ${locVal}, ${email}, ${pass}, ${mailUsed}, ${dept})
+          INSERT INTO staff (id, th, en, nick, nick_en, role, loc, email, pass, mail_used, dept, group_val)
+          VALUES (${id}, ${th}, ${en}, ${nick}, ${nickEn}, ${role}, ${locVal}, ${email}, ${pass}, ${mailUsed}, ${dept}, ${groupVal})
           ON CONFLICT (id) DO UPDATE SET
             th = EXCLUDED.th,
             en = EXCLUDED.en,
@@ -3864,7 +3973,8 @@ ${t.formLabelPass}: ${p.pass}`;
             email = EXCLUDED.email,
             pass = EXCLUDED.pass,
             mail_used = EXCLUDED.mail_used,
-            dept = EXCLUDED.dept
+            dept = EXCLUDED.dept,
+            group_val = EXCLUDED.group_val
         `;
 
         await initData();
@@ -4187,6 +4297,130 @@ ${t.formLabelPass}: ${p.pass}`;
           }
         }
       });
+    }
+
+    function renderGroupsDashboard() {
+      const t = translations[currentLang];
+      const isEn = currentLang === 'en';
+
+      const groupsMap = {};
+      const unassigned = [];
+
+      staff.forEach(p => {
+        if (p.groupVal && p.groupVal.trim() !== '') {
+          const gName = p.groupVal.trim();
+          if (!groupsMap[gName]) {
+            groupsMap[gName] = [];
+          }
+          groupsMap[gName].push(p);
+        } else {
+          unassigned.push(p);
+        }
+      });
+
+      const groupNames = Object.keys(groupsMap);
+      const totalGroups = groupNames.length;
+      const totalAssigned = staff.length - unassigned.length;
+      const assignedPct = staff.length ? Math.round((totalAssigned / staff.length) * 100) : 0;
+      const unassignedPct = staff.length ? Math.round((unassigned.length / staff.length) * 100) : 0;
+
+      // Update KPI counters
+      const elTotalGroups = document.getElementById('kpi-total-groups-val');
+      if (elTotalGroups) elTotalGroups.textContent = totalGroups;
+      const elAssigned = document.getElementById('kpi-assigned-val');
+      if (elAssigned) elAssigned.textContent = totalAssigned;
+      const elAssignedPct = document.getElementById('kpi-assigned-pct');
+      if (elAssignedPct) elAssignedPct.textContent = `${assignedPct}% ${isEn ? 'of total' : 'ของทั้งหมด'}`;
+      const elUnassigned = document.getElementById('kpi-unassigned-val');
+      if (elUnassigned) elUnassigned.textContent = unassigned.length;
+      const elUnassignedPct = document.getElementById('kpi-unassigned-pct');
+      if (elUnassignedPct) elUnassignedPct.textContent = `${unassignedPct}% ${isEn ? 'of total' : 'ของทั้งหมด'}`;
+
+      const container = document.getElementById('groups-list-container');
+      if (!container) return;
+
+      let html = '';
+
+      if (groupNames.length === 0 && unassigned.length === 0) {
+        html = `<div class="empty">${t.noResults}</div>`;
+      } else {
+        groupNames.forEach(gName => {
+          const members = groupsMap[gName];
+          html += `
+          <div class="section-card" style="margin-bottom:20px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px; border-bottom:1px solid var(--border); padding-bottom:12px;">
+              <div style="display:flex; align-items:center; gap:8px;">
+                <span class="badge b-group" style="font-size:12.5px; padding:4px 12px; background:rgba(124, 58, 237, 0.1); color:#7c3aed; border:1px solid rgba(124, 58, 237, 0.25);">👥 ${gName}</span>
+                <span style="font-size:13px; color:var(--text3); font-weight:500;">(${members.length} ${isEn ? 'members' : 'คน'})</span>
+              </div>
+              <button class="reset-btn" style="margin:0; font-size:12px;" onclick="searchGroupInDirectory('${gName.replace(/'/g, "\\'")}')">
+                🔍 ${isEn ? 'Filter in Directory' : 'ดูในรายการพนักงาน'}
+              </button>
+            </div>
+            <div style="display:grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap:12px;">
+              ${members.map(p => {
+                const name = (isEn || p.id === '680012') ? p.en : p.th;
+                const [bg, fg] = pal(p.id);
+                return `
+                <div style="display:flex; align-items:center; gap:10px; padding:10px 14px; background:var(--surface2); border:1px solid var(--border); border-radius:10px; transition:all 0.2s;">
+                  <div class="ava" style="width:36px; height:36px; font-size:13px; background:${bg}; color:${fg}; flex-shrink:0;">${initials(p.en)}</div>
+                  <div style="flex:1; min-width:0;">
+                    <div style="font-size:13px; font-weight:600; color:var(--text); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${name}</div>
+                    <div style="font-size:11px; color:var(--text3); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${p.role}</div>
+                  </div>
+                  <button onclick="openEditModal(event, '${p.id}')" title="Edit" style="background:none; border:none; color:var(--text3); cursor:pointer; padding:4px; border-radius:6px;">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px; height:14px;"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 1 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                  </button>
+                </div>
+                `;
+              }).join('')}
+            </div>
+          </div>
+          `;
+        });
+
+        if (unassigned.length > 0) {
+          html += `
+          <div class="section-card" style="margin-bottom:20px; border-style:dashed;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px; border-bottom:1px solid var(--border); padding-bottom:12px;">
+              <div style="display:flex; align-items:center; gap:8px;">
+                <span class="badge b-mail-pending" style="font-size:12.5px; padding:4px 12px; background:rgba(239, 68, 68, 0.08); color:#ef4444; border:1px solid rgba(239, 68, 68, 0.2);">⚠️ ${isEn ? 'Unassigned Group' : 'ยังไม่ได้ระบุกลุ่ม'}</span>
+                <span style="font-size:13px; color:var(--text3); font-weight:500;">(${unassigned.length} ${isEn ? 'members' : 'คน'})</span>
+              </div>
+            </div>
+            <div style="display:grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap:12px;">
+              ${unassigned.map(p => {
+                const name = (isEn || p.id === '680012') ? p.en : p.th;
+                const [bg, fg] = pal(p.id);
+                return `
+                <div style="display:flex; align-items:center; gap:10px; padding:10px 14px; background:var(--surface2); border:1px solid var(--border); border-radius:10px; transition:all 0.2s;">
+                  <div class="ava" style="width:36px; height:36px; font-size:13px; background:${bg}; color:${fg}; flex-shrink:0;">${initials(p.en)}</div>
+                  <div style="flex:1; min-width:0;">
+                    <div style="font-size:13px; font-weight:600; color:var(--text); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${name}</div>
+                    <div style="font-size:11px; color:var(--text3); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${p.role}</div>
+                  </div>
+                  <button onclick="openEditModal(event, '${p.id}')" style="background:var(--accent); color:#fff; border:none; font-size:11px; font-weight:600; padding:4px 10px; border-radius:6px; cursor:pointer;">
+                    ${isEn ? '+ Assign' : '+ ใส่กลุ่ม'}
+                  </button>
+                </div>
+                `;
+              }).join('')}
+            </div>
+          </div>
+          `;
+        }
+      }
+
+      container.innerHTML = html;
+    }
+
+    function searchGroupInDirectory(gName) {
+      switchTab('directory');
+      const searchInput = document.getElementById('search');
+      if (searchInput) {
+        searchInput.value = gName;
+        render();
+      }
     }
 
     // Backup & Restore
