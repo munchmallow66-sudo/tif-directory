@@ -3155,6 +3155,29 @@
       }
     }
 
+    function switchTab(tabName) {
+      document.querySelectorAll('.tab-content').forEach(tab => {
+        tab.style.display = 'none';
+      });
+      document.querySelectorAll('.nav-tab').forEach(btn => {
+        btn.classList.remove('active');
+      });
+
+      const selectedTab = document.getElementById(`tab-${tabName}`);
+      if (selectedTab) {
+        selectedTab.style.display = 'block';
+      }
+
+      const navBtn = document.getElementById(`nav-tab-${tabName}`);
+      if (navBtn) {
+        navBtn.classList.add('active');
+      }
+
+      if (tabName === 'dashboard') {
+        renderDashboard();
+      }
+    }
+
     function switchLang(langCode) {
       currentLang = langCode;
       localStorage.setItem('tif_lang', langCode);
