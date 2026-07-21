@@ -4843,118 +4843,118 @@ ${t.formLabelPass}: ${p.pass}`;
       const container = document.getElementById('org-explorer-cards');
       if (!container) return;
 
-      const divisions = [
+      const streams = [
         {
-          id: 'maint',
-          color: '#15803d',
-          bgColor: 'rgba(21, 128, 61, 0.08)',
-          borderColor: 'rgba(21, 128, 61, 0.25)',
-          title: 'MAINTENANCE DIVISION',
-          titleTh: 'ฝ่ายซ่อมบำรุง',
-          countKey: 'maint',
+          id: 'cto',
+          color: '#0891b2',
+          bgColor: 'rgba(8, 145, 178, 0.08)',
+          borderColor: 'rgba(8, 145, 178, 0.3)',
+          title: 'CHIEF TRAINING OFFICER (CTO STREAM)',
+          titleTh: 'สายงานอำนวยการฝึกอบรม (CAAT Compliant)',
+          countKey: 'cto',
           depts: [
             {
-              name: 'AIRCRAFT MAINTENANCE DEPT.',
-              nameTh: 'แผนกซ่อมบำรุงอากาศยาน',
-              subKey: 'maint_aircraft',
-              units: ['AIRFRAME SECTION (โครงสร้าง)', 'POWER PLANT SECTION (เครื่องยนต์)', 'AVIONICS SECTION (อิเล็กทรอนิกส์)']
+              name: 'DIRECTOR OF MAINTENANCE (DOM)',
+              nameTh: 'ฝ่ายซ่อมบำรุงอากาศยาน',
+              subKey: 'dom',
+              units: ['Maintenance Division', 'Maintenance Certify', 'Maintenance Planning', 'Store Inspector']
             },
             {
-              name: 'PLANNING DEPT.',
-              nameTh: 'แผนกวางแผน',
-              subKey: 'maint_plan',
-              units: ['MAINTENANCE PLAN (แผนงาน)', 'SCHEDULE CONTROL (บำรุงรักษา)', 'MATERIAL PLANNING (อุปกรณ์)']
+              name: 'DIRECTOR OF OPERATIONS (DO)',
+              nameTh: 'ฝ่ายปฏิบัติการบิน',
+              subKey: 'do',
+              units: ['Operation Division', 'Operation Scheduler', 'Operation Dispatch', 'Simulator Coordinator']
             },
             {
-              name: 'MATERIAL DEPT.',
-              nameTh: 'แผนกพัสดุ',
-              subKey: 'maint_material',
-              units: ['STORE MANAGEMENT (บริหารพัสดุ)', 'INVENTORY CONTROL (คลังสินค้า)', 'PURCHASING (จัดซื้อ)', 'RECEIVING/SHIPPING (รับ-จ่าย)']
+              name: 'DIRECTOR OF STANDARD (DS)',
+              nameTh: 'ฝ่ายมาตรฐานวิชาการ',
+              subKey: 'ds',
+              units: ['Standard Division', 'Standard Flight', 'Standard Theory (CAAT)', 'Standard Simulators', 'Standards Course Dev']
             },
             {
-              name: 'QA / QC DEPT.',
-              nameTh: 'แผนกประกันคุณภาพ',
-              subKey: 'maint_qa',
-              units: ['QUALITY ASSURANCE', 'QUALITY CONTROL', 'DOCUMENT CONTROL', 'CALIBRATION CONTROL']
+              name: 'DIRECTOR OF TRAINING (DT)',
+              nameTh: 'ฝ่ายบริหารงานฝึกอบรม',
+              subKey: 'dt',
+              units: ['Training Admin. Division', 'Training Coordinator', 'Training Compliance & Conduct', 'Training Planner', 'Registration & Licensing']
             }
           ]
         },
         {
-          id: 'training',
-          color: '#d97706',
-          bgColor: 'rgba(217, 119, 6, 0.08)',
-          borderColor: 'rgba(217, 119, 6, 0.25)',
-          title: 'TRAINING DIVISION',
-          titleTh: 'ฝ่ายอบรม',
-          countKey: 'training',
+          id: 'cco',
+          color: '#16a34a',
+          bgColor: 'rgba(22, 163, 74, 0.08)',
+          borderColor: 'rgba(22, 163, 74, 0.3)',
+          title: 'CHIEF COMMERCIAL OFFICER (CCO STREAM)',
+          titleTh: 'สายงานพาณิชย์และการตลาด',
+          countKey: 'cco',
           depts: [
             {
-              name: 'TRAINING DEPT.',
-              nameTh: 'แผนกอบรม',
-              subKey: 'training',
-              units: ['COURSE PLANNING (วางแผนหลักสูตร)', 'TRAINING DELIVERY (ดำเนินการอบรม)', 'TRAINING SUPPORT (สนับสนุนการอบรม)']
+              name: 'DIRECTOR OF SALE & MARKETING',
+              nameTh: 'ฝ่ายขายและการตลาด',
+              subKey: 'dir_sale',
+              units: ['Sale and Marketing Division', 'Sale Department', 'Marketing Department']
             }
           ]
         },
         {
-          id: 'standard',
-          color: '#db2777',
-          bgColor: 'rgba(219, 39, 119, 0.08)',
-          borderColor: 'rgba(219, 39, 119, 0.25)',
-          title: 'STANDARD DIVISION',
-          titleTh: 'ฝ่ายมาตรฐาน',
-          countKey: 'standard',
-          depts: [
-            {
-              name: 'STANDARD DEPT.',
-              nameTh: 'แผนกมาตรฐาน',
-              subKey: 'standard',
-              units: ['DOCUMENTATION (จัดทำเอกสาร)', 'AUDIT & INSPECTION (ตรวจสอบ)', 'CONTINUOUS IMPROVEMENT (พัฒนาต่อเนื่อง)']
-            }
-          ]
-        },
-        {
-          id: 'qa',
-          color: '#7e22ce',
-          bgColor: 'rgba(126, 34, 206, 0.08)',
-          borderColor: 'rgba(126, 34, 206, 0.25)',
-          title: 'QUALITY ASSURANCE DIVISION',
-          titleTh: 'ฝ่ายประกันคุณภาพ',
-          countKey: 'qa',
-          depts: [
-            {
-              name: 'QA / QC DEPT.',
-              nameTh: 'แผนกประกันคุณภาพ',
-              subKey: 'qa',
-              units: ['QUALITY PLANNING (วางแผนคุณภาพ)', 'QUALITY CONTROL (ควบคุมคุณภาพ)', 'INTERNAL AUDIT (ตรวจสอบภายใน)', 'QUALITY SYSTEM (ระบบคุณภาพ)']
-            }
-          ]
-        },
-        {
-          id: 'flight',
+          id: 'cfo',
           color: '#ea580c',
           bgColor: 'rgba(234, 88, 12, 0.08)',
-          borderColor: 'rgba(234, 88, 12, 0.25)',
-          title: 'FLIGHT OPERATIONS DEPT.',
-          titleTh: 'แผนกปฏิบัติการบิน',
-          countKey: 'flight',
+          borderColor: 'rgba(234, 88, 12, 0.3)',
+          title: 'CHIEF FINANCIAL & ACCOUNTING OFFICER (CFO STREAM)',
+          titleTh: 'สายงานการเงินและบัญชี',
+          countKey: 'cfo',
           depts: [
             {
-              name: 'FLIGHT OPERATIONS',
-              nameTh: 'สายงานปฏิบัติการบิน',
-              subKey: 'flight',
-              units: ['OPERATIONS CONTROL (ควบคุมการปฏิบัติการบิน)', 'FLIGHT DISPATCH (วางแผนการบิน)', 'CREW MANAGEMENT (บริหารจัดการนักบิน)']
+              name: 'DIRECTOR OF FINANCIAL & ACCOUNTING',
+              nameTh: 'ฝ่ายการเงินและบัญชี',
+              subKey: 'dir_fa',
+              units: ['Finance & Accounting Division', 'Finance & Accounting Dept', 'Purchasing Dept']
+            }
+          ]
+        },
+        {
+          id: 'cbo',
+          color: '#ca8a04',
+          bgColor: 'rgba(202, 138, 4, 0.08)',
+          borderColor: 'rgba(202, 138, 4, 0.3)',
+          title: 'CHIEF BUSINESS ASSURANCE OFFICER (CBO STREAM)',
+          titleTh: 'สายงานประกันความเสี่ยงและพัฒนาองค์กร',
+          countKey: 'cbo',
+          depts: [
+            {
+              name: 'DIRECTOR OF BUSINESS ASSURANCE',
+              nameTh: 'ฝ่ายประกันการดำเนินงาน',
+              subKey: 'dir_ba',
+              units: ['Business Assurance Division', 'Assurance Management', 'Risk and Loss Management', 'Process Improvement']
+            }
+          ]
+        },
+        {
+          id: 'dscm',
+          color: '#059669',
+          bgColor: 'rgba(5, 150, 105, 0.08)',
+          borderColor: 'rgba(5, 150, 105, 0.3)',
+          title: 'DIRECTOR OF SAFETY & COMPLIANCE MONITORING (DSCM)',
+          titleTh: 'สายงานความปลอดภัยและการกำกับดูแล (CAAT Compliant)',
+          countKey: 'dscm',
+          depts: [
+            {
+              name: 'SAFETY & COMPLIANCE MONITORING DIVISION',
+              nameTh: 'ฝ่ายความปลอดภัยและการตรวจสอบ',
+              subKey: 'dscm',
+              units: ['Safety & Compliance Division', 'Safety Management (CAAT)', 'Compliance Monitoring (CAAT)']
             }
           ]
         }
       ];
 
       let html = '';
-      divisions.forEach(div => {
+      streams.forEach(div => {
         const staffCount = staff ? staff.filter(p => {
-          if (div.id === 'maint') return getStaffDept(p) === 'maint';
-          if (div.id === 'flight') return getStaffDept(p) === 'flight';
-          return p.role.toLowerCase().includes(div.id);
+          if (div.id === 'cto') return getStaffDept(p) === 'maint' || getStaffDept(p) === 'flight';
+          if (div.id === 'cfo') return getStaffDept(p) === 'admin';
+          return p.role.toLowerCase().includes(div.id) || (p.dept && p.dept.toLowerCase().includes(div.id));
         }).length : 0;
 
         html += `
@@ -4995,14 +4995,22 @@ ${t.formLabelPass}: ${p.pass}`;
     function openOrgDeptModal(deptKey) {
       let filterDept = 'ALL';
 
-      if (deptKey === 'maint' || deptKey === 'maint_aircraft' || deptKey === 'maint_plan' || deptKey === 'maint_material' || deptKey === 'maint_qa') {
-        filterDept = 'maint';
-      } else if (deptKey === 'flight' || deptKey === 'training' || deptKey === 'flight_control' || deptKey === 'flight_dispatch' || deptKey === 'crew_mgt') {
+      if (['cto', 'dom', 'do', 'ds', 'dt', 'maint_div', 'maint_cert', 'maint_plan', 'store_insp', 'ops_div', 'ops_sched', 'ops_disp', 'sim_coord', 'std_div', 'std_flight', 'std_theory', 'std_sim', 'std_course'].includes(deptKey)) {
         filterDept = 'flight';
-      } else if (deptKey === 'admin_hr' || deptKey === 'finance' || deptKey === 'it' || deptKey === 'secretary' || deptKey === 'ceo' || deptKey === 'board' || deptKey === 'mg') {
+      } else if (['train_div', 'train_coord', 'train_conduct', 'train_plan', 'train_license', 'training'].includes(deptKey)) {
+        filterDept = 'flight';
+      } else if (['cfo', 'dir_fa', 'fa_div', 'fa_dept', 'purchasing', 'finance'].includes(deptKey)) {
+        filterDept = 'admin';
+      } else if (['cco', 'dir_sale', 'sale_mkt_div', 'sale_dept', 'mkt_dept'].includes(deptKey)) {
+        filterDept = 'other';
+      } else if (['cbo', 'dir_ba', 'ba_div', 'assurance_mgmt', 'risk_loss', 'process_impr'].includes(deptKey)) {
+        filterDept = 'other';
+      } else if (['dscm', 'safety_div', 'safety_mgmt', 'compliance_mon', 'safety'].includes(deptKey)) {
+        filterDept = 'other';
+      } else if (['board', 'ceo', 'vp', 'secretary', 'bd', 'hr', 'facilities', 'it', 'consultant', 'admin_hr', 'mg'].includes(deptKey)) {
         filterDept = 'admin';
       } else {
-        filterDept = 'other';
+        filterDept = 'ALL';
       }
 
       deptFilter = filterDept;
@@ -5297,6 +5305,10 @@ ${t.formLabelPass}: ${p.pass}`;
     window.exportStaffJSON = exportStaffJSON;
     window.importStaffJSON = importStaffJSON;
     window.resetSystemToDefault = resetSystemToDefault;
+    window.switchOrgView = switchOrgView;
+    window.filterOrgChart = filterOrgChart;
+    window.openOrgDeptModal = openOrgDeptModal;
+    window.renderOrgExplorer = renderOrgExplorer;
 
     // Startup initialization
     (async () => {
